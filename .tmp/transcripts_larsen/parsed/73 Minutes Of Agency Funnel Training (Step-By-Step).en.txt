@@ -1,0 +1,343 @@
+it. So, a funnel, at least in the way that I would describe it, is the theoretical but very real process that you take to move someone from not knowing who you are to becoming a real paying client.
+
+You can look at the definition of funnel and I'm sure you'll get a bunch of different things, but that's what we're going to say a funnel is. So, it starts with you driving traffic, then you getting their email address, and then them booking a call. If it was a gym, maybe come and book a demo or book a free class. Or if it was, you know, a high ticket software, it could
+
+be booking a demo. Or you could also substitute this with joining a webinar or doing whatever. There's many possibilities. Then a sales call happens eventually or a sales process happens and then they become a client or they don't.
+
+So I have three different examples of what to do. So the first one is where we all work here. The mastermind the process of getting someone to join this for consulting. Then I have one where it's more like getting a business to apply for a loan and then it's getting those lenders to buy the leads that are generated from this one. So you generate the leads that people from want a loan
+
+and you sell it to lenders and brokers who want to give the loans to those people and like those two work together. So, in a lot of the cases, you're going to need to have a buyer funnel and then some way to deliver the product. So, let's start with this. There's a few different parts in a funnel. There's the traffic, normally content and ads. There's other
+
+ways to drive traffic such as outreach and partnerships, but neither of those things really go through a funnel. If you cold email someone, you're just talking to them in email. They don't really go through this process. If someone refers you in a partnership, you usually just also skip this entire process and you're straight to the call.
+
+Then we have an opt-in page, which we're only going to use from traffic, only from traffic, and I'll explain that in a minute. We have a sales page with a VSSO. We have the book a call page. Then we have the DQ, which stands for disqualification page. I'm actually going to put application form in here.
+
+So, if they go to the page, they read it, they watch the VSSL, they think this is for them, they'll submit an application. If they're qualified, they'll go to the book a call page and book a call. If they're disqualified, they'll go to a DQ page where there's a few possibilities.
+
+You know, you might have a downell, you might have a crossell. If you don't, then it just might just say sorry, and that's fine. You'll have a thank you/confirmation page if they do book a call. Then you'll have email flows. You'll have a welcome flow and a pre-all flow and a sales and a follow-up. And then you'll have the sales call. So, I have a big outline
+
+that I'm making, but I'm going to go through all of these right here anyways. So, the first thing is we're going to need a traffic source. Doesn't matter if you have the rest of this. If there's no traffic flowing through it, it's not really going to do anything. So, for example, for scale your agency, the dominant form of traffic is content.
+
+It's upwards of 90%. I'm about to start ads, but it's upwards of 90%. So, someone views my YouTube channel or my Twitter or my LinkedIn or my Instagram, mostly from YouTube. You'll see I have a YouTube video here. In the first line, it'll be download my free trainings.
+
+and then also in the pinned comment. So if someone sees this, they say, "Oh, this guy has some trainings." We click on it. This would be the opt-in page with a lead magnet. So lead magnet usually some sort of free value and then they would opt in. So they would put their stuff here, they put their website, they'll tell me their
+
+revenue, they'll say, "Are you an agency owner?" and they'll click this. And now I have their information. They've become a lead. I wouldn't say they become a a very good prospect yet, but now we have their contact information. We can contact them. We know their name, their email, their phone number, their website, that kind of stuff. Then they would click download. Now I am not going
+
+to do that in this process just cuz this is for demonstration only. But if they do that, they will be redirected to this page, which is the sales page. So now they've done here and now they've been redirected here. You can follow the arrows. The reason that you wouldn't want to do an opt-in page on from your ads is because it just gets in the way. Your opt-in page might have
+
+10% 20% 30% opt-in rate and that's going to exclude 70 80 90% of people who very may well be qualified but just don't want to opt in for whatever reason yet. You're actually hurting yourself quite a bit by running ads to an opt-in page. If you are trying to do a basic funnel like this, when you're targeting, you know, business owners or wealthier individuals or,
+
+you know, not just absolute beginners, they just want the facts as fast as possible. You want to make it as low friction. So now they have gone from this page, which should be as simple as possible. Some people make this very complicated. What is the lead magnet?
+
+What are they gonna get? And a form. That's it. Some people will have a huge page that's, you know, you could scroll down for two minutes and still keep reading. That's never going to work in this kind of thing. If we go to my forms here, you'll see 43% of people completed this from YouTube. That is okay. I wouldn't say that's fantastic, but if we did the same thing from paid ads, this
+
+would be more like 10 to 20%. And it's just we don't need that to happen. this opt-in page and any metrics are always going to be way higher and way more effective from content because they've watched an hour of my stuff, two hours, three hours, 10 hours, like whatever.
+
+Versus ads, it's likely the very first time they've ever heard about me. They don't even know who I am. Like, they don't care. They don't admire me. They don't view me as an expert. They don't even view me as someone worth learning from. It's just how it is. And you have to understand that when you're making a funnel.
+
+This is the sales page with &gt;&gt; I have a question if it's okay. &gt;&gt; Yeah. &gt;&gt; Yeah. So, does uh like a visual uh image of the lead magnet make any difference on the opt-in page or is just an extra &gt;&gt; It won't make any difference. Not really.
+
+&gt;&gt; Cool. So next the ads would go here and then if they opted in it would also go here to the page at the VSSL. Should be noted that if they opt in here I have their email address. They should automatically start receiving my email flows specifically my welcome flow here. So here's my welcome flow. This is meant to just give them
+
+more information about everything and nurture them and touch points. So, they're reading my email. You can give them more stuff. You can talk about what you do. I have a framework for that that I'll talk about another time, but the email flow starts to happen here.
+
+Now, we have our page with the VSSO. The number one reason that people don't book calls is they just don't have enough information to even want to book a call.
+
+A lot of people have very bad habits here that they just don't really explain it or they explain it in a sense that they like you need to watch 30 minutes of this video to even understand what's going on. The thing that I like to do is have a headline, have some sort of proof or some social social proof up here.
+
+Call out for, you know, call out who it's for because a lot of time it's not even clear. &gt;&gt; It is Matt. I &gt;&gt; then you have a VSSL. Then you have an apply now button and then you just explain in plain English what it is. So what is the goal?
+
+&gt;&gt; It is Matt. &gt;&gt; The goal is to build this, who this is for, what you get, why you should do it, how much it costs, how to get started, FAQs, and some social proof. Some proof that someone somewhere has actually done this before and it's good. Like would be nice. So you don't have to go crazy, but at least some proof that this is good.
+
+So now we are here. If you've done it right, if you have basically explained it well in the ad or they've watched enough of your content to want to move forward, then they might apply. So at this stage, this would be a button. You can embed it in the page or you can have a button like this. I've tested it and it's about a 5% better to have it on its own page.
+
+So, when you're first starting out or if you're not doing that well, you don't have insane amounts of volume. It would be like it's not really going to make that much difference either way. Like a lot of people try to worry about very small optimizations when, you know, they're just starting out, but like like brother, you need this to be 600% better, not 5% better. like
+
+it's very very important. This page should have a bunch of disqualifications. If they are not a service-based B2B owner, like they're an e-commerce store, they this is not for them. Not it's going to kick them out.
+
+Do you have clients already? This is not for people who don't have any clients. It doesn't teach you how to make a service at all. They're going to be kicked out. How are you generating leads? It's just good for my information. like they're not going to get kicked out here. Do you have a business partner or multiple business partners just good for the call? Like do
+
+your business partners need to know this is it? Do you have one hour or more per day to work on this? Yes. What revenue are you currently doing? No matter what you're whether you're doing a mastermind or business loans or you're a plumber or you're targeting plumbers or targeting companies like how much revenue are you doing is always going to be a core question. You're going to have an idea
+
+like for this one they're not doing 30,000 a month or more. They get redirected elsewhere which I'll talk about soon. So let's just say 30,000. I always tell them the price like this is 2025. people who hide the price, like there's really no value in doing that anymore.
+
+If they're not okay with the price, like we're just wasting our time talking to them. Like realistically, especially when we have sales reps. They're not okay with the price, like why would we talk to them? I'm just going to leave it at that. When are you looking to join?
+
+If they're looking to join 90 days out, I just disqualify them personally. Then we get their website and then we get their contact information and that is the form here.
+
+So if we go back on the form um don't think I able to go back but for example for the question if they if they um are doing less than 30k they're doing less than 30k my form says they're unqualified and I happen to have a downell. So, if you were going to go on this form and maybe I'll just actually show you how I'll show you um as proof cuz
+
+proof is a good thing. They get redirected to my school which is for people who are doing 10K or less. So, I have a downell. If at all possible, you want a downell.
+
+you want to get some of that revenue. Even if you can get like if you had a $30,000 product and then you had a downell that's 5,000, you might as well try to get some downells if possible.
+
+Maybe like you would do, you know, we're going to put BAC for book a call and that would just be a separate process there if that happened. In my case, my downell's $97. They can just buy or they don't buy. It's all good.
+
+And then what you want to do in most cases is you want to have the cal the calendarly button embedded inside of type form instead of a separate page. If you have it on a separate page it's fine and there are use cases for that. But if you do it if you do it the application and going to this embedded on a separate page for example usually you're going to
+
+get like 50% drop off. So 50% of or 100% of people fill out the application, but then 50% book a call. If you have it embedded and you need to book a call to actually submit the application, usually it's going to be 70 to 80%. When you're doing this at scale, it's a large amount of drop off that you really can't have if you want to be profitable. There are situations where you'd have it on a
+
+page. For example, a lot of rich people like the richer someone is or the more successful the business is, the more this is true. You say, "Okay, there's a calendarly on the page or you can click this button that will text me on WhatsApp if you just prefer that." Like that is a situation where, you know, you might have it on a page. If they book a call, they're going to want to go to the
+
+thank you page or the confirmation page. So, let's open up mine. Uh thank you. And on this page, we want a few things to happen. We want to give them, you know, even a basic rundown of what to expect on the call. We want to show them that they have to accept, especially in Google. If they've never texted you or emailed you or had communication with
+
+you before, it's going to say unknown sender. And you're going to want to click I know the sender. And then I like to say text me if you want to. And then I have more usually the equivalent proof as well as you know watch my YouTube channel a little bit before.
+
+What you also want to do and what I'm going to be doing this week is you also want to take your top three FAQs. Normally they're going to be time related, price related, and whatever else related. The third one is usually specific. So for mine it's why should I trust you? Because I've exited three agencies before. price related, you know, how am I going to get an ROI on
+
+this? Time related, like how exactly does it work so I can make this efficient? You'd have just one to three minute videos here. You know, for business lending, it's am I going to get scammed with this? Like, why should I do you as opposed to all of the other business lenders? Um, could be a third one. Not going to think of it off the top of my head. But we want to treat
+
+this page as like a sales rep. Like you want to like really view this as you're trying to close them on this page. A good rule of thumb is whatever you hear all the time on the call and what you're sick of talking about, you know, put that on your thank you page so they just know. This here, what I said before about the reason that people don't book calls is because they don't have enough
+
+information. The reason why people further down the funnel don't show up to the call is be for the same reason. They just don't even have enough information. So that's what you're going to give them here. If you had just like, okay, you booked a call versus this, your show rate might be 30, 40% before, now it's going to be 60, 70, 80%, especially if it's coming from content. Your show
+
+rate's always going to be a bit less if it's coming from ads, just because they have less rapport with you. You know, if they watch 10 of your YouTube videos, you're basically their best friend versus all of that kind of stuff. But it's very important. So, the thank you page, it should be noted that if we go back in that I'm going to change the color here,
+
+but in that opt-in page, they're going to get that welcome flow, but also when they submitted that form and you have their information, they're also going to get that welcome flow.
+
+Now, if they've booked a call, so the 50% of people who booked a call, if you have basically not put your Calendarly in your type form or the 70% if they booked the call, what we want to do is we want to have a Zapier that says, okay, Kalanly goes to Zapier, we want to remove them from this welcome flow and we want to add them to the pre-all flow. And we want to do that
+
+just because we don't want them to receive both. The welcome flow, the pre-all flow, and the follow-up flow are going to look very similar. If you find yourself creating those and they look basically the same, that is correct. You need to give them the information, and the information is the information. It's just the welcome flow is something that's basically
+
+educational based on 30 days. The pre-all flow is, you know, basically I do 18 emails, one every six hours or one every four hours for three days before the call, which is basically taking that welcome flow and condensing it as much as possible as fast as possible. A lot of people are going to be really lame.
+
+They're going to be like, I'm going to annoy them or they're going to be mad. About 10% of people will say, stop spamming me. I don't even want to do the call anymore. But those people aren't really going to be serious prospects anyways. And the other ones are going to have a 70% 80% 90% open rate. You're not bothering them. You're doing them a favor. Like they booked a call because
+
+they want this information from you. See, mine is 66% 76% 73%. This is just the last 30 days. 69% like this is the information and the objections and all the stuff they have. This is modern 2025 marketing. This is you doing an actual good job and educating the prospect.
+
+You're going to see your open rates skyrocket. You're going to see them coming up to the call way more educated on how it works. They're going to come up to the call, you know, ready to close instead of you having to instead of using you as a librarian. Basically, it's very, very important. Then the call is going to take place.
+
+Everyone's going to have their own process for a call. I always say that all sales process, all good sales processes look the same and all bad sales processes are unique in their own terrible way. This is not going to really be how to run a sales process or a sales call training in this what we're doing right now. So before they get to the call, they should have got the
+
+pre-all flow. If you really have tremendous volume, what you also want to do is have retargeting ads here. It's not in this diagram, but if you have big volume, it's good. And what you basically be doing is you'd be making about 60 one minute videos of and each of those would be about hammering out a specific objection. So, a short form. So, like how much time
+
+does this take? A lot of people think that this takes X, Y, and Z time, but really we've drilled it down into this. And then you just have those running. The goal would be to because especially if they come from ads would be to force feed them these retargeting ads before the sales call basically the same function as the pre-all flow. So they literally know everything. The goal if
+
+you're going to do this strategy and when I say volume what I really mean is you're getting at least 400 calls booked in a monthly basis. If you're getting less than that chances are these ads are not going to deliver at all. So, it's just one of those things. Basically, you have to have at least 100 people in this custom audience for these ads to deliver. But, Facebook doesn't match
+
+everybody perfectly. A lot of the time you can lose 75% of those people in matching. So, you need to have 400. So, that's just if you're looking for math and a quantifiable what is volume, then that's it. at sales calls taking place, 95% or more of people are not going to buy on the call or close within five minutes of the call. So then they're going to the follow-up process. The
+
+follow-up process is going to look the exact same as all these, but it's just going to be a little different. The pre-all process is going to be always referencing that we have a call coming up. You can use variables to show it at the call's coming at what date. And the follow-up is always going to reference the fact that you had a call and how to get started with the next steps
+
+basically. So like this is the funnel. So if we go through it and we go through mine, let's just go through mine here. Oops. So now we've filled out this application.
+
+And then in my type form, let's just pretend we've done it here. Let's just pretend this is live so I don't book a call. Then they're going to basically see my thank you page.
+
+Let's So that's my pre-all flow and let's open it up here. Welcome and then enclosed.com is my follow-up. So we're not going to see those open right now, but we've gone from start to finish. So this is our content. It's going to this opt-in page.
+
+I have opened up the opt-in page or I've submitted and now I'm on my VSSL page. Um, let's duplicate this a little. Now I'm on the VSSL page. I'm looking.
+
+Now they have been receiving my welcome flow because they've opted in. They've clicked the apply now button. They have gone to my form. If they are disqualified, they're going to be going to this page here.
+
+where I'm going to get some revenue. If they are not, if they're qualified, they're going to book a call here. If they book a call here, they're going to see this thank you page. They're also going to be taken out of the welcome flow and into the pre-all flow. And then I'm going to run my sales process, which if you want to see my what I share on the calls,
+
+it's very very uh very very basic. So this is basically what I show in the column and that's how it works. So mine is about 90% optimized. But what would we do for something like business loan funnel? So business loan funnel if we get rid of all of these there's really no like for most part content is out. And because content is out, the opt-in page is out. If you are
+
+doing something like a payper lead business, you don't really want your clients to know how to do it themselves. That's just giving in direct competition. It's a big market. There's thousands of lending companies. There's millions and millions of small business, but we don't really want to create mass competition for ourselves, right? So, we have our ad. So for example,
+
+so we have our ad for example. Let's just say here this is our ad or this are our three ads here. We're just talking about them and then they click. Oh, it should be this page stake.
+
+This page is I would say a little underoptimized and we're working on it right now. Wow, that looks terrible. So, we're going to pretend that doesn't exist and it's not overflowing there.
+
+But this should say something like serving business brokers and lenders. This should be at the top. Qualified and exclusive business loan leads delivered to your in real time. Then because it's a business loan and it has kind of a a bad reputation like as scammers or because I personally don't want my face to show on so people come and like dox me or some like that. I'm using a
+
+DSL and this stands for Dex sales letter. The DSL is basically just a different format of the VSSL. So you would just really have one or the other. There are situations where you would use a DSL. So, one, you just don't want your face on it for whatever reason, good or bad. Number two, if you know you're just absolutely terrible at making a video, like you suck at it, you look like a an
+
+idiot on it, you're bad at communicating, you're just so uncomfortable, you might just do a DSL because you're just so bad at it. Another instance where you might have a DSL instead is if you had a VSSL and then you had that embedded in your site on Wistia or something of that nature and you see statistics and you just see that the
+
+engagement rate and the play rate are just so low that people clearly don't care enough to do this. This will be the case a lot in industries like home services. This will be a lot if you are talking to old people like you're selling senior living, I don't know, anything to old people who just don't even know they should be watching the video for some
+
+reason. And if you see your engagement's like 5% or 3% or something and people just aren't watching this, it is good to give a DSL a try just because it's clearly not working anyway. Might as well try. So, this has to be done with Google Slides usually and they can just click through it at their own pace.
+
+Basically, what you want to do is just give the facts. Basically, anything that you would have in a VSSL already, you would do it in here. I don't think this is a particularly good DSL. It should usually for reference be about 70 slides, but it's all good.
+
+And then we have either our calendarly or we'd have our application in the page. So, this is a very interesting caveat for a lot of people because up to this point of this call, we've gone ads to page of VSSL and I said you should always have an apply button and a form.
+
+The reason that you'd want to have an apply button and a form when you're doing ads is what I said before, like you got to make sure they're qualified in the price. Like, why would you want to talk to these people? But also the way that Facebook works and the way that machine learning and the algorithm works is every conversion you get, you basically get one data point. So if
+
+Matthew Johnson who's on this call sees my ad and goes in on my form and they have opted in, Facebook sees that this person has opted in. It goes through Matthew Johnson's Facebook and Instagram and WhatsApp and browsing history and god knows what else and tries to find more people with similar interests, attributes, whatever else they use to Matthew Johnson. And
+
+then the 300 million people in the United States gets narrowed down to or looks for people like Matthew Johnson, for example. Then Matthew Johnson and now Sophia Kurd comes in. Now it has two conversions and it says okay it's looking for people who share the same trade says Sophia and Matthew Johnson and then you go to 10 people 10 conversions tracked and then
+
+it keeps getting narrower and narrower and narrower and narrower for this reason because it becomes very difficult at the start like I always tell people your first five conversions are more difficult to get than conversion six to a thousand just because when you're first starting you really have no data to go off of.
+
+You know, your offer is probably weird, your ads are probably bad and it's just very difficult to go from zero to one to use the startup or business speak. Then when you get something that works and you start to get data, it becomes a lot easier.
+
+when Matthew Johnson and Sophia have opted in. Once we get to a 100 conversions, our tracking will literally or our targeting will literally be 5, 10, 25 times better. And we get to a thousand conversions, it will literally be a 100 times more accurate than when we are when it's first starting. We don't need any interest. We don't need any targeting. It's just letting the
+
+algorithm do what it is. So, we want this form there because if we're targeting business lenders and Matthew Johnson and Sophia are not business lenders, we're going the wrong way.
+
+Basically, we're targeting people who are not business lenders at all and are not qualified to buy. This is the important caveat here in advertising and I'm going to do it with a different example. So for business lending here or in a different category I do called um buy internationally which is international real estate brokers.
+
+We have our kalumanly embedded here because when we're first starting out, you know, most realtors are poor. Most realtors are not going to be doing enough revenue. To go back to that revenue question on the form earlier, but when you're first starting out, at least they're realtors, and that's a start. They might be the poorest realtors ever. They might be absolutely
+
+unqualified to ever buy from you, but them being realtors is much better than them being a grandma. So we got to start somewhere. So in this case, the reason that we wouldn't have our we just have our calendarly in here and we don't have a form to make it to give friction is they might be independent business loan dealers. They might have not any any sales reps at all. They might be pretty
+
+terrible and unlikely to ever buy or if they do buy, maybe they'll just buy once and just not really be a good client, but at least they'll be business lenders. So, it's very very good when you first start advertising. And this is where we got to use our big beautiful IQ and know that there's nuance to everything. It might just be better just to skip the form here and the qualified
+
+thing and just and the application button and just let them book a call because they might not be great, but at least they're going to be our target audience. Then when we get 10 or 20 or 50 or 100 conversions and Facebook at least knows who we're targeting, then we add this stuff back in. A lot of people, especially when they are first starting out, definitely add too much friction
+
+where, you know, I only want to work with businesses who are doing a million dollars a month or more. Statistically, that's going to be what in every 250, maybe even less businesses. and there's I think 37 million small business in the United States at the start it'd be better just to target business owners let alone you know trying to make it that complicated.
+
+So that is a very important nuance for a lot of people. Most people I would say upwards of 95% of people that I've ever worked with in a consulting manner never even get their first conversion. If you read Facebook's white paper, 97.1% of people who try Facebook ads never get a single conversion. Whether that's a lead, whether that's a call booked, whether that's a app download, whether
+
+that's a conversion in or a sale in terms of e-commerce, 97.1% of people never ever get anything. And all of Facebook's billions in revenue and I believe several trillion in market cap is from the 2.9% of people who do. So we don't want to make it too tough on ourselves. If we're doing it on Kalumly, we can at least, you know, say this is how much we're charging, this is the
+
+minimum size, this is how like how many sales reps do you have and elsewhere. I'm actually triing a new software right now called I closed. It basically combines well it's basically like kalanly but you can you can actually kick people out if they don't answer correctly. So it kind of combines the form and this into one. The jury is still out on this. So it could be
+
+amazing, it could be terrible. We'll see. But that is how a funnel works. So realistically there's a few different problems. Number one is traffic.
+
+If you get no traffic or you're very bad at advertising and your traffic's too expensive, that's a very big hurdle to having successful advertising. With content, your traffic's free.
+
+Basically, just takes blood, sweat, and tears. But it is limited by scale. Like not all content or mostly no content is going to go viral. With advertising, you are going to get traffic guaranteed. But it is more of an efficiency or a skill game. If you're not advertising right, like you're going to get reach, you're going to get impressions, but there's no guarantee that it's going to work. With
+
+content, you're going to do it for free, but there's no guarantee of reach. These are kind of opposite. And a good business will always have both of these because both of them work together. So you are spending a ton on ads, you are naturally going to get more followers and fans on YouTube, on Facebook, on Instagram, on Twitter, on LinkedIn as a crossover.
+
+Likewise, if someone has viewed or if someone clicks on your ad and they click on your Instagram profile and there's a bunch of valuable content on there and they watch 10 shorts, for example, they're much more likely to click or take whatever action that you want them to take if they see content versus it's bare. very very important. These two things also benefit something that's not
+
+on here, which is outreach and partnerships. If someone is a fan of yours, watches all of your content or reads all of your posts and sees your ads all the time and you just happen to outreach them because they're in your target audience, they're much more likely to respond than if that wasn't like you didn't have any content or ads.
+
+Then you would just be completely anonymous to them. So number one is your traffic. If you're not getting enough traffic or it's too expensive, that's bottleneck number one. Bottleneck number two is your we're going to just put LP for landing page. So if they come to your landing page and it's just terrible, it doesn't have enough information. It's not a desirable offer.
+
+It doesn't match the ads. That's why like a lot of people will just do over-the-top ads, but if it doesn't match the landing page, like the expectation of going to the landing page is going to just make them bounce.
+
+For example, like if I should say in my ad that we're going to give you qualified and exclusive business loan leads in real time, like we want our landing page to always match the ad or else we're going to have huge confusion and drop off.
+
+So here your landing page doesn't have enough information. Your VSSL or DSL is terrible, which usually means it doesn't have enough or clear information. You don't have enough social proof. Uh so it can be some other stuff. Your landing page takes forever to load.
+
+The third one is going to be basically your form is too strict. So we're just going to put Oops. I don't know why I did that. So a lot of the time you are too strict with your form to some degree. You want to be as strict as possible. Sometimes like you'll be needlessly turning people away that might not be absolute whale ideal clients but clients that are good
+
+enough. The next thing would be you are not booking enough calls. So you know like they've submitted your form like but they're just not for whatever reason booking enough calls.
+
+Usually it's cuz they're lukewarm interested and you can do that by more information and more social proof. The next one is going to be the show. We're going to put the show yeah show rate SR and you do that with your pre-all flow and your thank you page and your retargeting ads and all that kind of stuff. And the final one is going to be the obviously sales call
+
+that is kind of beyond the scope of this video. There's I'm going to or training I can do a complete one in sales in itself and maybe I'll do that. But these are going to be the places that you can make sure or improve your stuff. So traffic, you know, more would be the first one. So always just do more more content, more ad spend. If that's not working or that is capped out, then it
+
+has to be better. That would be the second option. And then if you have done more and you're made it better and it's still then you might need to try a new channel or a new angle or something of that nature. If your landing page sucks and you're basically not getting enough people to even start the form, that's going to be a function of it's not clear enough. There's not enough information.
+
+There's no not enough proof that this actually works. For your form, you want to ask the exact number of qualifying questions that make sense. No more, no less. You want to have as many as you need, but you don't want to have an unnecessarily amount. Like, you don't just want to I don't even know some examples off the top of my head, but it shouldn't be unnecessary.
+
+For the book a call, you know, you main thing you can do is put proof and having that inside the type form. For show rate, you want to have all of that stuff on the thank you page and more. You want to have a great pre-all flow that force feeds them information. Like I said, retargeting ads, more proof, all that kind of stuff. The sales call, you know, how you introduce yourself, the first 30
+
+seconds should be scripted. The questions you ask should be not scripted, but you should have a list. You should have a objection handling list because if you do a 100 calls or even you do 10 calls, like you're going to find that there's 8 to 12 objections and that's just going to be there. So you have a metaphor, you have a story, you have an example of how to overcome
+
+each of those. You can just choose, you train your salespeople. You go for the close properly, and then you follow up. So there's not very many things you can do or places that could be the problem in your business. You could really condense this down to, you know, you could really condense this down to four places if you wanted to. And there if you're looking
+
+for actual metrics on how to diagnose this for traffic, number of clicks, but cost per click is good for landing page. The main metric you're going to think of is, you know, how many people start your application versus come to your page. So that's going to vary pretty wildly.
+
+For the show rate, basically what you're going to want to track is number of people that show up versus number of clicks. Or if you want to take that one step further, how much money you have to do or you have to spend to get one qualified person to show up. And then you're going to just go your close rate and then to some degree how long it takes for some between someone filling
+
+out the application and them closing just because that's going to be important for your cash flow. Like there's only four overarching places that you can do. A lot of people, you know, think there's a million ways and there's not. There's four and there's many different things you could do there. But at the same time, there's only four places you could put your
+
+time. What you want to do and what you get in the mindset of like for this, you're going to see that in your ads manager. If you It's very very important to understand that if it's working and you're getting clients at an acceptable customer acquisition cost, nothing else here in terms of metrics matter at all. Just
+
+leave it. you're if you're getting clients, you're getting clients, no problem. But a lot of these are useful if it's not working to dive into the metrics to diagnose it. So, if I open up here and I go to let's just go here.
+
+So, what you're going to want to aim for in your ads manager is you're if you want to aim for something and it like I said, if it's working, doesn't matter at all. But if you want to aim for something, a 3 and a half% outbound click-through rate is a indication of this is a really good resonating ad that's it has potential to be an amazing campaign.
+
+Your cost per click is going to be a function of your outbound click-through rate and your CPM. more competitive niches like business owners will have a higher CPM.
+
+If you have a high outbound click-through rate, that's going to signal to Facebook that people like this and your CPM is going to be going down. Because if we think of it, Facebook makes money by having people use WhatsApp and Instagram and Facebook. If your ads aren't resonating, that's bad for Facebook because people are going to leave the platform. So, they're going to
+
+deliver your ad, but they're going to penalize you basically by charging you more, which if you see your CPM being 100 or 200 or 300 like some people have, it's a very good indication your ad is terrible.
+
+Here's an application rate. And a lot of the time you're going to be wanting to get a 10% application rate is something good to search for like to aim for because not everyone's going to book a call. Not everyone is going to show up.
+
+Not everyone is going to be qualified. So a 10% application rate leading to a 3 to 5% qualified shown booked call rate is what you're going to aim for. So based on this funnel, I can see that 2.62% 62% outbound clickthrough rate is just fine. Maybe we'll aim for 3.5% but this is not slouchy by any means.
+
+Something that's.5%.85% is bad. We need to fix it. But this is if we go to what's the constraint here. My ads are not the constraint. 1.87 cost per click is good enough in general. If you're seeing over $10 cost per click, you're probably screwed and you need to like fix it. But zuring into here, my application rate is about four times worse than it should be here. So in this
+
+situation, I can see that based on my numbers, I need to really focus on my landing page and my form because it's just so bad. So that would be a situation here. So in this case, landing page, I need to do make the page more information.
+
+I need to have a VSSL. That page doesn't even have a VSSL. More social proof has very limited social proof. And that's why it sucks. I'm not wondering or sitting scratching my head why it sucks.
+
+I know very well why this application rate sucks and I need to fix it. If I had you're going to aim for 70% show rate and you can just do that basic math whether you have that beaming to a spreadsheet where you can just use formulas or you can just literally see how many call recordings do I have versus how many booked calls like very
+
+easy and then your close rate like you are going to see what that is it's just how many clients did I How many calls did I take from ads? You're going to see a 15 to 20% close rate at scale per content. That could be well, it's going to be a lot higher, but I have a 70.5% close rate for consulting from my YouTube just because they know
+
+everything about me. They think I'm smart already. Like, they're coming to the call to close. But those are the places that you could like this is a funnel in its most basic form. There's many different types of funnels for a webinar funnel. You would probably change this this here to you know sign up for my webinar.
+
+If you have templates or something like I did with my agency I sold I did landing page templates. You would put that here and then eventually you'd hope that they just want to hire you to do it for them. for what's another kind of DM funnel. They would this would be a DM instead.
+
+So the bits and pieces are always going to be the same, but the fundamentals are important. This is a lot like a vehicle or like a car.
+
+I want to clarify car, not like an investment vehicle. It's like a car. You need every single piece of it for it to even function properly. A lot of the time people like, "What are the three things I can do?" Well, you have to do all of them. You're going to just fail if you have three things. If you had every piece of a car except the steering wheel, that car is extremely useless to
+
+you. And it's the same thing here. If you had every piece of the car but the brakes, useless to you. If you had every piece of the funnel, but you're not following up, your close rate's going to be three times less than it should be.
+
+If you have every piece of the follow or the funnel, but your landing page is terrible, four times less than what you should be based on what I have here. So, you can't just have bits and pieces. You have to have all of them. And I aim having all of these at six out of 10 in terms of quality is 5,000 times better than having half of them at 10 times quality. Just get it
+
+up there. Throw it up. At least you have it. You can always fix it later and then you'll be fine. You need to have every piece of it just in the way I described if you want to have any success in business. And 95% of the businesses out there don't have success. If you look just look at, you know, the Bureau of Labor Statistics.
+
+So how many businesses do $1 million per year in the USA? Then how many do 10 million per year as a percentage? Simple. So literally 33 million businesses, only 4% of them actually hit a million dollars. And that's just revenue. If you do a 20% margin, which is pretty standard for most businesses, especially because most
+
+businesses aren't particularly well-run, 4% of people make 200K, assuming they don't have to reinvest any of it. And then one in literally 0.6% of businesses make 10 mil, which is probably what every entrepreneur wants to do is make a couple of million dollars per year or even $1 million per year.
+
+So all of these businesses are not wellrun at all. So it's not an exaggeration when I say that literally just by being on this call and knowing this is what you should have, you're in the top 5% of people and then if you actually implemented it, you'd be in the top 1% of people. And it's not particularly complicated. You can set all of this up in a weekend. I just view
+
+that no most people don't have even basic knowledge. And of those that do, they don't implement it fully. And of those who do implement it fully, a lot of them can't keep it up for more than a week or a month. So if you just use statistics, you know, that's not very many people. So although people say, "Oh, this is saturated. Oh, this is competitive."
+
+Maybe in numbers, but 99.9% of people who are doing this are not actually serious in any way about their business and are not really your competitors. So, does anyone have any questions? As there's only eight minutes left, so we can have some time for questions.
+
+&gt;&gt; Yeah, I do. So, we have a point where people fill the form and they're qualified and then they book in a call, right? But like what if uh you know like they don't book in a call? Do we have a flow for that? Because uh because if they don't &gt;&gt; so what what should happen basically?
+
+And I have this on my personal cell phone, but if you are a serious like for this, I'm the one closing it, right? So I don't have a sales team. All of these processes are in my head. That's not a good thing. Like if you want a serious business, you have to have these processes. If someone fills out a form, I have Zapier and it texts me Aran filled out a form. This is his
+
+email. This is his website. This is his phone number. I instantly click and send a video of myself to them saying, "I saw you filled out the form." Like, "Do you prefer to do this on a call or over text?" They're going to respond. Like, and basically, you should be doing that or your sales rep should be doing that if they book a call, too, cuz you know, we'll call it selfie video, not a loom,
+
+like an individual selfie video that you picked up your phone and did. I know, you know, most people are lazy. They wouldn't do that. the show rate, the amount of rapport, the them knowing what you look like and are eager to talk to you, you just showing initiative is going to increase that show rate even more. So like that's you want to have Yeah, they that should be in here
+
+somewhere. So I'm going to actually add that. Good question. I like that. We're going to add that in here and that's going to be we'll call it permanent. So selfie video, we might call it something that sounds less weird, less but we're going to call it a selfie video for now.
+
+And we're going to make it orange because we're just going to make it orange. So selfie video. And then I'm also going to put retargeting ads here.
+
+Doesn't apply to everyone, but it does apply to super serious people who are operating at scale. So, we're going to put that in there. &gt;&gt; Uh, I have a question as well.
+
+&gt;&gt; Yeah. So like an abandoned cart flow does it work the same way &gt;&gt; an like if you're doing a product &gt;&gt; no service &gt;&gt; an abandoned cart flow &gt;&gt; for example &gt;&gt; I we can't hear you if you're talking &gt;&gt; all right yeah um The so like if they going back to what Arian was saying if they end up on the form but then they
+
+don't finish it is it possible to do something like an abandoned card flow where we send them &gt;&gt; Yes. So if they don't if they fill out the form but don't do it you could do that but your welcome flow will be picking them up anyways.
+
+So yeah, like you could do that I guess if you want, but your welcome flow is going to be doing that. And a lot of the time, like if you're doing ads, right, they literally can't like they wouldn't be in this email flow without doing your form. So like that's so like it's essentially what you're describing.
+
+So basically, no, not really. &gt;&gt; Okay, got you. Yeah, I got another question mark. So I see a lot of people do actually the uh this like was in &gt;&gt; well are in Google.
+
+&gt;&gt; Yeah. Yeah. I was saying especially in the uh in the you know in the info product niche people don't have you know the uh like the open page or like the sales page with VSSL but they replace that with their Instagram account as a sales page and their own ads &gt;&gt; that they have a DM sequence.
+
+&gt;&gt; Yeah. So like this &gt;&gt; like what do you think about that? is &gt;&gt; this here would be just DM. &gt;&gt; Okay. &gt;&gt; Uh I think it's all right. I think it has its place.
+
+&gt;&gt; Um which one do you think it's is better? Because in that you combine ads and content and there's a higher chance of them actually replying to your DM. &gt;&gt; A DM funnel is I would say three notes.
+
+One, it requires a lot of manual work. Like you have to have someone there 24/7 to &gt;&gt; do it. If that is true and you do that, very valid. I would say the second one is it's very hard to scale like it's very good to go from like if you're I don't know about numbers but if you're going like you want just want to make 100k a month that's perfectly fine.
+
+After that you're going to have thousands of DMs that it becomes very impractical even if you have multiple people to even organize it. So I think it's okay. I wouldn't do it for a lot of niches. If you're targeting younger people who prefer to do it like that, which a lot of info product customers are, then yes. But &gt;&gt; do you think it's a good way to get to
+
+around 50 to 100K and then implement this funnel? &gt;&gt; Yeah, I think so. I wouldn't do it for something like business loans though. I wouldn't do it for something like senior living.
+
+I would say like if you know your audience is under 35, do it. If it's not if that is not true, probably not. It also should be noted that a lot of the like for to some degree you want to have all over the funnels. So call, DM, you know, digital product, webinar, lead magnet, like in a ideal world, you would have all of these working profitable because they all work
+
+together. If someone downloads your lead magnet, they're way more likely to come to your webinar, they watched your webinar a week ago, they might DM you, uh they booked a call, they might, you know, they're more likely to book a call. But you got to start somewhere. Don't start doing all of them at once. Like, you got to get one to, let's just say 100K per month,
+
+and then you add a second one. Like you, if you if all of the funnels are profitable, you might as well run all of them. But it is difficult enough to get one funnel scaling, let alone all five at once. So you would just pick one at the start for sure.
+
+&gt;&gt; Okay. And for metrics, like you said, I'm like, if we're getting the final result, like that's the sale, then we don't look at any other metrics and try to change it, right?
+
+&gt;&gt; If you had a goal of getting a customer for $1,000 and you're doing so for $1,000. Yeah. like don't change anything. If you have a goal of 1,000 and you're getting it for 2,000 now, you would look at this stuff and see like why is this wrong or like what is stopping me? And it could be everything is stopping you.
+
+But you also would want to start with the one that's stopping you the most. Your ads might not be good enough and your landing page and your close rate might not be good enough, but one of them is going to be more terrible than the others and you want to start there.
+
+One of like no matter if you're at 100 or 10k a month or 100 million a month, one of these things is always going to be the thing that's stopping you from going further.
+
+You know, like you have financial problems, I have financial problems, Warren Buffett has financial problems. Like we all have financial problems. They're just different and better. So, it's the same with scaling an adfunnel, right?
+
+&gt;&gt; And like which part of the funnel do you think has the highest constraint or like uh or like um you'd say like the is is the most difficult part to crack? I'd say the ads in the landing page are what most people who are beginners start with. Like most people if you get on a call with someone and you've sold your service before like do at least an acceptable job.
+
+So the first part like if you're starting from scratch probably this and then actually getting them to show up and then sales. Usually, usually when sales becomes a constraint is when you actually have to hire someone who's not you and train them to do it properly. But if you're the founder and you're starting out, usually you've sold your service to someone at
+
+some point multiple times. Like you've proven that you can do it. So yeah, like usually that's most people I would say never get past this part. And then those who get past this part, usually they'll have a really low show rate or just like really lowquality calls where the people don't know anything like you have to explain too much to them where it's like a five call
+
+close. And then the sales happens when I try to get, you know, I have eight calls a day, Monday to Friday. Now I have to get Natalia to do the calls and she's not me. She's not sold this product a thousand times. she does not have the authority that I have as the person in the content or the founder of the company. So that's usually where it falls apart. And then when you're trying
+
+to do this, you know, now you have 50 sales reps, like it can get pretty complicated. But that's going to be the end of this training. Um I have to another call I have to go to. If you have any questions, just message me in Slack and I'll post the recording when it renders.
+
+So, bye-bye.

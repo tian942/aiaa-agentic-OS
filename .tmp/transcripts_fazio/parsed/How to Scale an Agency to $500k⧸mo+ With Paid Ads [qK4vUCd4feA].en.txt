@@ -1,0 +1,303 @@
+If you run a B2B offer, an agency coaching program, high ticket offer in any capacity whatsoever, I'm going to talk to you about how I make $1.1 million and sign $122 clients per month every single month using ads. So, basically a comprehensive outline and guide for profitably spending $7,000 per day or more on ads and signing 20 to 30 clients per week because that's exactly
+
+what we do at our companies. I'll tell you about it in just a second. But what we're going to go over is CACL LTV NR math funnel offer under design creatives media buying strategy scaling checklist.
+
+And then I'm going to give you guys an offer to work with me directly. So past 30 days numbers 1.161 million in revenue, $183,000 in ads. It was 2,800 individual sales cuz there's like some selfch checkckout that goes on too.
+
+It's not just full sales calls for every single offer. And then 766 qualified calls booked. Why qualified? Because I reject every single person who isn't qualified. And I'm going to tell you about that in just a second. If you don't know me, my name is Daniel Fazio. I'm the co-founder of Client Ascension and Liskit. This is how much money we make. And I'm saying that
+
+just for authority and credibility purposes, so you actually listen to what I'm telling you today because it works. So, let's get straight into it. So, first off, you can download this document I'm using this video at the first link in the description. And then two, you can work with me directly oneonone to scale your ads at the second link in the description. Click that
+
+link, opt in, and I'll give you pricing on how exactly that works inside of that video. But let's get straight into it. So, CAC, LTV, and RMA. We're going to walk through some definitions here like you're back in high school cuz you got to know this. So, CAC, cost to acquire a customer. LTV, lifetime value. LTGP is lifetime gross profit. So, that literally just means lifetime value
+
+minus the cost to fulfill. And then NR is net revenue retention. So, what I want to do here is walk you through this real quick. So, this is just an example of a Google sheet that's a CAC to LTV calculator. So, if we were to take some broad assumptions here, let's say you were spending $30,000 on ads and let's say your cost per qualified live call was $420. That's about something you
+
+could expect if you're running some kind of like B2B offer and like you're selling to people who make 25K a month or more in their own business, right? Close rate, it really should be like 28% if you're doing the qualification and lead rejection thing I'm going to talk to you about in a second. But then we go over here. You take your average revenue per customer monthly if it's a recurring
+
+service. Let's say you have a 70% gross profit per customer. Let's say your churn is 10%. That would mean that your lifetime value is 35,000. Your lifetime gross profit is 24,500. would give you a 16.3x between this right here, your $1,500 attack and this right here, which is phenomenally good. So, if you want a copy of this sheet just to kind of play with it yourself, first look in the
+
+description again, you can download this document which has a link to this as well. So, our entire job in our companies is either to increase LTV or decrease CAC and literally you serve no other function in your business. There there literally is nothing else to do in the business if it does not increase LTV or decrease CA. There's nothing you could possibly be doing inside of your
+
+company that is useful if it is not directly either increasing LTV or CAC. Literally, every single function that matters in any capacity whatsoever at all is 100% of the time going to fall within either of these. There's nothing you can come up with that would ever not fall within those, right? If it's a useful activity. So, you might say like, well, what about customer service? Well,
+
+why do you do customer service? So, your customers stay longer. Why do you want your customers to stay longer? So, they pay more money. What does that fall under? LTV. There literally nothing you could be doing that's useful in your company that doesn't fall within these two. So you need to make it abundantly clear that you've got to keep your eye on what actually matters. It's just
+
+making more money and decreasing cost. There's literally nothing else at all, right? So the higher the LTV, the more money we make. The lower our CAC, the higher our ROI. So what are the factors that actually influence LTV? Like how do we even increase LTV at all? So here's everything we do. How much you charge?
+
+If you charge more money, the LTV potentially go up if it doesn't get offset by increased turn. Number two is how long customers stay. That's if it's of a recurring service. There's how many times customers buy if it's not a recurring service. Then there's how often you reactivate people who churned.
+
+There's how often and by how much you can upsell people who come in from one offer and you upsell them to another offer. And then there's how efficiently you can downell people who are intending on churning. So, okay, someone says they're going to churn. Are you able to sell something else? See what I mean?
+
+So, here's the factors that influence CAC is your cost per qualified call and your close rate. Now, I could have put a dozen different things in here like clickthrough rates or cost per optin, but all of these metrics are completely useless beyond cost per call. The reasoning for this is going to be explained in the next section, but literally nothing else. If you're
+
+running a callfunnel business, you have a sales team, a sales teambased high ticket offer business, nothing else matters besides cost per call when you're running ads. Nothing. There's literally no other metric that you should even look at at all. It doesn't matter what's the cost per call and what's the close rate because that gives you the cap. Nothing else matters,
+
+right? So net revenue retention. What is this? So this is just a formula. The way you calculate it is you take whatever your MR is starting at and then you add your expansion MR. So what is expansion MR? It's upsells or upgrades. Then you subtract your churned MR, how much MR you lost. And then you take that number and divide it by your starting MR and it gives you a percentage. And the
+
+percentage is a literal expression of the growth of your company as a percentage, right? So imagine you have 100 clients at $1,000 a month. That would mean you're at $100,000 a month.
+
+So and let's say your monthly turn is 10%. So you lose 10 clients and you lose $10,000 per month in MR. So you go down to $90,000 a month from $100,000 a month. But you upsell another 10 clients from a,000 a month to 2,000 a month. So you gain another $10,000 a month accounting for both the churn and upsells. You're at 100% NR. Right? This metric ignores new customers. Right?
+
+formula is an expression of how healthy your business is absent of new acquisition. Right? If your NR is 90% that means you lose 10% of your revenue per month without acquiring new customers. If your NR is 100 110% that means you gain 10% of your revenue per month without acquiring new customers.
+
+So the enterprise value of your business is derived from NRR. Churn only matters to the extent that it impacts NRR. Right? Hope this makes sense because it's super integral for you to understand if you want to actually make this work. So therefore, increasing LTV is substantially more useful and worth your time than obsessing about reducing CAC. CAC can only go down so
+
+much. LTV can go up infinitely, right? So what's the secret to increasing LTV? Because after a certain point, it's unreasonable to decrease churn anymore. Things just happen, right? People have to churn. There's a better way. And the answer is the portfolio of products strategy. This is otherwise known. I like to call it operation hypers scale.
+
+This is how you make a profound amount of money. So let me give you a quick visualization here. What is this? Each of these green boxes represent an offer. And now each offer has its own acquisition strategy associated with it.
+
+So let's say you have one offer where it's ads, another offer where it's organic, and you have another offer that's coming in through ads, another one through ads. And one's a selfch checkckout, one's a low ticket product, one's a high ticket product, one's a mid-t product, one serves as an upsell to another, one serves as a downell to another, one's a cross-ell a cross-ell
+
+because they can buy multiple at the same time. It's just various tangentially related products that are similar to each other in different forms and different buying frequencies at different prices that are for different people in different life cycles of a customer. The point is to have a profound amount of these. You just have a lot of offers. Why? Because some quick
+
+napkin math to help you understand this. Let's say you have 100 clients from ads on one offer. Let's say it's offer one right here. And then some percent of these clients stay on this offer for a year. And then some percent churn, but they ended up being downsold some other offer to stop them from fully churn. So, so let's say they were on offer one, but then they were going to churn. They told
+
+the client success manager they're going to churn, but then the client success manager was able to successfully downsell them to offer two. Cool. So, now they're on offer two because offer two was more relevant to their business at the time that they were going to churn, right? And then let's say another percent fully churned, but then they started getting ads for some of your
+
+other offers and ended up buying those. So, they churned from offer one and then they started getting ads for offers three and four and then they were like, "Oh, wow. Offer three is way more relevant to me." So they purchase offer three, right? So you save some money there. You saved some churned MR, right?
+
+But let's say cold traffic bought a low priced offer, then it got upsold from customer success team to a higher price offer. So let's say over here, offer four was a low ticket product. They bought that. Then a customer success manager upsold them to offer one, which is a higher ticket product. You see what I mean? And then let's say you had older clients saw you launched another offer.
+
+So you just launched offer six and they ended up buying that while they're already on offer one. So now they're paying you for both offer one and offer six, right? And then this cycle just repeats forever. an infinitely interweaving incohesive type of finagle of different offers. You just have to sell and people just buy the you have for sale. Like it's
+
+really that simple how this functionally works. Like how many brands does CocaCola own? It's like 600, right? And then you take like random little companies like Proctor and Gamble. Like they own like 4,000 different SKUs. It's like random like that. Like Apple has like 60 products. Not all of them are hardware. There's a lot of software and like subscription based products and
+
+like media based products and like there's just for sale. There's just things to buy. You see what I mean? There's just various different products to purchase. This is what I'm getting at here. Like this is how you make this work. This is how your ad you make your ads work. Because if we just go back to this sheet over here, let's say that this was 1,500 over here and then this
+
+was like five to make this a little better. You're paying 1,500 to make 1,500. But then you still got to fulfill. So you're actually losing money on month. A lot of people just can't stomach that when when you don't have a ton of capital saved up like you're running kind of a smaller company. You see what I mean? So, the way you counteract this is by just having so
+
+much for sale that you can liquidate the ad spend faster. The whole point what you're trying to do is put $100,000 into ads in a single month and then make $100,000 back immediately in month one and then make all the profit in month 2 3 4 5 6 7 8 9 10 11 12. You see what I mean? Like this is the strategy. This is how you do this. And I'm not saying like you got to
+
+understand like this isn't just like some that I just like randomly came up with. this is how you scale a company. This isn't me like giving you like a theory of like, oh well, you can do it this way. Like this is just a strategy, but if you go start investigating other people's theories on how to do this, like they're going to tell you something else and you could do
+
+it their way instead and it might be better than my way. It's not true. This is how you do it. This is the way to do it. There is no other way to do it. You see what I mean? This is what I'm trying to get at. You invest money to purchase customers and you make as much of the money back as quickly as possible and then you make the profit on the back end. This is how every single large
+
+company scales on the entire planet. This is the way to do it. Just trying to make sure you fully understand the gravity of the situation which I'm trying to express to you. I'm correct.
+
+This is what you have to do. You got to just be comfortable with spending the money and breaking even and making the money back. And if you can't stomach that temporary amount of pain, you're just never going to be rich ever. I would prefer that you're rich. So just listen to what I'm saying and just do the strategy. It literally doesn't work any other way. So let's get
+
+more deeper into this. So every individual offer, right? All of these could independently be self-liquidating and your absolute level of profit will geometrically expand for every new additional offer you add. So, let's say that offer one has a $1,500 CAC and you collect $1,500 in month one. That's a self-liquidating offer, right? And then let's say offer two is a $500 offer and
+
+it costs $500 to get customers for it. And then offer three is a $70 offer and it costs $70 to get a customer. Every single one of them is exactly equal. You spend this much and you make that much immediately. It's a 1x row. That's every single one in month one. And all of your offers could be like that and your profit on the back end would geometrically expand. Why? Because
+
+again, I just explained that they interweave and they upsell into each other and cross-ell into each other and then there's recurring elements to them. The point is that you want thousands of human beings to have paid you any amount of money at all because the people who are most probable to pay you money are the people who have already paid you money. Right? The girl who is most
+
+probable to go on a date with you is a girl who's already been on a date with. And this is why I tell people, don't do lead magnets on cold traffic. Why? Because lead magnets are free. And people who download free tend to continue to only download free You see what I mean? You can't make profit back because the cost per lead on people downloading the free is too high in
+
+comparison to the amount of revenue that you will make from the people downloading the free Free downloads are only cool or only economically viable if it's organic traffic, right? So, like for instance, on this video, I have a free lead magnet. I just told you the first link in the description, you can download this document. Why am I doing that? When
+
+I just said free lead magnets don't work because it's free traffic. I'm not spending ad dollars. Like 10% of you watching this video might download a lead magnet. If this video gets 10,000 views, I just got a,000 email addresses.
+
+I probably close like four people. You see what I But if I was spending $10 or $15 per lead like you're going to do in ads, it's too expensive. It's not economically viable to do that. So, you need to selfquidate to acquire purchasers, people who buy because people who buy are going to continue to buy more You see what I mean? You got to imagine this is just
+
+a complete truism that you got to understand. Like, there's a section of your market, right? And it's like 95% of them are just like lurkers and they just don't buy They don't do that.
+
+They're little freeloaders. They refuse to buy anything. We call these people the pores, right? And then we have the 5% of people who actively buy stuff, invest into themselves, actually get all of the results, actually drive revenue and push the business forward because they're actually a serious person. Okay, cool. So, if we're going to get thousands or hundreds of leads, how do
+
+we make sure that only the leads that we're talking to and the people that we're having actual conversations with are people that aren't the pores? And the answer is through lead qualification or you make them pay for the upfront. That so that would be like a low ticket product where it's like you only let people talk to you, they've already purchased something. The
+
+other one is you're telling them the price up front and then you're confirming that they can pay the price and if they say they can't afford the price, then you reject them and don't even allow them to book a call in the first place. That's exactly the next section that we're going to get into. So let me finish this off first before we do that. So, every single new offer that
+
+you add to your arsenal of available to purchase from your business, every single new offer decreases net revenue churn, increases lifetime value, decreases CAC because there's more optionality, increases reactivations, increases net revenue expansion, and increases net cash flow. Every single one, all simultaneously, every time you add a new offer to your business for
+
+sale, all of this will happen at once. And it doesn't stop at offer three. It doesn't stop at offer four. It doesn't stop at offer five. It just keeps going literally forever and ever and ever and ever and ever and ever. And this is why you see these billion-dollar companies who will literally have like 3,000 products for sale. You see what I mean?
+
+And you're sitting here with one service, one product offering for sale, and you're wondering why you're not rich yet. I have like 10 different offers that people can buy from me. I just have for sale. There's just things to purchase from me. You see what I mean?
+
+Like this is why we're at $1.1 million a month cuz there's just to buy. You see what I mean? So let me show you this graph. So graphically this is how this works. So let's say you have offer one, it's selfquidating. And then you have offer two, it's selfquidating on cold traffic. Like you're running ads to offer one and you're selfquidating to spend immediately. You also have another
+
+offer that's doing that. What does this do? It feeds these people into an acquired customer pool. So you have a pool of people who have purchased from you, right? And then you add additional offers. You sell offer three to the acquired customer pool and you make $2,000 profit for every time you sell that. Pure 100% raw profit. And then you do the same thing with offer
+
+four and that's $2,500 profit. Pure 100% raw profit. No additional CAC. You already acquired the customer. Right? This is where you make money. So I want you to imagine this graph completely split in half. The left side is where you make the revenue in your business.
+
+The right side is where you make the profit in your business. Right? On the left side, you don't want to profit. You want to spend so much money on advertising that you are bidding that your bids are so high that you are completely self-liquidating. Right?
+
+If you're making any profit at all, you need to spend more money until you're not profiting. So, you're getting an absolutely ton of people in the door, right? Then you sell them other on the right side after they've become a customer with something. And you can imagine that when you've been doing this for so long, for six straight years, like I have, that's how you make
+
+a ton of profit, that's where the profit is made. You see what I mean? Like functionally, this is graphically how this works. This is very, very important for you to understand. It's the way to do it. It's the way. If you can spend a long time trying to search for information of someone saying, "Oh, no, you can profit on the front end. You can profit on the front end. You can
+
+profit on the front end." This is bro. You will make substantially more money just trying to do this than you will trying to profit on the front end. You will profit 500 times more money if you just go all in on this than if you were just trying to profit on the front end. Like just being real with you. You really need to just do this instead. All right, cool. So
+
+let's talk about funnel and offer design. So here we're going to cover optins, VSSLs, lead qualification, and calendar distribution. So generally for B2B, you're going to look like this.
+
+It's going to be add landing page. The landing page has a VSSL on it. Application call close. So I like to have optin pages. So this is incredibly simple. I just get the name, email, phone. The button button normally says get pricing and details. That's it. No videos, no testimonials, no excessive text on the opt-in page because that's for the VSSL page, right? So, just a
+
+clean singular headline and button. They put their info in, bam, they get automatically redirected to the VSSL page and it's just a video that explains your offer clearly. Then below the video is a button to book a call. Again, it's extremely simple. So now, when they click this button, it doesn't just show a calendarly. It does not take them to a calendarly. It opens a type form. Why?
+
+Because we filter people based on revenue, right? So, if they're making less than our threshold, it was going to vary by the offer. They don't even see the calendar. Right? So, this saves your sales team countless hours when I'm talking to poor people, right? And then after that, if they qualify, they get to see the calendar. So, I'm going to get into this in a second. I need to
+
+reiterate this so you really grasp the situation of what I'm trying to convey here. I'm asking them how much money they make. If they don't make enough money, I completely reject them and don't even let them see the calendarly at all. I also reveal the price and ask them if they can afford to pay that price. If they say no, then I also reject them and they're not even allowed
+
+to see the Calendarly. Right? I'm going to get more into the math of this in a second. But you got to understand like that is the correct way to do it. And if you don't do it that way, you are so You are so so so if you don't do this. You're trying to sell high ticket to cold traffic. Let me get into optins first. So, as a general rule, the more rich and sophisticated
+
+the market is, the less you want to use optins. So, if your market is exclusively people making like 100 or 200k a month or more, don't use opt-ins. But if they make below that, generally you should use optins. So, there's also other exceptions to this rule and it's obviously something you should just test yourself. So, don't like I Daniel told me to do optins and then I did opt it
+
+didn't work and don't like obviously everyone every offer is different, right? So, we personally generally always use optins because we're insanely good at email and we have insanely good setters. completely cracked setters calling and texting immediately. Email list like one, two, three emails a day.
+
+Like insane, right? So like functionally, how does this funnel work? Someone sees the ad, they get to the opt-in page, they opt in. Now they're on the email list. The email list links to the VSSL page that has the application on it. The setter is calling to doing the application process manually. That's something that's important to note as well. So like if you have an application
+
+that's filtering out poor people or the people who can't afford the offer, but then you also have setters who are calling and setting leads for the closers. The setter needs to also be doing the qualification process that's on the application because the setter just is the type form. You see what I mean? Like the setter needs to ask them how much money they make and reveal the
+
+price of the offer. That's what we told our setters. Our setters are only compensated for the lead if they revealed the price and they got the revenue from the person and the person's revenue is qualified and they said that they could afford the price. If they did not do that on the call, cuz we'll go and audit the call. If they did not do that, then they don't get compensated
+
+for it. Why? Because if the setters don't do that, then they're going to set dog leads on the closer calendar and then the closer close rate goes down. You see what I mean? It the whole sales process. You see what I mean? The setter is the type form. They are the application. They serve the same function. You see what I mean? So, we were looking right here. Someone opted
+
+in. They're also on the email list. So, I want to talk about the email list real quick. So, all optins go through a 5 to 10 day sequence where they get one to two emails per day. In addition to this, they're also getting our broadcast emails that we sent to the entire list.
+
+So optins may be getting like two to three emails per day. Like this is important to understand because there are too many times where I've been working with a client and they're completely not sending emails to the list at all. Oh, I send the email a week. They get two a day from me. You send one a week, I send 14. You see what I mean? So I had a student tell me he
+
+emailed his list an offer one time, collected about 15k, and then was on the phone with me wondering how he can get more clients. He's like, "I'm not making as much money I want." And he sent the email 3 months ago. And then I screen shared my HubSpot and show this guy I was sending five emails per week Monday to Friday on top of the automated sequences. And he's like, "Oh shit." I'm
+
+like, "The difference between what you're doing right now and what's actually required to get substantial results is normally extremely wide. Like you're normally doing 120th what it actually takes. If you're going to have an optin, use the that you get from the optin. If you're not going to hammer the email list, don't even do the optin." So people, "Oh,
+
+optins didn't work for me." It's a yeah, cuz you didn't do anything with the emails. didn't do anything with the phone numbers. That's why it didn't work for you. So, we double call leads as quickly as possible. The faster the better. So, we sporadically call them for one to two weeks after as well. So, they get automated text the day of and the next 3 days. Then they get
+
+occasional text. And the general gist is this. If you're going to use optins, get the maximum amount of usefulness out of it. Don't require your leads to give you an email and phone number up front, then not do anything with it. Right? This doesn't make sense. Like, the entire purpose of the optin is specifically to do something with the data that you're getting. So, constantly be calling them,
+
+constantly be texting, constantly be emailing. If you're not going to do that, just don't even use an opt-in at all. Right? But if you do use an optin and you do it correctly, I tend to find it works much better if it's not to very welloff business owners. If it's very well off business owners, don't use an opt-in. Okay, cool. So, friction and qualification. So, again, we use type
+
+form to filter out the unqualified people from talking to our sales team. This is extremely important. You need to be cautious of people bragging about low cost per call. So, you you'll see people online all the time, bro. $80 calls and they're all poor people with no business and no money 100% of the time. This literally is what's happening. So, if you do not friction in
+
+your funnel, ads will never work for you. You are not here to work with everybody. You're here to work with qualified business owners who make money and who have the budget to spend money.
+
+There's absolutely zero reason to talk to anybody, even for 5 minutes or any amount of time at all, who does not fit these qualification parameters. If your offer is $10,000 and the only people who can afford it are people who make $30,000 a month or more, why are you going to talk to anybody who makes less than $30,000 per month? And why are you going to talk to anybody who does not
+
+explicitly state that they can afford $10,000? It doesn't make any sense. It's a complete waste of their time and it's a complete waste of your time because your closers do not have an infinite amount of time to talk to tons of people. They can only talk to like five people a day. Stop making it poor people. It doesn't make any sense, right? So, when you constantly keep
+
+allowing unqualified people onto the calendar, your close rate is like 5%. Right? The sales guys get frustrated, your cost per acquisition is horrible, and every party loses. Everybody in this situation does not like what's going on here. Bad situation. You spend $1,000 per day with $50 calls booking 20 calls per day. 80% are unqualified. The close rate is 5%. You close one out of 20
+
+people. So, you need 20 calls to speak to even just two to three qualified people and close just one, right? One closer can handle five per day. You need four closers. Huge pain in the ass. You need to hire and manage four closers to make zero money at all. Like, what are you doing? Right?
+
+good situation. You spend $1,000 a day with a $250 cost per qualified call, booking four calls per day, closing one. It's one the amount of calls and time needed to spend to close the same amount of money. You only need to hire and manage one closer, not four. Right? This is a complete waste of time.
+
+Don't do that. Do this. Stop talking to the poor people. So, let me give you an example. This is just an example of mine. So the first question is, are you a B2B company or a B2C company? And I say right there, I'm like, we do not work with B TOC companies who sell to consumers. You must be selling to businesses. Two options. I'm B2B or I am BC. And if they select I am B TOC, it
+
+ends the type form. It just says you can't book a call. It's not for you. They can't even see the Calendarly, right? And then number two, what's your approximate current monthly revenue your business? If they select they make less than $5,000 a month, what happens? Auto reject. Rejected. They can't even see the Calendarly. It doesn't even show it to them. They can't even see it, right?
+
+Question three. Are you able to spend $2,100 to get started in a minimum of $600 per month onwards? Yes. No. If they select no, what happens? It rejects them and they can't even see the calendarly.
+
+They can't even talk to us. Next one. Do you estimate your total addressable market is more than 15,000 people? If they select no, what happens? We reject them because that's just something that they have to have that for the offer to make sense. So, if they select no, what happens? we reject them and they can't even see the calendarly in the first place. Now, let's walk through this. So,
+
+every single person our closers talk to is a B2B company who makes more than $5,000 per month, knows the price, and has explicitly stated that they can afford it, and they have a total addressable market large enough to make cold email work for them in the first place. So, what does that mean? It means that our close rate is like 32% and our CAC is low as and the
+
+closers make a lot of money and we need to manage like 14th the amount of closers. Each closer is able to bring us in like 50 to 80 grand a month in new sales by themselves with that low price of an offer. You see what I mean?
+
+If you do anything else, it's just completely stupid. The numbers don't make any sense. Like I can't get ads to work for me. like ads don't work for me. It's a get cuz you're talking to poor people. That's why that's literally why it literally zero sense at all.
+
+There's not even a single argument could ever be made. Every time you do this, it adds friction, right? This is friction. There's drop off. This question drops people off. So is this one. So is this one, right? It's a friction point. So adding more friction increases cost per call. It increases the percentage of calls booked that are qualified. It increases show up rate and it increases
+
+close rates. So when you do this and you get rid of the poor people, yes, it increases your cost per call, but it increases how many of the people are qualified and the show up rate goes up and the close rate goes up. And these counteract this so much that your ROI shoots up like three times. You see what I mean? So yes, your cost per call goes up, but all of the other
+
+metrics improve simultaneously to such a high degree that you make substantially more ROI. Right? Now, what happens if you get rid of this friction? You decrease your cost per call. So, you get more calls booked for the same amount of ad spend. However, they're all unqualified people. The show up rate goes down and the close rate goes down.
+
+And it does that so much that your ROI gets completely You see what I mean? It is profoundly more economically efficient to be booking less calls that are more expensive but are more qualified than to be booking more calls that are not qualified. Stop letting unqualified people talk to you. This is so integrally just ridiculously important for you to understand. If you
+
+do anything else, it's just a complete waste of time, right? So, calendar distribution. I'm going to introduce a new concept to you called availability variance, right? And now, I found this out by being a complete turbo skitso just looking at this all day long. So, when people are choosing call slots when they reach the calendar page in your funnel,
+
+they're going to pick the time that is most maximally convenient for themselves, right? What does that mean? If none of the times you have available are maximally convenient, they're only going to do one of two things. They're going to not pick a time at all and leave because it's too inconvenient, which increases your cost per call, or they're going to pick an inconvenient
+
+time for themselves, which increases no show rate. So, what does this mean for us? It means that as your calendar gets to be around 70%, time slots start being removed, which means that every single person coming through your funnel now must pick a progressively more inconvenient time for themselves, which increases your cost per call and your no-show rate at the same time. Right?
+
+So, if your calendar is 70% full, you need to hire another closer. Right? I've had so many clients inside Olympia where I help you one-on-one scale your ads and funnel and make a ton of money and scale your business one-on-one. Link in the description. Go check that out. But they come to me and they say, "I can't scale anymore. The cost per call keeps going higher." And then I go look at
+
+their calendar and there's no availability variance. So, what do I mean by availability variance? You have tons of different times to pick. Like, you have 9:00 a.m. available. You have 6:00 p.m. available. You have 11:00 a.m. available. You have 1:00 p.m.
+
+available. You just have all different kinds of times available. It's a variant, right? And you do it in 30-minute increments. People can just book throughout the whole day.
+
+Cuz what happens is they get to your calendar page, they look at their calendar, they're like, "What kind of do I have going on right now, and then they pick the time that's most convenient for them?" You see what I mean? If there's no convenient times, they just don't book. And then you're Like, so you're sitting here thinking like, you're like, "Oh,
+
+the leads are coming to me. I'm going to only set it so that they can only pick the times that are most convenient for me." Okay. Well, that's selfish as and completely because there's no availability variance and your cost per call shoots up. This is so substantial that there have been situations where we were spending like 5 grand or six grand a day and then we
+
+added a new full-time closer and then we started booking more calls for a lower cost per call without increasing the ad spend. We just put a new closer on and then just because a wider and deeper availability variance where people can pick any slot they want like multiple times at every singular slot of the day, the cost per call just shot down with zero additional ad spend just because
+
+there's wide as availability variance. You see what I mean? Right when slots start disappearing from the calendar, your cost per call shooting up 100% of the time. 100% of the time and the no-show rates shooting up as well.
+
+This is so important. This is so so so so so important. It's actually insane. So, what happens with these people is that you open up their calendar and then there's no slots to book into and you can't scale against a fixed calendar.
+
+When you try to raise your ads budget without hiring new salespeople, it's like scaling your ad spend for an e-commerce brand, but you don't have any inventory. It literally doesn't make any sense. So, like imagine you sell shoes.
+
+You got a shoe design and you're advertising for your shoes and you just don't have size 9 and 10. What are you doing? You don't have sizes 9, 9 and 1/2, 10, 10 and 1/2, 11 or 11 and 1/2.
+
+They have to be size 12 or they have to be size 8 and 1/2. That's literally no people at all. That's what you're doing when you have low availability variance. Obviously, your cost per call is inflated by 50, 60, 70% in some cases. Obviously, open your calendar up more. Like the works.
+
+So, fundamental thing to understand, you hire closers first before scaling ad spend. This literally doesn't make sense. Like, yeah, let me scale my ad spend on a calendar with no slots available. It literally doesn't make sense. People will have like four slots available. No, like I have slots available on the calendar. I could take four calls today. Those are not
+
+convenient times for the bill. Everyone, every single person in B2B, all of them in the whole planet want to either book from like 9:00 a.m. to 11:00 a.m. or like 1:00 p.m. to 2 p.m. That's the prime time. It's right around there.
+
+Now, what happens when you have a call slot booked at that time? And everyone wants that time cuz you don't have enough closers. So, that slot disappears on your calendar, right? So, what do you need to do? you need to hire another closer to replace that slot cuz it's prime time. That's when the people want to talk to you. It's one of the biggest fuckups I see a lot. The two
+
+biggest fuckups of this are you're letting the poor people talk to you and you have no availability variance, right? If you just do that, shit's going to work way better for you. So, here's like the ad strategy. So, media buying strategy and creative testing frequency and strategy. So, creative creative testing, we constantly test new creative for video ads. We'll typically launch an
+
+ad set with five different videos using the same body but different hooks. We'll also launch another ad set with the same hooks but different body. So, it looks like this. So it' be like hook one body one, hook two body one, hook three body one. We throw all that into a single adset and then horizontal was vertical scaling. One of the biggest mistakes I see people is trying to scale a single
+
+adset vertically. I just personally haven't really been able to do that. They're trying to push more and more budget into it. Instead, we scale horizontally. So we'd rather have 10 adsets running at $300 a day than one adset at 3,000 a day. The performance just always tends to be better like that. Audience targeting, we keep completely completely broad open
+
+targeting. So no interest, no look alikes, none of this 100% completely open broad targeting 99% of the time unless it's retargeting. Budget management. I typically start new adsets at $200 a day. If you can't start at $200 a day, it's just completely useless for you to even advertise. Like, you just don't make enough money yet. If a cost per qualified call is going to be
+
+between $200 and $300 and you're trying to sit here and spend $50 a day, you're going to get like one or two calls booked a week. It's just completely useless. Like, don't even advertise, bro. Just go make some more money. It literally just is completely useless for you to do it.
+
+It's too slow. If they perform well, we'll increase anywhere from like it's like 10 to 20% every couple days. If the adsets cost per call exceeds two times the target, I turn it off. It's really that simp. So if our good cost per call is like $250 and this is live for like 3 days, I hasn't booked a call. I just shut it off and I'll just consider it a failure. So AI targeting, you have to
+
+fundamentally understand what AI targeting is doing, right? If you try to manually control all of the variables in the ads manager, you're just going to get bad results, right? So you need to let the AI do the heavy lifting. And if you keep screwing it, screwing with it all the time, you simply get no results.
+
+So what you say in the ad is the targeting. If you say agency owners or B2B businesses or get clients or coaches, like you literally speak that words in the ad, that's exactly who it's going to target. The AI is transcribing what you're saying in the ad, reading the text you provided on the ads, and then using that against the billions of data points it has in everybody
+
+available to the platform. So it serves your ad against the people who are interested in those topics, right? meaning you do not have to do any manual targeting whatsoever. Trying to manually target and with it yourself is you thinking you're smarter than the AI.
+
+You're not like you're just not right. You're not going to beat it. There's zero situation where you manually target stuff yourself and it ever results in you getting better results than just leaving it completely to do its own thing. You're just not going to beat it.
+
+You really just aren't. As an aside note, I didn't put this here. I know it's not in the document, but the common question is, do you do video ads? Do you do static ads? The answer is video ads work better than static ads for B2B offers about 99% of the time. And if you're just like relying on statics, you're literally just being lazy. Stop doing that. Like, oh, my ads aren't
+
+working. It's cuz you're only using static. Also, another big thing I didn't dive too deep on into here is you need a VSSL. If you think you're going to get away selling a high ticket offer without you being on an extremely in-depth video sales letter on the page, you are completely It's not happening. You need a very long video sales letter. You need to give a dense
+
+amount of information and available for people to self-investigate your offer themselves, right? You're not getting away with that. Like, you need to do video ads and you need to have a video sales letter. If you're not going to do that, there's pretty much a 0% probability this works for you. So, what you say on the landing page is also the targeting in addition to what you're
+
+saying in the ad. So, let's keep this super obvious. If you have an opt-in page that says this is only for B2B companies above $30,000 per month in revenue, what do you think that's going to do? It's going to stop people who do not run B2B companies and also are not at $30,000 per month from opting in.
+
+Don't you think that makes sense? Right? If we only want people opting into our our opt-in page, who are B2B companies above $30,000 per month in revenue, don't you think it would be a good idea to put this on the optin page? Why are we doing this? So that only B2B companies who are above $30,000 per month will get triggered as conversions, right? And when those people are getting
+
+triggered as conversions, it's teaching the ads manager to target more people like that. So if you're getting unqualified leads or irrelevant leads, that means you need to add more friction to the funnel. If you're sitting here and your leads are unqualified that you're getting from ads, what do you do?
+
+You add more friction to get rid of them, right? So this is exactly why I do not allow people with no budget to book sales calls. It's also why I reveal the prices up front. Like we were just talking about the type form before because I only want people who make money and can afford the price to be marked as conversions so that the ads manager continues to only send me people
+
+like that. So I optimize for the call scheduled. I don't optimize for opt-ins. I don't do that's I optimize for people who opt in, get through all of the type form questions correctly, reach the calendarly page, schedule in the time, reach the thank you page after that they booked the Calendarly. I'm optimizing for the people who completed booking the call. And the only people
+
+who completed booking the call were the ones who answered all of the questions of type form correctly. What does that mean? It means that only the people who are a B2B company who make above $5,000 per month, know the price and said that they can afford the price and have a big enough TAM ever get marked as a conversion. So my ads manager keeps finding people who are similar or
+
+identical to that so that we don't get the poor people coming through. You see what I mean? Okay, next thing. I do not turn off ads. I always launch ads in batches of ad sets. I I like to put like five ads in the ads set, right? I'm rarely ever able to get a single ad above a,000 a day. Like a single ad set.
+
+It's normally a bunch of ad sets spending between $200 to $800 a day. So, whenever we launch an adset looks like this, hook one body one, hook two body one, hook three body one, hook four body one, hook five body one, or it's hook one. If we have a winning hook, it would be hook one body one, hook one body two, hook one body three. You see what I mean? All these go into a single ad set
+
+on each ad. All five primary text options, description options, and headline options are completely filled. Once I launch that adset, I never turn off any of the ads inside of it or with any of the ads ever at all. Ever. I launch the adset that no edits will ever be made to that adset ever again besides the daily budget ever. Why? Because it's AI targeting. It will automatically
+
+spend budget on the ads that get the maximum amount of results. There is zero reason to turn off individual ads. Therefore, when I'm assessing results of my ads, I only look at the results of the ad sets and never the individual ads. I only look at the ad set. So budget, budget planning and creative. So as we talked about earlier, each closer should only have about a 70% full
+
+calendar. So once that's achieved, you need to hire another closer to scale the ad spend. So you can only scale in batches. So if your closers can take five calls per day, you take your ideal or normal cost per call, multiply that by five, and that's how much ad spend you need to have per day per closer. So let's say you have five closers, and your cost per call if I call is $300.
+
+300* 5 is $1,500 per closer. You have five closers times $1,500. That's $7,500 in total daily ad spend. That's what you can spend per day. You can't go past that because they can only take five calls a day. Because if you start scaling past that, now you're going to hit the availability variance. Your cost per call is going to go up and your show rate is going to go down and your ROI is
+
+going to get Your CAC is going to get You see what I mean? So, if you want to scale more ad spend, you have to hire a new closer first. Get what I'm saying? There are no shows, reschedules, variants. That's why we only do five. So, the closer has time to do follow-up and sales activity when they're not on call. New creative testing. As a general rule, for around
+
+if you're spending like $3,000 of daily spend, you can launch five new creatives per week up to about $3,000 a day in spend. If you're around like $6,000 a day in spend, you need to be launching like 10 new creatives per week minimum.
+
+If you're at $500 a day, you can get away with like five new creatives every two weeks. Now, I don't have a hard formula for this. You really have to just vibe it out. Are the ads working or not? If they're not working, launch more. If they are working, you can get away with not launching as much. It's really that simple. It's kind of annoying sometimes when people will be
+
+like, "How many ads do I need to be launching per week and I need this exact?" It's like, "Dude, do the ads you have right now, are they working right now?" And if the answer is no, then make a ton right now. Not specifically five. Go make go do 10, 15, 20. But if all the ads you have are working right now and like you need to take a break this week, then take a break this week.
+
+It's really that simple, right? So if they're not working, obviously go make more immediately. Really that simple. Okay, so conclusion, just to reiterate this, I'm going to tell you about my offer Olympia, which is a really good offer. Understand your CAC LTV math.
+
+Build a funnel with qualification and lead rejection. Constantly make new ads and then focus on that revenue retention. It's really that simple. And then make sure you have enough closures for availability variance, right? All that kind of So, let me talk to you about Olympia. I'll work with you oneonone to scale your ads in Olympia.
+
+So, we work with B2B offers, agencies, people who sell coaching offers. We work with all you guys. It's join Olympia.com. So, how does it work? What's included? You get two one-on-one calls per month. That's with either me, my sales manager, Dan Crowley, COO, Andre, or Christian. A lot of people think that they'll need to be talking to me constantly all the time. And then you
+
+find out that like running ads and having a winning funnel is super easy and if you know what you're doing, but then all the actual difficulty is sales and managing a sales team. So you actually end up talking to Dan Crowley more than you talk to me after you get success, right? Done with you funnel. So you can duplicate our winning funnels directly into your account. Literally
+
+just duplicate the Uh done with you ad scripts. So I show you how to write your ads and personally review them for you. I have like this whole thing about how to use AI to do it like transcriptions of your sales calls and throw it in. And then I have like a whole like templatized way to do it with like a whole worksheet and then you just like literally construct ad.
+
+It's like super cool. And then you just send it to me and then I make some edits to it and whatever the And then you're good to go, right? Same thing with the video sales letter. I just have like a kind of a templatized version for you to just like copy and kind of like run through yourself. There's four inerson events per year. So you can hang out with us four times per year in
+
+person. That's free of charge for you. There's no additional cost to that. And then weekly group call with other business owners making 30K to 1 million a month. So, there's people in there ranging from 30K a month, 300K a month, 600K a month, all the way up to a million a month. I think there's like 40 people in there right now. It's actually like really cool. I like this offer a
+
+lot. Again, the link is joinely olympia.com. It's the second link in the description. So, you can go there. It's an opt-in page. You opt in there and then there's a video. Again, there's an application that reveals the price and asks you for your revenue. I'm literally doing exactly what I taught you how to do in this video. So, it's a great offer. You should go do it. And if
+
+you got any value from this, leave a comment, like, subscribe, whatever. And that's it for me. I love you. Peace.

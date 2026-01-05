@@ -1,0 +1,37 @@
+today we're going to talk about how to use AI to write $10 million plus vs telescript if you don't know who I am my name is Daniel Fazzio I currently make above $1 million per month I'm the co-founder of client essention and list kit I believe every singular thing I do sell uses a vssl funnel so if you're not using vsl funnels you're making a substantial mistake but you're here
+
+right now so I'm going to save you I'm going to teach you how to do it using AI before we get into this video if you want to see the actual vssl that I am actively scaling to cold traffic with $6,000 per day in ad spend put the first link in the description you can download it and watch the real actual thing as an example of what this creates so let's talk about this real quick B2B versus
+
+b2c this guide is exclusively for B2B offers specifically offers where you are not selling to poor people we will be generating logic based arguments not emotional-based argument so if your Market makes decisions based on emotion and not logic this will therefore not work it is for B2B offers only so step one and this is the core premise of everything that's going on here so you
+
+need about 10 to 15 recordings of live sales calls from actual people who are interested in this offer right specifically the transcripts in txt format not PDF do not extract this as a PDF you also can't do it as a MP4 or MP3 it has to be the actual transcription file ideally in txt format right the best way to do this is using a notetaker app like fireflies or fathom on your
+
+Zoom calls and then extract the txt transcripts of 10 to 15 you could actually probably get up to about 20 you're just going to be limited by CLA limits so you want to upload these to a CLA project upload 10 to 15 so what does that look like so if I if I go over here this is Claud if you haven't used claw before you're going to use a Claud project how do you get to Claud projects
+
+and you'll need 3.5 Sonet too so you'll need like the Pro Plan of Claude go up here Claude projects and then what you do is I'll go into this one for instance you upload project knowledge and what project knowledge is it's just here's your knowledge here's what you know so for instance I've got I believe 12 recordings of sales calls right here and it was the txt file or a docx file so
+
+it's just raw text right so 12 I could probably double this to about 24 based off of this right here it has a capacity and what you want to do is once you upload those you're going to start prompting so the first prompt we're going to do is along the lines of we have an offer where I'm putting this in quotes so you can inject it what your offer is who it's for what it helps them
+
+accomplish I need your help with writing video sales letter for this offer what are some core value propositions key points pain points and questions I need to address in the video take time for yourself to contemplate this if you feel like you need to ask me follow-up questions to generate a better answer please do so so that's what I did right here is the first prompt go all the way
+
+up here I wrote In what we do and then if basically just walked me through some key insights that I would have otherwise not understood so this is a good practice for kind of understanding where your offer Falls but secondarily the next prompt we want to do is this so this is for getting the section of the vssl can you extract the most common objections and questions list them out
+
+for me in descending order of the frequency with which they're asked so let me head back over to this and it's right here can you extract the most common objections and questions and list them out for me in descending order of the frequency with which they're asked so this was for a different offer than the one I'm showing you but it was about data quality and source questions so
+
+people want to know like this is for a data offer people want to know where we got the data from how accurate it is how do you verify what's the bounce rate then they want to know about volume and coverage then price and value questions then technical integration then specifics and then deliverability and then contract and commitment terms and then support and implementation and this
+
+is the exact sequence that they ask the questions why is that important why do we specifically want to know the frequency and descending order that they ask the questions because if you order it this is just a little mathematical trick if you have a ton of people and you order it in descending frequency of the order that they're asked it by Nature just by raw math comes out to be
+
+the exact order the exact logical order that the questions are answered why is that important in a vssl because you want to present an answer to a question and then present the answer to the next logical question that arises from the answer to the first question so you get a second order question you see what I mean you have to anticipate what is going to be asked that's why you
+
+specifically need to say and sending order of the frequency with which they're asked right so what does that mean so when I do this for the cold email setup offer this is what I get they want to know expected Roi and results how the system works the typical kpis and how many leads and clients they can get what's including the offer what's the pricing and case studies from
+
+other people therefore in that vssl for the C setup offer this is the table of contents it's literally the same exact thing you see what I mean like it's literally just these questions answered in order the difference between marketing and sales marketing is being able to anticipate the question that somebody is going to have before they ask it marketing is just a sales call
+
+without the other person present therefore what you want to do is make sure that you are answering the questions in the exact order that's going to be asked what's the best way to do that by extracting it from the sales call because marketing just is a sales call without the other person present that's literally what a vssl is is a video sales letter so you just answer
+
+the questions that they already ask on the sales call does that make sense I hope it does because I made $10 million doing it so do you want a full breakdown of the vssl if so click the link in the description ENT your details and I will send you both the actual vssl that I'm scaling at $6,000 per day to cold traffic not warm not warm this is different warm and cold is
+
+completely different there's a cold traffic DSL very important you need cold traffic that's what this is and I'll give you a breakdown of it if you click the first link in the description put your name email phone number in there and I'll send it to you if you put fake data in you're not going to get it cuz I'm going to email it to you right I'm going to text it to you if you put
+
+fake data in you won't get it all right cool I love you my name is Daniel Faz you you got some value subscribe all right peace
