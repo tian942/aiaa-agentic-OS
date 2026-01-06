@@ -1,0 +1,135 @@
+Most AI consulting proposals suck because they are essentially just pitch decks with credit card forms at the end. They entirely miss the whole consulting part. What I want to do here is show you a framework that a $10,000 consulting proposal should follow if you want any chance of closing a high ticket client for your service. So, I run an agency called Leftclick and we've worked with
+
+everything from local businesses that make 10K a month to literal multi-billion dollar business portfolios. Before this, I co-owned a PR company that had worked with some very big organizations including a literal space agency. uh and before that I had started and failed at something like five other agencies/service businesses.
+
+So after you send many hundreds of proposals for many millions of dollars in pipeline value collectively, you tend to learn what works and what doesn't. In this video, I'm going to cover what works and I'm also going to give you guys a very straightforward template you guys could use for any proposal of yours moving forward for whatever service, whether it's AI, marketing, or what have
+
+you. All right, so here's the thing that a lot of people get wrong right off the bat. And it's kind of understandable because of the term proposal. It's kind of in the name. You're proposing something. People naturally think proposals are about proposing a solution, and that's actually a mistake.
+
+A proposal is not about proposing a solution, at least not at the small to mid-size business level, which is where I spend most of my time. A proposal is a test where the client wants to see, do you clearly understand the problem that I am suffering from? And can you articulate it back to me better than I can myself? The answer to that question is yes, I'm going to work with you. If
+
+not, screw off. So at Leftclick we follow a problem first framework which just means at minimum at least 50% of the entire proposal is just about diagnosing the problem and paraphrasing that problem to illustrate that we know what they're talking about and then you know if possible actually quantifying the pain and the problem in terms of dollars. The other 50% is split between
+
+the actual proposed solution which is what most people spend the entire proposal focusing on. We do that less than 50%, the logistics, uh the legal and then ideally some sort of like payment mechanism is attached directly to the proposal just to cut down on the number of steps. So more than half of the proposal is upfront literally just talking about the problem and I'll run
+
+you through an example of what that looks like. One of the biggest proposals I ever won was for a marketing agency where the initial size of the engagement was about $5,000, but then I got them on a recurring relationship which over the course of our engagement made me over 100 grand. That proposal was almost 20 pages long. Every page was 300 to 400 words on it. I'm not saying you should
+
+do this. Very much a special case. But of the 20 pages of that proposal, I literally spent the first 10 talking all about the problems of the business. So, this included sections like your team is heavily misallocating your time and it's costing you over $20,000 a month. Here are the three reasons why. That's almost verbatim from the actual proposal. I then went heavily into detail about how
+
+the business owner was allocating their time. And then I wrote the entire thing in first person so that he would understand I was talking about him directly. It was me to him, not me to his business. So, I'm not telling you that you guys need to write a big monster long proposal. It's a very special case again, one where I kind of put my balls on the table. But what I am
+
+telling you is at the very beginning of your proposal, instead of writing a big fancy executive summary, my recommendation is to use language like this. The misallocation of your time is costing you X dollars per month. Here is why. Lack of structured management is costing you dollars per month. Here is why. Hesitance to restructure your business is costing you Z dollar per
+
+month. Here is why. Your bottleneck is thing and it is costing you amount. Here is why. By not solving thing, you will continue to feel pain and it will eventually result in some outcome. Here is why. So, if you contrast this with the one-page solutionbased proposals that the vast majority of competitors are sending, you stand out like crazy.
+
+This is kind of a crass example, and you know, I think it'll probably put some people off, but I actually think about proposals kind of like foreplay in relationship. Like, if you have a little bit at the beginning, the rest of your proposal will be received a lot better.
+
+And I think that's a good mental model for just, you know, continuing forward with pitching services. If you guys can focus on their problem first, you warm them up to the idea of your solution. I would never just dive right into the solution without doing that obligatory warm-up. So, with all that said, diagnosing problems randomly just does not work. There's actually specific
+
+structure that consultants use to clarify the chaos, and that's what I'm going to show you next. So, most people present messy problems to clients that are vague and unspecified. But the whole purpose of a high-quality consultant is that you bring clarity to their mess. A simple way that we use to improve our ability to do this is something called the MECE driver tree method, which
+
+sounds really fancy. It's not at all. I don't know why the hell consultants throw fancy terms around all the time, but it's very simple. MECE stands for mutually exclusive, collectively exhaustive. Okay, big fancy term, but basically when you identify the problems a customer is facing, you just use this framework to break all of those problems down very logically into a little tree
+
+where their goal is at the top, the primary drivers of that goal are underneath and then the subdrivers behind each driver are beneath that. The whole purpose of this is to make your problems interpretable, but also so that the client can actually follow along with your reasoning. And what I think you realize after enough sales experience is a big chunk of your value
+
+is not actually convincing somebody of something. It is getting them to convince themselves and the whole purpose of simple visualization and MEC driver tree methods like this is just illustrating a chain of very simple reasoning then putting it in front of them to have them believe it themselves.
+
+A lot of the time that's actually all you need to have somebody agree to what it is uh that you are providing and certainly that like what you're pitching them is affordable or maybe reasonable to pay. So the whole idea behind MEC is you basically just take this problem like make more money which is very vague and then you break it down into the contributors to how to make money and
+
+then you just make sure that every contributor is mutually exhaustive and then just run them through one by one. Practical example in the proposal I was talking about you know I listed the goals of the company as I saw them and one of those goals was that the guy wanted to scale to $300,000 a month in 12 months. Now at the time the company was somewhere around $100,000 a month in
+
+revenue. So logically the question we needed to answer was how do we go from 100,000 to 300,000 aka how do we add you know $200,000 in 12 months or so. We then broke it down really really simply cuz well if you want to make more revenue you can either do so one of two ways. You can have your current client base pay you more or you get a larger client base. Now these are simple and
+
+mutually exclusive drivers. Obviously we ended up doing a combination of both but this made things very easy for the customer to understand at the time. And from there the next question was okay so how do we actually get our current client base to pay us more and then how do we get a larger client base as well.
+
+So logically to get a current client base to pay you more you have to increase your price per customer and to do that you can either increase your price without materially changing your offer or you can improve your offer and increase the price alongside it.
+
+Obviously again we ended up doing a mixture of both to increase our client base. You could double down on advertising methods that are already working where you guys could find new advertising methods right so in this way it sounds really really simple but when you break things down in front of your customer in that manner especially if it's a small to mid-size business level
+
+where you know people typically don't have the ability to reason about business problems like this because they're usually too busy actually managing or running the business you can add a tremendous amount of value and you can make whatever price you're going to offer seem very reasonable by comparison. So when I did this with him, I wasn't really convincing him of the
+
+value of the service. He was sort of convincing himself because he was walking through that logic himself. So using thinking tools like driver trees in your proposals makes it clear that you are now bringing advisor level value. You're not just pitching people like a small commoditized service or a rookie. And I only know that because these are the frameworks that
+
+consultants use on me when I'm trying to get them to work with me, okay? When I'm hiring them. I just found that when I applied those same strategies to my own business, I made way more money, which is why I do it all the time. But even if you're perfect at diagnosing the problem and then using MEC driver trees and whatnot to run through how they work, if the client doesn't feel that the pain
+
+that they are currently experiencing is expensive, they are not going to be willing to pay you money. So how exactly do you do that? A $10,000 proposal is only going to land if the problem that the customer feels is bigger than $10,000 significantly so. And so generally you always want to charge a small fraction of the value that you are providing. And the fraction is anywhere
+
+from 10 to 30% on average. And where I think a lot of people blow it is they just don't quantify that paint. They just don't attach a dollar value to what they're putting in from the customer.
+
+And what happens when you don't do this is you can't subsequently charge a fair percentage for the work that you're providing and then you are forced instead to price off of really annoying little things like complexity of the system, the number of hours that you and your team spend building it. You know, the proxy or API key that you're using, whatever. Basically, something that is
+
+adjacent to the value but not actually the value itself. So instead, you should be telling your customers, especially if they're small to mid-size businesses, hey, this is costing you 45,000 bucks a year, and you don't have to be paying it. When you do this, and you make it very clear, you can then segue to charging a percentage of it, say 20%.
+
+And then confidently asking them for 45,000 time 20%, which is, you know, 9,000 bucks a year. If the client has internalized that they are currently paying $45,000 a year for something and if you put a solution in front of them that is only $9,000 per year, you know, the only situation which they would not immediately say yes to that is they didn't have the confidence that you
+
+could fulfill on that solution, which in all honesty is a lot smaller of a problem to solve versus just building the value like I'm talking about. So, nobody is doing this. Instead, in an attempt to sound really sophisticated, which may be a product of, you know, naivity or maybe just our industry, I'm seeing a lot of people use terms like inefficiency. You're currently suffering
+
+inefficiencies or optimization. There's a lot of room for optimization, but you know, just to get down to brass tax, that means absolutely nothing. Do not veil how much money the customer is currently spending on a solution in sophisticated sounding language. Just be very blunt. You know, if you could talk the language of money, people generally, at least I find, respect you a lot more.
+
+If you can do it on a proposal, the likelihood of you winning that proposal just goes up way more. So, how do you actually do this in practice? How do you assign actual dollar value to problems?
+
+I always see things in terms of three layers. The first layer is hard costs. So what is the cash amount that they are actively spending on a solution they don't need to? What software platform are they spending money on? What CRM are they spending money on that like they don't need to. So this is the direct expense. The second layer is in the opportunity cost. And this is kind of a
+
+little bit more difficult to understand. But essentially this is the growth that they are missing because they're spending time, energy and money solving this problem which they don't have to be instead of probably more pressing ones like revenue generation, lead genen, you know, sales and so on and so forth. The third layer is operational chaos which is just the stress, the subjective
+
+feelings and the inefficiency that results from usually the founders, directors or managers of a business not really being able to show up as their best selves. Uh it's the feelings of overwhelm. It's the stuff that you can't exactly write down on like a P&amp;L statement. So get in the habit of diagnosing and then quantifying prices like this and you'll do a lot better.
+
+That said, you could still have the perfect diagnosis and then completely botch the deal if you communicate it wrong. So we should probably talk a little bit about communication. I find that a lot of the time proposals will bury the lead. And what I mean by that is they will hide the point of the proposal behind some very long, very exhausting preamble. In reality, a
+
+decision maker, a business owner for the most part doesn't want to dig. They're busy. You know, they want a clear line from problem to solution. They want to just like put in front of them. And you do too. When you Google a recipe and you click on a link, you do not want to spend the next 15 minutes scrolling through stories about the Yorkshshire terrier of the writer and how they went
+
+to Italy when they were in nth grade. You want the recipe, you know? You don't want to know how the tomatoes made it to the freaking thing. You want to know what to do with the tomatoes. So, similarly, when somebody opens your proposal, just get to the point. This is not an SEO recipe blog article. This is a proposal for services. So in order to I guess constantly direct our efforts
+
+towards that. I and leftclick use the pyramid principle. When you're explaining problems and solutions, don't just spend all day building stuff up. The whole point of the pyramid principle is it just puts the point first and then you just stack your supporting arguments beneath. If you remember earlier, all of my examples were stuff like, hey, you're suffering from X problem. It's costing
+
+you $10,000 a month. Here's why. That here's why is really important. What we're doing is we're saying, hey, here's what we think. Here's the problem that we think you're suffering from. let me support that now that I've you know made my intentions clear with arguments, facts, evidence and so on and so forth.
+
+And rather unfortunately this is just the way that human beings do things. We usually see a conclusion and then we rationalize it. So when you do things in this way you're simply conforming to the way that their brain's already working.
+
+So each section should start with a conclusion and then it should provide evidence and should do that not the other way around. The next thing I want to talk about is staying minimal. Uh as we know clients buy outcomes, they don't buy technical specifications and they certainly don't buy your design. What I mean by this is you don't really need a sexy, fancy, beautiful proposal. You
+
+don't need gorgeous designs, uh, the sexiest backgrounds, all that stuff. What you need, and what people tend to appreciate, is a very straightforward pitch written on basically the equivalent of a Google doc. Now, obviously, you can and should touch it up a little bit. But the point that I'm making is that you should keep your proposal minimal and then focused on,
+
+you know, the pain and the things that, you know, you're promising your customers more so than little frilly design stuff. So my recommended structure and I'm going to attach a link down below with a very streamlined version of it is you start with problem then you go solution then you go investment then finally at the end you go agreement and actually also I'd
+
+recommend attaching a payment method directly to your proposal if possible. I know a few platforms like Pandanda do this and it makes your life a lot easier. The reason why is cuz you know instead of things being like a three or four-step process where you send a proposal somebody has to sign that you have to send the agreement then they have to sign that then after that they
+
+have to pay you know instead of all that they just do it all in one. I'm a real big fan of proposal platforms that let you do that and I highly recommend that you do that as well. And actually, just while I'm on it, a couple of additional points. You should keep your deliverables pretty concrete, but then give yourself flexibility through a term like the term equivalent just in systems
+
+and automations and AI consulting. You know, if you're saying, "Hey, we're going to use XYZ platform." If for whatever reason you can't actually proceed with XYZ platform because there's some scope change or some breaking API update or something like that. If you have XYZ platform or equivalent like air table or equivalent, you can technically remain within the
+
+confines of that scope which is valuable. Another tip is just to keep your timeline really simple if you guys are going to have one. And then another one is if you are working with small to mid-size businesses, I recommend keeping your legal agreement part very minimal.
+
+You know, like three or four classes, definitely not a four or five page term because it's just way too much friction. you're basically giving them a reason to say, "Well, I'll have my attorney look at this and get back to you." So, I'm not a lawyer. Uh, and this is not legal advice, but in my experience, having a very protracted agreement is totally unnecessary, especially for small toiz
+
+businesses. The reason why is you're probably never actually going to be able to legally enforce it. Nor would it really be worth your time if you're a very small business since the total contract value is probably going to be less than the opportunity cost you would be uh suffering from if you actually went ahead with it. Not to mention, if you live in a different jurisdiction or
+
+a different country or a different region, it just makes things way more complicated. All right, another big point. Proposals can be pretty valuable, right? If you crush a proposal, your business might make, you know, $100,000 over the course of the next year for something that's like between five to eight grand a month. So, if you really want to nail it, like if you're going to
+
+spend time in your business, where the hell else are you going to spend this time? Okay, I would recommend rather than just copying and pasting a template verbatim that just, you know, goes, "Greetings, executive summary. We are selling X, Y, and Z. Our agency has been around for 14 years." You know, don't do that. spend your time actually personalizing the intro and then like
+
+writing it to a person as if it's like a letter. And the benefit to that is if the beginning of your proposal is customized, oftentimes prospects will assume that the rest of the proposal is customized, which is inherently leveraged and it means you don't actually have to spend all that much time doing it. But like just logically speaking, like if you send out let's say
+
+five proposals and on average your conversion rate is 20%. After you send out those five proposals, you will on average win one deal. If your lifetime value is, let's say, $20,000, what that means is, you know, you've won a $20,000 deal per five proposals, what that means is the value of an individual proposal is $4,000. Okay? Every time you write a proposal, the net gain that you are
+
+making, the expected value of doing so is $4,000. So, logically speaking, how much time are you guys willing to spend to make $4,000? I know I'm willing to spend a fair amount of time. you know, if it's like the difference between copying and pasting a template and having like a 10% conversion rate versus spending 5 minutes doing something and then having like a 20% conversion rate,
+
+obviously you should choose to spend 5 minutes customizing something to get that 20% conversion rate. So, you know, like this boils down to another very important point that I don't think a lot of people realize in consulting or the agency space more generally, but you have a ton of power and potential if you spend your time on specific points and if you apply pressure to specific points
+
+in your business that actually pay off. Don't try automating or process optimizing or delegating every little thing. Instead, ask yourself like what does it make sense for me to spend my time on? And that tends to just be, you know, lead genen, sales, things that are uh usually very proximal to like the actual revenue generation. Okay, just to round it out, going to give you a quick
+
+list of tips. I recommend using a Spartan tone of voice. If a small to mid-size business and you're talking to the business owner themselves, I'd actually recommend using first or second person, aka I and you, I would not recommend using third person like we and the business. Uh, but if it's enterprise and if they're multiple stakeholders, like if it's not just going to be one
+
+decision maker, reviewing the thing, then I recommend third person. I've just run some tests on this and I find my conversion rates a lot higher. for SMBs when I say IU and then enterprise, you know, if it's we and and we make the business seem bigger. In general, short active sentences, you're not going to win like a freaking Pulitzer prize here if you're writing, but you should
+
+definitely run spellch check and grammar check religiously. I've received so many proposals just in the last year that have had very simple spelling mistakes. And if I'm honest, I don't actually give a about spelling mistakes. But what I do care about is your attention to detail. And if before we've even done any sort of engagement whatsoever, you're already showing me that you're
+
+not an attentive person. The probability of me saying yes to a later engagement is pretty low. Drop the title page. I find that just needless friction. And when you do put your price in, do it last and then frame it as an investment.
+
+Don't frame it as a cost. Uh don't use stock photos. No fancy graphics. Nobody really cares about that. You know, this isn't like a marketing brochure. It is a business document. So you should treat it as such. If you have case studies, I would definitely add a few. Maybe you could sprinkle them in between the problem and the solution/scope and the solution/scope and the investment. Okay.
+
+So that's it. As you guys could probably tell, I've written tons of proposals over the years. So, if you guys need help with implementing high-quality proposals into your own business, that is actually a portion of what we now focus on at Leftclick. So, reach out.
+
+Uh, we've developed systems that will automatically template out most of a very highquality consulting proposal using AI based off of stuff like a sales call transcript or form that you fill out. It's a very popular system. A lot of people that we work with do so and then they see significant improvements in their throughput. So, we'd love to build one for you. Just book a call with
+
+my team. Otherwise, I hope you guys now understand how to not drop the ball on your proposals, how to actually make client consulting documents that get your guys deals closed. Um, thanks as always for watching. Looking forward to seeing you in the next video. Have a lovely rest of the day. by

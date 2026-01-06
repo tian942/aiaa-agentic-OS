@@ -1,0 +1,7 @@
+{
+  "documentId": null,
+  "documentUrl": null,
+  "title": "VSL Funnel Test Document V2",
+  "status": "error",
+  "error": "<HttpError 403 when requesting https://www.googleapis.com/drive/v3/files?fields=id%2C+webViewLink&alt=json returned \"The user's Drive storage quota has been exceeded.\". Details: \"[{'message': \"The user's Drive storage quota has been exceeded.\", 'domain': 'usageLimits', 'reason': 'storageQuotaExceeded'}]\">"
+}

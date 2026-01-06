@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "company": "Peak Performance Agency",
+  "offer": "High-Ticket Client Acquisition System",
+  "executionTime": "3m 32s",
+  "deliverables": {
+    "marketResearch": {
+      "file": ".tmp/vsl_funnel_peak_performance_agency_20260105_163539/01_research.json",
+      "doc": "https://docs.google.com/document/d/1K1Gbej34V_OGIaMhc4v1nxHjN7JCih6GPwTtG_oiQL0/edit"
+    },
+    "vslScript": {
+      "file": ".tmp/vsl_funnel_peak_performance_agency_20260105_163539/02_vsl_script.md",
+      "doc": "https://docs.google.com/document/d/1tMzwMlyjuTFeoOgz-n4FCwjM9DG-hYec_vBsu3GBG1A/edit"
+    },
+    "salesPage": {
+      "file": ".tmp/vsl_funnel_peak_performance_agency_20260105_163539/03_sales_page.md",
+      "doc": "https://docs.google.com/document/d/1bNUnf7a1L_C8M5Qwfx55isfxdWg29plU_PGrsTwXQ30/edit"
+    },
+    "emailSequence": {
+      "file": ".tmp/vsl_funnel_peak_performance_agency_20260105_163539/04_email_sequence.md",
+      "doc": "https://docs.google.com/document/d/1okzpxi3dqTLqd5AMfX58mk4PHQTBZBM7dfD62x_VhrM/edit",
+      "emailCount": 7
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

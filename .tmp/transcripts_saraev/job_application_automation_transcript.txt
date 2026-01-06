@@ -1,0 +1,1330 @@
+Hey, I'm going to build an AI job
+application system live in front of you
+that automatically scrapes Indeed,
+customizes your resume for each
+position, and then organizes everything
+so you guys can apply to a,000 jobs in
+the time that it normally takes to apply
+to 10. This is your first time here. My
+name is Nick. I scaled my AI and
+automation agency at over 72K a month.
+And I'm now leading one of the biggest
+AI automation communities and almost
+3,000 AI automation freelancers and
+agency owners. I'm going to build this
+entire system from scratch using simple
+drag and drop tools. No coding required.
+and I'm going to walk you guys through
+every single step so you can follow
+along even if you've never built
+anything like this before.
+Okay, so here's a demo of the finished
+system. The way that it works is we have
+a resume template which we've uploaded
+over here. That resume template is then
+gotten inside of NADN. We then send an
+HTTP request over to a LinkedIn job
+scraper that just scrapes through every
+job on a list that we provide. We can do
+a custom search URL so you can feed in
+whatever you want. After that, we then
+pass that through AI to filter jobs.
+Some jobs aren't necessarily going to be
+in our wheelhouse, so we leave those
+out. After that, what we do is we take
+that ré template that we got inside of
+NAND earlier. We feed it alongside a
+bunch of the job details into AI to have
+it rewrite the resume. Once we've
+rewritten the resume, we feed that into
+a markdown to HTML converter. Then, we
+create a new resume, upload it to a
+Google Drive, and share it before
+finally doing a little bit of
+post-processing. And then finally moving
+into the outreach side of the flow,
+which grabs the email address from one
+of the people whose job post we just
+scraped, checks to see if the email then
+exists, and finally actually goes and
+creates a Gmail draft. The Gmail draft
+is simple. All we do is we tell the
+person that we know that they are
+hiring. We then talk about how we
+actually used AI to scrape the job,
+customize our resume, and automatically
+get their contact details. And then we
+include the resume. And if I click on
+this resume, the end result is a highly
+customized resume, which is quite
+different from the résé template we had
+before. In this case, specifically for
+an AI product manager and automation
+specialist, cuz that's what the job was
+asking for. You can obviously extend
+this approach to go and more or less do
+anything. You could say different things
+other than my email template. You could
+ask for different things. You could
+apply to different sorts of jobs. You
+could, I don't know, instead of
+customizing a resume, you could
+customize a PDF or a video or an asset.
+I mean, the world is really your oyster,
+but this is obviously the lowest hanging
+fruit approach. I've included some
+variables here that you can update,
+including the Appify API key, the
+template ID in the Google Docs module,
+and then the any mailinder API key. And
+you can actually swap out whatever
+service you want to do the email finding
+for cost reasons. And I'm going to
+include this link in the description so
+you guys have access to this template,
+and you can do whatever the heck you
+want with it.
+All right. So, as mentioned, this is a
+live build, meaning I haven't actually
+done the building yet. All I've done
+here is laid out a rough scope of what I
+think the system is going to look like.
+Then eventually, we'll dive into NAND
+and take this totally blank canvas and
+turn it into a workable system. So, just
+want you guys to know that I do this
+because I consider it more informative.
+I think that leaving in detours and bugs
+and stuff like that, it's a little bit
+more honest. You guys get to see like
+what the actual process looks like. And
+yeah, you know, back when I was learning
+how to build things in NAND and other no
+code tools, these are the sorts of
+videos that I always look for. So, I
+figure now that I'm at this point, I
+might as well make these sorts of videos
+for others, too. Okay, so here's how I
+think that this is going to work. We're
+going to start by getting some sort of
+resume into a templatable format. What
+do I mean by this? I just mean something
+that for the most part is just text,
+something that, you know, might have
+some light formatting, H2s, H3s, that
+sort of thing. but for the most part
+something that we can feed into AI and
+have AI reproduce for us without having
+to like add a bunch of complicated steps
+in between. So what I've done here is
+I've created a templated resume format
+for myself. And the only kind of like
+interesting pieces here are heading 4,
+heading 3es, and then I think that's it.
+Just some bolding and some metallics.
+And I just had a generate this. This is
+not like actually accurate whatsoever,
+but I want you guys to know that you
+guys can actually create whatever sort
+of ré template you want. This is just
+what I'm going with because it's simple
+and easy for me. Okay. So, after that,
+what we need to do is we need to scrape
+job postings using LinkedIn. Now, there
+are variety of tools that are available
+to allow us to do this. The one that I
+usually use on this channel, it's called
+Appify. This is basically just a
+marketplace setup where you have a bunch
+of these different people creating
+scrapers, uh, publishing them on here,
+and then charging people money for it.
+And because it's a marketplace, that
+means that they tend to compete, which
+allows us to drive prices down. The
+reason why I'm not building my own
+scraper in this case, while I think you
+can do basically anything in 2025 with
+technology, and I could most certainly
+build a scraper if I had enough time and
+energy, it would take me a lot of time
+and energy. Userenerated content
+platforms like LinkedIn, Facebook, and
+stuff like that, these have basically
+the most sophisticated anti-scraping
+protections on planet Earth. So rather
+than mcking around with having to, you
+know, solve that problem, I'm just going
+to abstract it away and I'm just going
+to use something that somebody else has
+developed that has the time and the
+energy and is incentivized to do it and
+then I'm just going to pay them a little
+bit of money for it. So I see one right
+over here called LinkedIn job scraper
+PPR. I've used this one before. So
+that's what I'm deciding to use for this
+as well. Developed by Curious Coder.
+It's a dollar per thousand results.
+Pretty simple and easy. And then from
+there, what I want to do is compare the
+incoming job against a bank of skills
+and have AI filter. The idea here is
+like obviously not everybody is going to
+be capable enough to apply to every job
+that comes their way. So we just want a
+simple but flexible way to filter out
+jobs that may not necessarily be in our
+wheelhouse. You know let's say I'm an
+engineer and I don't know for whatever
+reason my search is crappy and I get a
+job for house cleaning. Like I want a
+way to filter that out. I don't actually
+have to apply to said job. Right? Once
+we're done with that filter step we'll
+customize the resume to match the specs.
+Then you know the question is how do we
+actually do the application? A couple
+different ways to do this. So, you can
+totally build out some sort of like
+browser automation to go out and then
+apply to the job on, I don't know,
+Indeed or LinkedIn or whatever. This
+would again take a fair amount of time
+and energy. And while I have
+experimented with approaches like this
+and I made them work, I don't really
+want to go through the rigomearroll
+showing you guys what that looks like in
+a video, rest assured, it takes a lot
+longer than I probably can fit
+realistically into a good YouTube clip.
+So, what I'm going to do instead is I'm
+going to grab the website details of the
+company that is making that job post.
+I'm then going to look for contact
+details of decision makers. And once I
+have a contact detail of a decision
+maker, I'm going to send them an email
+using a short punchy pitch. I'm going to
+attach my resume in there. And I'm going
+to say basically, hey, I'm the person
+for the job. Okay? So, I can do the
+thing they're asking me to do. And
+because I'm going to be applying for
+technology jobs, I'm actually going to
+try and show them like proof in the
+pudding. So, because my system is an
+automated AI based system that, you
+know, does all the job applications, my
+hope is I could say something along the
+lines of, "Hey, I know you're looking
+for like somebody proficient in AI,
+well, I actually used AI to like build
+out a pipeline to allow me to apply to
+jobs just like this one." So, I figured
+I'd rather show you than tell you. Happy
+to run you through what that system
+looks like. This is a little bit more, I
+don't know, if you want to say daring.
+It's certainly not like a corporate job
+style approach, but then again, I think
+if you want uncommon results, you have
+to take uncommon approaches. Okay, so
+that's what we're going to do. That's
+what I'm going to try to do anyway.
+We'll see how well we can stick with
+this. First thing we're going to do is
+we're going to go over this ré template
+very briefly. And I just need to find a
+way to connect this to NAN. So I'm going
+to go back over to my NAD workflow. I'm
+just going to call this like AI
+automated
+resume.
+Just call that for now. Maybe I'll add a
+tag and I'll say NAN course. And then
+over here, what I want to do is I just
+want to see if I can grab the Google Doc
+content. Okay, so I'm going to get a
+document here. In order to connect to
+this, what you have to do is you have to
+create a Google Cloud Console account,
+which can be kind of a pain if you
+haven't done this before. Rest assured,
+there is ample documentation out there
+on how to do this. Basically, you start
+by creating a Google Cloud account, and
+then you just follow the steps. You
+enable the APIs, configure your OOTH
+consent screen, create your Google Oath
+client credentials, and then finish it.
+At the end of it, you're going to get a
+client ID and then a client secret.
+These are just what you paste in here.
+Keep the OOTH redirect URL the same, and
+then sign in. Okay, so once you're done
+with this, um, what you do now is we're
+just going to get the document. But
+where is the document? Well, we need to
+feed in the document ID. And for future
+reference, anytime you see a long weird
+ugly looking string in a URL like this,
+odds are that is the ID of the thing. So
+in our case, it is slashdocument slashd
+and then an ID. Odds are this is the
+document ID. And I find if you just
+throw stuff at the wall, a lot of the
+time it sticks. So, we are executing
+this run and voila, we now get the
+content. So, we actually get the content
+of this whole document, which is great.
+It's exactly what we need in order to
+feed into AI. And it looks like we got
+all of it. Yeah, we did. One thing I'm
+noticing we're not getting here is we're
+not really getting the formatting. So,
+I'm not seeing like H2, H3, H4, whatever
+I had before. That's not the end of the
+world. Let me just click simplify and
+see if we get more data
+because this is a little bit too
+complicated for me because it includes
+too much formatting. So, I think what
+I'm going to do actually is I'm just
+going to roll with the simplified
+version of this, the one that just has
+like a a content variable, and I'm just
+going to have AI like rebuild the format
+every time. It's not ideal because it's
+not going to be the exact same format,
+but my hope is, you know, it's going to
+be able to interpret or infer what is
+the heading here to hiring manager,
+obviously. What is the heading here?
+Professional summary, obviously. So, I'm
+thinking that's probably going to be
+sufficient. I don't know if it's going
+to work, but we'll try it. Okay, cool.
+So, now that we have the data inside of
+NAN, next question is, how do we scrape
+job postings and then compare? you know,
+maybe the resume against the job
+postings and do something. So, I talked
+about using Appify before. I got a
+scraper right over here. I'm just going
+to click try for free. I've already
+created an account and you guys can
+actually get 30% off using the code Nick
+30 below. So, feel free to use that. Uh,
+I don't get any money from that or
+anything. They've just been gracious
+enough to give me a code that uh makes
+it cheaper for people to sign up. What
+we do here is we add in a LinkedIn job
+search URL. So, the question is, what
+the hell is this? Well, we need to go
+over to this service, LinkedIn jobs.
+And then what I'm going to do is I'm now
+just going to like type in what I want
+that's interesting to me. The reason why
+all of these Zapier jobs and AI actor
+jobs and stuff like that are popping up
+for me is just because, you know, like
+LinkedIn knows that I'm into AI, so it's
+just automatically assembled this for
+me. I don't really want anything local.
+Like, does it have to be in Calgary? No.
+Um, can I just go United States?
+I just want like USwide searches, you
+know, probably remote. Title, skill, or
+company? Let's just do a automation over
+here.
+Now we're talking. These are cool and
+not all these companies are huge, right?
+Like I think there's a much higher
+likelihood of you actually getting a gig
+at like one of these small to midsize
+businesses than I don't know Zap year or
+something. So this is really positive
+for us. Okay, cool. So from here we can
+add some additional filters. So anytime
+past month, past week. Why don't we just
+do past month? I mean, you know, like a
+month is quite a long time. So maybe
+actually we do a week. Okay, looks like
+we have 800 job posts in the last week.
+That's some scale. I'm not going to
+filter experience level. Should I filter
+salary?
+Go 100,000. How many? 64 out of the 700.
+Wow. You know, I think in reality, most
+of these just don't show a salary at
+all. That's why barely any of them are
+popping up. So, let's leave that blank.
+Company, no. Remote. This is
+interesting. If I click remote, how
+many? 18. Hybrid. 104.
+Okay. So, the vast majority of these are
+on-site, obviously. Um, so if you really
+wanted to get like specific jobs in your
+area, you would probably have to, just
+to be clear, attach a search specific to
+an area, not necessarily just what I'm
+doing here. I'm going to proceed with
+this just cuz I want enough data to
+actually run this. But yeah, just
+letting you guys know that if you guys
+go remote, you only have 18 results as
+opposed to the 795.
+A lot of companies are still willing to
+work with you on a remote basis, even if
+you know, they don't necessarily say so
+right off the bat. But anyway, let's
+just give it a go. What am I going to do
+now? Well, I need to test and make sure
+that this works. I think a lot of people
+sort of put the cart before the horse.
+They put the forest for the trees or
+whatever and then they just like try
+diving into NAN and making it work. I
+always just like verifying that things
+work on the platform that I'm using. So,
+in this case, I'm using Appify.
+Obviously, what I'm going to do is I'm
+just going to scrape company details and
+then how many jobs needed? Let's just do
+10. I'm going to click save and start
+and let's just actually find out what
+happens
+because who knows, you know, sometimes
+there are bugs directly on the
+dashboard. if there's a bug directly in
+the dashboard. I don't want to have to
+be thinking that it might be an NAN bug.
+Okay, so you can't use this actor for
+scraping less than 100 records because
+it's not efficient. See that? That's a
+bug right there. Right? Like I wouldn't
+have known that that would have been a
+problem had I not put this in. Looks
+like we are doing some scraping now.
+Although it is taking its sweet ass
+time. Now I should note that I fed in
+less than 100 jobs and it looks like
+it's now outputed some which is cool.
+What are we getting here? Okay, so first
+of all, benefits, actively hiring.
+That's obviously a benefit if you are
+looking to apply to a job. Company
+description, that's good. Company
+employee count. This is great
+information. Company LinkedIn URL, which
+is nice. Why are we getting tons of UK
+jobs? The first two are UK. Company
+logo. We got the company name. We got
+the company website, which is great for
+us. Looks like all of these have
+websites, which is awesome. If we didn't
+have websites for this, that' make our
+life a lot harder.
+Okay.
+And yeah, this looks pretty solid to me.
+Looks like it's going a little bit above
+and beyond scraping even more jobs than
+I thought were in the list. There is
+usually going to be some sort of
+discrepancy between what the front end
+here shows you and then what an Appify
+actor scrapes sort of behind the scenes.
+And that's just because they're not
+using like a cookie for this. They're
+not actually signed into my account. So,
+their screen is different. It's, you
+know, it has some stuff in there that
+maybe get filtered out before it hits
+me. But that's fine. Okay, great. So,
+we've now scraped all of these jobs.
+This looks pretty good to me. We have
+all the data that I was personally
+looking for. The main one is just the
+website cuz from the website, you can
+get everything else. What I'm going to
+do now is I'm just going to find a way
+to take this actor run that I just did
+on Ampify and then move it over to NAD.
+So, let's just go over here. I'm going
+to type an HTTP request. And uh I've
+done this quite a bit in the last few
+videos, but just, you know, it bears
+repeating for posterity. Anytime I don't
+know how to deal with the docs, I just
+type in the name of the platform and
+then API docs.
+From here, my main goal is always
+initially to look for authentication
+guidelines. So, Appify is a really good
+API. So, if we scroll down,
+authentication is one of the very first
+things we see. So, here it tells us how
+to grab our API token. We go to the
+integrations page in the Appify console.
+Then, it even tells us the format that
+we need, which is authorization bearer
+format. There's even a little section
+that teaches you how to use
+authorization bearer format. Not all
+APIs are this good. You know,
+documentation is going to vary depending
+on what you're using, but Apify is
+pretty solid, which is one of the
+reasons I use it. So, I'm going to head
+over here. I'm going to create a new
+token. And let's just call this AI
+automated resume.
+I'm going to create. What we have now is
+we have the API token, which is awesome.
+So, if I paste this in, this is my
+actual API token. Should probably delete
+my old ones, huh? Can't tell you how
+many times my old ones have gotten run
+up by people that just like watch these
+videos and go, "Oh, did Nick forget?"
+And turns out Nick forgot. Anyway, so
+how do we actually convert this into an
+API call with the token that we have?
+Well, I've used this quite a bit. So, I
+know which endpoint to use, which is
+logically like let's just work through
+it in our heads, right? And even if I
+didn't know, what am I trying to do? I'm
+trying to run an actor. I'm trying to
+run a scraper, which they call an actor.
+So, what am I going to do? I'm going to
+look for the end points here that say
+run actor. And I see one here called run
+actor. Odds are that's what I want. You
+know, there's run actor synchronously
+with input and return output. Run actor
+synchronously with input and get data
+set items. run acts synchronously
+without input and get data set items.
+Odds are I'm going to want some sort of
+input. Odds are I'm going to want some
+sort of data. So, you know, even from
+first principles here, one of these is
+going to be one of the endpoints that I
+would probably use even if this is the
+first time I was using the API. To make
+a long story short, there's no way to
+know for sure without actually just
+going ahead and using it. So, you know,
+like we just have to get the
+authentication up and running and then
+we just start using endpoints and we
+just see does it give me the information
+I want. I'm going to kind of skip ahead
+a little bit because I know that this
+one does. Once you find the endpoint,
+um, how do you actually convert this
+into an NAND thing? Top right hand
+corner, you just click this little
+button. Okay? And then, well, actually,
+there's one more thing I want to do. You
+guys see up here, right over here where
+it says uh actors/ whatever/input,
+this is the ID of the actor. So, I'm
+going to go back to my ad docs. I'm
+going to paste this in because this is
+required. And then bearer token over
+here. I'm going to go and I'm going to
+copy this in a automated resume system.
+I'll paste that in. Okay. Then what do I
+do now? I copy this. This is the curl.
+You always want to look for the curl or
+the rest API or the direct API call. And
+you just want to paste it directly into
+the HTTP request as follows.
+When you do this, Naden will take all
+that data. It'll parse it out and then
+it'll update all the fields for you so
+that the HTTP request automatically
+works. This is one of my favorite
+features of NAD. It's one of the reasons
+why I think that they've blown up so
+quickly. They just make um actual API
+requests pretty easy. It looks like my
+token didn't copy over for whatever
+reason. So, I'm just going to go back to
+my account and then copy over the token
+again. So, what you want to do anytime
+you find like a less than token, greater
+than symbol, or like your API token or
+something like this, you just want to
+replace the entire thing with the token.
+Okay? You don't have to do it in between
+the little less than or greater than
+symbols. I used to run into issues like
+that all the time. Then the last thing
+is, if you think about it, like we've
+worked through all of the information
+here. We have the actor. We have the
+endpoint.
+We have the token. We don't have any
+input though. Like we're not actually
+feeding it any data. You guys remember
+how before if we go to the LinkedIn job
+scraper, we fed it this job search URL.
+Well, now we're not doing so. Well, the
+way you do this in Appify is just go to
+the JSON tab and we actually get all of
+the data in JavaScript that you can then
+just go back to NAN and then feed into
+using JSON just like this. So now we're
+sort of feeding it in everything
+including all of the settings and
+whatnot. What I'm going to do is I'm
+going to click execute step and I'm
+going just cross my fingers and hope
+that this works. And if it doesn't,
+we'll deal with it then. Okay. And then
+a quick and easy way to verify that this
+is actually running is just go back to
+the runs tab. And you can actually see
+it go and accumulate results for us
+live. We also obviously have the other
+data like the usage, how much money
+we're spending and so on and so forth.
+because this is like 100 or something uh
+sorry 1 cent per 10 I believe like we
+can just do the math and 78 cents 78 or
+078 and then this is 78 results. Okay
+and it looks like we just wrapped up
+here. So this is in table format uh
+format. I'll put this in schema just cuz
+that's a little bit easier to see. And
+we now get all that data that we got in
+the app dashboard but we have it inside
+of NAN which is obviously much more
+powerful because NAD is the glue that
+allows us to connect with a million
+other platforms. I'm just going to go
+back to our road map here. Let me make
+it a little more convenient for me. And
+I'm going to check this just cuz I
+always like to have some sort of record
+of progress. And then I'm going to check
+this as well. And now our next task is
+to compare incoming jobs against some
+bank of skills and have AI filter. So
+the question is how do we do that? Well,
+first of all, what I'm going to do is
+I'm just going to pin all of these
+outputs because I don't want to have to
+rerun that. You guys see how that took
+me like a solid minute or two. I was
+just waiting around. Maybe you guys
+didn't cuz we cut the video or whatever.
+But imagine if every single time you
+wanted to test a flow, it took you a
+minute. You know how many times I test a
+flow? I test a flow like 100 times per
+build. So that's an additional 100
+minutes or hour and a half. Just cut all
+that out by pinning data so you never
+have to do any of those weights again.
+If you do incremental testing like I do,
+this saves you a ton of time. And
+incremental testing in and of itself
+saves you a ton of time. So we just
+highly recommend anytime you do anything
+like this. But anyway, the next question
+is we actually have to do some
+filtering, right? So why don't we do
+some filtering? How am I going to do it?
+I'm going to feed this into OpenAI. I'm
+going to go message model. And there's
+sort of like two ways that we could do
+filtering like logically. Think about
+it. You can do filtering procedurally.
+Procedurally just means looking at
+keywords and stuff. Like that's like
+kind of the old way doing filtering.
+Then you could do filtering flexibly.
+And this is where you know even if
+something maybe doesn't have the keyword
+you're looking for, you feed into AI. AI
+can like infer that you know even though
+it's not the same word, it's like a word
+that you're looking for. It's more of a
+concept based thing, right? So instead
+of using keywords, we're going to do
+this. But I want you to know that you
+can totally still filter based off
+keywords. Like you could make it so like
+you only apply to jobs if it has the
+term NAD in it because you're an NAD
+engineer or something, right? We're just
+going to use AI here just cuz I love
+using AI specifically for this purpose.
+It's just a lot more flexible. It's a
+lot easier to use. Okay, so scrolling
+all the way down here to the bottom.
+First, we have to create a credential.
+If you guys haven't done this, just
+check out the documentation. They
+actually show you how step by step. You
+basically just open your API keys page,
+create a new secret key, and then paste
+it inside of NAN. So, I've done this
+before in multiple videos. I'm just
+going to leave that out now, but this is
+where you put it. Then you click save
+and all of a sudden now you're connected
+to your open AAI account which is great.
+We're going to use the resource text
+operation message model. And from here
+I'm just going to use GPT 4.1 and go
+mini. And what I'm going to do is I'm
+just going to write a big list of skills
+basically that I have. And then I'm
+going to ask it, hey, if the job doesn't
+include information that you feel is
+pertinent to me, then just don't let it
+proceed or something. Okay. So, first
+things first, we're going to go to
+system and I'll say you're a helpful
+intelligent job filtering assistant. I'm
+going to go user and I will say you
+filter jobs based on a list of
+attributes and skills that I or let me
+give it some uh context. I'm looking for
+jobs. Your task is to filter them based
+on a list of attributes and skills that
+I have. some jobs may not be relevant,
+which is why I want you to go through
+each of them and then let me know
+whether or not I'm an okay fit. Below is
+a giant list of all of my skills. And
+then underneath here, I'm going to say
+here is the job description.
+Then I will say respond in this JSON
+format. And I will say verdict
+true or false. So now it's going to
+return true or false depending on
+whether or not I'm a fit. I'm a fit,
+return true. If I'm not a fit, return
+false.
+both strings. Let's just say that make
+things a little bit easier for me. Then
+we will go output randomness
+temperature. And I always do 0.7 for
+applications like this just because I
+want it a little bit more deterministic,
+a little bit less random. Okay. So now
+what I'm going to do is I'm going to
+give it just a bunch of skills.
+Maybe I'll just give it like context.
+Below is a block of context about me and
+my skills.
+Let's do that. And then here is the job
+description.
+Let's start with skills. I'm just going
+to go and have AI whip up a big thing
+for me.
+Okay, what I did is I just had AI do a
+little bit of research on me and then
+dump a bunch of context. Now, what I'm
+going to say is job description wise,
+all I do for this is I actually go
+expression and then this is kind of a
+hack you guys could use if you don't
+know what to feed in or if you're just
+lazy like me. AI is at the point now
+where um the context window which is
+like the amount of tokens that you feed
+in the number of tokens that you feed in
+rather is so long that you could feed in
+like 20 bucks and you'd still be fine.
+Maybe not 20 bucks. It depends on the
+model. But because of this tokens are
+very cheap and so inference is cheap.
+And so what I do now is I just feed in
+the entire JSON object. I no longer deal
+with like trying to make this perfect. I
+just go JSON to JSON string and then I
+feed this entire thing in just like
+this. Okay. So once I'm done with that,
+we're actually good to go.
+So, I'm going to open this up now. And
+then, do you guys see how it says 100
+items here? If I just ran this as is, it
+would take quite a while to finish. So,
+what I'm going to do is I'll use a limit
+node. I'm just going to feed in one item
+at a time. And that's just going to kind
+of be my hack. Okay. So, we're going to
+execute the workflow. We're just going
+to feed in a single item past here. And
+we're going to run it. And because we
+had a very simple and straightforward
+and easy pitch, the verdict is just
+immediately false. Like, it wasn't
+really that big of a deal. It wasn't
+very long, right? Okay. So, what I'm
+going to do now is I'm going to pin
+this. I'll also pin this. What do we do
+with this data? You know, it just said
+verdict false. We can actually just feed
+this into a filter now. And we could
+say, you know, verdict has to be equal
+to true. And if it's not equal to true,
+then we don't proceed. So, let's execute
+this. And now, you know, we discarded
+verdict cuz it was false. So, we're just
+not going to use this anymore, right?
+And so, this is the design pattern that
+you use anytime you have AI doing some
+filtering. You drop an AI model that has
+like a returns JSON true or false. You
+just have a filter after that just
+checks to see whether it's true or
+false. So, that's pretty good to me. Why
+don't we now feed in 10 items? Let's
+unpin all of these and then we can go
+and we can see what AI has to say about
+all 10. Obviously going to take
+significantly longer because in N8 we
+run all 10 of these in parallel. So it's
+actually just like all 10 of these are
+going on. And it looks like of the 10
+that we fed in, it spit out five. So let
+me just take a peek at what five it spat
+out.
+Well, I guess I don't actually have too
+much access to previous data, huh?
+That's unfortunate. Still, that's cool.
+Let us just very quickly pin this over
+here. Just feed in Jason.
+Let's see. The first item we fed in was
+this one here, which is vice president
+of data. Looks like the verdict was
+false. Looks like the second one was
+looking for AI product manager and
+business analyst. That one was true.
+That seems pretty reasonable based off
+what I'm looking for. It looks like the
+third one was senior data scientist.
+That was false. Probably because I'm not
+a data scientist. This one here is true.
+Anyway, I'm just going to trust that the
+filter is doing what it's doing. I don't
+do this because I actually have a big
+list of criteria or whatever. Obviously,
+the purpose of this live build is to
+show you guys how to build something
+like this that you guys can then use at
+scale for whatever job application
+process you guys want. So, just treat
+this as like a nugget and then go in and
+like add your own skills, add your own
+contacts, add everything about you, and
+it'll do a good job. From here, what do
+we actually do? Well, let me think. We
+go back here. we can check it. Now what
+we do is we just have another AI model
+that customizes our resume to match the
+specifications and standards that we
+give to it. So basically we have to do
+now is you see this we have to feed this
+in to another AI call and that plus the
+data in the HTTP request. It's just
+going to kind of like meld together in
+this lovely open AI call. Then from here
+we're going to spit out a customized
+resume and then we'll be done probably
+about half of our build already. So, as
+you guys could see, pretty
+straightforward, pretty standard. So,
+what I'm going to do first then is I'm
+just going to copy the OpenAI model,
+paste it in here. Then, the reason why I
+do that is, you know, I just have most
+of it set up for me already. Then,
+instead of GPT4 Mini, which I think does
+an okay job, I'm just going to use
+GPT4.1. I think that, you know, the
+writing is a little bit more important
+than the simple filtering, yes or no.
+I'm going to say job customization
+assistant.
+Leave the I'm looking for jobs. I'll
+change to your task. Your task is to
+customize a provided resume. and then
+using a provided job description.
+So I'm going to leave this. So here's
+the job description and here I'm going
+to say here is my resume
+over here. We're now going to feed in
+the entire resume.
+Then I will say don't respond in JSON
+format. Respond with only the resume,
+nothing else. And I'll also say this
+resume will be added to a Google doc.
+So, write it in
+HTML format that I can easily copy and
+paste. Okay, I think this is going to be
+fine. I'm not entirely sure. We're going
+to give it a try, but this should be
+okay.
+Do we have everything we need? Job
+description. Yeah, I mean, I guess we
+do. It's not going to be JSON. No, it's
+going to be from this filter.
+It's actually going to be from this HTTP
+request if you think about it. So,
+what is the job description? is going to
+be dollar sign and then where am I
+going? I'm going down to the HTTP
+request.
+And then I'm uh maybe I'm going to
+limit. Gez, I don't know. I feel like I
+could select from either of these. Let's
+go limit. And then I'm just going to
+convert the entire thing to a JSON
+string. Item.json and then to JSON
+string. There you go. Should now have
+everything.
+We'll see. I think this is going to
+work. I mean, it's going to be a little
+bit different. Looks like for whatever
+reason there is a space with two hiring
+manager. Let me just go back here and
+make sure I include a space. I guess I
+did, huh? All right, whatever. We'll
+leave it as is. It should be able to do
+a pretty good job here. So, I'm just
+going to unpin this. Uh, this is five
+items. I just want to test it again on
+one. So, I'm going to go limit for now.
+I'm just going to do one, and I'm going
+to execute this workflow. Now, that's
+going to immediately execute all this.
+Uh, looks like using the item method
+doesn't work with pin data. Please unpin
+filter and try again. So, I think we're
+going to have to unpin a couple of
+these, which is unfortunate. Let's try
+this.
+Yeah, same deal. I think we got to do
+the basically everything from here,
+which sucks. Got to filter this out.
+Feeding it 10 items, right? Okay, there
+we go. So, sometimes when you use the
+item method, so when you go limit item
+dollar sign JSON or whatever, you run
+into what are called item matching
+issues in NAD where it doesn't really
+know which one to reference because
+you've pinned some data but you haven't
+pinned others. So, a quick and easy hack
+is just to like unpin everything except
+for whatever super crazy API call you
+need and then you're good to go. So, uh
+we're outputting this with like back
+ticks. I really don't want it to output
+with back ticks.
+Yeah, I don't like that. I don't like
+that at all. Can I just say
+do not output any back text? No. this
+and I will say your first character
+should be Let's just try this. Execute
+this again. Is this going to work? I
+think so. Yeah, it's already running so
+it's probably good. Okay, let's take a
+peep at this. This looks to be keeping
+in a bunch of additional information
+that I don't want. Like this output a
+style. I think I might just ask it to go
+markdown format instead of HTML.
+Markdown ETX format. Let's do this. I'll
+just try this one more time. And then,
+you know, I'm just going to output
+markdown and then convert the markdown
+to HTML. That's a little bit easier. I
+think as you guys see I normally like
+using output content as JSON just a lot
+easier because then I can map the data
+directly and also anecdotally I found
+the quality of the output is usually a
+little bit more systematized. This looks
+good to me though. Okay cool. So now
+that I'm done with this what do we want
+to do? Actually need to u think about it
+like upload it to a Google doc. So first
+of all I'm just going to convert the
+HTML to markdown or markdown to HTML.
+Feed in this key. Execute that step. So
+now I'm feeding in the output. And now
+what we need to do is we need to create
+and then update a Google doc. I don't
+know if we can update it with HTML
+though. Can we? Yeah. I don't know if we
+can. So why don't we do this first?
+Let's just create the Google doc. This
+is like our next Google doc.
+We're going to call it Nick Sar.
+Is this the best thing you could call
+it? No. You could actually call it some
+else. You know, you could say like
+foris, you know, whatever the name of
+the company is. But for now, we're going
+to create the resume. What we have to do
+after we do the creating of the resume
+is we actually have to like update the
+resume. Now, I think the only way to
+actually do this, and I only know this
+cuz somebody in Maker School mentioned
+this earlier, is, you know, Google Docs
+has this way where if you just apply
+HTML, it'll actually just automatically
+create the doc with nice formatting and
+stuff like that. But, NAN doesn't have a
+built-in endpoint for it. So, basically,
+you have to have do a custom HTTP
+request. So, I'm going to kind of cheat
+here because I know how to do this and
+I'm not going to like work out the logic
+with you as much, but I've actually done
+this before in a previous build. So, I'm
+just going to scroll through my builds
+and I'm going to see, can I find the
+thing where I make the Google doc
+because, you know, I've done it before
+and it's pretty cool. Okay, so I did
+some digging and I found this HTTP
+request. Here's how it works. Use what's
+called a patch update. You feed in this
+URL here. So,
+googleapis.com/upload/drivev3/files
+then the ID of the document that we just
+created a moment ago. Upload type equals
+media. Then what you do is you feed in
+text/html
+with the body from this markdown node.
+So I'm going to go and grab all of this
+data.
+And this should now update the doc that
+we just created a minute ago. in order
+to do authentication with like let's say
+you have a situation where you have a
+built-in like the Google Docs builtin
+that we just used to create the doc but
+then you have to do some sort of HTTP
+request that is not supported by nadens
+builtins there's a quick and easy hack
+that lets you do it way easier than what
+most people are probably doing which is
+just rebuilding everything and knocking
+around with authentication if you go to
+authentication type predefined
+credential type here then under
+credential type actually just put in the
+thing that you connected with in the
+previous built-in module so in my case
+Google docs oth2 API
+This will actually automatically pull
+the same connection that we just created
+earlier except they'll put it in an HTTP
+request. And they do this to simplify
+you having to stitch together platform
+integrations and then custom API
+requests like we're doing now. So very
+very useful. Okay. So after I've done
+this, what I'm going to do is I'm going
+to pin this because I want the same ID
+to come out. See here it says Nixive
+Resume, right? I should actually be able
+to go back here, go docs.google.com
+google.com and see nyx resume again.
+Cool. So, it's actually right over here.
+You guys see how it's totally empty
+right now? Well, it's totally empty cuz
+all we did was we created the document.
+We haven't updated yet. So, what I'm
+going to do is I'm going to see if this
+works to update.
+So, I'm going to say add HTML to let's
+resume here. Execute workflow.
+Nice. Awesome. And now I actually have
+my customized resume which takes all of
+the information that I used and gave it
+initially. Then it weaves in what the
+job is looking for alongside my
+experience to rewrite me something that
+looks like this. So that's pretty neat.
+Does a pretty good job here. I'm a
+business focused AI product manager and
+automation specialist with six years of
+hands-on experience designing,
+deploying, and scaling intelligent
+automation solutions for SMBs and SAS.
+Proven track record bringing structured
+ambiguity, translating user pain points
+into higher ROI product requirements,
+and bridging business and technical
+teams. I mean, that's pretty great. And
+to be honest, that's more or less
+exactly what I do. So uncanny. And then
+it also did formatting here with like my
+email address and stuff like that, which
+I like. And yeah, the formatting looks
+pretty clean. So if you think about it,
+like we could provide it some more, you
+know, formatting things if we wanted it.
+We could say, hey, make sure to output
+the chapter headings as like H2s or H3s
+or whatever. And it would do a pretty
+good job. We could also give it some
+examples of what we think really high
+quality rums are. So we can do that
+transformation by looking at um, you
+know, our examples, not necessarily just
+our oneline instructions. But all in
+still a pretty good job. Um, and I like
+where this is going. So, I'm just going
+to pin this now and then we are going to
+just check this puppy off. Last thing is
+we need to enrich the website and any
+other information for contact details
+and then send an email using a short
+punchy pitch and attach a resume. Okay,
+so what do we have now? Just taken
+stock. We have a very long linear flow
+that does Google doc content extraction.
+We call a specific job search URL. We
+then filter using AI. Let me just update
+this now. So, it says filter job. Then
+we do some math over here. or some funky
+processing. Then over here we rewrite
+the resume. Over here we convert it to
+markdown. Over here we create new
+resume. Then here we add HTML to the new
+resume. What's going on after this?
+Well, if this is all like data
+wrangling.
+Well, everything on the right of this is
+basically now just outreach. So it's
+sort of like a classic outreach flow.
+Now, if you guys have been following my
+channel for a while, you know that I do
+outreach flows all the time. What I'm
+going to do for this outreach flow is
+I'm just going to take the website. Then
+I'm going to see if we can enrich it
+using a service called any mailfinder.
+Enrich in this case just means grab
+decision makers at these companies. And
+then once we have their emails, we'll
+just feed that into a little email
+template and then send it out, including
+our attached resume. Nothing super fancy
+here. This is just an outreach flow. And
+uh you know, if you guys have seen me do
+this thing before, you'll know that
+outreach flows, even simple ones like
+this, can be extraordinarily powerful in
+the right hands. So, I'm going to use
+this service here called any mailfinder.
+There are a million services you could
+use. Okay. But I like any mailfinder
+because any mailinder allows me to find
+any mail. No, it's just a good service.
+It's reasonably cost effective at like
+higher levels and yeah, these guys are
+just like pretty solid. So, how do we
+use it? We use company search, person
+search, decision maker search, LinkedIn
+URL search. If I type leftclick.ai in
+here, I look for the CEO or owner, it
+actually goes and it finds me. plus my
+email address. Pretty wonky, huh? Isn't
+that crazy how it just does that? So,
+imagine if I feed in some other company,
+you know, zapier.com or whatever. If I
+feed it in here, it will find me the
+email address of the decision maker
+here. And so, if we constrain the
+company size to something small like 50
+to 100, maybe like 1 to 100 or so, odds
+are the founder or decision maker that
+we find is either going to be equivalent
+to the person doing the hiring, like
+it's going to be them, or they're just
+going to be known to them and can very
+easily forward over our inquiry or
+whatever. And odds are if somebody's a
+business owner or a founder, decision
+maker at a company that like, you know,
+has high agency and makes things happen,
+when we reach out to them with something
+that's customized and punchy like this
+and we put proof in the pudding and we
+show them like, hey, we actually went
+the extra mile. We're not just like
+applying to a job with a crappy resume.
+A lot of the time they really appreciate
+that cuz they're the sort of person that
+respects that thing cuz they're
+entrepreneurial in general, right? So
+yeah, that's sort of like what all this
+banks on. And I found great success
+using methods just like this for
+businessto business outreach,
+entrepreneurial, and I do it all the
+time. So that's what we're going to do
+here. I have 65,000 credits, so I might
+as well start working through them. Got
+an API key over here. So, I'm actually
+just going to copy this and then I'll
+also read the API documentation while
+I'm at it. What do we want? We want
+decision makers email. Looks like we do
+this with any mailinder v5. Guess what?
+We even have a curl request over here.
+So, I'm just going to copy over this
+curl request.
+And then I'll go back here. And now I'm
+just going to do another HTTP request.
+Import curl. Paste all this in. Done.
+Just need to fill in my API key, which
+we just got a moment ago. back over
+here. Right. Copy that. Paste it. What
+else do we want? Domain Microsoft.
+Decision maker category CEO. Well, if I
+just execute this, can I get the CEO of
+Microsoft? I don't know. Let's give it a
+try. Yeah. Now, I think his email is
+basically public knowledge at this
+point, but you guys get the idea, right?
+If we do leftclick.AI. Are we going to
+find anything? Let's see. We may. We may
+not. Nice. Yeah, we found me, right?
+That's kind of neat. So now that we have
+this, I'm just going to feed it in one
+at a time. And what are we going to feed
+in? Well, we just need the the website
+URL, right? So I think what we want is
+we want this limit node. And then what
+we want here is we want the domain,
+want the website, right? Maybe I'll just
+type in a website. I'll find it.
+Man, this is really long. Okay, right
+over here. Company website. Cool.
+Now, we're not going to be able to get
+this because we're going to run into
+that like node pinning thing again, but
+that's okay. There's one more thing I
+want to do here. There is the chance,
+and I don't know for sure, but I'm
+thinking there could be a chance that we
+feed in a record that doesn't have a
+website. So, I just want to go back to
+my filter node, and I basically want to
+not only filter for the verdict, but I
+want to make sure they have a website.
+So, I'm going to go back here to that
+limit node, and then I'll go website
+again. Scroll down
+just to where it says company website.
+I'll basically just say this
+is not empty. Okay, so we actually have
+a value for the website. Only if that's
+true are we going to proceed. So true
+and website.
+Let's just like filter true and website
+limit two. Okay, now that we have all
+this, I'm going to grab everything.
+Press P. Call this get email. And then
+we'll only proceed with this
+assuming that actually find the email.
+So say only proceed if email is not
+empty basically. Okay, which I think is
+good. And that way you know like
+email present
+at the very end we could do some sort of
+like Gmail flow. Anyway, we'll do that
+in a sec. So sorry, let's keep these
+pinned and then let's just run through
+the whole flow one more time. With 10
+jobs, let's see how many of these emails
+we can get. Realistically, we usually
+get between 30 to 45%. So it's not a
+sure thing, right? Like not all of these
+have actual email addresses associated
+with them obviously, but still we can
+get reasonably high enrichment rate I
+want to say. So that's what we're doing.
+Kind of looks like we had an issue. The
+resource you are requesting could not be
+found. So no underscore result. I don't
+want it to return me an actual error.
+That's kind of dumb. So instead of
+returning an actual error now, hold on.
+Is this because we're feeding in the
+www? H I don't know. I don't
+actually know. There could be a couple
+of errors here, right? Like I'm going to
+pin this now. Just got to run this.
+Oops. Sorry, not uh don't pin this. If
+you think about it, if I execute this
+step, it runs. This is a resource. It
+cannot be found. What if I just copy
+this and then I paste this without this?
+You know, sometimes there's a difference
+between like domain name and then
+resource. No. Okay. So, I think this is
+just like a basically if this doesn't
+find the email just returns an error.
+So, what do I do on error? I actually
+want to continue using the error output.
+So when you do that, there's a success
+route and then there's an error output.
+So success route will maintain, error
+output will stop. So let's execute this.
+Now this error output should go down
+here. Cool. So now if we feed in more
+than one element, right? Like and three
+of them are good and then one of them
+isn't, it should be fine. So I'm going
+to go over here. Let's output this to
+let's just do three for now. H maybe
+we'll do four. Unpin all of these.
+And then I'm going to run it from here.
+And we're going to try and get at least
+one of these. Okay. Uh oh, good lord.
+Let's try this one more time. Yeah, the
+item matching issues in NAN are the big
+things, honestly.
+You basically just have to rerun this
+every single time starting from here,
+which is unfortunate. And I'm just
+getting some NAN connection issues
+because the server was down earlier. We
+do be doing some filtering. And then I'm
+just going to get kind of ahead of
+myself here and just start working on
+some of the logic of a Gmail node. So
+I'm going to go create a So we could
+create an email. I'm just going to
+create a draft for simplicity.
+We connect this really easily. You just
+sign in with Google and voila, you're
+done. Resource is going to be draft. And
+I'm just going to say like re and then
+I'm going to map the job title. Then
+I'll just say first of all, let's see if
+we can actually get the name. That'd be
+really cool. But I'll probably see if I
+could use the name in the email and say,
+"Hey Pete, how's it going?"

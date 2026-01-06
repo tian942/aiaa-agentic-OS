@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "company": "Final Test Agency",
+  "offer": "Premium Consulting Service",
+  "executionTime": "3m 18s",
+  "deliverables": {
+    "marketResearch": {
+      "file": ".tmp/vsl_funnel_final_test_agency_20260105_164556/01_research.json",
+      "doc": "https://docs.google.com/document/d/1JOrX_qWNdwieY9E0fJGoTu8Co4jfAHijRgefvHsqUvY/edit"
+    },
+    "vslScript": {
+      "file": ".tmp/vsl_funnel_final_test_agency_20260105_164556/02_vsl_script.md",
+      "doc": "https://docs.google.com/document/d/1awtr-1fXkatpUSP1IwOfVAP6I4JjQQj306qp4jjL24I/edit"
+    },
+    "salesPage": {
+      "file": ".tmp/vsl_funnel_final_test_agency_20260105_164556/03_sales_page.md",
+      "doc": "https://docs.google.com/document/d/1Rss5B4P4LfwH7KMzj0DUBq4qoSjK0RSjx05MOr011vk/edit"
+    },
+    "emailSequence": {
+      "file": ".tmp/vsl_funnel_final_test_agency_20260105_164556/04_email_sequence.md",
+      "doc": "https://docs.google.com/document/d/13mDVx4_h1npgoe-Ztg6UrwJD57cduFaQDohlhcYDYOs/edit",
+      "emailCount": 7
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

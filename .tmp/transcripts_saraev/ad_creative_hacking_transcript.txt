@@ -1,0 +1,1353 @@
+Hey, today I'm going to be building a
+system that can turn a single click into
+thousands of highquality ad creatives
+that reproduce winning static image ads
+using NADN and OpenAI. I'm going to
+build the whole system live in front of
+you. Going to keep in the detours and
+any stumbling blocks along the way and
+you guys can catch the template in the
+description. Let's get into it.
+All right, here's a demo of the working
+system. It is a simple AI agent
+connected to a backend image spinner
+flow. The way that it works is we have a
+source folder in Google Drive. What we
+do is we upload images that we want our
+ad system to spin, aka make slight
+changes to. And in order to do that, all
+you have to do is go on Google images
+and just grab high quality ad creatives,
+take a screenshot, and literally pop
+them in here. Once you're done with
+that, we have a destination folder where
+all of the ads are going to be generated
+in. Head over to the agent, put in a
+prompt like in this case, light blue,
+pastel tones, cute style, Saraf and
+Sans, Sarah fonts, flat and minimalistic
+design, include outlines, company name
+is leftclick, and add the logo plus a
+cute little mouse pointer in the bottom
+right hand corner of the designs. CTA is
+build scalable systems today and then
+generate two samples per image. What
+this is doing is now running our image
+generation or image spinner prompt. The
+way that this works under the hood is we
+take the original image, we analyze the
+image to generate a very detailed
+description using this node right over
+here. Once we have that description, we
+then feed it into AI and generate what
+are called change requests. And then
+finally, we feed in those change
+requests into GPT image 1 alongside the
+original source image. This allows us to
+vary essentially an infinite variety of
+things in the source image and make it
+extremely high quality while still
+retaining the core elements that made
+that ad pop. And then once all is said
+and done, what we've done is we
+generated a bunch of basically spun
+versions of the original source ad. The
+value in this is we still get to stay
+pretty close to a template that has just
+clearly and obviously won, right? Like
+there's a reason why this company
+Spotify, which I know and love, is
+running an ad like this. Odds are it's
+successful. They've done some testing on
+it. So, we can actually take advantage
+of that testing money and use it to spin
+a working ad concept or formula and then
+post it on our own. Yeah. You know, the
+idea is we don't just do this one shot
+perfectly. What we do is we generate
+dozens, hundreds, potentially thousands
+of ads and then all a creative agency
+team does is it just goes through this
+destination Google folder after sending
+in the request and then odds are one of
+these ones that we've generated is going
+to be sufficient if not really good for
+ads. You can also theoretically just
+take all these and hook them up directly
+to some sort of ad system and then just
+test them against each other. This sort
+of iteration is soon to be
+extraordinarily common in the PPC space.
+Hey, so this is a live build. I haven't
+done any of the building yet. All I have
+is a hope and a prayer and an idea and a
+rough scope. My anvas is completely
+blank and I'm just going to walk you
+guys through my entire thought process
+from start to finish. Haven't actually
+built this thing before. The inspiration
+behind this system is this. I came
+across a Spotify ad studio ad and I
+asked myself, hey, could I spin this
+with a GBT image 1? And then a few days
+ago when I was designing an AI graphic
+design agent, I actually used it as a
+template and then asked AI to modify it
+a little bit. This is what I ended up
+getting. So, I consider this a very
+highquality spin. Obviously, it's
+different, but you know, I changed the
+key elements here. Changed the logo, I
+changed the company name, changed the
+um, you know, obviously brand colors, I
+changed some of the text here. And then
+we turned this from a real image into
+sort of a cartoon thing. When I saw
+this, I started thinking immediately as
+somebody that used to run a PPC agency,
+well, what's stopping me from not just
+generating one of these things, but
+what's stopping me from generating 50 of
+these things? And then, you know, maybe
+one of them ends up being that perfect
+ad combination that I really, really
+like. Then I thought a little bit more
+about how, well, you know, when I was
+doing this conversion over here, I
+hardcoded it. You know, I said, "Oh, I
+want a blue thing. I want it to say
+automations never felt so good." And so
+on and so forth. But that sort of
+ideation is perfect for AI. So what if I
+just have AI do all that stuff? I could
+actually take a template or a series of
+templates and then have AI ideulate a
+bunch of changes to those templates and
+then I could have them generate multiple
+templates. And then after we generate
+multiple templates, I can have generate
+multiple ad variants. And then from
+there, we could just take all those ad
+variants and test them against each
+other back when I was doing PPC stuff,
+which you know, admittedly I was not
+incredible at, but I was pretty good
+with stuff like this was part and parcel
+of our workflow. So my idea is if we do
+this right, we can save any sort of PPC
+agency that does this stuff at scale
+like 80% plus of their creative time,
+maybe even their copy time too,
+depending on how good it is. Okay, so
+this is not like a joke. This is a major
+system upgrade. I work with creative
+agencies all the time. This sort of
+thing like makes a pretty big
+difference. And over the course of the
+next however freaking long this video
+is, I'm going to run through logic that
+will allow us to build like a
+productized solution that we can very
+easily sell to creative agencies or we
+could use in our own companies with just
+like an input and a simple output. Okay,
+so here is the idea. First, we're going
+to provide a source creative Google
+Drive folder to the client and the team.
+The idea is all we do is we just give
+people, you know, this this box and this
+box is what they use to interact with
+the system. Okay, so they put a bunch of
+templates in this box. Templates being
+like um you know inspiration basically,
+other sorts of ads that they really like
+and so on and so forth. And then the box
+does some super cool magic. And then
+what comes out is a bunch of results, a
+bunch of ads, a bunch of spun copy and
+creative. So the only thing that they
+see is this box. The only thing that
+they have to deal with is this Google
+Drive. So then whatever is in that
+Google Drive folder, we're going to make
+the source material for our templating
+flow. When you ask the model to create
+something for you, the idea is we take
+the input and then we spin it 100 times.
+We then feed in a 100 variations of
+those spinned prompts into GPT image one
+which will output each of those spins
+and the results are then deposited in a
+result creative Google Drive folder and
+then you or the team, you know, is like
+an advertising agency or whatever, you
+just pick the best five out of the 100.
+You don't have to do 100, you could do a
+thousand. Hell, you could do 10,000.
+It's just about the budget. And then the
+more spins you have, the more bites of
+the apple or whatever you allow this
+model to do, the higher the statistical
+probability that one of them will be a
+standout knockout ad. And you know, like
+an experienced creative person will be
+able to see this at bird's eye view. So
+yeah, you know, whether or not you take
+this and then you give this sort of
+thing to a person or whether you take
+this and then you just immediately
+publish it, like the world really is our
+oyster at this point. And uh I guess
+there's some solid implications there as
+to like where the job of a designer is
+going in uh 2025, 2026 and beyond. Okay,
+so here is the rough scope. Here's, you
+know, above was just the idea. Here's
+how I'm actually thinking of doing this
+thing in practice, converting this grand
+concept into some sort of workable
+endflow. I'm going to start by creating
+some Google Drive folders. Then I'm
+going to grab images in source creative.
+I'm going to build an AI agent with a
+tool call that returns 100 variations of
+a prompt. And then another agent tool
+call is going to process 100 images with
+GPT image one, which will then add to
+result creative. And then I'm just going
+to notify the team in some way and I'll
+say, "Hey, your results are ready. Check
+out this Google Drive." And then, you
+know, like if you want to make any
+changes or whatever, you can. And we're
+going to keep it simple. This isn't
+going to be like super intent. I'm not
+going to deposit it in their project
+management system or whatever. We're
+just going to do this like blackbox sort
+of thing where it's like in a Google
+Drive. And the only thing you have to do
+is communicate with that Google Drive
+because I find that, you know, the
+audience that I'm targeting here of the
+creative agency folk. They usually
+aren't like the most like technically
+intense. I don't really want to give
+them too many steps or anything like
+that. And this is just like the approach
+that I personally do anytime I'm
+building something. I care more about
+the adherence than I do the actual like
+complexity of the system. All right. All
+right. So, let's actually go with it.
+First thing we got to do is we got to
+create Google Drive folders. There are
+two Google Drive folders I'm going to
+do. What did I call that one? Source
+creative. So, let's go source creative.
+And then this one over here will be
+best. That sounds better. So, do I need
+anything in Nadn for this? No, obviously
+not. What I'm going to do is I'm going
+to go over to my Google Drive. And then
+what I'm going to do is I'll create a
+folder. This folder is just going to be
+called oneclick equals 1,000 ad
+creatives. That sounds sufficiently
+clickbaity for us. I'm going to give
+this a click. And then inside of this
+folder, I'm going to have two. I'm going
+to have source folder.
+Then I'm going to have destination
+folder. And actually, I should just
+because Google Drive likes to organize
+these things like alphabetically. I'm
+going to go one source folder to
+destination folder. Okay. And now once
+I'm in here, what I can do is I can open
+this ID in my URL over here. Just copy
+this. It'll be a lot easier for us to
+find it later. I'm going to call this uh
+let's see, oneclick equals 1,000 ad
+creatives. I'm going to tag this as NADN
+course just because I'm compiling a big
+course that I'll probably recut the
+stuff into later. And now what I want to
+do is I just want to verify can I get
+the data to this folder. Okay, can I get
+the thing in the folder? So search files
+and folders. That's what I'm going to
+do. That's how we're going to start this
+flow. What you need to do in order to
+make this work is you need to connect
+your Google Drive account. In order to
+do this, head over to Open Docs and then
+there are a few steps you have to
+follow. You have to start by creating a
+Google Cloud Console project. You have
+to enable your Google Drive API. You
+have to configure your OOTH consent
+screen. Create your Google OOTH client
+credentials. Finish your NAD
+credentials. I know this sounds pretty
+scary and intimidating. It's not.
+Configuring your OOTH consent screen is
+literally you just copying this right
+over here to Google Drive. It even tells
+you as much and then's done a great job
+of like moving towards a simplified
+version of connections. And then once
+you're done, you just click sign in with
+Google. It'll then open a tab and then
+you just click the account that you want
+to sign in with and then you're good to
+go. So, um that's what I've done. Uh now
+that I have done this, I'm going to
+close this. This Google Drive is now
+connected. And then uh what I'm going to
+do is I'm just going to find files or
+folders inside of the Google Drive that
+I just showed you guys. Okay. And in
+order to do that, we just go down to
+folder. We can actually just manually
+hardcode it. We don't actually need the
+ID. We can select it using an ID if we
+want, but we don't have to. What was
+that one called back there? Number one
+dot source folder. So now we should find
+the source folder. There we go. There it
+is. And now what are we doing? We're
+just looking for files inside of source
+folder realistically. So, in order for
+this to actually find something, like
+I'm going to click execute. It's going
+to find nothing. But in order for it to
+find something, we actually need to add
+something in here. So, I don't know. Why
+don't I just find some ad creative
+example? Just going to go back to images
+and then let's use Facebook ad creatives
+cuz I just want to find an example of
+like a Facebook ad that we could spin
+really quickly. Uh, this one looks
+pretty good. You see where it says
+change your practice management software
+by zero. Yeah, these guys are awesome.
+Love this ad. This looks fantastic. I'm
+just going to go over here, copy this.
+I'm going to paste this in here. Okay,
+notice how this image doesn't have to be
+super high quality. I don't believe it
+needs to be because I did some
+preliminary testing as I showed you and
+uh it works pretty well. So, okay, now
+that this is in here, we should be able
+to run this. And when we run this, we
+should be able to get a file. And we
+did, right? We got a file with the ID.
+Now, this is I consider really
+important. We need a super simple flow
+where a graphic designer, some creative
+director can spot an ad they like and
+just dump a bunch of stuff into this
+Google Drive. How simple of a workflow
+is that, right? Insane. So, okay, cool.
+So now that we've verified that we can
+actually get the data in here. Our first
+step here is actually done. I always
+like to keep track where I'm at. So we
+just created a Google Drive folder. Now
+we can get the images in the source
+creative folder. We finished that as
+well. The next step is we need to build
+an agent with a tool call that returns
+100 prompt variations. This may sound
+like magic, but what am I trying to do
+here? Okay. Well, we have an image. Now
+that we have an image, what we need to
+do is we need to get a description of
+the image because what we need to do is
+we need to flip that description or spin
+it a million times uh with AI. and then
+have AI alter that and then feed in all
+those alterations into a prompt which is
+ultimately going to generate us an
+image. If that all sounds like
+witchcraft to you, don't sweat it. I'll
+show you guys what I mean. Okay, very
+first thing we have to do after this is
+we have to download the file. The reason
+why we have to do that is because this
+file is currently not like accessible to
+us. What this file is is this is just an
+ID. We're searching for it. So, I'm
+going to click download file and what
+I'm going to do is I'm going to download
+the file and I'm going to get it inside
+of NAN. So, I'm going to go buy ID. I'm
+just going to feed in this ID. What we
+have here is we've now mapped this. If I
+click execute step, we should get the
+actual image inside of naden. So click
+view here. And what we've done is we've
+taken this from our Google Drive and
+we've actually like funneled it directly
+into this canvas. If you guys are
+self-hosting, it is now on your server
+and so on and so forth. So once we're
+here, I can now pin all of these
+outputs. Now that they're pinned, what
+I'm going to do is I'm going to go into
+OpenAI and I'm going to get an analyze
+an image right over here. In order to
+connect to OpenAI, it's the same sort of
+deal. Um, this is actually a much easier
+connection than anything else. What you
+have to do is you have to create your
+open AI account. You have to add about
+$5 in credits at least as of the time of
+this recording. And then what you do is
+you get your API key, which you can get
+if you just click on this page right
+over here. They make it really nice and
+easy. After that, paste it in, click
+connect, and then you are connected. So
+anyway, there are variety of different
+things we could ask AI to tell us about
+this image. What I'm going to do is I'm
+just going to select GPT40, and I'm just
+going to start with what's in this
+image. Now, because this is a binary
+file, we have to go um from image URLs
+to binary file. And then the input data
+field name is going to be data. And
+basically, it's just always whatever
+this is. Okay, this is a really weird
+convention um but just always pick
+whatever the name of that little um
+orange section snippet is. So, what
+happens if I click this? Well, this is
+now being sent over to AI and AI is
+going to process it. And uh it doesn't
+look like this is working right now
+because it's saying that we didn't find
+it. I think this is because you're not
+actually allowed to pin data outputs. I
+know it's kind of annoying, but maybe
+we'll pin these two and then when it
+downloads it, we won't we'll have the
+unpinned version and we should we should
+make it work. I don't know. I'm just
+going to click execute. Let's see what
+happens. So, that worked. Okay. The fact
+that it's taken some time means it it's
+probably working. We're going to see.
+Okay. The image shows a person sitting
+with a laptop smiling. There's a paper
+with text and a downward arrow icon
+overlaid on the image. Below there's
+text that says, "Change your Pascus
+management software. The background is
+blue." This is pretty good, but it's not
+as good as it could be if you think
+about it, right? Like, what is this
+telling us? I think that personally
+there's more information on here than
+just that. You know, the backdrop of the
+woman, for instance, the woman's hair,
+you know, what the woman is wearing.
+Obviously, like this little background
+here as well looks to be like it's some
+sort of, I don't know, accounting stuff
+practice management software. This is
+good, but I'm not seeing a dark sort of
+overlay behind it. I think we could
+probably upgrade this. I'm a big fan of
+being hyper specific. So, let's just see
+if we can get this even more specific.
+And the more specificity we get,
+probably the higher quality our spinning
+is going to be. So, what I'm going to
+say here is what's in this image,
+describe it extremely comprehensively.
+Leave nothing out. Okay. Now, I'm going
+to run this flow again, and we're going
+to see if this prompt is maybe a little
+bit different. And if this is
+sufficient, then it's sufficient. We'll
+just move on. The image features a
+promotional graphic with a bright blue
+background. In the center, there's a
+layered design featuring a photograph of
+a person sitting with a laptop. She's
+wearing a light colored blazer and
+jeans, smiling at the background of lush
+green foliage. Overlapping the
+photograph is a document on paper with
+text and a grid-like table partially
+visible. Okay, great. So, now we're
+freaking talking. This is hyper
+specific. This describes it as good, if
+not better, than I would. This is great.
+This is exactly what we wanted. Now that
+we have this sort of description, we can
+actually just pin this output because
+that description is what we're going to
+use next. Okay, so if you think about
+it, there's now a million other things
+that we could do here. Like, I could use
+another OpenAI node and then have that
+generate a 100 variations of this. And I
+think that's probably what I'm going to
+do. And then after that, what I could do
+is I could feed that into an agent and
+have the agent maybe select the template
+or something like that. Like we'll see.
+But um okay, what I'm going to do next
+is let's go back to OpenAI now. And
+where it says message a model, what I'm
+going to do is we'll connect with the
+same credential resource message and
+model. Model I'm going to use for this
+is GBT4.1. The reason why is because as
+of the time of this recording, this is
+the largest context window model that I
+could do. And in in our case, we're
+going to need a very long context
+window. Also, this one's pretty high
+quality and it's not super expensive.
+It's not like GBT4.5 or anything. So
+this is sufficient for me. First thing
+I'm going to do is I'll change ro to
+system. And then for prompt I'll say
+you're a helpful intelligent prompt
+rewriting assistant. You help rewrite
+prompts. And now what I'm going to do is
+I'm going to add a user prompt which is
+where I actually give it the
+instructions. This over here is just how
+it is defined, how it identifies. I
+guess this over here is like what it
+does and what I want it to do. And the
+first thing I would do is I always
+provide some context. So I've generated
+an image description. I want you to
+rewrite it in let's just do 25. Well, I
+guess for test purposes, let's just do
+five different ways. No, let's do 20.
+Uh, yeah, let's do five different ways
+for now. And we can scale this up later.
+I want you to rewrite it in five
+different ways given the following
+input. And then here, I'm going to have
+the input from the user that requests a
+specific thing. So, back in the example
+that I gave you guys, that would be for
+instance blue background leftclick add
+studio mouse icon button text that says
+this, right? Like this is what I'm going
+to feed in some highle instructions and
+I'm going to have it generate me a
+description of all the things that I
+want. So, I've generated an image
+description. I want you to take that
+image description
+and then give me five variants of it
+based on the following input.
+And I'll say input uh and then in this
+case, let's see like how do we want to
+modify this test, right? Like we should
+probably have some modifications. Let's
+say we want it bright orange. We want a
+cartoonish
+character in the middle. We want text
+saying instead of change your practice
+management software, maybe we want like
+upgrade your systems today, you know,
+and then like a logo of a company,
+leftclick
+logo,
+bottom right hand corner, which is just
+a mouse icon. Let's say a mouse pointer
+icon. Okay, I don't know if this is
+going to work. We're going to give it a
+try. Okay, what I'm going to do here is
+I'm going to pretend that this is my
+like dynamic input. We're just going to
+feed it in a static input for now.
+Return your output in the following
+format. And we're going to do JSON
+format. What I'm going to do is let me
+just open this up and then zoom way in
+on this. We're going to say variance.
+And now we're going to have an array.
+And then we're going to have first image
+search modified image description,
+second modified image description, and
+then we'll go
+etc. And it should pick up on that.
+Okay, so we should have an object now
+with a key called variance with a value
+that is an array that says first
+modified image description, second
+modified image description, etc. Then
+rules. Your task is to generate new
+descriptions
+that we will later feed into an image
+generation model.
+New descriptions based on the changes
+that we will later feed into the image
+generation model. But do not change
+anything that is not explicitly
+specified.
+Only change that which is requested.
+Do not modify the image prompt. Maybe
+I'll just leave that out for now. We'll
+just give this a test. Yeah, I think
+that's probably what we'll probably do.
+I'll click output content as JSON and
+then under temperature, we'll go 0.7.
+Now, what I'm going to do now is I just
+want to click execute step. And I just
+want to see can we generate five
+variants for now that we can then later
+feed into AI alongside some sort of
+template. Okay. A bright orange
+background with a cartoonish character
+in the center featuring the text upgrade
+systems today. Above the character, the
+leftclick logo depicted as a mouse
+pointer icon is placed at the bottom
+right hand corner. On a vibrant orange
+background, a playful cartoon character
+stands in the middle of the words
+upgrade your systems today. Okay, this
+is kind of cool. But what I wanted is I
+wanted variance. I didn't just want like
+the text to be slightly varied. What I
+wanted were actual variants. So,
+so take the original input, modify the
+original description, and then generate
+four other variants
+with slight modifications to things like
+color, style, copy,
+etc. Do not change company names.
+Do not massively modify. Massively is a
+relative term. We should avoid relative
+terms. Do not make large changes, only
+small ones. And then after this, what I
+could do is I I actually give it some
+examples of what I want. Um, if I just
+give it one example of what I want, then
+it'll do a lot better than me just
+asking it. Hey,
+systems now system I upgrade system.
+Okay, we should actually have it
+with modifications. Things like color,
+style, copy, etc. do not Okay, instead
+of slight modifications, I'll go
+modifications should now modify the
+colors and stuff.
+Okay, upgrade your systems today.
+Upgrade your digital systems. Enhance
+your systems today. Cool. All right,
+that's that's reasonable. It's not a big
+deal. Okay, we're now going to pin this
+output. And now, what do we do from
+here? Well, we can actually get into
+like the image generation side of
+things. Um the way to do image
+generation there are a couple different
+ways. What you can do is you can just
+copy this. Okay. Then you can paste it
+in and then under resource you change
+this to image. And now you can actually
+generate an image. You do that with GPT
+image one. The issue is the image that
+we are going to generate with this is
+not going to be very good. Okay. And I'm
+going to show you guys what I mean here.
+Uh let me just set a hard-coded limit.
+Let me just unpin this. Sorry. Let me
+just set an example of what I mean here.
+You know, our original image that we fed
+in just to be clear was this, right? And
+we went and we described it. Now we're
+trying to regenerate it just with GPT
+image. But as you can see here, this
+bears very little resemblance to the
+source image. Now, the reason why you
+can't generate images like I'm talking
+about with this method is simply because
+the model is way too flexible. So we
+have to do is we have to constrain the
+hell out of this flexibility by instead
+of asking it to do it just with text. We
+actually have to combine text and a
+template of the image. Now a template of
+the image might sound like witchcraft to
+you guys but you can do this. You can
+actually feed in a template. The trick
+is you don't say it's a template. What
+you say is hey this is a source image. I
+want you to make an edit cuz OpenAI's
+GBT image 1 currently has an edit
+functionality. So what we can do is we
+can feed in a source image. We can say I
+want you to slightly edit this according
+to this. and then we'll get the exact
+same output as if it were using a
+template or scaffolding or something
+like that. So yeah, we can't just
+generate the image. What we have to do
+is we have to modify it. Unfortunately,
+just based off my experience with the
+style guide generator, there is no way
+to modify it just directly built in. You
+do have to do a custom API call, which
+is kind of annoying. So what I'm going
+to do is I'm going to set up a custom
+API call. Now I'm going to be kind of
+lazy. I'm just going to feed in the API
+call from my previous one over here, but
+I'll show you guys how all that stuff
+works. No problem. We're going to
+generate the image using GPT image one.
+Okay. So, what is this? This is an HTTP
+request module. The method is post. The
+URL is api.opena.com/v1/im
+images/edits. The authentication is a
+predefined credential type. If you've
+never used this before, what that means
+is you click on it, you scroll down
+under credential type, you just find the
+thing you want, open AAI, and then even
+though you don't actually have any sort
+of built-in endpoint, this can reuse the
+credentials that you've created for NAND
+built-ins, which is super convenient.
+And then you just select your key here.
+And I have a bunch of different ones.
+I'm just going to roll with this. Now,
+what you do next is you click send body
+form data. And there are three
+parameters. The first is form data
+model, and this is GPD-image- one. The
+second is nadn binary file and then it's
+image and then input data. Field name is
+data. Lastly, we have parameter type
+which is form data and then prompt. Down
+over here is where you actually have the
+prompt. So your task is to generate an
+image. Here is your prompt rules. Stick
+as closely as possible to the outlines
+of the source document. Then change text
+color, shapes, and styles only if
+explicitly specified in the prompt.
+Something is not specified, do not
+change it. Okay, so this is kind of
+cool. This is kind of neat. This is one
+of the ways that we're going to follow
+that source document. And let me show
+you guys how much better that is than
+what we're currently doing. Now, one
+minor issue here is the way that you
+feed in the data, I'm realizing, is
+using binary. And I do not know how to
+feed data from an earlier binary output
+into a later binary output. That's kind
+of annoying. Uh I was struggling with
+this in my last build, so I might as
+well figure it out now. So, let's see.
+Feed NAN data binary to later node.
+Let's just start with that.
+Okay, this one is saying, are we able to
+access binary data from a node way back
+in a JS expression of a later node? And
+then he says, nope, that's currently not
+possible. That's the founder of NAN.
+That's unfortunate. I do not like that.
+Um,
+can bring the binary data in again with
+a merge node. Okay, let me see here. So,
+oops, wrong one. So, what I could
+hypothetically do is I could have a
+merge node somewhere around here, I
+guess. And then that merge node would
+take as input this
+uh could feed it in over here. Yeah, I
+mean maybe. Just seems kind of
+unnecessary though, honestly. Like input
+two and this would be input one.
+And then we feed this in here. I do not
+know. Let me find out. We're just going
+to rearrange this with option shift t.
+And then uh just because we are now
+doing this, we have to deselect,
+deselect I should say. And then for now,
+I'm just going to have both of these
+feed into the merge node. Um it looks
+like we're currently appending the
+inputs. That's not really good. Let's
+just combine them all. Let's not
+combine. Let's just position.
+This is input one. This is input two. So
+we should just like stack the fields on
+top of each other. Let's just keep
+everything. Don't really want to combine
+by matching fields to be honest. I'm
+just going to keep everything. I don't
+know if this is going to work, but we'll
+just execute this. We should now have
+both run.
+They should also run. We got the
+analysis. And then we're going to have
+the spinning.
+The spinning will now merge. You must at
+least define one pair of fields and
+fields to match to match on. I mean,
+that's kind of annoying, but why don't
+we just match on index? Is there an
+index back here? I don't think so.
+There's an ID, but there's no index. So,
+when we run that again. Okay, cool. So,
+it actually does look like we have the
+uh we have the data. We had the JSON
+here. We also have the binary. So, this
+should work. This should actually work.
+Cool. Looks like I figured out how to do
+that. Fantastic. This input data field
+name is going to be data. So, oh, hold
+on a second. Wait a second. I'm seeing
+two items here. I don't actually want
+two items. I want one item. You know
+what I mean? Let's see here. So, this is
+item one. This is item two. That's not
+good. You know why that's not good?
+Because if we get in the habit of doing
+stuff like this, if we get in the habit
+of doing stuff like this, now we're
+changing, we're fundamentally changing
+the output flow here. I guess I could
+just say execute once and it'll only
+execute a single time with this, which
+isn't that bad.
+Still, I want to be able to reference
+the other data. So, no, the way that I'm
+currently doing this is not going to
+work.
+Um, we should merge the matching items
+together.
+We should
+enrich all of input one with data from
+input two added in.
+Okay, so now I'm just going to pin this.
+Oh, can I do this? I don't know. Let's
+just find out.
+Now the output is just one item, which
+is unfortunate. We need both items. Try
+combine. Okay, cool, cool, cool. I think
+combine works. I don't think we have
+binary data here though now that this is
+all just in one item. So I think now
+unfortunately we have to run this one
+more time.
+Okay. And then over here the output of
+the merge node is a single item with our
+binary. Now that binary is right over
+here. So we should actually be able to
+feed this in now. Uh okay. So what I'm
+going to do is I'm going to feed in the
+binary field name which is data. And
+then in addition to this I also have to
+feed in another thing. So, here is your
+prompt. And why don't I just feed in
+let's just do one of these for now. And
+just so I can show you guys what this
+actually looks like when all said and
+done. Okay. So, let's paste all these
+together. I actually don't know if this
+is going to work even. Let's do this one
+more time then.
+And then let's run this puppy. Okay. And
+we do be generating. Here's the thing.
+The way that this HTTP request works, we
+do just get a bunch of B base B 64. So,
+I now have to pin this. Then the last
+thing we have to do is we just go over
+here and we go B64 convert JSON to
+binary data or convert hold on JSON data
+to binary.
+So I'll go over here and then I'm going
+to convert this to file. Okay, then we
+just feed in the B64.json
+put output data in this field. Let's
+execute the step. Okay, now we have the
+file output here. Let's click view. What
+do we got? Okay, we have um a very kind
+of scary looking woman over there. Not
+going to lie, I think the uh
+modification there was a little bit
+rough, but it more or less has
+everything else that we were asking for.
+So, just to be clear here, the source
+data of the image is this. So, we can
+open this in a new tab. This is now our
+destination data.
+Okay, so the source destination source
+destination. Oh, and I'm actually a
+little bit zoomed in, so let me zoom out
+a bit. There you go. So, what do we
+have? We actually have the vast majority
+of the information here is the same. And
+here's the thing that I should mention
+as well. Like I'm not expecting this to
+be perfect on the first go, right? Like
+I'm going to generate tons of these and
+then I'll let the creative designer pick
+the best pick whatever the heck they
+want. And I mean like you know if they
+have an actress or something that they
+really want in there, they can actually
+just like crop her out and then stick
+her in the new one, right? Like no big
+deal there. But yeah, you know, there
+are some minor changes. I don't really
+like how they left out that little
+bolded section. I do like how they
+actually added the logo, which is kind
+of neat. So yeah, that's pretty fun. I
+think we're doing reasonably well. Looks
+like the one thing I needed to modify in
+order to make it work though was I
+needed to change the prompt from this
+general description to make the
+background bright orange. Swap the text
+for upgrade your systems today. Add a
+leftclick logo with a mouse pointer and
+so on and so forth. Right? So
+what we need to do is we just need to
+get the supplied prompts to be in that
+shape you can think of it as. So, I'm
+going to head over here to the OpenAI
+node. And what I'm going to do is I'm
+just going to give it some examples. And
+instead of generating a description,
+what I'm going to do is I want you to
+take the image description and then give
+me a simple prompt I can use to
+tell an AI image editor what changes to
+make. Okay. So, I'm going to say bright
+orange background,
+character in the middle, text upgrader
+systems today, leftclick logo. Let's say
+small left click logo. bottom right-hand
+corner.
+Okay, so this is the main prompt now.
+New change suggestions that we will
+later feed into the image generation
+model. Take the original input suggest
+changes to the original descriptions and
+generate four other variants of
+modifications like color, stock, copy,
+etc. Not change company names. Don't
+make large changes, only small ones. So,
+you know what? I'm not going to write
+all this stuff myself. Why? Because I'm
+super lazy and because hey, if I'm doing
+AI anyway, I might as well have AI help
+me. So I will say generate four more
+variants like this. Adjust color copy
+etC slightly and then I'm just going to
+feed my actual request in.
+Oops. Sorry. No, sorry. I just want you
+to spin this text a little and then
+generate four more change requests.
+Modify color etc. And then I will
+the color. Copy DC. Only thing to never
+change is the company name. Cool. Cool.
+I like this. Cool. It's doing a pretty
+good job. So, what I'm going to do now
+is I'm going to take these and then I'm
+going to copy and paste them in.
+Put all five of these. Replace your
+changed version of my original with my
+own into an array inside of an object
+with a key called variance.
+Now, we're going to grab that and I'm
+just going to copy paste that puppy in.
+No need for a key, just the text in an
+array. No, no, no. I mean the
+description key. That's why you need to
+be super specific with these things.
+Whatever. I'm going to copy this. Now
+we're going to go back here and then I'm
+going to go I'm going to provide the
+description as a user prompt and then
+I'm going to provide uh four outputs as
+this.
+So I'll now say variance
+here going to cut it like that. And then
+over here what I'm going to do is I'm
+going to feed in my little base
+description
+which is right over here.
+I'm just going to call this original
+changes.
+Now we have like modified change
+requests, right?
+Then the input is going not actually to
+be over here.
+We can do that input later.
+Over here we're going to have the actual
+input.
+Um actually let me
+Uh, let me think for a second. Bright
+orange background character, middle tax
+upgrading system today. Here
+we might need two.
+Okay, actually, let's just feed in that
+base
+prompt right over here.
+And we'll call this input um original
+description.
+And then I should actually generate the
+whole thing.
+Just feed that in there.
+Okay, that looks pretty fine.
+And over here under OpenAI, what I'm
+going to do is I'll just feed in another
+input
+uh which we are going to call original
+description.
+And I just now need to get something to
+put in there. Now, I don't want to use
+the exact same thing that I was just
+looking at a moment ago, right? Cuz this
+doesn't make sense. So, I'm just going
+to grab a new creative.
+Snap a photo of your receipt and done.
+Uh I want something that's just a little
+bit higher quality here. Here's the the
+Spotify thing that I was telling you
+guys about.
+H
+Let's see.
+Here is a fantastic business, HubSpot. I
+love these guys to death. Uh, founder
+actually used to read my newsletter,
+believe it or not, Darm Shaw. Really
+smart guy. Really ahead of the curve
+with a agents and whatnot, which is
+pretty sweet. I'm going to add this
+image in here, and then we're going to
+do our little spinning with that. Okay,
+so now we're going to grab that image.
+We're going to download that image.
+We're going to analyze it. We're going
+to take it. We're going to feed it in
+here. We're going to merge it. Then
+we're going to generate an image using
+GPT image 1. And then let me think here.
+So, we're feeding in five variants,
+right? We're merging it and then we're
+generating the image. I feel like what
+we should probably do instead, well,
+it's tough, right? We're feeding in
+binary to this thing. What we need is we
+need some sort of loop where we grab
+that and then we feed in the binary over
+and over and over and over and over
+again. But how do we do that? That's the
+question. This to me seems like a data
+wrangling issue. Okay, for now we're
+just going to generate it once. We'll
+worry about the complexity later. But
+yeah, like what I want is I want this to
+spit out 50 or 100 and then I just want
+it to like vary over and over and over
+and over again. Just do this. So, we're
+going to need a loop in here for sure,
+no matter what, right? Okay, cool. So,
+we've merged the data. We're now
+generating the images in GPT. Very cool.
+I guess another way I could just get
+around the merge. Like, the reason I
+don't like the merge is it's I'm just
+probably going to forget about it. Like,
+from a maintainability perspective, I
+could just have it download the same
+file again. Kind of be annoying to
+download a file twice. You know, like
+developers and stuff like that would
+definitely be like, "Oh, Nick, what the
+hell are you doing? You no idea how to
+build an NAN flow if you're doing that."
+But like sometimes I'm willing to make
+these really simple ass trade-offs just
+because it's simpler for me. like, you
+know, oh, I just download the same file
+again. Well, that's easy. I'm even going
+to have access to the same ID. And then,
+if you think about it, I'm just going to
+download it before I do every image
+generation. And it's um, you know, it's
+like a linear thing. Like in computer
+science, they talk um big O. Uh, so, you
+know, like O of N and stuff like that.
+This is just like O of 2N, which is O of
+N. So, it's not that big of a deal.
+Anyway, let's take a look at the image.
+Upgrade your systems. Today, we got the
+exact same vibe going on that we had
+with the original. It's just now we got
+that bright orange background and it
+says left click. I'm not liking how it's
+just doing bright orange again though to
+be honest. I think the original was
+bright orange. Right. So I think the
+original was bright orange. But you know
+I'm seeing here that we lost some
+details.
+So I think I think if we just generated
+this 20 times I think a lot of these
+problems would have been solved. It even
+like confabulated a you know a forearm
+for the guy which is kind of neat. But I
+think if we just did 20 of these it
+would just like you know one of them
+would be really standout. So I'm kind of
+inclined to just run this 20 times. Um
+the question is now we need to generate
+an object which has you know we need to
+have this with the five variants and
+then for each of these variants we need
+to feed it in. You know what like I'm I
+just want to get this done and then I'll
+worry about optimizing it later as I do
+most things. So I'm just going to grab
+this. I'm going to grab this download
+file. Feed this in right over here. And
+right over here, what I'm actually going
+to do is I'm going to split out loop
+over items split in batches. Delete
+this. For each of these, I will download
+the same file. Then using that same
+file, I will generate a variant. Convert
+this to a file. Once I'm done converting
+this to a file, I need to upload this
+somewhere. So what I'm going to do is
+I'm going to go to drive, not pipe
+drive, Google Drive. Going to now upload
+the file.
+loop this back around. Where am I going
+to upload this file? I'm going to go to
+um the same drive that I had before.
+What was the name of the drive? To
+destination, I think, right, there we
+go. File name. I mean, I don't know.
+What am I going to name this? Let's just
+call this like gen.
+Maybe test will do for now.
+Okay. No other properties. I'm just
+going to generate the image as data.
+That should be output as data if I'm
+downloading the file again.
+Oh, I got it. I got it. I got it. That's
+why I hardcoded the prompt. No wonder
+the image is trash. Okay, cool. Cool.
+Well, now we should be able to
+split out the items.
+The item we're going to split out
+logically
+is variance.
+Now, if I just pin this, pin this, too.
+When we do this splitting, we're going
+to have five items. Each of these items
+is going to go into the loop over items
+node. Then we're going to loop. We're
+going to download the file. What file?
+JSON. ID. The question is, what is the
+ID? The ID is going to be the ID from
+way back over here, which is kind of
+annoying to access. Do I have access to
+it over here? It's going to be this
+Google Drive over here. So, I'm just
+going to be cheap. I'm going to paste
+this in delete this again. Why? Because
+I can actually access this over here, I
+believe.
+I might not be able to. We'll find out.
+So, what am I going to feed in? Google
+Drive item JSON ID. Yeah, looks like I'm
+good. And then here, generate the image
+using GPT1. What am I going to feed in
+for my prompt? I'll tell you what. Um,
+loop over items
+should get message content.
+So, we should get loop over items,
+message content. I don't know for sure,
+but I think we will. So, I'm going to go
+here. dollar sign loop over items item
+message.content
+item
+JSON dossage content I I don't know for
+sure but we will see
+then we convert to a file and then
+Google Drive 03 okay well let's just
+give this a go and see whatever happens
+I don't even know first item Google
+Drive picked it up fine what sort of
+input did we feed in we fed in
+this image. What sort of prompt did we
+feed in? No prompt. Undefined. Okay,
+that's fine. We're going to fix it up on
+the second run. Okay, over here, the
+data that we're going to need is I'm
+just going to go back a couple nodes
+till I find the loop of items. This loop
+over items does indeed have it, but it's
+in message content variance, which I
+forgot. So, this looks good to me. We
+should now actually be able to do the
+variance. And now that we've done this,
+one more thing I'm going to add is just
+a wait. Just going to wait 5 seconds.
+Not a big deal. And again, I'm just
+going to spread these out. Now, I'm
+going to execute the workflow. I will be
+cognizant of my token costs, hence why I
+have the 5 seconds. Also, rate limits.
+And we'll take it from there. Okay, we
+generated a few. Now, I'm just going to
+go check out the Google Drive. You can
+always find Google Drive stuff with the
+web view link. So, let me just open this
+up. What do we got? Upgrade your
+practice management software. I'm not
+liking how tall this is. We should
+probably specify like the height of the
+images, you know, like you know, don't
+get me wrong, this is cool, but uh I'm
+pretty sure the source doc that we fed
+was a square. So, we don't want this to
+be a non-s square. So, let's go back to
+the destination folder. Let's see. So,
+this is the original. Weird. Doesn't
+look like it made any changes whatsoever
+to that one. So, we should check that
+out. This one definitely looks like it
+made a change. That one definitely looks
+like it made a change, right? So, I
+mean, it's making changes, uh, which is
+cool. And, you know, not all of them are
+going to be perfect, and that's fine. We
+sort of expected that. Looks like there
+was an image on run number four. Why?
+What was the problem?
+Oh, never mind. It's not that there was
+a problem. It's just that uh Well,
+actually, there is a problem. It says we
+have four items. Only three went through
+here.
+Maybe I'm just crazy right now. Maybe it
+just hasn't moved the fourth one out
+yet. I think it should, though. Okay. I
+really don't know what this issue was
+with. Was it the third item? Second
+item. Looks like the second item is
+still processing. Or is it the fifth
+item? Hm. Anyway, we got a fourth one
+here. It is still a little too tall. So,
+not happy with the height of them,
+obviously. Uh, so how do we fix the
+style here? We should be able to fix the
+style. So, let me just Google this
+really quickly. Open AI and we'll go
+this. This will probably get
+docs for us.
+When we have the docs, we should be able
+to take those docs and then find out
+what exactly is going on here. That's
+the crate image. They have a size
+parameter. How about the edit image?
+Okay, here we go. H. Can we set the
+size? Yes, we can. Size the generated
+images must be one of 1024 1024.
+So, we have to do some sort of 1024x
+1024. Um,
+all right. Let's go back here
+where it says prompt. We'll now go size.
+We'll just go 1024* 1024. This should uh
+solve that specific issue that we were
+having where it's just all crazy.
+And then we also just want to avoid
+them, you know, it having the exact same
+thing over and over and over again. So,
+let's check that out. Yeah. Okay. I
+mean, you know, like we are getting a
+ton of different vibes, which is cool,
+right? I mean, like this one's really
+cool. This one's actually looks pretty
+real. No major issues here whatsoever.
+Um I'm just not a fan of how it's
+taller, but you know, if this was a
+square like like this, for instance,
+this would be perfect. This would be a
+great ad. Simplify your practice
+workflow. And then like hell, we even
+got like the Apple
+uh little Apple MacBook stuff there. And
+you know what's crazy? It even like
+almost took the same source person. And
+here it even almost took the same source
+person. This woman is clearly fake and
+you know invented. But this this guy
+here might be this woman here is clearly
+inspired by that. So listen, this is
+good. I like this. I like this. Why
+don't we move this to trash? And why
+don't we now rerun with the 1024 x 1024.
+Let me also see how we can improve this.
+Okay. So they are actually giving very
+different changes. So I think what we
+need to do is we need to say first
+change request, second change request,
+third change request.
+You generate new change suggestions that
+we later feed. Take the original input.
+Okay.
+Make these changes minor.
+We want to stick to the source closely.
+Do not change company names. Do not make
+large changes, only small one. Okay.
+Do not meaningfully add any placement
+change requests. Do not suggest any
+meaningful changes to placement.
+We want the elements all in the exact
+same place
+in the image. So only ever suggest
+color, style,
+or copy changes.
+Okay, that sounds good to me. All right,
+now we should be able to run this. This
+is my prompt engineering challenge more
+than it is anything else. So, let's gun
+it. Execute workflow. Going to grab the
+image analysis, which should be stored
+now. Yep.
+Then over here, we're going to have our
+change requests. Oh, you know what?
+We're missing something. Why are we
+missing something again?
+H Why is that? Oh, man. We are totally
+missing some Oh, wow. That's crazy. We
+We were missing something this whole
+time. Did a reasonable job. Okay, let's
+now feed in the content
+right over here. Paste that in. Good
+lord. Isn't that funny? Isn't it crazy
+how AI can still do a pretty good job
+all things considered? All right.
+So, what is the change request that we
+want?

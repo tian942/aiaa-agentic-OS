@@ -1,261 +1,646 @@
 <coding_guidelines>
-# Agent Instructions
+# AIAA Agentic OS - Complete Agent Instructions
 
-> This file is mirrored across CLAUDE.md, AGENTS.md, and GEMINI.md so the same instructions load in any AI environment.
-
-You operate within a 3-layer architecture that separates concerns to maximize reliability. LLMs are probabilistic, whereas most business logic is deterministic and requires consistency. This system fixes that mismatch.
-
----
-
-## The 3-Layer Architecture
-
-**Layer 1: Directive (What to do)**
-- SOPs written in Markdown, live in `directives/`
-- Define goals, inputs, tools/scripts, outputs, and edge cases
-- Natural language instructions with quality gates and checklists
-
-**Layer 2: Orchestration (Decision making)**
-- This is you. Your job: intelligent routing.
-- Read directives, load skill bibles, call execution tools in order, handle errors
-- You're the glue between intent and execution
-
-**Layer 3: Execution (Doing the work)**
-- Deterministic Python scripts in `execution/`
-- Handle API calls, data processing, validation, delivery
-- Reliable, testable, fast. Use scripts instead of manual work.
-
-**Why this works:** 90% accuracy per step = 59% success over 5 steps. Push complexity into deterministic code. You focus on decision-making.
+> **Version:** 2.0 | **Last Updated:** January 5, 2026
+> This file provides ALL context for a Claude Code agent to operate this system.
 
 ---
 
-## Execution Flow (Any Idea)
+## Quick Reference
 
-When you receive a request, follow this 7-phase flow:
+| Resource | Count | Location |
+|----------|-------|----------|
+| Directives (SOPs) | 110 | `directives/*.md` |
+| Execution Scripts | 114 | `execution/*.py` |
+| Skill Bibles | 137 | `skills/SKILL_BIBLE_*.md` |
+| Deployed Apps | Modal AI | `execution/modal_apps/` |
+
+**Environment Variables Required:**
+```
+OPENROUTER_API_KEY     # Primary LLM access (Claude, GPT via OpenRouter)
+OPENAI_API_KEY         # OpenAI direct (optional)
+PERPLEXITY_API_KEY     # Market research
+GOOGLE_APPLICATION_CREDENTIALS  # Google Docs/Sheets
+SLACK_WEBHOOK_URL      # Notifications
+```
+
+---
+
+## System Architecture (DOE Pattern)
+
+This system uses a **Directive-Orchestration-Execution (DOE)** architecture that separates concerns:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    USER REQUEST                                  │
+│              "Create a VSL funnel for Acme Corp"                │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  LAYER 1: DIRECTIVE (What to do)                                │
+│  ─────────────────────────────────                              │
+│  • Location: directives/*.md                                    │
+│  • Natural language SOPs with inputs, steps, quality gates      │
+│  • Example: directives/vsl_funnel_orchestrator.md               │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  LAYER 2: ORCHESTRATION (Decision making)                       │
+│  ─────────────────────────────────────────                      │
+│  • THIS IS YOU - The Claude Code Agent                          │
+│  • Read directives, load skill bibles, call scripts in order    │
+│  • Handle errors, make routing decisions, self-anneal           │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  LAYER 3: EXECUTION (Doing the work)                            │
+│  ───────────────────────────────────                            │
+│  • Location: execution/*.py                                     │
+│  • Deterministic Python scripts for API calls, data processing  │
+│  • Example: execution/generate_vsl_funnel.py                    │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      OUTPUT                                      │
+│  • Local files: .tmp/*.md                                       │
+│  • Google Docs: Formatted, shareable                            │
+│  • Slack: Notification with links                               │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Why DOE Works:** LLMs are probabilistic (90% accuracy = 59% over 5 steps). Push deterministic work into Python scripts. You focus on decision-making.
+
+---
+
+## Directory Structure
+
+```
+Agentic Workflows/
+├── .env                    # API keys (NEVER commit)
+├── .tmp/                   # Intermediate outputs (gitignored)
+├── credentials.json        # Google OAuth credentials
+├── token.pickle           # Google OAuth token
+│
+├── directives/            # SOPs - What to do (110 files)
+│   ├── vsl_funnel_orchestrator.md
+│   ├── vsl_script_writer.md
+│   ├── company_market_research.md
+│   ├── deploy_to_modal.md
+│   └── ... (106 more)
+│
+├── execution/             # Python scripts - Doing (114 files)
+│   ├── deploy_to_modal.py      # Deploy workflows to Modal AI
+│   ├── generate_vsl_funnel.py  # VSL generation
+│   ├── research_company_offer.py
+│   ├── create_google_doc.py
+│   ├── send_slack_notification.py
+│   ├── modal_apps/             # Generated Modal deployments
+│   └── ... (108 more)
+│
+├── skills/                # Domain expertise (137 skill bibles)
+│   ├── SKILL_BIBLE_vsl_writing_production.md
+│   ├── SKILL_BIBLE_cold_email_mastery.md
+│   ├── SKILL_BIBLE_agency_sales_system.md
+│   └── ... (134 more)
+│
+├── trainings/             # Source material (transcripts, courses)
+├── N8N Workflows/         # Original N8N workflow JSONs
+│
+├── AGENTS.md              # Agent instructions (mirrored)
+├── CLAUDE.md              # THIS FILE - Agent instructions
+└── QUICKSTART.md          # Human quick start guide
+```
+
+---
+
+## Execution Flow (7 Phases)
+
+When you receive ANY request, follow this flow:
 
 ### Phase 1: Parse User Input
-One sentence is enough. Parse intent and identify capability needed.
-- "Write a VSL" → VSL directive
-- "Create ads" → Ad creative directive  
-- "Build nurture sequence" → Email sequence directive
+Extract intent and map to capability:
+```
+"Write a VSL for my coaching business" → vsl_funnel_orchestrator
+"Deploy the newsletter workflow"       → deploy_to_modal
+"Research this company"                → company_market_research
+"Generate cold emails"                 → cold_email_scriptwriter
+```
 
 ### Phase 2: Capability Check
-Does this capability exist? Is there a Skill Bible and Directive?
+Does a directive exist for this task?
 
 | Condition | Action |
 |-----------|--------|
-| **YES** - Skill Bible + Directive exist | Execute with existing skills |
-| **NO** - Capability missing | Trigger Leader Manufacturing (Section 4) |
+| Directive exists | Load it and execute |
+| No directive | Check if script exists in execution/ |
+| Nothing exists | Create new directive + script (Leader Manufacturing) |
 
-### Phase 3: Context Loading
-Load ALL required context before execution:
-
-```
-Primary Skill Bible (from skills/)
-├── Supporting Skills (related skill bibles)
-├── Voice Guide (if available)
-├── Compliance Rules
-└── Goals & Success Criteria
+**Quick check:**
+```bash
+ls directives/ | grep -i "<keyword>"
+ls execution/ | grep -i "<keyword>"
 ```
 
-**Location:** `skills/SKILL_BIBLE_*.md` (50 skill bibles, 75,000+ words)
+### Phase 3: Load Context
+Before execution, load ALL required context:
+```
+1. Primary Directive    → directives/<workflow>.md
+2. Skill Bibles         → skills/SKILL_BIBLE_<topic>.md
+3. Related Directives   → Check "Related Directives" section
+4. Execution Scripts    → execution/<script>.py
+```
 
-### Phase 4: Directive Execution
-Follow the directive SOP step-by-step with quality gates at each stage:
+**Example for VSL funnel:**
+```
+directives/vsl_funnel_orchestrator.md
+├── skills/SKILL_BIBLE_vsl_writing_production.md
+├── skills/SKILL_BIBLE_funnel_copywriting_mastery.md
+├── directives/vsl_script_writer.md
+├── directives/company_market_research.md
+└── execution/generate_vsl_funnel.py
+```
 
-1. **Pre-Flight Checklist** - Validate all prerequisites
-2. **Workflow Phases** - Execute each phase in order
-3. **Quality Gates** - Run validators between phases
+### Phase 4: Execute Directive
+Follow the directive SOP step-by-step:
+1. Check prerequisites (API keys, inputs)
+2. Run each workflow phase in order
+3. Save checkpoints to `.tmp/`
+4. Validate outputs at quality gates
 
-### Phase 5: Quality Gates (Mechanical Enforcement)
-Python validators that BLOCK output if checks fail. Not warnings—actual stops.
-
-| Validator | Purpose |
-|-----------|---------|
-| `validate_directive.py` | Blocks if missing required sections |
-| `compliance_auditor.py` | Blocks if compliance violations |
-| `readability_checker.py` | Blocks if reading level > 5th grade |
-| `output_validator.py` | Blocks if word count/format fails |
+### Phase 5: Quality Gates
+Validate at each checkpoint. Common checks:
+- Required fields present?
+- Output format correct?
+- Word count/length appropriate?
+- No API errors?
 
 ### Phase 6: Delivery
-Auto-upload to Google Docs and notify via Slack:
-
+Standard delivery pipeline:
 ```
-Local File (.md) → Google Doc (formatted) → Slack (notification + link) → Ready for Review
+1. Save locally     → .tmp/<project>/<filename>.md
+2. Create Google Doc → execution/create_google_doc.py
+3. Send Slack       → execution/send_slack_notification.py
 ```
 
 ### Phase 7: Self-Annealing
-After every task: What did we learn?
-- Errors → New rules added to directives
-- Better approaches → Update skill bibles
-- System gets smarter with each execution
+After EVERY task:
+- Did errors occur? → Fix script, update directive
+- Better approach found? → Update skill bible
+- Edge case discovered? → Add to directive
 
 ---
 
-## Leader Manufacturing (Learning New Skills)
+## Common Workflows
 
-When a capability doesn't exist, the system learns it autonomously:
+### 1. VSL Funnel Creation (Complete Pipeline)
+```bash
+# Option A: Run the complete orchestrator
+python3 execution/generate_complete_vsl_funnel.py \
+  --company "Acme Corp" \
+  --website "https://acmecorp.com" \
+  --offer "B2B Lead Generation"
 
-### The 6-Phase Process
+# Option B: Run individual steps
+python3 execution/research_company_offer.py --company "Acme Corp" --website "https://acmecorp.com"
+python3 execution/generate_vsl_script.py --research-file ".tmp/research.json"
+python3 execution/generate_sales_page.py --vsl-file ".tmp/vsl_script.md"
+python3 execution/generate_email_sequence.py --research-file ".tmp/research.json"
+```
 
-| Phase | Action | Output |
-|-------|--------|--------|
-| 1. Parse Request | Identify core skill, break into sub-skills | Skill map |
-| 2. Find Authorities | Identify recognized experts, prioritize | Authority list |
-| 3. Acquire Sources | Gather courses, books, playbooks, examples | Source material |
-| 4. Create Skill Bible | Synthesize 2,000+ words, structured expertise | `skills/SKILL_BIBLE_*.md` |
-| 5. Create Directive | Build step-by-step SOP with quality gates | `directives/*.md` |
-| 6. Integrate | Update routing, now PERMANENT capability | Ready to execute |
+**Outputs:**
+- `.tmp/vsl_funnel_<company>/01_research.md`
+- `.tmp/vsl_funnel_<company>/02_vsl_script.md`
+- `.tmp/vsl_funnel_<company>/03_sales_page.md`
+- `.tmp/vsl_funnel_<company>/04_email_sequence.md`
 
-### Skill Bible Structure
+### 2. Cold Email Campaign
+```bash
+python3 execution/write_cold_emails.py \
+  --sender "John Smith" \
+  --company "Acme Corp" \
+  --offer "Lead generation service" \
+  --target "Marketing agencies"
+```
 
-Every skill bible contains:
-- Executive Summary
-- Core Principles & Frameworks
-- Techniques & Tactics
-- Case Studies
-- Common Mistakes & Fixes
-- Edge Cases
-- Quality Checklist
-- AI Parsing Guide (for agent integration)
+### 3. Market Research
+```bash
+python3 execution/research_company_offer.py \
+  --company "Target Company" \
+  --website "https://targetcompany.com" \
+  --offer "Their main product"
+```
+
+### 4. Content Generation
+```bash
+# Blog post
+python3 execution/generate_blog_post.py --topic "AI in marketing" --length 1500
+
+# LinkedIn post
+python3 execution/generate_linkedin_post.py --topic "Agency growth tips"
+
+# Newsletter
+python3 execution/generate_newsletter.py --theme "Weekly AI updates"
+```
 
 ---
 
-## Mechanical Enforcement
+## Cloud Deployment (Modal AI)
 
-### Quality Gates (Code That Blocks)
+Deploy any workflow as a cloud webhook:
 
-Not "please remember"—actual Python validators that throw exceptions:
+### Deploy a Workflow
+```bash
+# List all deployable workflows
+python3 execution/deploy_to_modal.py --list
 
+# Check what a workflow needs
+python3 execution/deploy_to_modal.py --info vsl_funnel_writer
+
+# Deploy to Modal
+python3 execution/deploy_to_modal.py --directive vsl_funnel_writer
+
+# Dry run (generate without deploying)
+python3 execution/deploy_to_modal.py --directive vsl_funnel_writer --dry-run
+```
+
+### Setup Modal Secrets
+```bash
+# Auto-create secrets from .env
+python3 execution/deploy_to_modal.py --setup-secrets
+
+# Or manually via Modal CLI
+modal secret create anthropic-secret ANTHROPIC_API_KEY=<key>
+modal secret create openrouter-secret OPENROUTER_API_KEY=<key>
+modal secret create slack-webhook SLACK_WEBHOOK_URL=<url>
+```
+
+### Deployed Endpoints
+Each deployed app gets 3 endpoints:
+```
+POST https://<workspace>--<app>-webhook.modal.run  # Execute workflow
+GET  https://<workspace>--<app>-health.modal.run   # Health check
+GET  https://<workspace>--<app>-info.modal.run     # Workflow info
+```
+
+**Example:**
+```bash
+curl -X POST "https://lucas-37998--vsl-funnel-writer-webhook.modal.run" \
+  -H "Content-Type: application/json" \
+  -d '{"data": {"product": "AI Course", "price": "$997", "audience": "Marketers"}}'
+```
+
+---
+
+## Key Execution Scripts
+
+### Content & Copy
+| Script | Purpose |
+|--------|---------|
+| `generate_vsl_funnel.py` | Complete VSL + landing page + emails |
+| `generate_vsl_script.py` | VSL script only |
+| `generate_sales_page.py` | Sales page copy |
+| `generate_email_sequence.py` | Email nurture sequence |
+| `generate_blog_post.py` | Long-form blog content |
+| `generate_linkedin_post.py` | LinkedIn content |
+| `write_cold_emails.py` | Cold email sequences |
+
+### Research & Data
+| Script | Purpose |
+|--------|---------|
+| `research_company_offer.py` | Deep company research via Perplexity |
+| `research_market_deep.py` | Market/industry research |
+| `research_prospect_deep.py` | Individual prospect research |
+| `scrape_linkedin_apify.py` | LinkedIn profile scraping |
+
+### Delivery & Integration
+| Script | Purpose |
+|--------|---------|
+| `create_google_doc.py` | Upload to Google Docs |
+| `send_slack_notification.py` | Send Slack messages |
+| `deploy_to_modal.py` | Deploy workflows to Modal AI |
+
+### Utilities
+| Script | Purpose |
+|--------|---------|
+| `convert_n8n_to_directive.py` | Convert N8N JSON to directive |
+| `parse_vtt_transcript.py` | Extract text from VTT files |
+| `validate_emails.py` | Email validation |
+
+---
+
+## Skill Bibles
+
+Skill bibles provide deep domain expertise. Load relevant ones before execution.
+
+### Finding Skill Bibles
+```bash
+# List all skill bibles
+ls skills/SKILL_BIBLE_*.md
+
+# Search by topic
+ls skills/ | grep -i "vsl\|funnel\|email\|sales"
+```
+
+### Key Skill Bibles by Category
+
+**VSL & Funnels:**
+- `SKILL_BIBLE_vsl_writing_production.md`
+- `SKILL_BIBLE_vsl_script_mastery_fazio.md`
+- `SKILL_BIBLE_funnel_copywriting_mastery.md`
+- `SKILL_BIBLE_agency_funnel_building.md`
+
+**Cold Email & Outreach:**
+- `SKILL_BIBLE_cold_email_mastery.md`
+- `SKILL_BIBLE_cold_dm_email_conversion.md`
+- `SKILL_BIBLE_email_deliverability.md`
+
+**Agency & Sales:**
+- `SKILL_BIBLE_agency_sales_system.md`
+- `SKILL_BIBLE_agency_scaling_roadmap.md`
+- `SKILL_BIBLE_offer_positioning.md`
+
+**AI & Automation:**
+- `SKILL_BIBLE_ai_automation_agency.md`
+- `SKILL_BIBLE_monetizable_agentic_workflows.md`
+- `SKILL_BIBLE_ai_prompting_workflows.md`
+
+---
+
+## Creating New Capabilities (Leader Manufacturing)
+
+When a capability doesn't exist:
+
+### Step 1: Check If It Really Doesn't Exist
+```bash
+ls directives/ | grep -i "<keyword>"
+ls execution/ | grep -i "<keyword>"
+ls skills/ | grep -i "<keyword>"
+```
+
+### Step 2: Create New Directive
+```markdown
+# directives/new_workflow.md
+
+## What This Workflow Is
+[One paragraph description]
+
+## What It Does
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+## Prerequisites
+- Required API keys
+- Required skill bibles
+- Installation commands
+
+## How to Run
+\`\`\`bash
+python3 execution/new_workflow.py --arg1 "value"
+\`\`\`
+
+## Inputs
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| arg1 | string | Yes | Description |
+
+## Process
+### Step 1: [Name]
+[Details]
+
+### Step 2: [Name]
+[Details]
+
+## Quality Gates
+- [ ] Check 1
+- [ ] Check 2
+
+## Edge Cases
+- Edge case 1 → Solution
+- Edge case 2 → Solution
+```
+
+### Step 3: Create Execution Script
 ```python
-# Pre-execution hooks
-validate_prerequisites()  # Blocks if missing inputs
+#!/usr/bin/env python3
+"""
+New Workflow - [Description]
 
-# Post-execution hooks  
-validate_output()         # Blocks if quality fails
+Usage:
+    python3 execution/new_workflow.py --arg1 "value"
+"""
 
-# Agent limiter
-max_parallel_agents = 3   # Prevents overflow
+import argparse
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--arg1", required=True)
+    args = parser.parse_args()
+    
+    # Implementation
+    print(f"Running with {args.arg1}")
+    
+if __name__ == "__main__":
+    main()
 ```
 
-### Pre-Execution Hooks
-Validate prerequisites before any task starts:
-- Required inputs present?
-- Skill bible loaded?
-- Directive understood?
-
-### Post-Execution Hooks
-Validate output after each step completes:
-- Format correct?
-- Word count met?
-- Compliance passed?
+### Step 4: Create Skill Bible (If Needed)
+If this is a new domain, create `skills/SKILL_BIBLE_<topic>.md` with:
+- Executive Summary
+- Core Principles
+- Techniques & Tactics
+- Common Mistakes
+- Quality Checklist
 
 ---
 
-## Automatic Delivery Pipeline
+## Self-Annealing Protocol
 
-Every deliverable follows this path:
+After EVERY task completion:
 
+### 1. Check for Errors
+Did anything fail? Fix it:
 ```
-1. Local File    → .tmp/*.md saved locally
-2. Google Doc    → Formatted, shareable document
-3. Slack         → Notification with link
-4. Ready         → For human review
+Error occurred → Read stack trace → Fix script → Test → Update directive
 ```
 
-**Key principle:** Local files are intermediates. Deliverables live in cloud services where the user can access them.
+### 2. Update Directive
+Add learnings:
+- New edge cases discovered
+- Better approaches found
+- Quality gate refinements
 
----
+### 3. Update Skill Bible
+Add domain knowledge:
+- New techniques that worked
+- Mistakes to avoid
+- Industry-specific insights
 
-## Operating Principles
-
-**1. Check for tools first**
-Before writing a script, check `execution/` per your directive. Only create new scripts if none exist.
-
-**2. Load skill bibles**
-Before executing any directive, load the relevant skill bible(s) for domain expertise.
-
-**3. Self-anneal when things break**
-- Read error message and stack trace
-- Fix the script and test it again
-- Update the directive with what you learned
-- System is now stronger
-
-**4. Update directives as you learn**
-Directives are living documents. When you discover constraints, better approaches, or edge cases—update the directive.
-
----
-
-## File Organization
-
-**Directory structure:**
-```
-.tmp/               → Intermediate files (never commit)
-execution/          → Python scripts (deterministic tools)
-directives/         → SOPs in Markdown (instruction set)
-skills/             → Skill Bibles (domain expertise)
-.env                → Environment variables and API keys
-credentials.json    → Google OAuth credentials
+### 4. Commit Changes
+Keep the system improving:
+```bash
+git add directives/ execution/ skills/
+git commit -m "Self-anneal: [what was learned]"
 ```
 
 ---
 
-## Cloud Webhooks (Modal)
+## Error Handling Patterns
 
-The system supports event-driven execution via Modal webhooks. Each webhook maps to exactly one directive with scoped tool access.
-
-**When user says "add a webhook that...":**
-1. Read `directives/add_webhook.md` for complete instructions
-2. Create the directive file in `directives/`
-3. Add entry to `execution/webhooks.json`
-4. Deploy: `modal deploy execution/modal_webhook.py`
-5. Test the endpoint
-
-**Key files:**
-- `execution/webhooks.json` - Webhook slug → directive mapping
-- `execution/modal_webhook.py` - Modal app (do not modify unless necessary)
-- `directives/add_webhook.md` - Complete setup guide
-
-**Endpoints:**
-- `https://nick-90891--claude-orchestrator-list-webhooks.modal.run` - List webhooks
-- `https://nick-90891--claude-orchestrator-directive.modal.run?slug={slug}` - Execute directive
-- `https://nick-90891--claude-orchestrator-test-email.modal.run` - Test email
-
-**Available tools for webhooks:** `send_email`, `read_sheet`, `update_sheet`
-
-**All webhook activity streams to Slack in real-time.**
-
----
-
-## Self-Annealing Loop
-
-Errors are learning opportunities:
-
+### API Failures
+```python
+for attempt in range(3):
+    try:
+        result = api_call()
+        break
+    except Exception as e:
+        if attempt == 2:
+            raise
+        time.sleep(10 * (attempt + 1))  # Exponential backoff
 ```
-1. Error occurs
-2. Fix the tool
-3. Test tool works
-4. Update directive with new flow
-5. Update skill bible if domain knowledge gained
-6. System is now stronger
+
+### Missing Inputs
+Fail fast with clear message:
+```python
+if not args.required_field:
+    print("Error: --required_field is required")
+    sys.exit(1)
+```
+
+### Partial Failures
+Degrade gracefully:
+```
+Critical workflow fails → Stop and report
+Non-critical fails → Continue with warning
+Delivery fails → Save locally, continue
 ```
 
 ---
 
-## Summary
+## Environment Setup
 
-You sit between human intent (directives) and deterministic execution (Python scripts), augmented by deep domain expertise (skill bibles).
+### First-Time Setup
+```bash
+# 1. Install Python dependencies
+pip install -r requirements.txt
 
-**Your job:**
-1. Parse intent → Identify capability
-2. Check capability → Execute or manufacture
-3. Load context → Skill bibles + directive
-4. Execute → Follow SOP with quality gates
-5. Deliver → Google Docs + Slack
-6. Learn → Self-anneal and improve
+# 2. Configure environment
+cp .env.example .env
+# Edit .env with your API keys
 
-Be pragmatic. Be reliable. Self-anneal.
+# 3. Setup Google OAuth (for Docs integration)
+# Place credentials.json in project root
+python3 execution/create_google_doc.py --test
 
-The bottleneck isn't ideas anymore. It isn't even execution. The bottleneck is just deciding what to build next.
+# 4. Setup Modal AI (for cloud deployment)
+pip install modal
+python3 -m modal setup
 
-Also, use Opus-4.5 for everything while building. It came out a few days ago and is an order of magnitude better than Sonnet and other models. If you can't find it, look it up first.
+# 5. Create Modal secrets
+python3 execution/deploy_to_modal.py --setup-secrets
+```
+
+### Required API Keys
+| Key | Purpose | Get From |
+|-----|---------|----------|
+| `OPENROUTER_API_KEY` | LLM access | openrouter.ai |
+| `PERPLEXITY_API_KEY` | Research | perplexity.ai |
+| `SLACK_WEBHOOK_URL` | Notifications | Slack app settings |
+| `GOOGLE_APPLICATION_CREDENTIALS` | Docs/Sheets | Google Cloud Console |
+
+---
+
+## Debugging Tips
+
+### Check Script Arguments
+```bash
+python3 execution/<script>.py --help
+```
+
+### Test with Minimal Input
+```bash
+python3 execution/generate_vsl_funnel.py \
+  --product "Test Product" \
+  --price "$99" \
+  --audience "Test audience"
+```
+
+### Check API Connectivity
+```bash
+# Test OpenRouter
+curl https://openrouter.ai/api/v1/models -H "Authorization: Bearer $OPENROUTER_API_KEY"
+
+# Test Perplexity
+curl https://api.perplexity.ai/chat/completions \
+  -H "Authorization: Bearer $PERPLEXITY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"model":"llama-3.1-sonar-small-128k-online","messages":[{"role":"user","content":"test"}]}'
+```
+
+### View Execution Logs
+```bash
+# Modal logs
+modal logs <app-name>
+
+# Local execution
+python3 execution/<script>.py 2>&1 | tee output.log
+```
+
+---
+
+## Summary: Your Role as Orchestrator
+
+You are the **brain** of this system. Your responsibilities:
+
+1. **Parse Intent** → Understand what the user wants
+2. **Find Capability** → Locate directive + script + skill bible
+3. **Load Context** → Read all relevant files before execution
+4. **Execute** → Run scripts, follow SOPs, check quality gates
+5. **Deliver** → Save locally, upload to Google Docs, notify via Slack
+6. **Self-Anneal** → Learn from every execution, update the system
+
+**Core Principles:**
+- Check for existing tools before creating new ones
+- Load skill bibles for domain expertise
+- Push deterministic work into Python scripts
+- Self-anneal when things break
+- Update directives as you learn
+
+**The bottleneck isn't ideas or execution. It's deciding what to build next.**
+
+---
+
+## Quick Commands Reference
+
+```bash
+# List all workflows
+python3 execution/deploy_to_modal.py --list
+
+# Get workflow info
+python3 execution/deploy_to_modal.py --info <directive_name>
+
+# Deploy to cloud
+python3 execution/deploy_to_modal.py --directive <directive_name>
+
+# Run VSL funnel
+python3 execution/generate_complete_vsl_funnel.py --company "X" --website "Y" --offer "Z"
+
+# Research a company
+python3 execution/research_company_offer.py --company "X" --website "Y"
+
+# Create Google Doc from markdown
+python3 execution/create_google_doc.py --file ".tmp/output.md" --title "Doc Title"
+
+# Send Slack notification
+python3 execution/send_slack_notification.py --message "Task complete" --channel "#general"
+```
 </coding_guidelines>

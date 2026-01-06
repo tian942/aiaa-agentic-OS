@@ -58,13 +58,13 @@ This workflow uses AI to process inputs and generate structured outputs.
 
 ## Process
 ### 1. Prepare Context
-[Describe what this step does]
+Calls market research agent to conduct in depth market research
 
 ### 2. Compile Final Script
 [Describe what this step does]
 
 ### 3. Create VSL Script Doc
-[Describe what this step does]
+calls Google Doc agent to create the formatted google doc
 
 ### 4. VSL Hook Creation Agent
 AI agent processes the input with the following instructions:

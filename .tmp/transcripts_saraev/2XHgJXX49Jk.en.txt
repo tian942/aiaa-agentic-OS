@@ -1,0 +1,233 @@
+Hey, this is an exhaustive and updated list of every way that I currently know of to scrape and generate leads for services. I use these every day over at Leftclick to generate hundreds of thousands of dollars across a variety of industries for clients using outbound.
+
+So, this is the sauce. There is no sauce like it. Everything that I'm showing you guys is currently working as of the time of the recording of the video. Obviously, outbound methods change, but in addition to showing you guys what the method is, how to go and do it yourself with a live demonstration and then where you need to go in order to get these resources, I'm also going to give you
+
+guys a Google doc that just has all of them laid out in front of you top to bottom. So, if you guys want to, I don't know, create SOPs or give this off to your team to do some education or learning, feel free. You can find that down below in the description. Let's start with the first. So, there are two ways that currently exist in order to scrape leads. Now, when I say leads, for
+
+the most part, I'm meaning email addresses, although obviously phone numbers, first names, last names, and companies are part of that as well. Let me run you through the two that people are using all day long that they don't tell you about. The first is nominative email enrichment. Basically, what happens is you get company domains andor first names or last names. Then you take
+
+the name of the person, so in my case, Mixer, and you combine it with the domain of their website. So, leftclick. Then you just add, remove, and multiply these in various combinations. Nick at leftclick.ai. Nicks at leftclick.ai.
+
+Nick.sarif at leftclick.ai over and over and over again until you find one that works. When you find one that works, boom, there you go. That's your email. Why does this work? Because most of the time people follow pretty standard patterns and conventions when they name their emails. And so you just get to take advantage of that. You know, if I'm Nick, I'm not going to name myself XYZ
+
+at leftclick.ai. Although maybe I should start and I'd get fewer damn cold emails. I'm going to name myself like Nick at leftclick.ai so people know who the heck they're talking to. Okay, so this is number one. And you'll find that a lot of the methods I'm going to show you guys are going to include this. The second method is using what are called HTTP requests to then generate a bunch
+
+of data that you then scrape and parse. Now, if you guys don't know much about technology or about it or how to do this sort of thing, that's okay. Most of the stuff is abstracted away to tools nowadays anyway. But just so you have a bird's eye view, what you do is you request the content of a page like with a tool make or nadn or zapier or whatever. Then you parse it. Parsing
+
+just means breaking it down into a language that you understand. Once you're done with that, you have this thing and a language you understand. You just look for strings or sections of characters that are in specific patterns. For instance, thing at second thing do third thing. Okay, so nick at leftclicki.
+
+Once you have data in this format, becomes very easy to just dump it into a list or a database or something like that. And then you're good to go. You've essentially got email addresses as well.
+
+So they do this not only for emails, they do this for phone numbers with various formats. They do this for for domains, for all sorts of information, but we're going to be going specifically over email addresses today just cuz that's the easiest. I'll also talk a little bit about phones, too. So the first way is to use air scale to then find a list of domains. You take that
+
+list of domains, feed it into an enrichment tool like any mailfinder, and then you get a bunch of emails. So, first things first, use this tool, airscale.io, which I'm not affiliated with or anything, to find companies. You then select, you scroll all the way to the top, your location. I'm going to do United States. Company size. I'm going to go 1 to 10 and 11 to 50. And then all
+
+the way down here, keywords. I'm just going to type in PPC agency. That's way easier for me. You then click preview companies and it'll go and it'll actually find a list of companies that fulfill uh your requirements. So I'm looking for things that have the word PPC agency in the title. As you can see, I now have a giant list of PPC agencies all over the world I can sell to. Then
+
+you click load all companies to a table. You access the result and you get something that looks like this. Now most of the time lists like this aren't going to include the domains. Instead you're going to include the company names, company LinkedIn URLs and other fields.
+
+But what we need is we need the domains to perform that nominative email enrichment. Right? So luckily tools like Aircale and other ones like Clay and stuff like that as well have this builtin. Just click on the company domain column. Then you go down to select where you're going to be pulling the company name from in order to do the lookup search. Then I'm just going to
+
+use the same company name thing. I'm going to add the current pages row. So I'll do this on 40. And then I'm going to run a workflow. Now as you see this is running top to bottom through a giant list of records to pull the domain names from these records. So, Zosamus, Voxster, Triosco, the PPC guys, the agency CR, and so on and so on and so forth. We just found a bunch of domains.
+
+So, that's pretty sweet, right? What we do now is we go to export, and I'm just going to download a CSV. I'm only going to do these selected 40 rows. It's really easy. And then click this button.
+
+What we have now is we have a list of companies, which is pretty solid. I'm just going to resize this so it can be uh visible. And now we have all these domains. What we do after we have all these domains is we feed this into an enrichment tool like any MailFinder. So, I'm going to head over here to the top right hand corner. I'm going to go bulk search and then I'm going to go new
+
+bulk. Then you upload. Click decision maker search. Select your spreadsheet. Paste it in. It'll automatically map the company names and domains column. Then you click process and it'll go through and it'll actually find emails for records in this data set. So, as you can see, we've processed 30. We've got 21 emails so far. Okay. And so, after our 40 rows were processed, we received an
+
+enrichment rate of 70%. 28 out of the 40 were considered valid. And as you can see, we actually have the email addresses over here, although obviously I'm obiscating them. Now, if we want to download them, we just click this button. This is going to charge us a certain number of credits. They usually, what I like about them is they only bill you based off of the ones that were
+
+found. Like a lot of email services bill you just based off the number of attempts that they made as opposed to the number of ones that were actually found. And then once you're done, you have the name of the person, you have their role, you have their LinkedIn URLs, you even have their email, although I am obiscating this same thing with valid email over here. uh you have
+
+their type, AMF status, that just stands for any mail finder, company name, company domain, company LinkedIn profile, location, industry, and so on and so forth. So hopefully you guys could see this is more than enough information to, you know, craft a cold email campaign or maybe some sort of like outbound LinkedIn campaign, whatever the heck you want, you have it
+
+all right here. The second way is using LinkedIn Sales Navigator to get a list of people. With those people, you then feed them into Vain or an alternative to turn this into a Google sheet with leads. Then you import them into an enrichment tool like Vain or any mailfinder to get the email addresses.
+
+So I have a list here for PPC agency. Okay. What I'm going to do is I'm going to look specifically for founders, co-founders, CEOs, you know, owners, all of these terms that demonstrate that they're some sort of decision maker. Then for the geography, I'm going to go look for people that are specifically in the United States. This list is still pretty
+
+big. So just for the purposes of this demo, I'm also going to filter based off of headcount. And maybe I only want companies that are between 2011 to 500 people. I'm looking kind of enterprise level. So now, as you can see, I have a list of 62. Realistically, you should have a list of probably like 2,00 to 2,500 for best results. And what I can do next is I can just copy this URL. I
+
+can go into a tool like Vain. Then with this tool, okay, I just click create order. I paste in the LinkedIn sales navigator search URL. I check it. And then it'll add this to a database to be cued automatically. It's found 62 results. I'm going to call this example for YouTube. Now, Vain offers you the ability to enrich directly in the app.
+
+So, you can get the emails of things if you click this button. Um, I didn't select that feature today, so I'm just going to click create order. And now on the bottom lefthand corner, it's actually going through and it's scraping things using my LinkedIn profile. the specifics on how to set it up, you can find um on vain once you've signed up.
+
+But essentially, you have to get like your LinkedIn cookie and then you have to export the LI_AT token before connecting it that way. Once you're done, you can scrape leads really, really easily. So, this is an example list that I did for PPC agencies a while ago. Just going to click download. And you get a lot of data here. If I go um import and let's just replace this with
+
+my new data from vein. Assuming that this is like the list that I just exported because you guys could see here I'll get a lot of data. I have the first name, last name, some of them even include the emails. I have phones, summaries, job titles, job descriptions, and so on and so forth. What do I do with this list? Well, it's pretty easy.
+
+I can just pump this directly into a tool like any mailfinder like I just had before. So go to new bulk and then I can look again for decision makers or more pointantly I can look for the person name search um endpoint. The reason why this is valuable you'll see in a second is you allow the algorithm to use nominative enrichment based off the first name the last name and then
+
+the company name over here. Now we don't have the domain name itself. What we have is the company name. So any mail finder and really any other service is going to look for the company domain using some Google magic and if it finds the company domain then it'll be able to enrich this. So once you're done with that just click process and as you can see we're now going through that list
+
+again. We process 60 70 80 90 out of 100 we have a val validity rate of something like 80 or so 80%. Which is very solid. I mean how often is it that you're going to get 80% of a list that you put in.
+
+This is going to fluctuate and presumably go down with time, but you get as the end result a list that looked really similar to our previous one with a big list of emails. It's just we have even more information now since we have the first name column, last name column, and a bunch of personal stuff, too. The third method is enterprise specific.
+
+This takes advantage of a little known arbitrage hack within any mailinder that allows you to get significantly more emails for significantly fewer credits. The exchange rate ends up being about one credit to 40 emails, which is bonkers. Basically, in any MailFinder, you have what's called a company search where if you put in a domain like OpenAI, Forbes, Anthropic, Microsoft,
+
+whatever. Okay? You can actually get all of the emails at that company, at least the ones that are publicly available. So, let's say I open up Forbes over here, I have all these emails. It's bonkers, right? Down at the bottom in grayed out text, you can download all of the known emails at that domain. 176,000 with Forbes endings. Okay? And you'll notice that there's a differential
+
+between the number of credits you pay and then the total number of emails you download. This is about a 1 to a 40 ratio. Um the reason why this is so great is because you can obviously arbitrage token or a credit cost and then for the price of one credit you can get 40 emails. This is also great if you're targeting enterprise because a lot of the time like good enterprise
+
+sales involves you just targeting like one company or a small set of companies. So you have some list in front of you then you just dump that list into any mailfinder. You get 10,000 emails, most of them at two or three companies. Then you pitch something that's very company specific. Usually it only takes a few people at the company for you to be able to, you know, sell your thing to. So
+
+that you then as you know a service seller who's looking to get some social proof can say stuff like our tool is used by the team at Microsoft or whatever. How to actually go about doing this at scale? Just head back to aircale, make a company table looking for big businesses like this one, World Pay, Warner Bros, Viston, whatever. Find the domain name as well and then export
+
+it. And then all you do is you just go back to any mailfinder and then instead of running an individual search, do a bulk search and then it'll actually give you a commaepparated list of all of the email addresses, which is wild. Now, you're not going to have all all of the email addresses. If you run this thing in bulk, you won't have the option to arbitrage the one to 40, but you can
+
+usually still get, you know, 5, 10, sometimes even like 15 emails from just one search per row. So, if you want like an automated way of doing it, this is definitely pretty solid. Otherwise, you know, if you're targeting, let's say, 10 or 15 companies, just get your ICP, you don't need to use AirSkill for that.
+
+Bump them in through a company search one at a time, download all of the known emails, and then run them through some sort of validation service to trim them down to the most likely ones. If you guys want um a way then to get information on who these people are, all you have to do is just take their email address, publish them or put them into Google like this, and then a lot of the
+
+time you'll actually find the first name and the last name just directly through Google. Then you can build a really simple automated pipeline using nan or make.com to do this for you automatically. I'll show you a little bit more about that later. But then you can extract first names, last names, and emails for a fraction of the price. The next method is using Apollo to generate
+
+a list similar to LinkedIn Sales Navigator. Then exporting that list using a variety of tools like Ample Leads, Leads Rapidly, or maybe export Apollo. This then gives you a CSV which then you can feed into whatever tool you want. The good thing about Apollo is most the leads already include the email address, so you usually don't need to pay for any additional enrichment. Now,
+
+this used to be the best tool, and I'd recommend it all the time within Maker School. So much so that it was actually in the curriculum of Maker School for quite a while where I actually showed people how to, you know, get up and running with um the scraping infrastructure. Unfortunately, they recently changed things so that I got to refilm my dang video now because Apollo
+
+was scraping uh another service, LinkedIn Sales Navigator, and then other tools. these ones here scraping Apollo. The point I'm trying to make is this was very quickly obiscated unfortunately and it just doesn't really work anymore.
+
+Still, I'm going to include it for posterity because there's some rumblings showing that maybe this still works. It's just working on a lot slower of a basis. Um, so the way that this works is you basically grab your list. Okay, in Apollo, same idea as before. Get a bunch of job titles, founder, partner, co-founder, owner, whatever. Get a bunch of locations. Then you have a list and a
+
+URL. You copy the URL into a tool. And I'm just going to use one of these. Why don't we just use leads rapidly for now? Once you're in the tool, in my case, leads rapidly, you just paste in the URL.
+
+This is then going to tell you how many leads you are going to be scraping. So, I have a list of 3,040. U maybe I only want to scrape, I don't know, you know, a thousand of those leads. I can then click purchase, and then it'll consume my credits right up here. Once you're done, you'll have a list of different transactions. So, one of these failed.
+
+These fail every now and then, but um your completed records, you can then rightclick, go download, then you'll have a list of them just like you had before. And if you import these into some tool, again, you get a list of first names, last names, full names, email addresses, their titles, company names. I mean, literally everything that you could
+
+want. You also get phone numbers and sanitized phone numbers. I'll talk a little bit more about how to get more of these um later, but uh yeah, this is more or less like the most cost effective way to generate leads. It's just it's very shaky. Some of these providers are taking forever and I don't know if they're still scraping them in an automated basis, but who knows? Maybe
+
+in the future these things will be back to service. Just wanted to mention them at least for posterity sake. The next few tools take advantage of a platform called Appify, which hosts a bunch of scrapers for a variety of services. The first one is going to be the Google SER result scraper where we assemble a giant list of domains using Google search.
+
+Then with those domains, we feed them into any mailfinder to get a bunch of decision makers at those businesses. So I'm just going to go to Google SER real quick. There's a search result scraper right over here on Appify. I'm going to try this. They'll let you try it for free with certain certain number of tokens. All you do is you just type in whatever the term that you would search
+
+on Google to get companies like this. So I'm just going to do Calgary dentists. I'm going to go down here to results. Why don't I just go one page and 10 results per page to keep it simple. You can select a bunch of settings surrounding, you know, how many of these leads to scrape, um how to do this, whether or not you want uh paid results only or ad organic results only or
+
+whatever. After you're done, you'll then get um essentially a bunch of data which we can preview. This now includes a bunch of websites. So, we have the URLs right over here.
+
+If I export this, then we scrape the organic results, click download, take those organic results, and then upload them into a Google sheet just so you guys could see what's going on. And now you guys could see we have the title of the clinic, the URL, the description, and then we have the displayed URL. I mean, both of these are basically the same, but because we have the URL, we
+
+could take this URL into a tool like any mailinder. So, I just go over here, click new bulk. You can choose decision maker or company search. Depends on kind of what you're going for. I'm then going to select the domains column here. Then I'll click process. And as you guys can see, it's going and doing some scraping for me. Looks like of the five, it's found four. So enrichment of 80%. And
+
+when all said and done, we achieved an enrichment of 50%. Now, this isn't as good as it could have been, but still pretty reasonable. On average, I get between 40 to 60% of all of the domains that I feed in. And luckily, the Google Ser scraper is really cheap. Um, as you can see, it only costs something like, I don't know, $3 per 1,000 records. If you upgrade your plan on Amplify, it's
+
+significantly less. But um, yeah, you know, these economies of scale come together. And then when you import them, you get the name, the result title, aka the um, title of their role in the business, their email address, then even some more information, including descriptions and stuff like that. All stuff that you could use to whip up a really cool campaign. But Google SER
+
+isn't the only thing you can do. A lot of the time we're working with local businesses and that's where the Google map scraper comes in handy. So I'm just going to click try for free here. And again, just like I did earlier, I'm going to look for, I don't know, dental clinic. Maybe this time we're going to do New York. And maybe this time I only want to extract 10 places. Then you
+
+click save and start. Now what we're doing is we're scraping specific map listings for people in an area, which is pretty sweet. So as you can see, I just ran this and just like we had before, just head to the top right hand corner.
+
+This time I can just scrape everything. Once you're done, you can go back here to your sheet. I'm just going to import these leads just to show you guys what these look like. Now, we have 10 businesses. Smilecrafters, floor, lvivvar, w dent dental, whatever. These are all dentists basically in our target markets presumably. Once we're done, we just go back to any mailfinder. Click
+
+new bulk. Let's go decision maker search. Then feed in the exported list from Google Sheets. Then we can see is we still have that domains column. So, I'm going to upload this. And same thing as before, we're now going to find their emails. Now, that last sheet I tried running through because it only had 10 records, you know, law of large numbers came in and I think we only scraped
+
+three or four of the leads. But just to show you guys, you can realistically accept with Google Maps. Not all of the websites that you guys are going to be getting are going to be websites that like the company owns themselves. A lot of websites are going to be like Facebook pages and stuff. And obviously, we can't find the decision makers at Facebook anywhere near as easily um as
+
+you know, some small company. So, on average, you're probably going to have validity rates somewhere around like 20 to 30%, I want to say. Um, I just reran this on a list of 50 and um, you know, I think we're going to end up getting somewhere around like probably 15 emails or so. I think right now we have what 14. In my case as well, I fed in the same domain a couple of times. So, this
+
+is probably just not very worthwhile to do. You should probably dduplicate the list. Uh, we ended up with a total enrichment rate of 32%. So, um, nowhere near as valuable or cost effective as the Google SER leads. That said, this can be very valuable if you have something that's very locationsp specific. So, spending a little bit more money for these leads can make sense if
+
+you are targeting people in a local area for a local product or service. You're going to have significantly higher rates if you know you can mention things like what, I don't know, what's across the street or where they are in a specific geographical region. Back in the day, I used to go door to door and so we would look for data sources like this in order to pre-qualify our lists before going
+
+out and then actually knocking or calling. The next method involves using the Google SER and map scrapers to feed into an automated workflow. Now, I set this one up in NADN, which is a simple drag and drop no code tool. And I've already preset all of the data. I just wanted to show you guys what this looks like just for the purposes of your guys benefit. Um, basically what I have is I
+
+have a workflow set up that automates the process of running an Appify Google SER scrape. So that's what's happening right over here under the hood. I'm basically looking for a term like Calgary dentist just using Appify. I'm just doing it through their API. So kind of behind the scenes, their back end.
+
+Then I'm extracting the data. I'm limiting the number that can go through. And then most importantly, I'm actually scraping the website. So I'm getting the website, I'm scraping it, and then I'm feeding it into AI to get details. I'm just going to click execute workflow just to show you guys what this looks like on three records. So you guys could see, but basically every time I
+
+call a website, I end up getting a bunch of code back. Right now, this code here on the right hand side actually just contains all of the details of the website for me. And a lot of the time, this will contain things like the email address, like the phone number. You just have to parse it in specific ways. And so that's what I'm doing here with these fields. I'm turning this big block of
+
+text into a much shorter version where I can start parsing things out like phone numbers as you guys can see over here. Now what's really cool is you can start combining this procedural mechanism of generating um you know website scrapes and stuff with AI based mechanisms of extracting data. So if I feed in all of this data which is very unstructured as you see into a model like um open as
+
+GPT5 it can go and output something that looks like this. As you see here we got a lot of data. We got the record ID, the page title, page metad description, industry, we get the owner name, owner title. Now, um, owner email in this case wasn't found, but we can find these, I want to say about 10 to 20% of the time.
+
+Although, keep in mind when you do, it's likely not going to be the owner email themselves. It's going to be something like, you know, info@ dental clinic.com, hypothetically. Still, a lot of the time, this goes directly to the owner.
+
+So, then you can use information like this to do, you know, whatever the heck you want. Um, my AI model extracted phone numbers, bunch of contact form notes, even some address information, including um, angle suggestions for pitches and so on and so forth. So, pretty cool to see just how much data we can pull um, in a semi-automated fashion. And after I just dumped all
+
+this stuff into a database, which um, I put out together a while ago. As you can see, we scraped a couple of emails, then dumped them all into the Google sheet. So, we have a couple of these general ones. And then, uh, it even talks about what those are. Is this as valuable a scraping source as let's say any mail finder decision maker finder? No. But you can go significantly higher volume.
+
+And a lot of the time the marginal cost of sending a cold email nowadays tends to zero if you guys have all the infrastructure set up. So if you're sending cold emails or DMs or whatever, you can also extract LinkedIn profiles, Instagram profiles and stuff like that.
+
+Um, also keep in mind you can combine this with any of the other scraping mechanisms that I talked about to get not only the email but more or less whatever other information is present on any of their web pages. The next way is purchasing a list on a data set marketplace like Bright Data. Now, if you guys are longtime watchers of my channel, you'll know that I haven't
+
+talked about this before, and that's because I just wanted to purchase a couple of lists and try them out for myself before I discuss this. I want to say these work reasonably well. Leads are definitely cheaper, but a lot of the time these resources have been scraped forever ago. And because they've been scraped forever ago, like a lot of the time, companies will have changed their
+
+email addresses or people just won't be using an email anymore. Anyway, the specific um list to buy are LinkedIn people profiles over here. Okay, Google Maps full information over here. Um you can get information from um Facebook as well and then crunch base too. So if you go on LinkedIn people profiles, the way that this works is you have a basically a giant list of names, ids, cities, and
+
+so on and so forth. They actually give you a little preview and sample data set. This is over 600 million records and this is updated every quarter. So that's what they say. The actual total cost of this is 0.0025 per record as you see. And then with this information, you can pump it into something like any mailfinder um and so on and so forth in order to like get
+
+more enriched lists. You can also use aircale to find specific companies instead of LinkedIn people profiles. Then use that information if you go to company information over here um or just buy the company uh um you know list and then filter based off the presence of websites and then you guys can loop this into whatever other flow you want. The thing is all of these services that sell
+
+lists will have some minimum order amount. So $250, you know, if it's like your very first time doing this sort of stuff, you can get a lot of leads for $250. You get 100,000 leads for $250, but you know, do you really want to spend that much money all in one place?
+
+That's why I prefer typically like smaller scrapers. Anyway, I purchased a couple of these lists. Uh my email performance and outbound performance tends to be worse by a measure of about half. So basically, either these leads are on average half old or they've just fluffed the lists or something. Uh but they still work. I still get replies.
+
+And then because of the very low record cost, obviously you can arbitrage this and do cool things, especially if you have tools like any mailfinder available to you to then get email addresses.
+
+Okay, next up, you can use a tool like the Appify Instagram Scraper to scrape Instagram profiles for specific hashtags or queries. Then you can look within those profile descriptions for email addresses. Enrichment rate on this is pretty low. That said, a lot of the time these include links. because they include links, you can then use any mailfinder and other email enrichment
+
+tools to get emails there, too. So, I'm just going to start by looking for uh posts and then I'm going to run based off of a search query over here. I'm going to look for the term automation and then I think we're just going to search for users that have the term automation inside. What you end up with here is you end up with a giant list of all of the Instagram information that
+
+you could possibly want. And you'll see a lot of these are businesses that include things like WhatsApp numbers or email addresses just directly in the description. Um, now obviously I'm doing this in a manual way, but hopefully you guys can appreciate how a moment ago I just um used an automated tool in order to go through and then filter and do a bunch of stuff. Well, guess what? You
+
+can use automated tools to go and filter and do tons of stuff for whatever your lead scraping source is. And this is something that I would do for this as well. Uh, you know, we've scraped 168 leads or so. So, I'm just going to go export. Let's put this in as a CSV.
+
+Import, drag and drop. And we have our lead list. Now, this is a lot of leads. You'll see a lot of them also include things like domains just directly in their descriptions and so on and so forth. The reason why this is valuable is because now you have like a variety of different lead generation mechanisms. For instance, you could look
+
+specifically through the descriptions for email addresses and you'd probably get, you know, 5 to 10% of these. Or after you're done with that pass, once you've done your lowhanging fruit, you could then look for domains. Once you found domains, you could pass them through any mailfinder and you can get even more. Now, a lot of the time you're going to have first names and last names
+
+in the attributions. Not a lot of people realize, but these attributions you could then use to find the people themselves. Or if you have the domain name in addition to the first name and the last names, then obviously there's a lot you could do with that, too. So yeah, just one of many different ways to do this. In addition to using Instagram, you guys could do the exact same
+
+approach on Tik Tok. You guys can do more or less the exact same approach on X as well. Uh and so any of these social media platforms, you just take the same funnel, you scrape a bunch of profiles or posts based off of some search query.
+
+Then you pump in the description, uh the profile picture, the alt uh uh codes on the images, and literally all the information into some tool presumably like NA enter make probably or if you wanted to do it manually, you could do it with Google Sheets just like command effing, but that's a lot of work. Then you have a giant list of everything that you need in order to enrich. You're
+
+probably going to get enrichment rates of like 20 to 40% or so, but there are multiple millions of profiles on Twitter, Instagram, Tik Tok, and so on and so forth in any niche. So, odds are you're going to get enough for whatever your total addressable market is. The next mechanism is pretty sneaky, but basically um you guys know like LinkedIn jobs. I don't know if you've ever gone
+
+on LinkedIn jobs before, but if I go LinkedIn jobs in Calgary, which is where I'm from, you'll see that there's a big list of people that are looking for hires in particular uh niches. So, you know, I'm typing in, I don't know, automation or something like that. Well, I see that there's 475 people that are hiring automation people. Uh 475 companies essentially. Some are looking
+
+for Zapier, some are looking for automation testers, whatever. You know what's really cool? Turns out you can just take this list, you can go directly to a tool like LinkedIn Job Scraper. You can pump in the URL right over here and then you can actually find companies that are hiring for particular roles.
+
+Why is this so valuable and powerful? Because this is a list of people that literally have needs that they're willing to pay money for. I mean, these people are saying, "Hey, I want somebody to go and, you know, do some automations for me, and I'm willing to pay real money for it." This is about as close as you can get to people that have money in their hands that are willing to pay for
+
+your ability to solve their needs. Now, what's really cool is you have a company name column over here. So, what you could do is you could download this list, take it back into any mailfinder, add a bulk decision maker search, paste in this list of people that are looking for work. And where it says company name, just feed in the company name.
+
+Okay, once you're done with that process and you know when you search just based off company name, probability of you getting results will go down. As you see here though, we're feeding in, you know, 15 results. We're getting uh yeah, we're getting basically a return rate of 100% so far. This is unlikely to persist all the way through, but it's pretty dang good already. So, um you know, this is
+
+just another way that you can get a list. And then instead of your list being kind of unqualified or at varying levels of qualification, you know that every single company here actually suffers from a need. Now, when you email, don't necessarily just email the CEO or whatever. If it's a big company, you're probably going to want to email a hiring manager or something like that.
+
+But yeah, as you can see, we just fed in 35 records and we have 29 emails that are valid with another four that are considered risky. And I got to be honest, it's the wild wild west out here. I send emails even if they're risky. I don't give a crap. The next mechanism is on a cold email platform called Instantly. So, Instantly is a cold email platform that basically
+
+allows you to actually get leads directly within the email platform. So, I ran a bunch of different campaigns the other day for one of my YouTube videos. Um, in the top right hand corner here, you can actually click on get leads and you can upgrade to what are called supersonic leads. Now, I've used the service before. This basically gives you access to a database of about 250 to 300
+
+million leads and then you buy them for 4500 um $97 per month for 4500 leads. Will I recommend this for cost purposes? No. But do I recommend this for convenience purposes? Yes. Um, you can absolutely just get up and running with these leads. These aren't going to be as high quality as the ones that we're um scraping with most other methods, especially the first three on our list.
+
+Um but you know, if you just need to get a message out, the cost of the leads compared to the opportunity cost of you not sending those emails or messages today is usually very disproportionate and it's almost always better unless you're like really really broke to just start the campaign today and see what people have to say. The last mechanism is when you scrape a data source
+
+directly. Now, the benefits to scraping a data source directly are these are leads that are not easily accessible. And because there's a much higher barrier to entry when you scrape leads directly, like I'm about to show you in a second, and enrich them through a totally custom enrichment pipeline, the people that you're reaching out to tend to be a lot warmer. They tend to be
+
+people that haven't been burned out by tons of cold outreach before. The downside is you have to know a little bit about how to actually, you know, do the HTTP requests and the parsing and stuff like that. But just to give you guys a quick example, this is school.
+
+This is the same service that I host my community on, Maker School, where we guarantee your first paying customer for an AI service in 90 days where you don't um pay. We give you all of your money back. So, the way that this works is you basically have listings where you know in the hobbies category, number one is calligraphy school, number two is the acting lab, number three is the
+
+Brotherhood of Send, and so on and so forth all the way down. Well, you know what's pretty cool? It turns out you can build a scraper to scrape this stuff. I built a scraper for it as part of my most recent video. So, as you see, what we're doing here is we are HTTP requesting school. And so this is just one of the many ways that you could do something like this. But in my case, I'm
+
+literally just pinging this page first using NAN. What I get is I get a giant list of all of the entries from one all the way up to 34. This gives me a massive list of data that I can then use to do more or less whatever the heck I want with. Now, this data is very big and it's very unsemly. And so I don't really like having the data in this way.
+
+So, what I do next is I extract it in a much easier way where I now have code that shows me what all of these elements are for. After I'm done, I've actually parsed all of this data on the lefth hand side that looks really complicated into a simple structure where I have the page title, the description, I have the image link, I have the category type and name. I even have the amount of money
+
+that all these charge for their services. Hopefully, it's not a far cry to see how I could take all that information and then I could dump it into a big Google sheet that contains things like the first name and the last name of the person that runs the community, uh, their Facebook pages, their Instagram pages, even things like their websites. From there, all you do
+
+is you pump them into a tool like any mailinder. And in my case, when I did this, I pumped in something like 5,000 rows. I did zero work, zero post-processing or anything like that.
+
+Once you're done with that, you get a list of emails that looks something like this. And yeah, this is one of the most powerful things that you could realistically learn. It's one of the reasons why I recommend learning how to scrape if you are going to spend some time learning automation because you can compile quick and easy lists like this that let you send emails that achieve
+
+reply rates as high as uh this one is now at 11.5%. That is 11.5% of all the people that I emailed responding to me. And it looks like about a third of those responded positively wanting something to do with me, some sort of meeting or or whatever.
+
+Okay. So, I'm going to leave all of these methods here in this Google uh doc. and then I'm going to provide that to you. All you need to do is just click below at the top of this description.
+
+Um, this is free. You don't have to pay anything. You may have to enter your email address. If you do, I'm just going to send you some emails talking about how great I am. Um, but yeah, that is more or less how you can get so many leads that you have no idea what the heck to do with them. Thank you very much for watching and I'm looking forward to hearing from you guys. Leave
+
+a comment down below if there are any lead scraping mechanisms that I missed out. I'll catch youall on the next video.

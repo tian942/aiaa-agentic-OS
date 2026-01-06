@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "company": "Client Ascension",
+  "offer": "Agency Growth System",
+  "executionTime": "2m 55s",
+  "deliverables": {
+    "marketResearch": {
+      "file": ".tmp/vsl_funnel_client_ascension_20260105_160839/01_research.json",
+      "doc": "https://docs.google.com/document/d/1jV9yn1jxh4spLQGBYvJ797drnQQ2FvOQVi5_uliTbQ4/edit"
+    },
+    "vslScript": {
+      "file": ".tmp/vsl_funnel_client_ascension_20260105_160839/02_vsl_script.md",
+      "doc": "https://docs.google.com/document/d/1Q4XH4IL6dnE9rW8QzpUrz3NQ2nwKaayvOmcLICDi8Ko/edit"
+    },
+    "salesPage": {
+      "file": ".tmp/vsl_funnel_client_ascension_20260105_160839/03_sales_page.md",
+      "doc": "https://docs.google.com/document/d/1Q-_ulRHJ7PylScPAw-RfcK35rnDVUWkKK3Amd3rp4Wg/edit"
+    },
+    "emailSequence": {
+      "file": ".tmp/vsl_funnel_client_ascension_20260105_160839/04_email_sequence.md",
+      "doc": "https://docs.google.com/document/d/17i1rASPGDqS-yC7wV93APSf47hIpj4iG1pVWqkaBL5I/edit",
+      "emailCount": 7
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

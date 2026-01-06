@@ -1,0 +1,7 @@
+{
+  "documentId": null,
+  "documentUrl": null,
+  "title": "Test: Formatted VSL V2",
+  "status": "error",
+  "error": "<HttpError 400 when requesting https://docs.googleapis.com/v1/documents/1CUBZVv2IAACrN0SWQe46wyUwZIYsd4XoRJV89c8gEEE:batchUpdate?alt=json returned \"Invalid requests[8].insertText: Index 132 must be less than the end index of the referenced segment, 132.\". Details: \"Invalid requests[8].insertText: Index 132 must be less than the end index of the referenced segment, 132.\">"
+}

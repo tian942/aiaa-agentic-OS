@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "company": "HubSpot",
+  "offer": "Marketing Hub",
+  "executionTime": "2m 14s",
+  "deliverables": {
+    "marketResearch": {
+      "file": ".tmp/vsl_funnel_hubspot_20260105_162408/01_research.json",
+      "doc": "https://docs.google.com/document/d/1tSzoKcLoiJ2U-gsJd8BKvxoMRmiR8aAuF8TeTX3FjRg/edit"
+    },
+    "vslScript": {
+      "file": ".tmp/vsl_funnel_hubspot_20260105_162408/02_vsl_script.md",
+      "doc": "https://docs.google.com/document/d/188O7UBxcgM27F3ABsujd-hXDvdjTy42664Hi0IlR4qg/edit"
+    },
+    "salesPage": {
+      "file": ".tmp/vsl_funnel_hubspot_20260105_162408/03_sales_page.md",
+      "doc": "https://docs.google.com/document/d/1hEE6i-XNzVSEPxy3hbeQTwb4aDcbU_8Ibg9SCzeuE7w/edit"
+    },
+    "emailSequence": {
+      "file": ".tmp/vsl_funnel_hubspot_20260105_162408/04_email_sequence.md",
+      "doc": "https://docs.google.com/document/d/1i3Ic7AR9dVUrtTL5SRi7zg2STStz8pfRyN4rgVWSb4c/edit",
+      "emailCount": 7
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

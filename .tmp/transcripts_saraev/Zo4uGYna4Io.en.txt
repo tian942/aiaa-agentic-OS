@@ -1,0 +1,83 @@
+So, let's say you have a bunch of Agentic workflows running for you, maybe even in parallel, doing really productive things like scraping leads, enriching them, adding them to a database, or updating your CRM. If you guys don't know how that works, watch my recent video for a full end to-end walkthrough on Agentic Workflows. Now, once you've determined how powerful
+
+these things are and sort of come to the realization that a lot of economically valuable work is probably going to be relegated to these things, the natural next question is, "Hey, Nick, it's awesome that I can run these on my own computer as assistant, but how do I take these to the cloud? How do I actually send these to employees, clients, colleagues, people I work with, and so
+
+on and so forth. And that's what this video is going to be about. You're going to learn how to take your AI agent instantiation on your own computer and then duplicate that and give that to other people so they can do the same sorts of things that you are doing. I've included prompts for all of this below and I'm going to start by running you through the specific method and then
+
+what you get and then finally at the end I'll walk through how to actually implement each. So the first strategy is to spin up a GitHub code space and then just invite your user. The reason why this is so great is it takes just one click for the user after they create a GitHub account which is itself totally managed. Everything including the authentication, the directives, the
+
+scripts themselves and the requirements is automatically set up for them if they do this. And then it also runs on a hosted server that costs about 18 cents an hour. Um this is 18 cents an hour just like at face value. But I should note that the server spins down when not in use. So the actual cost of this is usually significantly less assuming that they're not using their agentic
+
+workflows 24/7 which most people will not be. At the end of this what you get is you get a fully managed um in my case Visual Studio Code instance inside of a GitHub container that looks like this.
+
+And they have access to as you guys could see Cloud Code right over here to run steps um in your directives and executions folder aka in your DOE framework. So now it's actually going through it's listing the directives.
+
+it's it's going to go accomplish it. It's not as fast as if you were to run it on your own infrastructure, of course, but this manages very very well as a one-click solution to share. With this next method, you basically just duplicate the directives and then the executions folder from your parent workspace into your new workspace. And then you just give it a quick prompt
+
+telling it, hey, I've been given a highle framework and the directives execution scripts to accompany them. Set up my environment to run everything. We also include some contextual data here which gives the model everything that it needs in order to do what we want it to do. Finally, in the last method, use traditional GitHub repos. These are slightly more complex since they have to
+
+use GitHub and know a little bit about it, but it still costs zero bucks since it's on their own infra, and it's reasonable for anybody that I would consider mildly tech capable. So, for this, it's as easy as you just give a workspace, and then you say um duplicate this into the current environment.
+
+And then it just goes through, asks you for your GitHub details, sets that up, and then you will have duplicated everything on your own. environment. Now, this can be kind of intimidating, so I don't always recommend it, but it works reasonably well. You can then tell it to do whatever you want, like scrape 100 realtor leads in the US. I keep using scraping examples, by the way,
+
+just cuz that's what I'm currently doing. It's a big chunk of my business. But I should note that you can do a lot more than scraping with this stuff. Then it'll go through, examine the repository, examine everything that needs, and then allow you to, you know, have the same functionality in your own cloud instance as you do on other people's computers. Okay, so the first
+
+method is really simple. We're just going to go over here to this document, which I share with everybody by the way, and then copy the code space section to my current cloud code instance. And I'm going to paste this in. And I'm basically going to say, hey, set up my current workspace as a GitHub code space so I can share it with collaborators.
+
+Then I'm going to be able to um invite people by GitHub username. And so, you know, they're going to have to set up their GitHub account and stuff. The second that they have it, you just ask for their username and then we'll be good to go. So, it's going to start by checking the current state and gathering what's needed. Shortly thereafter, if you already have a remote configured to
+
+that repo, in my case I do, um you're good to go. Basically, it'll just push. If not, it'll prompt you to connect your GitHub account and then add one. Um in addition, it'll also do things like uh you know, give you keyring access, which is just a fancy name for like oneclick um ooth and so on and so forth.
+
+Now, a lot of security people are probably going to hate me for this, but I actually just commit the umvs directly to my repo just because if I'm sharing this um interorganizationally or intraorganizationally, odds are uh I'm comfortable with people having access to the tools and so on and so forth. I want you to know you don't have to do this.
+
+you could just um not commit the&amp;mb to repo and just have like a simple one two three step-by-step guide where you know you give people um number one add your appy token number two add your anthropic token and so on and so forth okay once you're done it'll give you a little message that looks something like this with the repository link um it'll run you through what it did although we
+
+don't really care too much about that and then over here it'll say to invite a collabor collaborator by GitHub username so now what your client or employee or colleague has to do is they have to go on GitHub and set it up and one of The questions that I'll ask you is, hey, what is your username? And so in my case, it was Nikki test. So I'm going to say invite Nikki test. At least I think
+
+it was Nikki test. Maybe it was Nick Testy test. It's probably Nick Testy Test, huh? Yeah, that's what it was. Nick Testy test. So anyway, make sure you get the dang name right. Once you're done, um, you know, you can you can invite the user and then on their end, they're going to get a little link, um, through email and then there's also a page that you can
+
+visit really easily that'll show show all the invites. And so, you just open this puppy up. They can accept right there. And then once they've accepted, they'll have full access to said workspace. Now, the question is, this looks really complex. What the heck do we do from here? It's actually really easy. You just replace the URL that's GitHub with codespaces new. that it'll
+
+drop you directly into a little prompt here which um sets up said workspace for you on like I believe it's Amazon Web Services Infrastructure. Once you're done with this, it'll actually set up the remote connection.
+
+This what's occurring right now. And if you guys are keen, you'll notice that this is occurring within my browser. It's not occurring like on my computer. It's within my browser because I'm connecting to a server that we set up called Cuddly-Journey. Once you're done, you'll have a page that looks something like this. It'll welcome you. It'll thank you for joining. Um and then
+
+there's just two things you need to do. you need to go over here and then actually connect to your agent of choice. So in my case I'm doing claude code. So I'm just going to click install. Then what you have to do as well is you have to connect to cloud code. So after you've done the installation after it's all good to go in the top right hand corner you're
+
+going to see a little like claude icon start. So you just give that a click and then um you'll be talking to Claude but then you have to go back slashloggin and then you can actually like log into your specific claude account and um access it and stuff like that. then you can talk with it just like you normally do. Okay, for method number two, you just need to give them the directives
+
+and executions plus a share prompt. I have the share prompt right over here, so you guys can copy and paste that in. No issues. Um, it's going to cost $0 as I mentioned and then you're just rebuilding the systems for them. So, how do you actually do this in practice?
+
+Well, first I'm just going to set up a new window and then actually open and create a new folder. So, I'm going to go over to open folder over here. I'm going to go new folder and let's just call this YouTube video. I'm going to create.
+
+I'm going to go in. Now, once I'm in, I have to create two folders as part of my structure. The first is directives. The other is execution. Now, it's going to try and make this in the same folder.
+
+So, don't let it do that. Once you're done with this, you have like most of the scaffolding. All you need to do is just move over to the specific um directives that you want to share. And so, I mean, a lot of these directives are going to be, I don't know, mutually exclusive, right? Like they're not going to rely on each other, but some of them will be. So, it depends
+
+on sort of the way you've structured things. Sorry, I kind of forgot which one I'm in. Jesus, I have a lot of windows open. Um, you just paste all the directives in, paste all your executions in, and then finally, paste in these files, agents, claw, gemini, and then again, env is up to you depending on whether or not you want to share that. Um, in my
+
+case, for most of my uh staff members, stuff like that, I usually do. Once you're done, all you need to do is copy over the shared agentic workflow document. And now what you're doing is you're telling it, I've been given a highle framework and all the scripts to accompany them. just go through this process. Um, you know, we we duplicate rather or add some additional um kind of
+
+safety, what do you want to call them? Constraints here just in case you don't already have agents cloud or Gemini set up. So, actually have it do so. And it's just going to run through here, find all the dependencies, create a requirements.txt, which is what you need in order to like run scripts, uh, and then have everything nice and set up for us. There's going to be a fair amount of
+
+file reading since obviously I have, I don't know, like 15 or 20 different scripts. So, it is going to be loading in a fair amount into context. Um, I just uh recommend you have it run. This is a cost that you will have to bear uh one time anytime you do this approach.
+
+That's usually why I recommend doing the GitHub code spaces. Okay. Then it will go use this requirements file to add a bunch of dependencies. And now it's just going through looking for the env since I've already pasted the env file in. It should decide not to. From here on out, it is double-checking to make sure claude, Gemini, and agents.mmd are all the same. Once it's done, it'll say
+
+something like your do framework's ready to use. And then you can go ahead and uh proceed just as you were before. So it'll run through the directives, find the scripts, and then ask me for any information that I didn't provide.
+
+By the way, if you want to see that specific workflow in action, just check my last video. Okay. And last but not least, if you did want to set up that traditional GitHub repo, first you have to create a GitHub repo on your sort of like master branch, if you think about it. So, the code base or the um uh Agentic Workflow base that you want to copy over to other people's places has
+
+to have a GitHub repo. I've already showed you guys how to do that. Pretty easy. Just ask the model to create you a private GitHub repo and then push your env. After all that's done, it's literally as easy as just going into your cloud code and just saying, "Hey, clone this into our workspace." So, you just give it the link of the workspace that you set up. Um, and then you just
+
+send the URL over to your employees, your staff members or whatever. Basically, what it'll do is it'll create a new folder here called do-workspace that just has everything that you need.
+
+And then, you know what you could do is you could just open this up in a new folder. So, you could go into your YouTube video folder and then open this up. Let that be the parent folder. Uh, and now you have everything that you need. Um, you know, assuming you download and install claude code on the user. So, hey, tell me about this workspace.
+
+And uh it's just going to go through get a highle overview presumably from the agents claude and gemini. Then it'll go through and give me everything that I needed to know. So it's the directive oriented execution framework a powered automation system etc etc. And I can actually go and run um real implementations like I was showing you guys before. All right. If you like that
+
+sort of thing definitely check out Maker School. It is going to be the home for agentic workflows as we move into the new year. Uh, I also offer a 90-day money back guarantee where if you don't get your first customer for an AI or automation related service, I give you all of your money back. That's just how it works because we're very confident in our ability to deliver that. Aside from
+
+that, if you guys have anything that you want to know about Agentic Workflows, anything that I haven't answered here, I'm on a big Agentic Workflow run. So, just drop a comment down below with maybe a question you have or some observation that maybe I didn't pick up on, and I'd be more than happy to help.
+
+Thank you guys very much for watching another video, and I'll catch all y'all in the next one. Bye.

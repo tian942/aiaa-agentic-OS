@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "company": "Example Agency",
+  "offer": "Lead Generation Service",
+  "executionTime": "2m 49s",
+  "deliverables": {
+    "marketResearch": {
+      "file": ".tmp/vsl_funnel_example_agency_20260105_162037/01_research.json",
+      "doc": "https://docs.google.com/document/d/1XkQKPgNfj6WJfvNGOBtpArMnodogRPph56Dksa3oZMo/edit"
+    },
+    "vslScript": {
+      "file": ".tmp/vsl_funnel_example_agency_20260105_162037/02_vsl_script.md",
+      "doc": "https://docs.google.com/document/d/1iPWLzCmD12Qg7Yrl50Mcu-y6NZMUpcoIH_ALJUzuIKU/edit"
+    },
+    "salesPage": {
+      "file": ".tmp/vsl_funnel_example_agency_20260105_162037/03_sales_page.md",
+      "doc": "https://docs.google.com/document/d/1haPfARXd8cEFKM0Z_EpK5FCVf0kthsfhK5m4Qbg4SBY/edit"
+    },
+    "emailSequence": {
+      "file": ".tmp/vsl_funnel_example_agency_20260105_162037/04_email_sequence.md",
+      "doc": "https://docs.google.com/document/d/1yuKgj9ogXw_r_j3gAOZr3RNbedygFx-PN5kdYkERAVA/edit",
+      "emailCount": 7
+    }
+  },
+  "errors": [],
+  "warnings": []
+}
