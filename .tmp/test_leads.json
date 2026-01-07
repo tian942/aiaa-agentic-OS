@@ -1,0 +1,14 @@
+[
+  {
+    "name": "John Smith",
+    "title": "CEO",
+    "company": "Acme Marketing Agency",
+    "website": "acmemarketing.com"
+  },
+  {
+    "name": "Sarah Johnson",
+    "title": "VP of Sales",
+    "company": "TechStart Solutions",
+    "website": "techstart.io"
+  }
+]

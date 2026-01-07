@@ -1,0 +1,53 @@
+{
+  "brand_name": "Monster Energy",
+  "website": "monsterenergy.com",
+  "niche": "Energy Drinks",
+  "timestamp": "20260106_165614",
+  "images": [
+    {
+      "scene_type": "Hero Product Shot",
+      "prompt": "Monster Energy Ultra cans photographed in clean studio environment, perfectly aligned on pristine white backdrop, minimal shadows, bright even lighting highlighting the metallic silver surface and iconic claw mark logo, crisp blue and black typography clearly visible, straight-on camera angle, fresh and energetic mood, professional product photography, high resolution, 8K quality",
+      "fal_url": "https://v3b.fal.media/files/b/0a895314/olwPjZEMyUVXyDAknF05j.png",
+      "local_path": ".tmp/photoshoot_Monster_Energy_20260106_165614/01_Hero_Product_Shot.png",
+      "drive_url": "https://drive.google.com/file/d/10HyPv47_XbaGE7cxVK3Y-Q5h5N7n5sUi/view?usp=drivesdk"
+    },
+    {
+      "scene_type": "Lifestyle Context",
+      "prompt": "Monster Energy Ultra cans photographed in urban skate park setting, positioned on concrete ledge next to skateboard and protective gear, surrounded by graffiti walls and action sports equipment, natural golden hour lighting, gritty urban color palette with pops of neon, low angle shot, rebellious and active lifestyle mood, professional product photography, high resolution, 8K quality",
+      "fal_url": "https://v3b.fal.media/files/b/0a895317/0B0TghoSRzkkuu__43_hN.png",
+      "local_path": ".tmp/photoshoot_Monster_Energy_20260106_165614/02_Lifestyle_Context.png",
+      "drive_url": "https://drive.google.com/file/d/1fuPHoE-dEOMUItfp1mIe6yrBmiXsE_jG/view?usp=drivesdk"
+    },
+    {
+      "scene_type": "Detail/Texture Focus",
+      "prompt": "Monster Energy Ultra can photographed in extreme close-up, focusing on the intricate etched patterns and textured metallic surface around the jagged claw mark logo, surrounded by water droplets for freshness, dramatic side lighting creating depth and shadows, monochromatic silver palette with blue accent highlights, macro lens perspective, intense and powerful mood, professional product photography, high resolution, 8K quality",
+      "fal_url": "https://v3b.fal.media/files/b/0a89531a/J0qfxhgj2-Ex95sbJCQMS.png",
+      "local_path": ".tmp/photoshoot_Monster_Energy_20260106_165614/03_Detail_Texture_Focus.png",
+      "drive_url": "https://drive.google.com/file/d/1zhHkEPCswcbmfk9-I-paABJ_UGu-dWl7/view?usp=drivesdk"
+    },
+    {
+      "scene_type": "Aspirational Scene",
+      "prompt": "Monster Energy Ultra cans photographed in sleek modern penthouse setting, elegantly positioned on black marble surface next to high-end gaming setup and premium tech accessories, surrounded by ambient LED lighting and chrome accents, moody dramatic lighting with blue undertones, elevated camera angle, sophisticated and premium lifestyle mood, professional product photography, high resolution, 8K quality",
+      "fal_url": "https://v3b.fal.media/files/b/0a89531e/LW2NicL95V5EcxGTex1iQ.png",
+      "local_path": ".tmp/photoshoot_Monster_Energy_20260106_165614/04_Aspirational_Scene.png",
+      "drive_url": "https://drive.google.com/file/d/1sdXCDgGHxLvWD64WIb67fsZs2rh6TYu7/view?usp=drivesdk"
+    },
+    {
+      "scene_type": "Creative/Artistic",
+      "prompt": "Monster Energy Ultra can photographed floating in mid-air with dynamic splash effects, positioned against electric blue lightning backdrop, surrounded by ice crystals and energy particles, dramatic strobe lighting creating motion freeze effect, electric blue and silver color palette with neon accents, tilted dynamic angle, explosive and electrifying mood, professional product photography, high resolution, 8K quality",
+      "fal_url": "https://v3b.fal.media/files/b/0a895321/5f4duOns76X3NKrURIMTP.png",
+      "local_path": ".tmp/photoshoot_Monster_Energy_20260106_165614/05_Creative_Artistic.png",
+      "drive_url": "https://drive.google.com/file/d/1xP0NUB9pf8Mufohc2SD1NHboeo4u5neJ/view?usp=drivesdk"
+    }
+  ],
+  "original_image_url": "https://v3b.fal.media/files/b/0a895311/HTtDD3cne5tLH2pA5rfkO_monster_ultra.jpg",
+  "product_description": "The image shows two cans of a beverage. Each can is tall and cylindrical, designed for easy handling. The primary color of the cans is a shiny silver-white, giving them a sleek and modern appearance.\n\nEach can features a prominent logo near the top, consisting of a stylized, jagged \"M\" which resembles a claw mark, in a bold metallic gray color. Surrounding the logo, there are intricate patterns etched into the surface, adding a textured look to the can.\n\nThe text on the can includes \"Monster Energy\" in bold black and blue letters, with \"ULTRA\" written below in smaller blue letters. Near the top rim, there is additional text in black and blue, indicating \"Zero Calorie.\"\n\nOverall, the cans are made of aluminum, as typical for beverage cans, and have a pull-tab at the top for opening. The design is energetic and eye-catching, aimed at conveying a sense of energy and activity.",
+  "prompts": [
+    "Monster Energy Ultra cans photographed in clean studio environment, perfectly aligned on pristine white backdrop, minimal shadows, bright even lighting highlighting the metallic silver surface and iconic claw mark logo, crisp blue and black typography clearly visible, straight-on camera angle, fresh and energetic mood, professional product photography, high resolution, 8K quality",
+    "Monster Energy Ultra cans photographed in urban skate park setting, positioned on concrete ledge next to skateboard and protective gear, surrounded by graffiti walls and action sports equipment, natural golden hour lighting, gritty urban color palette with pops of neon, low angle shot, rebellious and active lifestyle mood, professional product photography, high resolution, 8K quality",
+    "Monster Energy Ultra can photographed in extreme close-up, focusing on the intricate etched patterns and textured metallic surface around the jagged claw mark logo, surrounded by water droplets for freshness, dramatic side lighting creating depth and shadows, monochromatic silver palette with blue accent highlights, macro lens perspective, intense and powerful mood, professional product photography, high resolution, 8K quality",
+    "Monster Energy Ultra cans photographed in sleek modern penthouse setting, elegantly positioned on black marble surface next to high-end gaming setup and premium tech accessories, surrounded by ambient LED lighting and chrome accents, moody dramatic lighting with blue undertones, elevated camera angle, sophisticated and premium lifestyle mood, professional product photography, high resolution, 8K quality",
+    "Monster Energy Ultra can photographed floating in mid-air with dynamic splash effects, positioned against electric blue lightning backdrop, surrounded by ice crystals and energy particles, dramatic strobe lighting creating motion freeze effect, electric blue and silver color palette with neon accents, tilted dynamic angle, explosive and electrifying mood, professional product photography, high resolution, 8K quality"
+  ],
+  "drive_folder_url": "https://drive.google.com/drive/folders/1A03aeLiq3kTl9IluInH7zmOwxVc9BlQt"
+}

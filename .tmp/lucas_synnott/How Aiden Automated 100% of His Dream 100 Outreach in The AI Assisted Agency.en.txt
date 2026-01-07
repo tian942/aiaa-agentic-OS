@@ -1,0 +1,163 @@
+Oh, holy Like that's what they teach inside of this. When you break it down node by node, it's so simple. I would not have fathommed I could build something like this a month ago. Everything inside of the business models that they teach in CA can be automated. 30 deliverables over 2 days on Dream 100. That's insane volume. 20 grand is not unreasonable when you can
+
+say I will have a funnel that'll make you 100 grand a month. Hey, what's up? I'm Lucas Sinnate, one of the co-founders of the AI assisted agency. I am here today with one of our students, Aiden. Aiden has put together an absolutely phenomenal workflow using some of the stuff he's learned while inside the AI assisted agency. So Aiden, thanks for coming on. Do you want to uh
+
+give it a background and kind of what you do, what your agency does? When I came into Client Ascension, I didn't have an agency. I was like absolutely zero. So through all the course content, I chose the funnel ads through like W2 work in the past and the knowledge that they have on how to like do it for clients when you don't have a boss. That really took off for me.
+
+&gt;&gt; Awesome. Cool. And you joined about a month ago, you said. Yeah, I think I had my first like my onboarding meeting less than a month ago. It was like October 12th or something like that.
+
+&gt;&gt; Okay, sick. And before you came in, how much like uh automation or AI experience did you have? Like were you, you know, a power user do building like flows before or like just kind of, you know, a chat GPT kind of &gt;&gt; I would say me and my like 45year-old dad were at the same level of AI use, right? We were using chat GPT to like search online recipes or save
+
+ingredients list or like I'm into tennis so I use it to find me a new tennis racket based on my budget and price point. Right. But I was never doing anything like multi-step or or multi-use function like NADN or Poppy or anything like that? No.
+
+&gt;&gt; Gotcha. Okay. Sick. So when you kind of first joined the program and you kind of came in, you saw the uh you know the different NAM workflows and templates and stuff like that and the the training. What was that like? Was that kind of an overwhelming sort of moment or were you kind of immediate kind of click with you?
+
+&gt;&gt; It was a little overwhelming at first. So I' I'd heard of NAM cuz I I knew AI was like the 2025 social media marketing right when Tai Lopez first dropped that in 2012 and everyone was making a boatload of money. So I'm like I have to get on this somehow. But everything online was like super dense almost like it was a lead magnet. Like hey this is impossible. Pay me to do it for you. And
+
+so on my sales call, the thing that sold me was he he walked me through the VSSL script writer and I was like, "Oh, holy shit." Like that's what they teach inside of this like, "Yeah, I whatever the price is, let me pay it." And then when I got in, first module I went to was enough to be dangerous in Nad and it was just Lucas walking through everything he built and when you break
+
+it down node by node, it's it's so simple. &gt;&gt; That's great. Like that made sense to you kind of straight away cuz I love Nad, you know, it's it makes total kind of sense to me. But have you gotten to that stage yet where like you like kind of just like you get an idea and you can just kind of automatically figure out without even going having to look it up
+
+where stuff goes next like this has to happen and this and this and you kind of just like Yeah. Yeah. &gt;&gt; And Daniel talks about this too like like becoming AI brain just thinking in terms of how AI works instead of how it used to work. And so when I think about NAN now it used to be okay look at Lucas's uh workflows copy and paste but now it's like okay I know how AI agents
+
+work. I know how HTTP requests work. I know how loop items and and flows and triggers work. So that now kind of what Lucas does for all of his stuff, I start with an end goal of mine and I'm able to work backwards because of the courses and and information inside of CA.
+
+&gt;&gt; So you mentioned there like you know the templates and workflows that that we have. Those are the ones you kind of started with. How did kind of using them turn into what you've built now? This Dream 100 kind of uh automation you've got. I started using them and Dream 100 really spoke to me because I had watched a video about it. I think I saw Aan's like original video and I didn't know
+
+who Aean was like two years ago and I'm like that's a ton of work. I don't want to write, you know, 100 sales pages and do all the market research. And so when I got into this and I saw the deliverables were all AI based. I'm like, okay, well that's going to automate Dream 100 a lot. But there's still a lot of manual work to Dream 100 where you got to go find the company,
+
+you got to do the research, you got to funnel hack, you got to find their profile, write the message, do all the follow-ups. And so I knew that if I can automate 100% of client deliverables once they're paying me, I can definitely find a way to automate the deliverables while they're not it. Like everything inside of the business models that they teach in CA. And so I took the parts
+
+that I liked from the funnel copywriter and took out the parts that I wouldn't necessarily have if I was doing outreach. So like I wouldn't have all of the detailed information, the target audience from them, their revenue indicators, their KPIs, but I do have their website and their business name.
+
+And I didn't want to spend an hour on each company. And so I parsed together some tools for uh an agent and had it do it all for me. Um and then kind of kept down that line of thinking until I could just click a button and my dream 100 spit out.
+
+&gt;&gt; Fantastic. And yeah, this is like exactly kind of you're honestly like the first person to do this, but this is like the goal for all the AIA students is like we give you a ton of workflows and put some bunch of stuff inside of it and a ton of training, but I want people to start developing their own specific use cases for their personal sort of agencies because not everyone's going to
+
+run the same thing. I can build, you know, a million workflows, but there'll you someone will use a different tool or use a different uh like, you know, wording of their VSSLs or the scripts or whatever. So, they'll need like to to tweak it. And so, that's exactly what you've done and what I think is really really impressive. So if it was cool with you, do you mind you mind sharing
+
+your screen? We can take a look at what you've actually built. &gt;&gt; All right. So this is the completed workflow and it did not start out like this. And one thing that really got me when I started with Nitn is you get these templates and they're like 15 20 nodes long and there's loops and lines and you don't know what the going on. So you know you start by one node,
+
+you break it down, you test run. I mean this whole thing probably took a day or two of of work to set up. But when you think about the the grand scheme of how much work this saves you, that hour of work is leveraged 10 times more than anything else you're going to be doing.
+
+&gt;&gt; Yeah. Oh, yeah. I mean, imagine if you were actually writing VSSL scripts individually for every single person you were out reaching. That like one VSSL script alone would probably be two two three hours of research and putting together and writing the whole thing.
+
+&gt;&gt; Oh, Elite. &gt;&gt; Yeah. You know, so like you invest those kind of two days now to not have to spend 3 hours a day going forward, you Um, and so just like to showcase how fast this is, we can actually I have in my automation sheet, I have a test that's going to run in the background.
+
+So when I click to execute, it goes and gets rows in this sheet. And this is my D100 automation sheet. And I've kept it small like this on purpose. So I originally had Manis spit out a lead sheet for me. And this uh JSON prompt for Manis is inside of uh this workflow right in here. and it'll spit out something like this for you where it's got a hundred companies within your
+
+niche that are in your revenue target with your estimated employees. So, we're not targeting, you know, huge companies that have in-house marketing teams. We want that 10 to 50 employee count. So, they're at that point where they're making enough money, but they don't maybe have the operational capacity to hire an in-house marketing team. And so, that's why they want to outsource to
+
+you. Um, and then we filter by being able to find a decision maker. So, a CEO or owner, a director of marketing. and we have their email and at least one social profile because that's what differentiates Dream 100 from any other cold outreach. It's that personalization of profile to profile where you can see, okay, this is a regular human being.
+
+He's got content posted. He's doing this stuff, right? So once that spits out, I just copy and paste on these first four into the automation sheet. And that's what this getit rows is. And so I'll usually do five at a time because we recommend starting with five DMA 100s.
+
+Then we have a loop over node and that'll loop over all five items one at a time. Um, and so first it goes into my market research agent and the market research agent is just going to take the the business name and the website and it's going to do research on every single data point that Nick Verge teaches us to uh research in the creative brief to write a VSSL for a
+
+client or for yourself. And then the system messages basically tells it how to output it into a strictly JSON format so that one we save on context window but two when this message gets output into our VSSL script agent. It's super easy for this agent once we give it part instructions on how to parse that data to go into that data and extract what it needs without getting bogged down by
+
+reading that entire uh output. Now, one thing that I like about this market research agent is I use Gemini 2.5 Pro because it has the largest context window that I could find by far, 2 million tokens. And so, I gave it access to Perplexity and then Google search.
+
+And this is something that we can do another video on. But this is free Google search up to a,000 searches a day. So, instead of paying 75 bucks to SER API a month to get 5,000 searches a month, you can just go to Google Search Console, set up your own API, and get for free. Um, and then that goes into the VSSL script. This is we'll shoot out a really good VSSL scripted markdown
+
+format. This is all from Nick Bird's training. &gt;&gt; Yeah. I'm sorry to interrupt. I was just going to say just for for those prompts that when you were doing the VSSL scripting uh agent, uh how did you kind of get put together those prompts? What was your process for doing that?
+
+&gt;&gt; AI baby. &gt;&gt; Love Cloud. Cloud's my favorite. &gt;&gt; Yep. And you actually are are the the reason I switched over to Cloud because I was using Cad GPT. So you can see this is my context window for those prompts that you're seeing right now. And I basically just go in and say, "Hey, can you create me markdown prompts for NAND and I give it as much context as I can.
+
+You know, you tweak it. You know, you probably run this workflow four or five times before you get that output exactly right." So after that, M2 doc just takes that markdown output from the VSSL script agent, creates a Google doc. This moves it into my dream 100 deliverables folder and then um it goes into an outreach message agent. And so the last piece of friction that I had to overcome
+
+was actually doing research on the business, funnel hacking the business, and coming up with that message that was personalized, but also showcase where my BSL script could slide into their current workflow and increase any amount of metrics that they would care about.
+
+And so again, this has access to Google search and perplexity. And then both of these are models that do a little better in copyrightiting. So I have chat GBT5 mini to save on credits for this one.
+
+And I believe this one is Sonnet. Yep. for the VSSL script writing. And then once this, you know, gets information about business and the funnel, it'll create a message that automatically has the doc link from M2 doc in the message and it'll output it into this outreach message here. And so all I need to do is go to the social profile listed from Manis, copy and paste the outreach
+
+message, and it'll look something like this where it's got that doc link. and does a little research on what the company's doing and where my BSL can fit into that company's marketing strategy.
+
+&gt;&gt; That's fantastic. Really, really good. I I I love the personalization of the message there. That's that's brilliant. And then just including like the the link as well and everything just makes it like so streamlined as you just could copy and paste and just go there LinkedIn and just send it over. Yeah, I know LinkedIn doesn't like automation, but that's something you probably could
+
+at some stage as well also automate if you really wanted to, you know, but um that's phenomenal. And like you said, it took you like about like what you said one to two days to kind of get this up and running.
+
+&gt;&gt; Yeah. And it wasn't like I sat down for eight hours. It was like I sat down for an hour and made market research and then I went and had a cup of coffee. And I still work a full-time W2 job as a director of marketing for a construction company. And so I'm like doing their work in between. It's like when I have a free second, I'll I'll hammer out, okay, VSSL script agent. It takes me 20
+
+minutes to to get down the system and use the prompts exactly how I want it just using Claude. And then I was running it without this outreach message and I was doing some Dream 100s and I'm like, "Oh, I I don't like doing this." So all right, let's build this out. So, I'd say like two days total time, but maybe two, three hours of actual working time to build this top flow.
+
+&gt;&gt; Crazy, man. Like, it's so good. And then you you said just before the call, you told me a bit about what your plan with, but the bottom flow there is as well. And I think that's really really cool idea. I know you start building this out currently is just the general idea, but you want to just explain the concept behind kind of the other things that are going to help you with the uh dream 100
+
+outreach. &gt;&gt; Just next step in the dream 100 process is hopefully you get people reaching out to you and say, "Yeah, let's do this. Let's hop on a call." So to be prepared for those calls again, we want to reduce as much friction as possible so we can push out, you know, enough volume that it would be unreasonable to be unsuccessful as Hormosi says. Um, and so
+
+every time we loop on a Google sheet and we create a dream 100 deliverable and outreach message, it'll also do research on the prospect, on the psychology of the business owner because we have those social profiles, and it will kind of give me a dock on how to sell that prospect, what the business is doing, where the gaps um are, what ROI can pitch, if it can find, you know, the
+
+Facebook ad library, the ad spend amount, kind of guesstimate those numbers, and then I just M2 do node move the file um into another folder in my dream 100 and then if anyone does reach back out I already have you know a whole dock on how to sell them.
+
+&gt;&gt; That's phenomenal. I mean so like as you were saying there like by the time you're you're finished this not only are your actual outreach messages and the deliverable sorted but you've even got insights into the prospect themselves based on their social posts and you can know ahead of time what to talk to them about on the call and kind of how you should probably treat them and stuff
+
+like that. Like that is fantastic. That is uh exactly what I was hoping people would start doing with uh with AIA. I've be I've been an NAND evangelist for a long time and I'm glad to see people are kind of getting getting some use out of it and understanding kind of how powerful it can be.
+
+&gt;&gt; The enough to be dangerous is exactly how it sounds. Like I would not have fathed I could build something like this a month ago because I've seen pictures of NAN and I've seen like those Tik Toks where it's like level one JBT, level two was like learning how to XML prop, level three is like learning JSON and then level four is NAN and they show these giant NAN workflows. But when you get
+
+into it and when and how Lucas breaks it down, it's just stupid simple where it's like, "All right, one at a time. Every node does one thing that you need. Don't try and have one node do everything and then just hack away at it." &gt;&gt; Yeah, for sure. Yeah, you'll be happy to know as well that that the uh expert course is going to be completed next week, too. So, uh we have a little even
+
+more kind of detailed going like way in depth. I know one of the things you were interested in was the vector stores and stuff. So, I'll be going over like how to set them up and what they what they look like. You were saying you wanted to use those for like sales pages. Is that right? Well, so originally I had this for uh sales pages. So that was my original deliverable and that that's
+
+where I was creating a sales page and you can see I have this was like 2 days worth of outreach on Dream 100. I got I think 30 deliverables here. And so if you can do 30 deliverables over two days on Dream 100, that's insane volume. And I realized like, okay, I'm selling VSSL funnels to home service. They probably already have a landing page. My USP is VSSL. I need to switch up to a VSSL uh
+
+deliverable. But what I wanted to do was for the sales page agent, you know, you can give it a supervase vector store and then I could go my sales page copy and then I'd have, you know, a bunch of proven sales page frameworks um and ones that actually have, you know, 11 12% CTR, really high conversion rates. And then in the system message be like, hey, this is how I want you to write. Don't
+
+strip the exact content, but that format and that that tone of voice, that structure is how I want you to write. &gt;&gt; Exactly. And I think that's the best way to use uh vector stores when it comes to to to writing. I've briefly showed you before one of my newsletter writer automations. It does the exact same thing. You know, it's not taking the content from it. It's not using the
+
+topics or thing. It's just kind of like trained on examples of writing styles you like or like you know, proven winning kind of formulas and stuff and it helps kind of the structure and the tone and the actual like uh layout of the copy and stuff like that. And that's what I think is the real difference between copy that sounds like Chat GBT wrote it and copy that actually sounds
+
+good, you know. But uh yeah, so yeah, that's that's fantastic. That that'll be a fire when it gets when you got it fully set up. &gt;&gt; The one thing I really like about the vector stores is you can only put so much in these messages before you bog down the context window. So I can't paste in, you know, 100 sales pages or in my VSSL I can't post in 100 sales
+
+transcripts. It just won't have any room to think. But with this and the way it's embedded with this uploader here that you built, it can automatically go to those tags and see what it needs to read without bonking down that context window.
+
+&gt;&gt; Yeah, dude. That's that's fantastic. Yes. I mean, like the the end result there is like as you're saying kind of the beginning, it took you like a few hours of work and that's your entire Dream 100 outreach process basically handled for you. You know, like that's a huge game changer in terms of kind of how much you're you're uh uh time you're investing, especially with as you said,
+
+you're also still working a 9 to5. So obviously time management is very important for that. So yeah, I mean like this is like something I talk about a lot in the course as well is like one of the questions I get is like how should I know when I it's time to automate something and I was always like &gt;&gt; as soon as possible.
+
+&gt;&gt; Yeah. Like honestly as soon as possible but like but if it's something you're doing like every day the chances are you can automate that You know like if it's something that has taken a lot of time and uh you're you're doing uh you know just like get AI to do it for you.
+
+You know, I I a good formula I heard recently was uh figure out your hourly rate. And your hourly rate is determined by your salary divided by how many hours you work per year. And then uh you figure out then what your hourly rate is. And if there's a task that takes you that you've got got to do like on a regular basis and if it's more than that, you know, hourly uh rate, you have
+
+AI do it or you get someone else to do it because it's just not worth or less the number of your time doing it. That's one of the best things about AI is you don't have to hire people for a lot of this stuff. if you can uh you know do it uh kind of automatically. And what's this one?
+
+&gt;&gt; This is just like for my W2. I'm director of marketing and I'm like all right, I I need to use what I've learned so I can you know keep my W2. It keeps the bills paid and then grind away on CA. And so I click this execute workflow and all of my monthly deliverables for my director of marketing position are done. So I have my ad copywriter, my blog writer, my email writer, short form
+
+agent, long form agent. So we do daily short form, we do YouTube content and then promotional agent. So this goes and grabs like like holidays and like that Black Friday that'll spin up, you know, do this like email campaign or make this post about the 4th of July or some like that.
+
+&gt;&gt; That's phenomenal. I love that. So like not only automating your agency, you're automating your your uh job as well. That's that's fantastic. It's that's such a good ego way of looking at it.
+
+Again, you like especially like that if you've got listed liberals you just know you got you got to get done, then just finding out a way to do that like automatically is like just an absolute game changer. Phenomenal work, man. This is really really good. What would you say is kind of the Have you got any other ideas for things you want to automate or things you want to get set
+
+set up next? &gt;&gt; Not right now. No, it'll probably be something to do with sales processes or like you shared this on a call we were on where it's a web hook for Fathom AI.
+
+You take the onboarding transcript and then boom, the funnel's written for everything you gather on. And so I'll probably want to build something like that.
+
+&gt;&gt; Exactly. Yeah. It's like like to me the whole thing is like imagine like how not only are you saving time but imagine how impressive it is to a client if like you're like we'll do a 24-hour turnaround time on your entire funnel strategy your VSSL script your ad scripts you know having and like literally either within like perhaps actually just wait like to make it seem
+
+realistic like wait like you know 3 to four hours and go hey they're done but really they were done within you know 15 minutes of the god being over &gt;&gt; but I think Horoszi says it he's like if you want to make a ton of money you find something that people are already buying you either do it at half the cost half the time or twice the output, you know, twice as good. And so AI can do it
+
+twice as good because they have unlimited context windows and unlimited research capability and they can do it in a quarter of the time because as soon as that onboarding call ends, they start writing and researching and that's just a recipe for boatloads of cash.
+
+&gt;&gt; Exactly. Yeah. Fantastic. Yeah. And then you know from there then there's uh obviously other things that we provide in the course as well like the uh the templates you know for like the funnels and things like that. So you're basically just copy and pasting really and uh you can have someone's stuff up and running. Like I think honestly I want to get everyone to the stage where
+
+you can sign a client and 24 hours later have their funnel live. Like literally be like yeah this is going this is good to go. You know we're we're running ads now.
+
+&gt;&gt; You could charge so much for that. Especially when you're targeting companies that like are established and they know, okay, like first to market is first to cash and 20 grand is not unreasonable when you can say I will have a funnel that'll make you 100 grand a month in 24 hours to deploy tomorrow.
+
+&gt;&gt; Dude, phenomenal work. I'm really really impressed with uh how quick you picked it up and the uh the work you've done. I'm I'm very glad to see that the so the workflow templates and the the contents helped you along kind of building this stuff out and uh this is exactly what I want to see uh you know you guys doing is like building out things like this.
+
+It's absolutely fantastic. But uh yeah, why don't you uh do you want to just uh shout out your agency and kind of your website or like uh what do you uh what you're kind of offering at the moment?
+
+&gt;&gt; My agency is Sequoia Strategies. We just do um BSL funnels for home service businesses. Um and so I coined like problem first marketing. So it just I target home service businesses that kind of have demand genen offers already. So like I don't want roofing agencies or you know anything like that. I want like geothermal pools, hot tubs, high-end remodels, those wants where people
+
+aren't usually waiting for something to happen and then jumping on a million different calls with every contractor to try and get us all sold for the cheapest price.
+
+&gt;&gt; And really cool and uh really happy to have you in the program. Really happy to see what you're what you're doing and hope you look forward to some of the new stuff we got uh coming. We've got our new automations agency coach joining next week who I think uh you're going to very much enjoy talking to about some of the stuff you're you're working on uh along with whole new course being added
+
+all about running an automations agency which also include new workflows and things like that too that you can use in your own business as well. But yeah, really appreciate hopping on the call man really good to you. For anyone that wants to learn how to build stuff like Aiden has here, go to uh client ascension.ai and watch the VSSL from the incredible Daniel Fazio. If you haven't
+
+followed his channel, go subscribe to him on YouTube. And uh if you want to know a bit more about kind of the work that I do here at AIA, you can subscribe to my newsletter at appliedleverage.io.
+
+Uh Aiden, again, thank you so much for coming along and uh I will see you on the next Q&amp;A call. &gt;&gt; Yes, sir. &gt;&gt; Awesome. I so much.

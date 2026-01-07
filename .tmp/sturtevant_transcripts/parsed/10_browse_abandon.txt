@@ -1,0 +1,616 @@
+ 
+10% off. Use this code, claim my
+2026 and beyond. People just are kind of
+And for this last email, it's going to
+And inside this email, we want to have a
+And so I just copy and pasted the
+And then also has not been in this flow
+And then you want to do this exact setup
+As you can see, this is not as simple as
+But really, we don't need to change
+But this is what we like to do here for
+Claio, and then reenable it. That should
+Clavio is going to generate it for us
+Clavio. So I'm just going to do this
+FAQ section. And then for email three,
+FAQs right here. So, it's going to be
+FAQs? For this specific email, they were
+Highly recommend you check it out. Now
+However, they're missing one metric, and
+I can delete this and do this right
+I can go back in configure the AB test
+I deleted the time delay and we are now
+I'm going to exclude the price cuz maybe
+I'm going to upload everything as
+I'm not going to do this now just for
+I've always seen that that performs
+In this case, we want the URL that the
+It's a sock brand. We know you're ready.
+Just would need to add the creatives for
+Now we can do that. You can go and copy
+Once we do that, it's going to take us
+Right now you, yes you, have people
+So, if you click onto this email, we
+So, there are a few FAQs to do with
+So, usually something like that can work
+Somebody looks at a product page. And
+Something you can also do if you ever
+Then we'll have the Clavio dynamic
+There's a good balance of making sure
+This app right here, it's where I like
+a cart abandoned flow and this is not a
+a customcoded website or anything like
+a just a frame. It's literally just a
+a little bit more on FAQs instead of
+a little bit more urgency. like don't
+a template from Clavio called the browse
+abandoned flow, and then some of the
+abandoned flow. So, we're going to say
+abandoned flow. You could also build
+abandonment at the top. We're going to
+about the trigger, what fired, price,
+actual person. You want to personally
+address for this button. I can pull it
+address, you want this right here. Then
+all set. It is all functionally set up
+all that we want to do right here is
+also adjust the dynamic section if you
+an email like this within Figma, this is
+and all your other abandonment flows
+and email three. But what we're going to
+and everything. So, if you wanted to
+and it's going to plug in this flow
+and leaves, we want to send them this
+and paste the prior dynamic link that we
+and then we are going to create this and
+and then we have our preview text. We
+and what offers work specific for you.
+anymore. But I found it's highest
+anything too much. I just like to focus
+are a couple different options that we
+are a lot more flows to cover. So if you
+at a specific product and then left
+back option. So, this is where you could
+be a textbased email. So, I'm just going
+be eventurl and so it's going to take
+be whatever you want it to be and you
+because that should fire a different
+because this is a client account. You
+before anybody receives any of these
+behind Rebel Bro. We started this brand
+best AB tests that you should run. If
+bests sellers and then we show some of
+bestsellers button, we want to link them
+better. Then we can go into actually
+bit different because Claio added this
+bit more aggressive because it makes it
+block. We'll have this button and then
+boom, now it's going to be highlighted
+brand. As you can see here, hey there,
+brands, and we've generated $150 million
+brands. Today, I'm going to walk you
+browse abandoned flow. Somebody looked
+but I can do include price. And in this
+but they didn't like it? They might be
+can book a call with us below. We built
+can change this to whatever we want. Do
+can click save, you can test it,
+can exclude buttons, you can have shop
+can look right here. It's going to show
+can preview this with the dynamic
+can roll with this. But I want a higher
+can see this icon called smart sending.
+can still convert for you. And so it's
+can test if this is properly pulling for
+checkout abandoned flow. This is a
+click right here, and it's going to give
+clicked this, we want to link them to
+clothes for boys with exceptional
+collection page, they didn't view the
+coming out to be. We go then to the
+consists of four emails. Let's get into
+converting browse abandoned flow. There
+converting email. So we are going to go
+converting to hit them with emails while
+converts better for me. It's a little
+cool design features right here. Shop
+correct. We want to make sure anybody in
+correctly. Now, we can build our email
+could do. We can see right here there is
+couple of times because this current
+create AB test section right here. Once
+create a highconverting browse abandoned
+creatives of these emails. Now, you can
+creatives. We can do that for email two
+customers. I'm going to blur this out
+day before we send the second email. And
+default section. So if there's ever an
+default tag and I'll show you that in a
+depend on your brand and your margins
+developer or something. But now, let's
+different copy up at the top. Maybe have
+directly to that page. Then we have this
+disable your integration with Shopify,
+discount, maybe they don't want to use
+discount. And thanks for rolling with
+do a social proof section and then a
+do something like nike.com and then
+do with the creatives is we're going to
+dollar off, you can do a free gift,
+don't want them to receive these emails.
+don't want them to send browse abandoned
+don't want to wait 10 minutes because
+don't want to wait a day cuz that person
+down here, just for the sake of time, I
+downloaded all these images. Now, we can
+duplicate this image block a couple of
+dynamic clavia block showing exactly
+dynamic link is going to take the person
+dynamic section, we can click this
+dynamic section. I'm going to drag a new
+editing this template right inside of
+either design your emails within Figma,
+email 4, we like to do something fun
+email address and they looked at a
+email and then we're all good to go. We
+email cuz this is a very high converting
+email design if you want to check it
+email inside of Clavio. And I'm not
+email is a graphic based email. So, I'm
+email marketing flows, you can watch
+email number two and then three. So,
+email right inside of here. And then we
+email which we can view it right inside
+email, we ended up deciding to mix the
+email, you can see it's just a table.
+email. And that's why it works so well.
+email. And then to build the rest of the
+email. So, for all of my abandonment
+emailed profiles. That's what smart
+emails and expect to make sales. See,
+emails or anything within this flow,
+emails. So, that is the flow that we are
+essentially how we would then bring this
+exactly how you are going to do the
+exactly what that left behind. And I
+example email, this textbased email
+firing the flow. This viewed product
+fix this and get it to works. Every once
+flow emails, I want to turn this
+flow inside of your email platform,
+flow is going to be this viewed product
+flow to and recover sales. If you do not
+flow, card abandoned flow, checkout
+flow, the checkout abandoned flow, which
+flow. If somebody places an order, we
+flow. To be extra careful, I actually
+flow. We want them to go into the cart
+flows. So, make sure you turn that one
+focus here. We're going to have some
+for another video. But that's exactly
+for each customer. So, you can do
+for it below. It's completely free.
+for the exclude price one, I'm going to
+for the past 30 days, it's correct. If
+for this image. You want to do a top
+for we already have this first email.
+for? It has some text. You can edit this
+frame. And then we have a text box right
+from the dynamic section here. What this
+from you, they clicked on that email,
+generate millions of dollars in
+get into actually creating this flow and
+get them with a discount. So, we want to
+getting too crazy or confusing. What
+give social proof and we show other
+give some social proof like having these
+give them a discount code right up at
+go into the plain text email, which when
+go to edit email right here. I'm going
+go. And something like this typically
+goes over all four abandonment flows and
+going to change for each customer,
+going to do that in this case. And then
+going to go into the specific designs. I
+going to just use their template right
+going to pull the product image. Link
+going to put in our oneh hour time delay
+going to rock with for today. Let's get
+going to show the price right here. And
+going to show them exactly what that
+going to your website looking at
+have other videos on design. But
+have the dynamic section here. You can
+have this currently set up within your
+headline. Well, what are you waiting
+here by mixing in a textbased email from
+here is I can exit. I can click done and
+here we go. We have these set up. Now,
+here, and you can adjust this however
+here, we can create a flow. Now there
+here, which there's one missing. Let's
+here. And then we are all good. Let me
+here. I'm going to name it test browse
+here. Let's upgrade that sock drawer.
+here. Right now, we can change this to
+here. We have the logo. We have the full
+here. You can see Clavio has this sort
+highly recommend it. But if you're short
+hour before we send this first email. We
+hours, it's going to skip them from
+how this is going to look. You can
+how to build this in Clavio. Just bear
+how to upload these emails by using
+ideas. Goes over also the site abandoned
+if in that same time that person also
+if somebody received an email campaign
+if that person just viewed that product,
+if you want the product name, you have
+if you want to see if we can help you as
+image blocks. So you can see how this is
+image, you want it to be a dynamic image
+images. So, here I am here just
+important to understand that this is not
+in a while, it breaks, but disabling
+in e-commerce sales in the process. So,
+in loss sales for e-commerce [music]
+in on the results. I have this talk that
+in the email. And then I can do the same
+in the funnel, such as adding it to cart
+insert the price into this email, all
+inserted a product feed for you, which
+interested in something else. So, this
+interested in your product that you have
+into Clavio is you would have to use
+into Figma and we are going to create
+into building this inside of Clavia. So,
+into someone and look at everything
+into the cart abandoned flow, but what
+into this texton builder right here. And
+into your email sending platform just
+is directly to the product that they
+is like all they have to do is like say
+is perfect. You can switch this with any
+is we'll put that link in. It's going to
+is why I saved this discount for you.
+issue with the link or the dynamic
+it as email one test include price. So
+it good. You have to set up the flow,
+it has the trigger. It waits 2 hours and
+it there. And then price right here. You
+it to your main homepage. So, maybe I'd
+it's Ashley here, the Rebel mastermind
+it's going to double check that the
+it's showing somebody exactly what they
+it. So, here is a simple strategy that
+item that they viewed. And I'll go over
+just going to clone these. Put you here.
+just keep it simple. We threw in some
+just like this. just name it name it
+just pushing one specific collection.
+just rename these to browse abandoned
+just send people if it didn't work. For
+just throwing in one email and calling
+kind of like to say in the last seven or
+know this is blurred, but you can see
+left behind. And since they have a
+left behind. You can adjust the copy to
+left section right here. You want the
+left. Well, if somebody viewed a product
+let's walk through the rest of these
+like an actual friend sending you an
+like for example what that could look
+like this is going to convert because
+like this. But essentially, we've
+like this. Can bold this section and
+like to do this. And then boom, we're
+like. We do the dynamic clavio block. We
+link. So for the link, we want to use
+looks at that specific product page.
+maybe I want to test including the price
+maybe for preview text? I'll be we held
+maybe for this one I'm going to do name
+maybe including the price within your
+metric we were just talking about. And
+metric which in this store you can see
+might not be interested anymore. We
+miss out on thousands and thousands and
+more depth for the browse abandoned flow
+much you can do inside of here, but it
+nail the timing, and know exactly what
+name and then the price. And you'll also
+need to basically guide them back into
+now buttons, whatever you want. For now,
+of Clavia. So we have our subject line
+of Clavia. This is going to target
+of here. But even Claio gets some things
+of sales resistance. And the strategy
+of template for us right here. It has a
+of the other items or go back to this
+off. Now, let's get to the actual
+okay if you're short on time to use
+on mobile. And this looks perfect. It'll
+on time, you can also do it right inside
+one of these products. And I can show
+one of these. So if I wanted to recreate
+one we're going to do exclude [music]
+onto it. We want to create texton email.
+or it's not showing any numbers, then
+or placing an order. I've used this flow
+our brands. Typically here, it makes
+out email flows for over 200 different
+out. You can operate within Figma. I
+over. You can have a default where it
+part is within Claio, we can set up AB
+people aren't going to be interested
+people in the same flow at the same
+people that we could send this email
+people who view a specific product on
+people will click or engage at a higher
+perfect. And again, the nuance with
+perfect. And then we can publish this
+person left behind. And so if you don't
+person looked at. So, if I click this,
+placed order zero times to starting this
+platform you're using, you can head over
+platform. So, we're going to drag in
+popular categories, you can have it be
+pretty much all set. And then boom. All
+pretty well. And honestly, like if
+price. And so then what I'm going to do
+problem is it's a bit limited in how
+product metric that I was just telling
+product page. These are 201 potential
+product section. For this specific
+product, then they're going to get fired
+products and not ordering a single
+products are definitely fun. And so
+products, we don't want to barge them
+products. What I've done here is this is
+profile follows these rules. So this
+pull in first name as well if we wanted
+quality made to last. Our mama
+random stuff. Then we'll be able to
+rate if they don't see the price until
+really hits well for the customer in
+received an email within the past 12
+receiving this email. Now, we don't want
+recovered revenue. So if we go to flows
+reenabling usually fixes it. If you have
+remind them of that discount and give
+rest of these time delays in and then I
+right here and show you one of these. We
+right here before we send the first
+right here we can see on October 29th
+right here. And you can see right here
+right here. I just copy and pasted this
+right here. So we have the include price
+right within Claio. And we'd actually
+rule right here, checkout started zero
+sake of time. If you want to see exactly
+says um for example, you can just take
+scroll down, we can see skip recently
+second. But essentially what we do here
+section if we want. Right here we can
+section right here. Delete you. So now
+section stops working there's this fall
+section, this if somebody clicks this
+section. You can see it looks a little
+see if you can find it. But essentially
+see some stuff pulled down here because
+see this viewed product section, this
+see what it looks like on desktop and
+seem like for the customer, their order
+send one day apart because somebody just
+sending is. And so, if anybody's
+sense. They were so close to buying,
+set up a high converting flow like this
+show the item that they left behind. And
+showed that they were active on our
+similar. We're going to mention their
+skeleton, I'm just going to put these
+slice because we're going to add that
+slowly going to waste. That's why in
+so days because how most sites are set
+social proof for this email. And then we
+social proof. And we like to answer some
+some reason, the event didn't get passed
+somebody added the cart from a
+somebody adds to cart, we obviously
+somebody's viewing multiple different
+someone has added to cart. We're going
+something like this. And then you'll see
+something like your order is ready to
+something super important that we want
+sort of discount. Now, it's going to
+sort of social proof section. You could
+specific products that you want to show
+specific setting off. And I see brands
+specific to your brand. What are your
+start to mess [music] things up because
+strategy. And then we're going to wait 1
+strategy. Now, this is where most people
+stuff. So, you want to reach out from an
+supporters mean everything to us, which
+test if we want right here. But I'm not
+testimonials right here. And we also
+tests on these emails. So if you wanted
+text directly inside of Clavio. The only
+texton editor. Now we can put in the
+that at the top of the email before we
+that discount on that product. So, you
+that in these second emails have this
+that is the added to cart metric. If
+that person to whatever the event URL
+that same formula from the other email.
+that specific product, which these
+that this is firing whenever somebody
+that we would have to do here is we
+that we're going to use to do that
+that's the only thing where you'd have
+that, you're going to have to talk to a
+that. And then a social proof section.
+the abandonment. You can do percent off,
+the buy button without raising any sort
+the dynamic section. So this is what is
+the exact strategy that we've used to
+the filters. You can see that the
+the fonts, you can change the colors,
+the moment. You can use wording like
+the money you're spending on ads is
+the products right here if somebody
+the team or from the founder. It's going
+the top of the email. We want to address
+them a little bit more education on your
+them to buy is going to be easy. You
+then also what it's going to look like
+then it sends this browse abandoned
+then they have profile filters right
+then we are all good to go. You can also
+there is our first email. And that's
+there were 201 people who we have their
+these designs, again, check out this
+these website visitors might be
+they do. So, if we click into this
+they go to the page. And what I can do
+they might still be browsing on the
+they viewed a product, and then they
+they're not going to buy. Maybe we can
+thing. Which means if you don't have a
+this email two times right here. So
+this email, this email, and then also
+this fancy section right here, which is
+this flow has not gone to checkout
+this for you for now with a dot dot dot.
+this image block right here. And then
+this is product feed. Essentially,
+this is the product. Then it has the
+this is what's going to be the dynamic
+this is where we can create the email.
+this one, it's going to be pretty
+this slice feature here. And you can
+this to be turned on for flows. Cuz what
+this video and I will see you over
+this video, I'm going to show you how to
+those three right here. I'm just going
+thousands of dollars by having this
+through exactly how to do the same. It's
+time. So, just as like a fail safe, I
+times and then put in the rest of these
+times starting this flow. That's
+tired of seeing only corporate based
+to AB test the headline or something or
+to be a personal touch point, which
+to best sellers. Whereas if somebody
+to design emails. I have a video on
+to do at each stage. So, if you want to
+to do is if we go into this email, we
+to do that. I can just click preview
+to drag another email section right
+to duplicate this email right here a
+to generate tens of millions of dollars
+to go over into this dynamic section and
+to have its own link. And so if we go
+to metrics. And the specific metric that
+to offer. That doesn't mean that getting
+to put in this. You can see like the
+to say zero times since starting this
+to see that it's not there. That's
+to upload different image slices. That's
+trigger it's going to be take the person
+trigger right here inside of your Claio
+trigger right here is that viewed
+trigger, you can see that this is what's
+turned on within their abandonment
+two right here. somebody can shop some
+up is people can actually add to cart
+upload the images right inside of
+upload the links. You can pull the link
+upload these emails as images. So I
+upload these images within this
+uploaded one big image right here, which
+uploading as images is each image needs
+uploading the images. I'm going to
+urgency as you want here. And then for
+us. You can see it feels personal. Feels
+used for the button in the other email.
+video which shows how to upload emails
+video, I'm going to be doing it inside
+viewed a product? I don't want these
+viewed. Pretty sweet. And then boom,
+views a product, we're going to wait 1
+wait another day before we enter some
+wait too long since it's very popular at
+walks through these even in a little bit
+want to also see the complete guide to
+want to go to the text. You can change
+want to have different slices for each
+want to pull specific information, if
+want to show other products because what
+want to show some other products as
+want to skip the Claio dynamic section
+wanted to shop other items. So that
+was which for browse abandon email and
+way of bringing them back and buying,
+we are going to be using to fire this
+we click this, it's going to duplicate
+we go to the exclude price. We're going
+we have the full email right inside of
+we pull in some testimonials with some
+we use that you can steal as well.
+we want to build the plain text email,
+we want to treat differently. Then also
+we wouldn't want to do because this
+we're all good with this one. The best
+we're going to do is after somebody
+we're going to enter a discount. Put
+we're going to look at the triggers and
+website. So, we want to wait one hour.
+website. Sometimes if you wait a week or
+well, book a call below. Either way,
+well. Boom. Super simple. Add as much
+what Claio has done here is they've
+what that person left behind. We want to
+what this profile filter is saying is
+what you have to do is you have to
+whatever one you're using. In this
+whatever platform you're using with
+whatever you want to do. And then you're
+whatever you want to do. And this is
+whatever. You want to show what they
+when we're building the email, we click
+which is what I'm operating within here.
+whoever receives this email. And it's
+will slot in the emails. Now, I like to
+with me as I go through the full
+with one goal in mind. Create cool
+with subject line ideas and preview text
+with the same flow. That's correct.
+with this variable right here. That's
+without going any further. And so, if
+without having to do all this work, you
+without viewing a product. So, what if
+would be a viable option for having this
+would just need to adjust the creatives
+would up I would export these images
+wrong, which I wish they didn't, but
+yes and we will send them their order.
+you can let this test run and then check
+you cannot just throw in any series of
+you click preview, you can actually look
+you go inside of Clavia or whatever
+you have the right content, but not
+you have their attention. So, we have
+you have to do is you have to click, you
+you know exactly how to create a high
+you see something you liked and then
+you that formula, which is pretty sweet.
+you that once we're inside of Clavio.
+you wait like a couple days, these
+you want this doc, I'll have the link
+you want. You can include buttons, you
+you're able to pull in dynamic products
+you're super short on time, something
+you. So, if we click use template,
+your own flow, but in this case I'm
+your website, but don't go any further

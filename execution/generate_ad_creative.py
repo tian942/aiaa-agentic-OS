@@ -118,7 +118,7 @@ FOR EACH AD INCLUDE:
 Make copy specific, benefit-driven, and action-oriented.
 Follow {platform}'s ad policies (no exaggerated claims, misleading content)."""
 
-    return call_llm(client, system_prompt, user_prompt, temperature=0.8)
+    return call_llm(client, system_prompt, user_prompt, temp=0.8)
 
 
 def main():

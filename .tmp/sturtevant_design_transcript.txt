@@ -1,0 +1,173 @@
+This is going to be the most tactical video on how to make email designs that actually convert. And it's not just going to be like, "Oh, you should do this." I'm literally showing you exactly what bad is and then me recreating the email and what good is. This is exactly what we do at my agency. We've done over $100 million in the past 18 months. We sent over a billion marketing emails and
+
+we kind of know what works. So, I'm going to go over through all these examples that I personally have done with my team. So, let's go over these examples. We're using big brands here so that it's easy for you to understand and easy for you to see. uh kind of like the before and after and what it looks like because believe it or not, a lot of these big brands don't know what they're
+
+doing with high converting email design. So, I'm going to show you exactly what you should be doing. So, first up, we have this Calvin Klein email. So, this is actually what Calvin Klein's email looks like when you sign up to their email list. Now, there are a couple things that stand out. The first thing that we want to consider is the customer as they're coming in. The hero image is
+
+just a big shirtless dude, which I mean, yeah, that's cool and all, but really, we have men and women who are coming into this brand. And so it's really important with your product imagery what you're using. So you can see in this imagery we went with a actual just like featuring men and women using the product and so the person could see potentially this is somebody who uh who
+
+matches them and what products they would buy. So that's going to be super important right off the bat that we want to do. This also matches their website aesthetic. Nowhere on their website do they have all these colors. And so you sign up to the email list, you get all these colors. Just doesn't match the brand. And so we want to make sure that we're matching the brand here. The next
+
+thing that's going to stand out is right here. We have the welcome and then the button with the discount way up at the top of the email. When somebody's opening up their email, they are seeing they're only seeing like up until like this point. So, you're just seeing this dude and his jock right when you open up the email. That's not what the person signed up for. They're here to get their
+
+discount code and they're here to leave. They we need to make it as clear as possible. Hey, welcome to Calvin Klein. Here's your discount. Go shop on the website. That's what we want you to do.
+
+So, that's what we want to do right here. And then we just give a little bit of brand information. Remind the discount code throughout the whole email. and then shop by collection for ease of shopping. Shop men and women might just might not be enough. And so we want to give out a couple of different recommendations here. Then always have a footer with buttons right
+
+here. You'll notice that we have clear shop now buttons for all of these sections and it's just flows really well. We have nice clear and big buttons right here throughout the whole email.
+
+Now the biggest difference here is updating the product imagery in this hero section to make sure it's calling out the actual uh customer because we've had different hero sections result in double the revenue for brands just by the images that we're picking. So, we want to make sure that we're taking that into account. Always have the button and the discount code up at the top of the
+
+email for the welcome email and make sure it matches your brand vibe. Super important for welcome emails. Now, let's go into Whoop right here. Tech brand. If you haven't seen them, wearable fitness tracker. Um, but essentially this is their before email. What's something that you'll notice? Well, first it looks kind of lame. It's just like kind of just like text and then some images here
+
+and there. There's a lot of text right here. It's a little bit small. The first button is down here and it just says learn more. How lame is that? So, we wanted to reconstruct this whole thing and like what this email is about because they offer a free trial. You can literally get a Whoop sent to your house for free and try it out and then you don't pay until after like the first
+
+month. I believe it's the first month. And so, we want to make our call to action show how much value this is. So, we changed this email to talk about the free trial because that is our offer.
+
+That is what you get when you buy our product. So, we want to feature that. Um, and then we just made it more fun with the copy. That's not on the copy. That's not on the design side. This is copy. So doing something instead of being like we're not like other wearables. We made this when like the Kendrick song they not like us was big.
+
+So played on that. They not like us. Their fitness tracker we're performance partner. Yada yada. Use your free uh get your free trial with Whoop today. Start free trial. Boom. Then we actually show what the product is like, what the app is like because that's what people care about. And then we pretty much just showed what they were showing in a different layout. It just it just flows
+
+a little bit smoother. We have the background change right here in this infographic. I found that it's harder to read when your eyes are going back and forth. We prefer to stack. Then we end with the free trial right here. And then of course in the footer, we shop by category, accessories, and memberships.
+
+We want to give people options to browse further if they didn't find what they liked in this original email. And so we moved this button way up at the top. We adjusted some of the copy. You can see this hierarchy right here. It's super simple to see. Right when the person opens the email, they have something to click and there's a clear value proposition. Then we just cleaned this
+
+out. made a little bit immersive so it's not as flat like right here by having this section go over having the phone go right here and this just makes it super clean um and a lot more immersive for the customer. So that is Whoop. Now let's go to this next one. So this is Aloe Aloe. It's pretty much like a Lululemon fitness clothing. So this was a site abandoned email. So this was if
+
+you go to the website, you don't view any products and then you leave. Okay? Or it's a collection. I meant it's a collection. So you're this is this is what happens when somebody is looking at tops. And so, um, this is the email that you receive. You'll see there's a weird thing going on here with light versus dark mode in the email. Um, which happens when you use Claio or whatever
+
+email sending provider sections. We don't like to do that because in light versus dark mode, it's going to give you a ton of different stuff because for different users in their uh, inbox, they prefer dark mode. With Clavio or intext HTML sections, it's going to alternate the colors. It's gonna mess up your email.
+
+And actually, a lot of people think that you can't do full image emails, but you can. We do over $10 million every single month with pure image-based emails. I don't know who started spreading this propaganda that you c you can't do image based emails. You quite literally can.
+
+And look at all the top brands and a lot of the top brands crushing from email. They're doing this. Trust me, I've tested this. You're totally fine doing full image based emails. But you'll see right here, trending tops. A couple things that stand out. There is no button in this whole email. You have shopwoman and shop men up here at the top, but we never want those to be at
+
+the top because that distracts the customer right at the beginning of the email because that's not what the email is about. There's no clear buttons for each of these individual products. We need to have individual shop now buttons so the customer knows that they can click that item. You'd be surprised that has an impact on clicks. You want to make sure you do that. And then you want
+
+to give people a general option like shop all tops. What happens if the person viewing this email doesn't like any of these tops? They're just going to leave. But what if you finish with like a general like keep browsing or something like this? like shop all tops.
+
+We always want to finish our product sections with further browsing if you have more products. So what we did here, we made this just a little bit more designed. Made this during the winter time. So we used like this winter background and we said serve in your new top. These deserve a second look. Grab your new piece. You deserve it. Big button right up at the top of the email.
+
+That's going to be a theme because that is what high converting design is. That's a fancy way of saying put big buttons throughout your email and put one up at the top in the hero section so the customer sees it right at the top.
+
+That is what high converting email design is. Um, and so what you can see here throughout this email is look at how this flows. See, we used a transition, a little gradient down here, transitioning from the white snow into the white background behind this product section. It makes the email very immersive. It makes it easier to scroll.
+
+So that's what we're doing here. Then we feature some trending tops. We make it a little bit cooler than just like plain products. And so we have like the these little outlines and the black and white shop now. We changed the product grid to doing like one layout, two layout. This is what you need to keep your customers scrolling and keep them engaged with your emails because if they see this,
+
+this is boring. This is a little bit more. It releases a little bit of dopamine in your head. Then of course, finish with shop all tops. Then of course, finish with shop by category buttons in the footer in case somebody might not be interested in a top, but they might cuz like they they go to they scroll to the bottom, they don't like these tops and they're like, uh, I just
+
+bought a top from Lululemon. Shop by category woman. Eh, maybe I could go for some for some aloe. Click on woman and then boom, they can start shopping. That is what we want here. There's an abandonment email. Address the abandonment in the call to action right here. Perfect. That is Aloe. Now, let's go to right here. Birkenstock, Boomer brand. It Birkenstock is just stuck in
+
+marketing to 50 year olds. Meanwhile, a lot of their sales right now are coming from the younger audience. So, we want to appeal with that design style. This just looks There are a couple things wrong here. You never want these navigation buttons up at the top of the email. Like I said earlier, when you open your email and you look on your phone, this is all you see. And it's
+
+just distracting. There's so much going on. All these call to actions, decision fatigue in humans. You're much more likely to bounce. That's why we always put the navigation buttons at the footer when the person could potentially be ready to browse. So, we put these in the footer down at the bottom after somebody has viewed these products and then they don't like what they see. Keep it super
+
+simple right when they open the email. So, this was an upgrade letter leather weather. Um, then right here, this button's super small. Want to make our buttons a lot bigger. Um, you can see just the big difference here. The bigger the button, the higher the clicks.
+
+That's another principle of high converting design. Um, and so we have a big button right here. I like how they have individual shop now buttons, but they're very, very small. We want to make that a lot make them a lot bigger and clear. Make sure that they can see this. It looks like this got messed over, messed up when I brought this. At the very least, we need to underline the
+
+product section, which is what we did here. I want to show a variation of us not having the uh not having clear shop now buttons, but you can actually underline these products too and it doesn't have an impact on click rates.
+
+So, you can see it's just a super super simple product grid. Not very immersive of an email, super flat and just not very fun. And so, what we did leather weather, this was a fall email and so we made it fall vibes brown right here. And then we feature the product. You can see the immersiveness right here. This is what she's wearing. Um big button up at the top. make it immersive over this
+
+section to help it flow into this uh white background down here. Feature the different colors here, which we like to do for our uh for our um brands that sell clothing. Always finish with a shop all button. Then they also have a follow section. So, we wanted to add that.
+
+Then, we want to avoid all of these different uh call to actions down at the bottom. It's going to overwhelm. Let's keep it simple. Products and then tag us on Instagram. We have a photo gallery right here. Um and um just to show that.
+
+And then also we have the afterpay. Shop now pay later in case price is something that people are worried about. And then shop by category of course in the footer in case somebody uh might want to shop something else. Um so there's the before and after for Birkenstock. Now let's rock and roll over to a fun one. We have Rare Beauty. So this is one. This is Selena Gomez's brand. And again this is
+
+another instance of you'd be surprised how much you see these big brands mess up. I received this email in April. There's a block right here for the cyber week event. What is going on here? How do you not catch this? I'm I'm I'm always so shocked with these big brands that just have these mistakes. Um but same sort of deal with our prior welcome email that we're showing that that we
+
+went over. Um we want to give the offer super clear right in the person's face. You have 10% off your first order of $30 plus. Here's your discount code. Go shop. The person might not want to read all this BS. Look at how small this discount code is. If I'm receiving this email, I'm you people aren't reading your emails. They're not going, I created rare beauty because I wanted a
+
+challenge. No, they're skimming the email. And if you don't hand them a click and you don't hand them the information and the discounts on a silver platter, they're not going to click and they're not going to engage.
+
+This is me handing the click in the sale on a silver platter. The person signed up for their discount code. Enjoy 10% off. Here's your discount code. Go shop right when you open the email. Rather than going through this and then I'm like, uh, where's my discount code? Uh, cyber week. What's going on for cyber week? And then you're worried about this bunch of stuff. And then the discount
+
+code is right here. Crazy. I don't understand why we're doing this. The individual products, they need to have shop now buttons just like this. This is what we want to do. And then clean up the footer a little bit. Add the shop by category buttons. Make this a little bit cleaner. And finish with a general shop now button. Maybe the person doesn't want these three items. Put the give the
+
+option to shop other items right here. And then of course, we have just like different imagery right here. Make it flow a little bit. have it uh give it a little bit of life right here uh was kind of the goal here. But this is what is going to be high converting. Give them the click on a silver platter.
+
+Liquid Death. I wish Liquid Death had better emails because they're such a fun brand and I love them. So, this is the before. Uh Eternal Blackness never felt so soft. I love the copy. Their copy is amazing. More stuff you don't need.
+
+That's really funny. Um click the button says hell yes. I think that's great. It's just their design. The button is way too low. It's too small of a button. We need to make it a little bit bigger.
+
+We need to have it higher up in the email. Um, and let's let's add a little bit more fun into these emails because they've so much life with their copy and brand. Let's add that to design. Let's make it high converting because it may not convert. Having a bunch of like fun elements in your email designs may not convert as much right off the bat, but over time you'll get less unsubscribes,
+
+more people on your list because they like opening the emails and seeing the graphic design. That's stuff that people like and that gives dopamine in their heads to where they will keep uh keep opening your emails and eventually convert down the line. And so what did we do here? We changed the headline dress to kill. We added this little like cool little element right here. And then
+
+to go with the kill, we had we added blood. And then we uh added that line eternal blackness never felt so so soft. Added a bit of copy. It's for those who refuse to blend in, who embrace the dark side, and know that wearing black is always in season. Banger. Shop black pieces right here. So just making it super clear. Shop black pieces. You don't just need to shop this item right
+
+here. Shop black pieces. Um, and then we feature the product right here and then go into a little bit of product education as far as what this specific product is and then own the darkness right here. Making it a little bit fun, earth friendly production, supreme comfort. Let people uh get behind the brand. 100% sustainable cotton right here. Um, if I could, if I would improve
+
+this a little bit, I would probably try to make this section flow a little bit better. I don't like how abrupt it is right here. Um, see, tried to do a little gradient down here, but kind of was working fast here. Uh, but that would be one thing where I'd try to make this section flow a little bit smoother.
+
+But I love this product section right here. More stuff you don't need. And then just adding some life. Look at the little like paper clip. There's a paper tear down here, which is super cool.
+
+Gives it a bit of life. Um, and then, um, so this is a specific product. And then a testimonial. Um, love it. And it's a funny testimonial. It's softer than the inside of our king-sized coffin and it's killer. Uh, look, scared our neighbors into scraping the fish off their car bumper. I'm rating it a perfect five out of seven. Add some life with funny testimonials. That's what
+
+builds community because they're like, "Ah, look at the look at the community. Look at the buyers they have." Then also featuring some other products. Shop now. And of course, shop by category in case they don't want to buy a black tea, they have an option to buy other stuff here at the bottom. Boom. Perfect.
+
+Engagement. Now, we have a super straightforward one for UGG. Um, there's just way too much going on. Right? When you open this email, customers are going, I bet that their customer scroll rate is so low because there are just so many options. There are 1, two, three, four, five. There's six buttons right when you open the email in the first like half second. That's just crazy. We
+
+don't want that. Um, and then it's just like a little bit too abrupt here. These individual products don't have shop now buttons, which we need to have. And this button's too small. So, what do we do?
+
+We make it a little bit more immersive by just changing the background of the email to the background color of like this main hero image. And so we just do this, the perfect gift for every Valentine. You know, you've been nice all year, so treat yourself to a naughty new look. Boom. Shop Valentine's Day.
+
+Added some extra copy with this bridge section. Um, and then add in the product section, added the little hearts to go with the Valentine's theme. And then shop Valentine's Day. Shop by category buttons in the footer. Super simple. You can see a common theme here with all these emails. Um, and then kind of for road right here. Same sort of deal. I love the copy and the stuff that they're
+
+doing in their emails. Um, it just kind of needs to be updated a little bit. Um, I like this lip care the road dictionary. I think that that's great. Um, I just think that this is a last chance uh email. Um, this is a last chance. And so what we wanted to do is make it super clear that this is a last chance. And so we'd have a discount timer right here counting down the timer
+
+of the offer because the offer last chance is right here, which is literally like tomorrow. Like if we're highlighting an offer, people buy from urgency. Let's put the urgency right in their face. button way up at the top of the email. Boom. Kiss the sun back.
+
+Different copy right here. And then we go into kind of like their lip care matters. And then we move the road the road dictionary section right down here. And then we go through the treatment steps of using the peptide lip treatment and then the lip shape to make it flow and give them a clear step process right here. This is what you need to do. It's the same sort of information but in a
+
+little bit different way. And then finish with the peptide lip treatment free with purchase. Boom. Perfect. High converting. this is what we want. And then the last one here for the before and afters, we have Gym Shark, who Gym Shark, again, another brand that I absolutely love, but their emails are just lame. They're just stuck in the corporate corporate vibe. So, again,
+
+they have the navigation buttons at the top, which are going to overwhelm the customer. We don't want to do that. This button is a little bit too small overall. This is okay, though. Um, but then it's just like super bland. The buttons. We definitely want to do that.
+
+And so these are like a few examples of a little bit more engaging emails in design. Um this is like an example of like a branded email in a world where you can do anything. Do gym. Um they say that a lot in their um in their um Instagram. Um so I pulled it from that.
+
+And then a little bit of copy right here. Big button right up at the top. Immersive little section of do gym right here playing throughout in behind this girl. And then if you're going to do gym, do it right. Mix and match our favorites. Um, and so if we go right here, um, this is actually a GIF, which looks like it's not going to play, but it's actually a GIF that plays different
+
+tops and then different bottoms, so you can mix and match your favorites. And so that was like the angle we went with there. And then new drops just in and then shop new drops uh just to feature that at the bottom. Um, and then a testimonial sort of email with like a phone right here. So, it's a little immersive and then you have the logo and it's kind of like a retro background for
+
+gym lover for by gym lovers for gym lovers. Shop now button. There's a low shop now button, but that's okay. And just a super simple email highlighting some testimonials and then doing a um doing a photo gallery before a final shop now button and then woman versus man. And then there's like a blog email.
+
+So, this is how we execute blog emails. We like to have a button up at the top and then a little sneak peek of what the blog is like and then give a little bit of information. So, back anatomy 101, back anatomy 101, highlighting, giving some education to the customer list, which is great. And then finish with general learn more button right here.
+
+So, you can see these have a little bit more life. Um, and these are probably going to convert a lot better. Um, and yeah, these ones I think we could update and do a little bit better. These are a little bit old. I think these uh I think some of these we could we could clean up a bit more, but you can see like the principles that we're applying. Okay, now we have six final examples of just
+
+like other brand emails that we've done. Um, just to give some life to them. Uh, so this is Rayban for example. This is a summer fever email. Again, you could see right here, clear offer right up at the top of the email and button right up at the top of the email. You can see this gift. We flip through the products of different colors. And then we go into some education. Sun's out, shades out,
+
+your shades your style. And so this is how you can customize your products and you get 20 20% off custom sunglasses because it's a custom shades offer. We want to show every part that they can customize. The lens, the frame, uh the engraving in the case, and then a general shop now, and then 20% off last chance. And then of course, footer category buttons at the bottom. Same
+
+sort of thing here. Skims wave at the top, early gift for you. And then I love how this email flows because it's a gray background photo shoot and she's on like a white uh the floor is white and so you make the rest of the email white so it looks like it flows and it's super clean. Gifting made easy. um you're coming with the gifting with our limited edition gift bags just featuring that
+
+and then for her for him. This is what I love for clothing brands if you're doing a gifting email for her and then for him and then separate by men and women and then right here um finish with a general general button right here for the sale and then category buttons in the footer.
+
+We have the super fun email for Mr. Beast uh feastables right here carrying a lot of the fun from the website and then peanut butter perfected little bit of information button way at the top of the email. You can see how immersive this is right here. It's going to hit well with the demographic. Um, and so I love this. And also in their emails, they never talk about like their ethical
+
+sourcing, which is what differentiates them as a brand. Taking down big chocolate with ethical sourcing. This is exactly what that means. And I love how this footer is like kind of like floating in the sky right here. And we have these little elements all throughout the email which give it a ton of life and help it flow um, and feel super immersive. We have this Calvin
+
+Klein email using a cool little photo gallery at the top. And then there's an example of doing shop by men's and women's in the hero section. So this is something that's fun. You don't have to use the same sort of layout of logo, headline, body copy button up at the top of the email. You don't always need to do that. You can have logo on the left with a photo gallery with like uh the
+
+headline and then body copy down here and then two different buttons, which I think is great. Um pair with denim, so women's denim and then men's denim um right here. Individual products with a cooler uh product section right here.
+
+And then bonus savings in store um as well. Just highlighting that call out and then the buttons in the footer. Perfect. Here's a Stanley email. Valentine's Day sale. Super clear.
+
+Valent super clear email on Valentine's. Um just button up at the top. Here's the discount. You still have time. Anytime you're highlighting a anytime your sale is ending, you want to call out the day, especially if it's coming up. So, I like the circling it right here uh that we did on the design side, making it a little bit fun that this is when it's ends. And then I like it. make your
+
+list, check it twice, order it now. I thought that this was fun. And then a product section with the check marks. Not as high converting because there aren't individual shop now buttons for this section, but I just think it's super fun and you can mix this up every now and again. Then again, footer buttons in the footer. And then lastly, New Balance right here. I think that
+
+this is cool if you want to push people to SMS uh men's upcoming launches. Custom font right here. Bring it some life. And then the different products uh releasing sign up for SMS reminders.
+
+Then also featuring past launches that you do. A lot of brands just do a launch email for products that they're launching and then they don't remind their customers. And so I think that this is cool instock launches. And so you can look at the different launches that they that they had over the past like month or so. Some of the featured products that are in stock finish with a
+
+shop all styles button and then have the footer navigation. So boom, that is what I'm talking about. That is high converting email design. So in summary, get your buttons in your offers way up at the top of the email. Use big buttons.
+
+End with a general shop now button. Individual products need to have shop now buttons. Add footer buttons. And then boom, that's it. And then make your emails immersive when you can. Have some fun with it. And boom. That's high converting email design. That is what you need to know. Hopefully that helped you visualize it um in exactly what I'm
+
+talking about in these videos and what actually matters for getting people to convert. Um, if you want a team to create these emails for you, we have done over $100 million in the past 18 months through our agency. If you're an e-commerce brand doing at least $50,000 a month, then you can book a call with us in the description below. Thank you so much for watching the video. Make
+
+sure to click on this next one, which is an absolute banger. I have it recommended for you here, so make sure you check that out. Um, and yeah, thank you so much for watching. See you in the next one.

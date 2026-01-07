@@ -47,3 +47,25 @@ OPENROUTER_API_KEY=your_key
 ## Integration
 Position 3/7 in VSL funnel pipeline.
 **Inputs:** VSL script, research → **Outputs:** Sales page copy → Email sequence writer
+
+## Related Skill Bibles
+
+**[SKILL_BIBLE_funnel_copywriting_mastery.md](../skills/SKILL_BIBLE_funnel_copywriting_mastery.md)**
+- Sales page structure and flow
+- Conversion element placement
+- CTA optimization
+
+**[SKILL_BIBLE_hormozi_marketing_mastery.md](../skills/SKILL_BIBLE_hormozi_marketing_mastery.md)**
+- Landing page psychology
+- Headline formulas
+- Conversion optimization
+
+**[SKILL_BIBLE_hormozi_10x_sales_process.md](../skills/SKILL_BIBLE_hormozi_10x_sales_process.md)**
+- 10x revenue sales process
+- Offer presentation
+- Value communication
+
+**[SKILL_BIBLE_hormozi_customer_acquisition_fast.md](../skills/SKILL_BIBLE_hormozi_customer_acquisition_fast.md)**
+- Fast customer acquisition
+- Sales page optimization
+- Trust building elements

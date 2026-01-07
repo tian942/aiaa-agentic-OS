@@ -1,0 +1,185 @@
+in this video I'm going to be showing you my exact process for Designing High converting e-commerce emails inside of figma this is the exact process that has generated over $20 million for my partner brands in the past 12 months here are some examples that this process has made I'm going to be showing you stepbystep how to make these emails inside of figma with some brief
+
+tutorials going to be going through my thought process when creating an email I'm also going to be showing you how to upload these emails inside of clavio so that they're optimized for deliverability now I want to start off by saying that I would recommend staying away from using canva for email design because it's a little bit too simplistic and it's really hard to organize INF
+
+figma can be just as simple but with more capabilities and emails just always turn out better and it has bonus features which I'm going to be showing you throughout this whole video so enough yapping let us get into it okay so here I am inside of figma you can see I kind of have some stuff laid out here just so that we can have it for reference first I want to show you a
+
+little bit around figma so we obviously have the this section here which you can see it's high liting different parts of the email because that's exactly what these are these are called layers and so if you choose a certain layer like if I chose the logo right here it's going to pull up the logo and then you get specific information about the logo here so if I want to like change the size I
+
+could change the width to like 3,000 and then it's going to update right there but I'm just going to go ahead and undo that and then if I click out of it you can obviously go into any one of these sections here and it's going to highlight on the left and right side then you'll also see up in this top left corner we have different little features that we can do here we have like our
+
+menu we have text we have comments we have if we just want to move stuff around we have shapes all that good stuff now like 90% of like everything that you see here with like all this crazy stuff like you don't really even use it too much and so I think it's best if I just show you exactly how I create an email and then you're going to see just how little stuff that I use and
+
+then what stuff you should be using and hopefully it brings you a ton of clarity so what I'm going to be doing is I'm going to be taking this copy here which we put together for a gym shark email and then I'm going to be turning that into a design live so we can see the copy here this is how I like to write copy in my agency rather than just listing out like headline this body copy
+
+this I like to really lay things out for the designer so that the copywriter they know exactly how the email is going to turn out because I used to be exclusively a copywriter sometimes I would think an email would turn out one way and it would go completely different direction and so it just lets you have a little bit more control and designers appreciate it because sometimes it can
+
+be really hard just like starting from absolutely nothing so L thing out like this are a great way to start with your design so you can see this is a back in stock email it says back in stock they're back it has a little bit of copy then this is a button and then we want a graphic and then core values and then looks like we just want some fan favorites and like best sellers just
+
+listed out in somewh way now what's really nice and what I highly recommend is having templates ready to go for your emails and so like what I do for example is I have a ton of templates for hero sections Bridge sections and then product sections so right here this gives you a really good place to like start out when you're building an email like for example you can see this is
+
+hero section 7 3 and then two if you want these just sign up for my newsletter and you'll get information on it but it's super helpful way to start out and we can see I have a headline here body copy a button and then a graphic so I think probably we're going to want to start off with something like this for the template that we're using for the hero section for this email so
+
+I'm just going to plug this in over here I'm going to copy and paste and I'm just going to use this actually just on the side for reference and you guys can just watch me start from absolutely nothing so again this is gym shark I do not work for gym shark and I don't have any access to their assets so I'm just taking stuff off of the internet and building from there so let's get into it
+
+the first thing that we're going to want to do is we want to create the logo and so all you really need to do I'm just going to have a white logo so I'm going to pull up a rectangle here and just do a logo section right here I like to have the width for all my emails 600 so I'm going to adjust the width width here then let's just do 600 by 1 100 here and then maybe change this color to a white
+
+color and then we want to put their logo smack dab in the middle now okay so I've just put in their logo now I'm just going to drag this in right here now it's nice and centered figma helps us align it so perfect now we have the logo now we can kind of like map out the rest so we're going to want a headline body copy and then a button and then a graphic so I'm going to want the graphic
+
+to be in the background here so now I just have to go find an image from gym shark and this can usually take the longest of your design is finding an image that works and so that's what I'm going to do right now and I'll report back when I find something okay so I found a cool picture of some jacked people in a mirror I think this is good it gives off like the gym shark Vibe and
+
+I guess for this email we're going to make it darker because this email this image looks pretty dark so all I'm going to do here is I'm going to align this I'm going to make the width 600 and then boom now the problem is we have all this text that we need put over top of the image and we don't want to cover their faces so what we're going to have to do is we're going to have to add like a
+
+background here and make it flow and make it look like it is part of this image so here is what I am going to do so I am going to take a rectangle and I am going to place it here going to make the width 600 and apply it here I'm going to turn it the color black and then I'm going to drag this here and that actually flows kind of smoothly oh wow I was not expecting that but we're
+
+going to have to apply a gradient so a gradient it's essentially just going to be a smooth transition from one color to another in this case we're going to do color to a transparent background so I'm just going to duplicate this rectangle and then move this down to like here and then what all that I'm going to do is I'm going to make this a gradient so how I do that here is I'm just going to
+
+click the color The Fill here then I'm going to go to this tab right here and now we have a gradient so right now it's going side to side so we want to make this up to top and then this is good the stops this is telling you what percentage at what point do you stop but the thing is like at this bottom instead of making it this color we want to make it completely transparent so I'm just
+
+going to make that transparent and so now what we have here is we have a gradient from the top which is black to now it's slowly transitioning into clear you can see that is a little bit better maybe we want to move it we can adjust this as we want so I just kind of adjusted it a little bit I changed it to Black and then we can have this be whatever we want I'm going to have it go
+
+like this I think that looks pretty good and now we have some space to add our text so all that we need to do here is we can just go up here and then insert our text like this we can adjust our size to whatever we want say like there back so I just adjusted the font made sure that it's all good and now we have that copy there back and then we can just duplicate and do the same thing for
+
+the body copy drag this in here then just make sure that it's aligned okay perfect now we need the shop button so we want to say shop best sellers so all we need to do here is we can get like an ellipse so all we need to do is I'm just going to make a rectangle with rounded Corners let's make this white and right up here this is how you can have rounded Corners so we can like just
+
+start off with like 65 and see how that looks going to want to make this a little bigger and then I'm just going to copy and paste this and say shop best sellers change you to Black oops change the color to Black then we have a situation here where it is behind so I can't see the text that's because it is behind this rectangle so if we just reorder
+
+this then the shop best sellers comes to the front so I'm just going to do this and then may we want to make this a little bit bigger since it's a button maybe not that big like that and then we can make it bold and maybe adjust this button a little bit so I just messed around until I got what I wanted and and then boom not too shabby at all we just need to adjust this a little bit we can
+
+move this image and you down a little bit then extend this and boom not too bad and boom there's our hero section that is not too bad this is a bit of a long hero section it would take a long time for a person to scroll down and find like the next section so I'm just going to crop this I'm going to hold the command key and then just adjust this maybe we can start for now just like at
+
+right at this point right here maybe 00 x 500 so now the hero section is set let us move on to the core values section same sort of deal we're going to want to set a background maybe let's mix it up and do a white background rather than black so that this email is way too dark plus it's nice to like make your sections clear for people so I'm just going to add another Square adjust the
+
+sizing here and make you white and then we just want to plug in the copy going to put you here say our core values copy and paste and get the rest perfect now we can just mess around with like the sizing and the fonts how we want them so here's how it looks looks kind of awkward and I think that R values is a bit lame so I'm going to change this to something like the gym shark way and
+
+then we kind of have like this hierarchy of like a longer headline and then it moves down like a pyramid and it funnels your eyes I think that looks a little bit better and then now we have this section here where we have to put in the table and then all the copy so I'm just going to start out by like listing out and like kind of like laying out everything going to say value one value
+
+two value three value four value five and then we can copy this over and then I'm going to select these and copy them over cuz we we're going to make it split like a table and then probably add like some sort of a divider I think it would look weird I don't I don't want it to be split up too much like a grid so
+
+maybe we make it a little bit more fluid so I'm going to take a rectangle here and just have small little dividers like this that's like repeated between the two so we'll have something like this and then we can copy and paste it and put it below like this so it's not like they're trapped okay my computer just shut down but we're all good I filled this in I adjusted the fonts and
+
+everything so this is what we have the gym shark we values are invaluable we list out the values we break things up this way but I feel like this is still like kind of a little bit lame there's like no depth it looks very two-dimensional it's it's just like a white background so what I would do here is I would probably add like some icons or something or add like some gradient
+
+or something I think it would be cool if we add like gradients like behind the text here so I'm going to do that so this is how I typically do gradients gradients are just like changing color from like the top to the bottom like we did in the hero section but what we're going to do is we're going to place it here so all I'm going to do is I'm going to get a rectangle and I'm just going to
+
+put it to the side and put that width 600 and then I'm going to drag it over here like behind this we could do it behind everything but I think I'm going to go one by one and see how that looks and I'm going to reorganize these layers in a second but essentially we just want to move this behind like the text that we had so I'm going to move this way back and then now we are set it's behind
+
+let's adjust this okay so that's what we have now I want to apply the gradient so I want this to be white and maybe go from like a grayish color to like a white color at the bottom or just like transparent so I'm going to click here I'm going to go over to the gradient option again right now it's going side to side I want it to go top to bottom so we're just going to do this and I want
+
+it to end at White so I'm going to go to the bottom one and then have it end like that so that looks pretty cool that looks pretty cool feel like this is a bit harsh of a color to come out of nowhere with so I'm going to try to make this a little bit lighter just going to drag this up maybe maybe like that is perfect cool so that adds a little bit of depth now I'm just going to repeat it
+
+for the rest I'm just going to copy and paste place you here and then drag you down and boom just like that we are set some of the spacing is a little bit off so I'm going to adjust that but I think this looks pretty good it adds a little bit depth makes it not just like a flat white background but I'm just going to adjust the spacing real quick so that we're good cool so now we are done with
+
+this section this is what we have so far for the design I feel like it's pretty on brand uh it's not too far off from what they do and looks pretty cool now we have this bottom section but first i'm going to reorganize layers because you should should be doing this from the start but I'm bad so I don't really organize but I'm going to organize this and show you how you should do it so
+
+first we want to make sure that this is one like whole frame so I'm just going to click all this make sure we have everything I'm going to double tap here and we're going to create a frame so now everything is within this Frame so if I click the drop down you can see everything is inside everything outside is like this stuff and this stuff but right here we have the frame I'm just
+
+going to name this gym shark oops gym shark email and then boom now it's gym shark email and then we can adjust this and that's the size of the frame what I'm going to do is I'm just going to extend this out so that we make room for the rest of the email all right now it is time to like group stuff and organize everything so that it's easy to track so I like to group everything by section so
+
+I'm going to click everything here and I'm going to group all this I'm just going to click here and I'm going to make it a group now we have group 112 which within it we have all the stuff in the hero section so I'm just going to name this hero section and then I want to drag it to the top just so it's easy to find let me scroll da da da da da then we'll put it right here and so
+
+actually above it we want to do the logo section so I'm going to take both of these I'm going to group this and then I'm going to say logo and then drag the logo up to the top now we have logo hero section and we can even organize within the hero section so like for example we can make the button one thing so I'm just going to group these and group that and say button then up here we can like
+
+change this to headline we can change this to sub headline and organize these as we want I'm just going to put in G gradient which is that and then we have the background here and then of course last behind everything we have the image then now it's a little bit cleaner and a little bit better laid out and you can easily navigate everything now I'm going to do the same thing here for the bridge
+
+section okay so now we are nice and organized we have the logo we have the hero we have the bridge section they're all separated and they're they have their different layers in here which are labeled pretty nicely some people will organize it better than I do but I keep it pretty bare now let's we kind of went out of order but let's do the body section now so we're just doing our fan
+
+favorites and then we just want to list out a few best sellers which we can take from the website so I'm just going to extend this by moving the background out a little bit because I don't think we need to change the background too much and I'm just going to copy this down and then I'm going to say our fan favorites rather than that we could even take it like just a step further and stay on the
+
+theme of gym shark and just say gym shark favorites so now I'm going to go take a couple bestsellers from their website and just put put them off to the side and show you guys what I do I'm just going to choose three for now all right so here what I chose I just did like a couple of the main products this is like women's and then a couple men's um I actually have this same uh product
+
+no I'm kidding but but you get the point we just want to insert these in and do our product sections so we can go up to our product sections here and then take some inspiration so for this one we have three products that we want to do and we can fill out a little bit of space here um something to always keep a note for your product sections is you want each of your items to have their own like
+
+individual shop Nows this way the customer knows that they can click and Shop each item directly from the email and it's going to link them directly to the site so I think probably the best cure we've already given a lot of information in the emails I don't think we need to give like a whole bunch of information about the product and I don't think this would fit quite well so
+
+I'm just going to do something like this I'm going to recreate this myself but essentially looks like we're doing a little SC curve so we're showing products like in an S and then just giving the product name and then giving a shop now button so I am just going to drag these in for now maybe we put you here we put this one here drag this down oops so I'm just going to click the
+
+background here and then drag this down and then we have this here now obviously we need to format this now so we can just put this like let's just say like right there is fine and then we can do the same sort of thing here for this one set them apart a little bit and then do the same thing here we just want to make sure that these are like equally spread apart and equally the distance distances
+
+so I'm sure there's probably an easier easier way to do this but I usually will just get out like a rectangle like this and then what I'll do is make sure this is aligned and then see how far away this is from there 67 and then I'll go here and then do the same thing and just make sure it's aligned now I want to do the same thing for how spread apart these are so that's what it is so then I
+
+go here and then move that up to be in line with that and then I want to make sure it's in line with the top as well or with this top image so so let's see is it going to let me align that no so I will just take this extend this out and then move you here so looks like this one actually is outside of the frame so I'm just going to move it inside of the frame and then now it's going to let me
+
+to it's going to let me like line this so that's perfect right there perfect so now I can delete that and then we have this now we can just like fill in the text so I just inserted a text box and put the name of the product minimal sports bra and then we can throw it in wherever then we're going to want a shop now button as well so to do that I'm just going to go up to this button save
+
+some time copy it and then paste it down here and then let's adjust the sizing so I can go down to selection colors here and then just change the background to Black and then this other one change the text to White and then we can adjust the size a little bit so let's make you a bit smaller maybe like that is good and then we can just change this to say shop now just you put you inside that looks a
+
+little bit big so maybe turn you down just a hair and then boom that looks like pretty good and looks evenly spaced perfect I might even yeah I think this is good to go this looks a little bit empty so I want to add a little bit of pizzazz these are really highly reviewed products so why don't we just like put how many how many reviews they are so I'm just going to insert a star here and
+
+then boom now we can just adjust the size rather than if I just changed the width here so you can see the the width and the height aren't connected right now so if I change the change the width to like 25 it's going to completely mess it up so I'm just going to go back and now can make these go together in direct proportion so if I turn this to 25 it's also going to adjust the height so we
+
+can do that I'm just going to change this to Black and then give the review number so it's rated like 4.3 I believe and then boom that's pretty good let's adjust this a little bit smaller and make you a little bit smaller I adjusted it just a little bit more and maybe also like to go with these products it still looks a little bit bare so I'm going to add just like a
+
+little like quick information about the product so just copy and paste this say light support right now it's in all caps and you can actually change that if you go down in the text section to these three dots I'm just going to change this to do as typed and so right now it let's click on this light support perfect and then I will move you down and then maybe make this smaller and then like a gray
+
+color just like that and then let's just make this you could do medium or just make it light that makes it a little bit better and then now it's just a matter of like spacing this out that looks pretty good I just adjusted like some of the spacing and the sizing and I kind of like how this looks maybe we could just add a little bit of depth to this photo rather than have it just be like thrown
+
+onto there um I think we could carry over this theme of like this line so if I copy and paste this I can add it to like one side of the image maybe like put it here and then extend it and I think this will look pretty good cool and let's just make sure that these are aligned and perfect I'm just going to move this out of the prior frame and that looks pretty pretty good it has a
+
+little bit more depth we have some more information on the product there's a good amount of stuff going on but not too much perfect I like it now I'm just going to repeat this for the other products now this looks pretty freaking good I like it I like it everything has a little bit more depth you have some cool stuff we carry this theme of like the black l over we have our individual
+
+shop now buttons we have a little bit of information on the product looks like this just needs to be adjusted like the the center wise so when you're go going back through designs you're going to notice a lot of little stuff like this so always make sure you're checking okay perfect and always for any product section where you're showing individual products maybe the person didn't like
+
+any of these products but they want to browse they're interested in shopping right now so we always always always want to end with a shop now button like a more General shop now button after our product sections so that they can shop more bestsellers so I'm just going to copy and paste this again extend this out a little bit and just say shop best
+
+sellers and then adjust you make sure you're centered and boom that looks pretty pretty good this is beautiful great email we start off with a high button at the top saying shop best sellers we go into a bridge section that builds like kind of just like your brand and then we outlin some products shop best sellers now the last thing that we need to add is the footer which is one
+
+of the most important parts of your email the footer is overlooked so heavily but it is so important because it's the only part of your emails that's shown in every single email and so I like to always give options for people to shop further in the footer or have more specific shopping options this way no matter your email like even if you're doing a Blog email or an educational
+
+email you'll have shop now buttons in the footer that people can click and so for JY shark in this instance I want to be able to let people shop by either man or woman and then of course we're going to do like social media icons and all that good stuff so I'm going to extend this uh down a little bit further and for our footer we are just going to so for the footer I like to make the
+
+buttons a little bit different so I've put them as wom and man so that women and men can shop differently depending on the email so that you don't have to separate every email by woman and man and then rather than make them buttons I think I just want to create like a line and just have like two essentially sections so we can do a line like that and then put a line like this and then
+
+do the same thing for men we're going to copy this this to make sure that they're the same width and then move you down make sure you guys are aligned and that is pretty perfect then I'm just going to copy and paste just images or pictures of social media icons which you can just look them up but you can see here says frame 85 here so that means that it's not inside
+
+of our gym shark frame so I'm going to move this Frame I'll name it social media and then I want to find the gym shark email and then I'm just going to put you down at the bottom I'll reorganize all these in a second the boom now it is inside and we are all good so it's also a good idea in your footer to have your buttons for browsing you want to have your social media you
+
+also want to have like icons with a little bit of social proof this way in every email you have that information so I actually just screenshotted what they have in their emails they have afterpay Clara free shipping or free returns and then world class support I think that's pretty good so I'm just going to do this and then insert that into the bottom of the email that looks pretty good and
+
+then at the bottom of every email I like to build it inside of clavio but you need to have like essentially the legal stuff and messaging which clavio will do for you so maybe we'll add that when we go into clavio so I'm just going to adjust the background here and then now I'm going to go back and I'm going to adjust the spacing a little bit like move this up a little bit and then I'm
+
+also going to organize all the layers all righty so here is the finished product it is all organized and set up in here their bag we just got a new shipment of some of our best sellers do yourself a favor and find out how they earn that bestseller title we have a gradient from the top the black that goes into the image then we'd say the gym shark way we have this bridge
+
+section which has a ton of depth it has the gradient and it has all the information and it's spread out by these uh black lines then we have the gym shark favorites we carry that like black line theme over here we have individual buttons for each product um these have a little bit more depth they're spread out evenly and then we finish with a shop bestsellers button at the bottom and
+
+then in our footer we have different style buttons we have some icons and then we have social media icons I don't know about you but if I was a customer I would be clicking these buttons and I would be purchasing on the spot so this is perfect now we are ready to take this into clavia so I'm going to show you the three-step process for making sure that this is optimized inside of clavio so
+
+that you can send it and not worry about your deliverability so the first step is we need to slice the design into different sections so we're uploading image files and each image can only have one Link in so this shop bestsellers but button needs to be different than this and this and so they need to be separate we also want to make sure that our image sections aren't too big CU if we have
+
+too big of image files then it's going to be slow to load inside of clavio or when somebody is opening their email in their inbox so after we slice we're going to export the images and take them to a website which is going to compress our image files and make them a lot smaller and then once we compress them then we can upload them into clavio build them out and then add the correct
+
+links and then there's an extra like half step which I'm going to show you essentially we just want to add some HTML and some code into our email so all we have to do to slice it's super easy you just go up here and there's a slice feature just ready for you and all you do is you highlight the section you want so I'm just going to separate the logo section like this so now you can see
+
+slice one it's over top the logo and once you put it where you want we're just going to click export on this slice I like to use 2X and then export it as a JPEG and then we're going to export it save it and then we're going to be able to download so I just downloaded that now let's get another slice I'm just going to copy and paste this slice move this one down make sure it's aligned
+
+with where the other one ended and I will use just this whole section same deal slice repeat this for different sections that just aren't too big and now down here we have to split each product by each other so that someone can individually click them same deal with the footer we're doing the same thing but I'm going to have to do something a little bit different with
+
+the icons at the bottom so at the bottom I'm going to split it like this just to make lives easier I'm going to do this and so this whole section is going to be button for Facebook and I'm going to export that and then I'm going to make a smaller Instagram section here and then the same thing as Facebook I'm going to do for Pinterest here and then we just need to finish with the last icons here
+
+at the bottom perfect now we have all of our files sliced now let's take them to a tool that is going to compress our images I like to use I love img.com compress compress image this is really good it's super easy so so I can just select all my slices and then upload them as one big batch right here and then you'll see look at how much space that we saved it was 1.72 megabytes and
+
+now it's 327 kiloby it's already downloaded I can open it right here perfect now let's get over to clavio so now we are inside of clavio this is just a random account that's not connected to anything but all we're going to do is head over to campaigns we're going to create our campaign I'll say test video click continue and then we can send whatever list we want uh like the
+
+newsletter beehive newsletter join my newsletter and we can say if we want to skip or not skip recently sent two profiles who we don't want to send to whatever it may be and then now we're actually into the email subject line we could say they're back maybe add a fire emoji and then in the preview text we can say something like check out these best sellers and of course that would be
+
+gym shark but all we're going to do now is we're going to do drag and drop we're just going to create a blank email so now we are all set we're in ins side of cavia we can just delete whatever sections that we want I'm going to delete this delete this section so we only have like the unsubscribed footer here then delete literally everything else and we're starting from scratch
+
+perfect so like I said we're using image files so we're just going to drag an image file here and we're just going to upload our logo right here these are the compressed ones so we're just going to start off with slice one and then add these in and then look at that then I'm just going to duplicate this a bunch of times as we have a lot of slices and then work on replacing these okay
+
+perfect so we've done everything except for like the social icons you can see it looks really good everything looks exactly how it was and you can check mobile as well this is perfect but I wanted to show you for adding in these social icons cuz you can see they were we essentially are doing three different things in one row so all that we want to do is we want to upload a table here
+
+drag the table in and then you have your settings and so we have this left side and then we have the right side we have our text and then our image and then sell content we can see this is text we want it to be an image so I'm just going to change this to an image and then we can go to table settings here then we can add another column because we have three different columns I'll change that
+
+to an image in a second but you can also see that there's space on the top and bottom that's padding so under settings as well we can get rid of the padding set it to zero so that the images are taking up the whole Space you can see now it's taking up the whole space and we can change this to an image and now we can upload our files so now we are all set the file aren't too big so we're
+
+all good to go we just need to upload the link so all you need to do is go into each image and just paste your link into the link address so this one just with the logo would be gymshark.com this one you just go to the best sellers page link it there and then same for each one of these wherever the link you want the customer to go that's what you put super simple and you can also add alt text so
+
+what alt text is is essentially if an image isn't going to load for a customer either it's too big for whatever reason or their inbox provider blocks images is for showing up which is very very very very rare we barely even add alt texts but this essentially what would show up for somebody if they didn't if they weren't able to see the image so in this case you would say like they're back you
+
+can just replace like with the copy and say we got a new shipment a new shipment something like that just so a person without images would be able to kind of understand so you can add your alt text for each one of these and then you're good to go and just send yourself a preview of the email so you can test out the links uh just send it to whatever your email is like Max cop.net and then
+
+you'd be good to go so boom what a beautiful email that we made together glad you saw it happen I'm sure this would make jym shark a ton of money they're not going to use it but they should that does it for this video I hope you got a ton of value in seeing me create a gym shark email live using figma I hope you learned a thing or two so let me know in the comments if you
+
+have any questions let me know if you have any videos that you would like me to create if you want another more advanced tutorial here then I'm happy to do that if you want me to design your emails with my team for you and you run an Ecom brand that does above $50,000 a month then book a call the link will be in the bio but anyways appreciate you watching and I will see you in the next
+
+video

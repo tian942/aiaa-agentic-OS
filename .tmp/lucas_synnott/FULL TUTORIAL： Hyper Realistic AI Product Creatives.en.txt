@@ -1,0 +1,93 @@
+if you're in the Ecom space you know that good product photography is hard to find and often expensive and making interesting creators from those product photos is often even more timec consuming and tough to do so today I'm going to show you how just using mid journey and Photoshop I turned this photo and this photo into this photo we're going to make it a quick one today
+
+so let's get right into it the first thing you're going to need is a photo of the product itself this can be just taken with your phone use Converse Ling to remove the background if you just want to do it quick and easy doesn't have to be super clean or anything like that we're going to work on that later in Photoshop as you can see here I've got this pill bottle from Eterna it's a
+
+sement of some sort we're going to use this as kind of the base for what we're going to make the the product image for the next thing you need is going to be a mid-journey subscription if you're in the creative space at all you should have a mid Journey subscription even if you don't use the actual images that outputs the kind of ideas ideation it comes up with there super super helpful
+
+I think it's great we're going to go over the prompt that I used to get this so this was the final image that I got as you can see there's a bunch here that it gave me I upscaled this one so let's look at the prompt I use as you can see it is a supplement bottle it's on EX circular platform it's got water and Mist around it the uh prompt was a blue supplement bottle emerging from
+
+splashing dark water surrounded by m smoke in in a storm on circular platforms so a ISM so blue s bottle then emerging with splashing Dark Water so describing the surrounding it could be you know sitting in sand on the beach you know like whatever it is your items kind of tee towards surrounded by Mist smoke and a storm that could be you know if you're on a beach surrounded by palm
+
+trees and birds flying over overhead on circular platforms you can just kind of change the prompt to kind of fit whatever it is you're looking for but it's a pretty basic prompt you should have a good idea kind of of what you're looking for based on this just think of like other product images you've seen and when you are generating this majne actually lets you upload images so if
+
+you click the little image button here upload the photo of your product itself and it should give you something closer to the shape of what you're looking from here you're going to upscale the image just using the subtle button here to make just a basically larger image of it going to download it and then we're going to dive right into Photoshop so I've already completed this in Photoshop
+
+but I'm going to give you a breakdown of what you're going to do straight away you want two or three duplicates straight away of the original mid Journey image the next thing you want to do is you want to select wherever the text is I've done this already but if you select like around here as we saw in the previous photo you're going to use Genera to fill and say remove text this
+
+should do a pretty good job getting halfway there if it doesn't try content to wear fill mess around with it a little bit but it should be pretty close to get as I said you going to duplicate this image straight away so on the next duplicate of the mid Journey image you're going to select the product and say remove the container remove item whatever it is this will give you a base
+
+plate to work from but you still have the original here with the text removed next you're going to have your actual item you want to make sure that you have the original base plate still in there with the mid Journey generated bottle in there because you're going to use that to give you a general guide of the size you can go for with this this is to kind of just place it properly on the
+
+platform and we're going to look into kind of how we blend this now so the first thing I did with this image with everything here set up exactly like this they selected very Loosely around the base of the item cuz that should be in water that should be sitting on the platform itself and very simply I used the generative fill tool so I select it all around here and I just typed in
+
+generative fill and I typed in water splash base this gave me this now if I look here at Photoshop actually gives you a number of options I can click through here and try these out but this one clearly looks the best as you can see here if I zoom in this looks like the bottom of the bottle is actually sitting in the water now on top of the uh the the platform after that what I
+
+did is I went back to our original mid Journey image is our base layer that has the original mid Journey generated supplement bottle in it so it looks like this I cut out the supplement bottle I asked Photoshop gener of AI to remove the splashes and things like that but I ended up with a basic version of just this this bottle then if I reenable these layers on the water splash base I
+
+took this copy of the bottle and I placed it on top see when I do that you can actually see the little water droplets and things like that that are are coming through I set the mode to linear Dodge ad over here and I set the opacity to 15% if I set this to 100% now how bright that is but I've manipulated the original image of the bottle using command click here to move around so I
+
+get those shadows and those highlights and things like that that are going to go directly on the bottle and make it look more realistic as you can see was 100% there this do look correct I had erased around some of the text and stuff here to make it more legible we bring it back down 50 that gives you that kind of nice realistic look I also will go into into the original bottle all adjust the
+
+curves image adjustments curves bring these up and down you know highlight things a bit you know I've already done this but it just makes it look a little more realistic that's kind of fit the setting and the lighting a little bit better now the thing that I think really brings this to the next level in terms of realism it's something very simple I searched water droplet PNG took these
+
+water droplets place them right on top out of them just in different areas this is the same image just duplicated over and over and I just moved it around and erased some sections flipped it put it in other sections and immediately just makes it look significantly more re realistic next thing I did was I just added the company's logo just got it from their website I think and just copy
+
+and pasted it in there now one thing that you can change depending on the image that you have this base of this item is covered with that generative fill that we did with the water but some things you might want to be actually like sitting on a desk or a table or someone's hand when someone's holding something or something sitting on a table there's a base shadow that he
+
+might not even notice it's not just like the drop shadow we usually see there's a little Shadow right at the bottom of the thing it's sitting on that kind of shows where the item is sometimes you might want to keep uh your base image with the generated product like this in order to generate that shadow to keep that kind of there with this I like the little water droplets that were kind of jumping
+
+around at the back here so I decided to keep that whole whole section so I don't actually have the removed section turned on it looks a little bit too clean it looks like there's kind of something missing again it doesn't look like it's inter in the environment if I add this in you got kind of water jumping around little extra stuff here it just makes it look like it's kind of more actually
+
+inside the environment itself so now you've got your kind of basic version done what you're going to do here is create a new layer you're going to go to image Play Image what I like to do is go to filter camera raw filter and here you can mess with it kind of like emulates the look of the camera a little bit right so I can bump the contrast a little bit bring
+
+some of those highlights up because this image is very kind of Otherworldly and interesting let bring the Shadows down a little those white slightly whiter black slightly blacker that was too much of our quality or too much of our our details minus 8 there texture bring that up a little bit that kind of makes the water droplets pop let's do that Clarity can be a bit too much sometimes this is
+
+going to do over the top now I don't want that I should have bring the clarity down a little bit and this is I think the kind of real defining thing is the grain I think adding a decent amount of of grain not that much but around there makes it look like was taken with like an actual camera as that kind of like natural grain to it like okay and there you go now you've got product
+
+image that can be used in ad creatives on social media on Shopify product pages anywhere that you need it to and it took basically about 15 to 20 minutes with mid journey and some photoshop and this applies to all sorts of different photos I'm going to show you another one I just did in a second this is another very common type of photo so this thing is like you know it's got a it's a
+
+pre-workout supplement for a gym brand it's got a particular flavor fruit punch so you want to like surrounded by fruit or uh you know this big orange juice Blast coming out at the top so I'm going to break down how we did this one too I'm going to start off actually by showing you the mid Journey prpt we used for this as you can see here this one took a little bit more testing as I was
+
+messing with different prompt Styles and adding in the reference image for M journey to take note of but eventually we did get something that worked pretty well so the one that we finally end up using was this one here it says a black tub of gym pre-workout supplemented with white label floating in the air at an angle mango freze behind mango juice splashing cinematic product shot bright
+
+orange backdrop bright Vibes as you can see moury actually didn't fully listen to me there it doesn't have it floating in the air at an angle but I'm sure if I kept add it and kept giving it more instruction it would the same process as usual you're going to upscale it subtle and then you're going to download it now with the image of Photoshop we're going to do what we did before we're going to
+
+duplicate it a bunch of times going to walk you through the different things I did in order to make this image work the final version of this image we saw before looks like this so how did I get it like this it required a lot of manipulating the size and angles of the photo if I turn this photo off and see the base one I've actually deleted the upper part of the uh the section I
+
+wanted the orange Splash gone but I needed to manipulate the uh shape of the bottle in order to fit my new soap bottle so I draged this across a little bit and then I added in these orange liquid splashes as you can see all I've got left when I have this here is actually just the base as I mentioned the base is important when sitting on something gives us this Shadow
+
+underneath makes it seem like it's actually sitting on the table these are all here just little fill-ins I did to to cover up shadows and things so let's pull in the actual uh item itself so the item itself is here as you can see I've don't we talking about before by positioning it properly on top of the previous mid jury generated image so again the process we have is we've got
+
+multiple duplicated layers with the bottom layer we've got a second layer usually with the item removed we've got a third layer that has just the mid Journey item taken out of it and then we have our own actual product photo so after I take that I've got it kind of messed around the back of the layers here to get everything looking how I wanted to and get everything moved
+
+around cut things out remove things all that sort of stuff then what I do is I take the mid Journey photo of the generated image and I remove the label from it again I've say l Dodge here I'm going to S this some normal just you see what it what it looks like and bring it up the opacity up just looks like a big tube you know like it's just a it's a large black tube it's got those
+
+highlights and that texture that's what we're really looking for here so then I set it to linear Dodge I set the opacity to about 20% and you can see it's out of these little kind of lines here these highlights that make things look good you can manipulate the size this you can kind of move the edge if move those little Reflections there line them up how I want them to look and know right
+
+on the edge of the the product there and just get it really looking like as close to the original midj Journey photo as possible again that there set to linear Dodge and AD that's what gives us those nice highlights and things like that on top of our original item now again the original item we're going to do is you're going to adjust things like the the the curves so you're going to bring
+
+down a little bit the blocks maybe close to kind of look try and match the other items that are around it that are shadowed and see kind of how dark they are and maybe not going to we're actually going to boost the high see we boost high too much we actually lose the detail on the in the product a little bit we're screwing up a little bit there so it's kind of like a very minor sort
+
+of curve bring it up a little bit too this isn't a super uh intense adjustment here uh click okay on that then you can also adjust the curves on the linear Dodge layer that's got the details on it maybe you want to bring the highlights up a little bit so you can see move up there you want to keep as much detail as we can so we're actually going to move it up a little bit and that's looking
+
+this is kind of done now like this looks pretty good as it is the other things we can add are things like a compy logos and stuff like that I have those here somewhere but there we go so 7 there so it's got the company logo just there and we talked about again what kind of the I love these little things the things kind I think really if you've got something that makes sense to have liquid on it I
+
+think these add a lot to it are the little water droplet so I turn this layer on you can see I've got a few little ones just here and over here and then you can kind of use the Eraser tool to kind of make them match set them to Overlay I actually just the opas overlay and left them there and now we are going to do what we did last time we're going to make a new layer image apply image to
+
+flatten everything filter camera raw filter boost exposure a little bit that nice bright orange there boost the contrast a little bit then after then let's bring the Shadows ever so slightly down nine highlights little let's leave that that's enough kind of on that side of things but let us add a little bit of texture for clarity to would be kind of nice yeah I like that that see that kind
+
+of makes the blacks more black and just makes things pop a little bit if you want with this you c a little viget you can do like this kind of highlight it but I kind of like just this flat look I'll just go with zero on that one and now the grain we're going to add a little bit of grain see you go too far that that looks awful right you want just enough that it looks like it was
+
+taken with a camera or you kind of emate like a phone look about 25 just get these nice little Sky lines when you zoom in and stuff this all looks more gritty and makes it look a little bit nicer click okay there we go again you've got another perfect product photo that you can use in your creatives you know as anywhere you want it to this is I think a super powerful way to make
+
+creative super quickly essentially again if I walk through the process you are going to use mid journey to generate an image use your product photo as a reference to Mid journey to get the shape of your item take it into Photoshop duplicate the bottom layer a few times you're going to end up with three plates usually you've got the original plate you're going to have the
+
+plate that has the product removed and the plate that is just the mid-journey product then you're going to have your own product you bring in use the layers to organize things properly and have the midity product on top of the actual product photo you going to set the majority product to linear Dodge add and set it to about 10 to 20% opacity adjust it so that all the shadows and
+
+highlights match up and then you're going to kind of mess with the bottom layers so it looks like the item's actually sitting where you needed to sit and then finally you're going to add some extra details things like water droplets or anything along those sort of lines that you're going to do a final pass of new layer image apply image filter camera raw mess around so it
+
+looks real add some grain add some texture and you are good to go that's just a little insight into how we use Ai and Photoshop in order to create some really really cool looking product images uh this is super super useful for multiple cases over at Innovative we offer a specialized AI product photo creation Service as well as using the same methods to create killer image
+
+photos for Landers product pages email designs absolutely everything I'm going to make the psds for these files available they be in the link in description below if you have any questions feel free to hit me up if you need more product folds of your brand feel free to contact me on Twitter at copy line killer and if you also want to find out more B doing this yourself or
+
+any tips or tricks feel free to hit me up see you in the next one peace

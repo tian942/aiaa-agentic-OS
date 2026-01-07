@@ -523,3 +523,32 @@ This orchestrator is **perfect for Trigger.dev** because:
 - [vsl_email_sequence_writer.md](./vsl_email_sequence_writer.md) - Workflow #4
 - [google_doc_creator.md](./google_doc_creator.md) - Workflow #5
 - [slack_notifier.md](./slack_notifier.md) - Workflow #6
+
+## Related Skill Bibles
+
+Load these skill bibles for complete VSL funnel creation:
+
+**[SKILL_BIBLE_vsl_writing_production.md](../skills/SKILL_BIBLE_vsl_writing_production.md)**
+- 10-part VSL structure framework
+- Hook formulas and pattern interrupts
+- Direct response principles
+
+**[SKILL_BIBLE_hormozi_marketing_mastery.md](../skills/SKILL_BIBLE_hormozi_marketing_mastery.md)**
+- 14 years of marketing advice
+- Funnel strategy principles
+- Conversion psychology
+
+**[SKILL_BIBLE_hormozi_sales_training.md](../skills/SKILL_BIBLE_hormozi_sales_training.md)**
+- Ultimate sales training framework
+- Objection handling for VSL scripts
+- Closing psychology
+
+**[SKILL_BIBLE_hormozi_email_marketing_complete.md](../skills/SKILL_BIBLE_hormozi_email_marketing_complete.md)**
+- Complete email marketing framework
+- Follow-up sequence optimization
+- Revenue-driving email tactics
+
+**[SKILL_BIBLE_hormozi_10x_pricing.md](../skills/SKILL_BIBLE_hormozi_10x_pricing.md)**
+- Pricing psychology for offers
+- Value stack creation
+- Premium positioning in funnels

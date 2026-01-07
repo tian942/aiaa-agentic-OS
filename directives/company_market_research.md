@@ -308,3 +308,20 @@ Research output is passed as context to all downstream workflows.
 - Include pricing psychology insights
 - Extract more granular pain point hierarchy
 - Build research template library by industry
+
+## Related Skill Bibles
+
+**[SKILL_BIBLE_hormozi_marketing_mastery.md](../skills/SKILL_BIBLE_hormozi_marketing_mastery.md)**
+- Market research principles
+- Customer insight extraction
+- Competitive positioning
+
+**[SKILL_BIBLE_hormozi_lead_generation.md](../skills/SKILL_BIBLE_hormozi_lead_generation.md)**
+- Target market definition
+- Pain point identification
+- Value proposition development
+
+**[SKILL_BIBLE_hormozi_customer_acquisition_fast.md](../skills/SKILL_BIBLE_hormozi_customer_acquisition_fast.md)**
+- Market opportunity analysis
+- Acquisition channel research
+- Customer journey mapping

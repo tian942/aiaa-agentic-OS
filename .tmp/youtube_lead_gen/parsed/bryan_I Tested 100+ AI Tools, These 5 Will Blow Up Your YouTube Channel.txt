@@ -1,0 +1,89 @@
+I spent the past 12 months testing over a 100 AI tools to grow my YouTube channel. But out of all these tools I tested, only five came out as staples that I use every single day in my video production process. So, if you're struggling to get views or you're just spending too much time creating content, this video is for you. I want to categorize these five tools according to
+
+number one, picking a niche. Number two, ideation and script writing. Number three, producing a video. And number four, actually editing the video. The most important part of starting a YouTube channel is picking a niche.
+
+Because if you pick a niche that's too small, you won't get any views. But if you pick a niche that's too big and with the wrong audience, you may get a ton of views, but you won't actually make any money. One thing that most beginner creators get wrong is that they'll just go and pick a niche that they're interested in. They don't actually research how much money that they can
+
+make in a given niche. Are there any other winning channels within this niche? And whether there's actually longevity in the channel. That's where the tool Nixv comes in. Nigv is an AI powered YouTube platform that helps creators find profitable niches, find keywords, discover new channels across a database of 150,000 plus YouTube channels. What I personally love about
+
+this tool is that it automates niche discovery and analysis process. It helps predict trends, monitor niche saturation levels, and it has 21 plus unique filters for discovering profitable channels. They also have a Chrome extension which allows you to find similar channels to your competitors so that you can spy on them. So, for example, if you wanted to find all of
+
+the channels within the business niche, you could go to a big business creator, for example, Alexozi, go click similar channels, do an in-depth search, and it'll immediately pull up tons of channels with a similar audience to Alex Moszi. And then you can spy on those channels. And you can go even deeper by looking at those channels, searching for similar channels to those channels, and
+
+then finding even more competitors that way. And then you can also spy on how each channel is doing. You can see how many views that they're getting monthly. You can see how much money they're making, what their RPM is, so that you can decide what niche to get into. Other great features of the Chrome extension is that you can download a transcript, download thumbnails, and really just
+
+makes the overall YouTube experience a lot more enjoyable. It's really the small things that the Niglive Chrome extension really helps with that adds to your entire YouTube experience being something super pleasurable. Now, of course, if you were to look around and look for competitors, there'll be dozens that are way cheaper than Nyx Lev, but the most difficult part of running a
+
+software like Nexv is having all of the data aggregated in one place. And because Nicks left has so many Chrome extension users and so many of the main app users, it has all of this data so that when it comes together, number one, the actual data that it serves you is accurate. The RPMs are very accurate to what YouTube gives it and the loading speed is a lot faster. And really next
+
+Lev is only able to achieve this because it has number one a ton of engineers behind it and number two it has all of the data points so that it can give you actual accurate data which in my opinion is the most important because at the end of the day Nixv is a data and a research tool and it's only with this accurate data that you can pick a niche correctly and start winning on YouTube. Okay, so
+
+now you've used Nyx Lev to find a killer niche, but you're completely screwed if you don't know how to come up with ideas or write a killer script. That's where this next tool comes in. Everyone knows that coming up with the video idea is the most important part of a YouTube video. Even Mr. Beast knows this.
+
+&gt;&gt; You realize that like the idea is so freaking important. Like you could theoretically most YouTubers watching this, you could pull triple the views with half the work if you just had better ideas. Like no joke, it's it's that extreme.
+
+&gt;&gt; And then once you have the video idea, most creators spend all of their time writing the actual script of the video because the words that you say will determine the performance of the video, even more so than the edit. And if you're like most creators these days and have ADHD, you won't have the attention span to sit down for more than 5 minutes to actually write your script. So they
+
+have a couple options from here. Number one, they have an inconsistent posing schedule. Or number two, you do what most of the cool kids are doing these days and which is using AI. They'll try using ChBT or Claw, but their scripts end up sounding generic. But with this AI script writing tool, Subscriber, it simplifies the entire writing process.
+
+Subscriber is an AI powered script writing platform that is specifically trained on thousands of videos of YouTube data. Subscriber will analyze your channel and your voice and create customized scripts that are designed to go viral. Unlike the writing of Chetchvt, Subscriber is actually trained on 5,000 plus pieces of viral content.
+
+So, it knows exactly what works on YouTube, what doesn't work on YouTube, the retention techniques, and the storytelling techniques that makes a video go viral. It takes you from having no idea what video to make to having a complete script. literally handholds you through the entire process. I've personally used this to write scripts that have gotten over 500,000 views. My
+
+personal favorite feature of Subscriber is the ideation chatbot. Let's say I really like Imangaji's titles and I want to remix it for my channel. I can go to the ideation chatbot and say, "Hey, I really like atangaji's video ideas. I want to remix some of them for my YouTube channel at Boomer Brian. Give me 10 video ideas based on the biggest outliers on Iman's channel in the past
+
+12 months." and instantly it will give me a ton of video ideas that I can choose for for my next video. You can go back and forth with the ideation chatbot until you have an idea that you're really really happy about and then you can turn that into a script. It's like talking to a YouTube strategist that you'd usually pay thousands of dollars for, but in a chatbot. Let's say I
+
+really like this video title. I can give subscriber my YouTube channel and it instantly analyzes my audience and my voice so that it knows how to write for me. And let's say your current YouTube channel has no subscribers and your voice doesn't exist. You can remix a winning channel in your niche, tell it what differences you want it to make, and then it will steal that voice and
+
+steal that audience and fine-tune it towards your specific channel that you want to make. So, for example, if you like the scripts of the documentary channel Fern, you can literally import their videos onto your own channel, give it a remix, and you'll be able to write just for their channel and create your own replicate channel if you'd like. For a long time, I was hesitant on using AI
+
+to write my scripts because I wasn't sure whether it would match my voice or my tone. But the cool thing about Subscriber is that it has this advanced feature that you can go in and fine-tune your voice. You can literally change the sentence length, the sentence structure, your specific tonality, and even the common phrases that you use. And once you fine-tune your voice, you can go on
+
+and create a script. All that I have to do is give Subscriber a short prompt of the video, click the type of video that I'm trying to make, give it a length, and it will instantly guide you through writing the hook, selecting the payoffs, fleshing out the script, and the best part, Subscriber has a built-in script editor. Basically, it's an AI that's trained on editing the actual script.
+
+So, there's an AI for creating the ideas and then there's an AI for writing the script and then there's an AI which looks at the script and helps to edit it based on what it knows is winning on YouTube. If you're worried about whether subscriber can write technical and niche content for you, it actually has a research phase where you can plug in PDFs, videos, or even search certain
+
+articles that you want so that it can be trained on your niche knowledge. And similarly, if you're writing with Chad GBT or Claude, you don't want to feed the AI too much information because if you feed it too much information, it will start to hallucinate because it will not be sure what information to pick from. Or it might even start coming up with its own information. But if you
+
+feed it just the right amount of information, it will be able to take that knowledge that you've given it and turn it into a script that's number one YouTube retention optimized and has intriguing storytelling. And bang, in 12 minutes, you can go from having zero idea what video to make to having a fully written script. Honestly, I've tested Chad GBT, Claude, Notebook, LM,
+
+and all of these other writing models. But subscriber wins because it is trained on hours and hours and hours of YouTube data. So, it knows exactly what works on YouTube and how to create a retention optimized YouTube script. So, if you're writing scripts manually right now and you want an AI to automate a good chunk of the process for you, Subscriber AI should be your go-to tool.
+
+Okay, so now that you've gotten your script, you need to actually record the video. But these days, you don't really have to get in front of the camera and record because they are AI avatars that have just become that good. Most AI avatar sucks because you can still tell whether it's an AI or whether it's a human just by looking at the small little details like the way that the
+
+lips move, the way that the hand gestures move, and the overall emotion across camera. But I bet in 6 months, you won't even be able to distinguish between AI and human. Right now, most people are using AI avatars for short form content because in the 30 to 60second reel where the viewers are just scrolling and brain rotting, they won't really be able to tell. And with
+
+YouTube, most people are still shying away from using it in their content, but I've identified two channels that are absolutely crushing it with AI avatars on their YouTube channel, namely Yuri, who runs Roboverse and Ryan. These two channels are super duper interesting.
+
+They're making videos on these AI video generators and they're getting tens of thousands of views just because of the interest around the topic. And the way that they monetize is through affiliate revenue and sponsorships from these video generation tools. Super interesting. And I think you can take this exact playbook and apply it to any niche out there. For AI avatar
+
+generation, they use argill.ai. And for voice generation, they're using 11 labs. With Argill, with only 2 minutes of training data, you can really fine-tune an AI model to look exactly like you.
+
+The key of the training data is that you want to use a high quality camera like the Sony FX3. And you want to make sure you have good lighting in your face in a nice studio. With a couple rounds of fine-tuning with different rounds of training data, you should be able to find an AI avatar with good lighting in your face, nice lighting, and a nice studio background. I've personally also
+
+tested Casia, Hen, and DID. While Cantasia and Hunen are pretty good in terms of AI avatars, Argill still comes out on top because of how hyperrealistic the hand gestures are. And overall, it's much harder to tell that it's an actual AI avatar. And for voice generation, while 11 Labs has been around for a long time, it is still king. You can easily train 11 Labs on your voice and it come
+
+out really, really good. All you need to do is take your existing video files and upload it onto 11 Labs, and it can immediately create a hyperrealistic voice off. You listen to this. This is my actual voice, and this is my AI voice that only took me about a minute to make within 11 Labs, which is pretty insane.
+
+Okay, so now you've got the ideas and you've got the scripts and you've got the AI avatar. Now it's time to automate the most painful part of the entire video generation process, editing.
+
+Cutting out all the ums, a parts where you lost your train of thought is the most painful process in all of YouTube. My editor probably does around 200 plus cuts per video to make me sound coherent. And that's why the next tool is Gling, which is an AI powered video editor for creators to cut out background noises, silent moments, bad takes, and filler words. It also
+
+includes AI captions, automated zoom in and outs, noise removal, and title and chapter generation. One of my favorite features of Gling is that when you upload a video, it immediately transcribes it. And you can do textbased video editing. Basically, how you would normally edit a script on a Google doc, you can do the exact same thing on a video editor. You can just edit the
+
+transcript and it will cut up the pieces of content accordingly. Really, this tool is really great because it saves you a ton of time on your first pass of editing. I personally also tested Dcript and Wondershare. And while they're both great for editing workflows, I've personally found Gling to be the fastest and the most accurate when doing up simple cuts. So, who can use this? If
+
+you're doing talking head content and you need simple raw cuts, Gling is for you. But if you're doing more high produced content that requires crazy animations or complex editing, you probably still need a traditional video editor for that. Right now, there isn't an AI powered video editing tool. Can do all of these crazy animations, can do all of these crazy B-roll. The closest
+
+thing that we have to that is the V3 model and Midjourney that's able to create B-roll for your videos where you would normally use stock footage. Okay, so just to recap the tools that we're using for niche finding, we're using NextLev. For ideation and script writing, we're using subscriber.ai. For video avatar generation, we're using Argo.ai and 11 Labs for voice
+
+generation. And lastly, we're using Gling for video editing. Now, having all these tools is cool and all, but this is where most creators make the biggest mistake. They go out there and try all of these different AI tools trying to automate every single part of their workflow, but they're missing one crucial factor, and it's that he who chases two rabbits chases none. That
+
+means if you go out there and try all of these tools, you're going a mile wide, but an inch deep. Instead, what you want to do is audit your current workflow to see what you're currently spending hours and hours and hours doing and see what you can automate from there. So, for example, if the longest part of your workflow is YouTube script writing, you can use a tool like Subscriber to
+
+automate a big chunk of that, save you 2, 3, 4, 5 hours that you can use to go spend time with your family or create other types of videos. You don't want to automate what you're not already doing.
+
+You only want to automate things that are taking up a large chunk of your time. Now, it doesn't matter if you know what the best tools out there to create content are if you don't actually understand what makes good content viral. That's why I created a master class teaching you how to go from idea to research to a fully written script that can actually go viral and get you
+
+your first 100,000 subscribers. Click on this video over here and I'll see you in the next

@@ -1,0 +1,41 @@
+{
+  "personalized_at": "2026-01-06T15:39:37.688084",
+  "config": {
+    "service": "AI workflow automation",
+    "value_prop": "Save 20+ hours per week on repetitive tasks",
+    "depth": "light"
+  },
+  "total_leads": 2,
+  "leads": [
+    {
+      "name": "John Smith",
+      "title": "CEO",
+      "company": "Acme Marketing Agency",
+      "website": "acmemarketing.com",
+      "personalized_first_line": "As CEO of a marketing agency, you're probably drowning in client reports and campaign updates.",
+      "pain_point": "Spending excessive time on repetitive administrative tasks like client reporting, campaign monitoring, and team coordination instead of focusing on strategic growth and client acquisition",
+      "personalization_source": "role-based",
+      "research_notes": "No specific research available. Using typical pain points for marketing agency CEOs who often struggle with operational efficiency while trying to scale.",
+      "confidence_score": 75,
+      "alternative_angles": [
+        "Managing multiple client campaigns while keeping your team productive is no small feat",
+        "Scaling a marketing agency means juggling more client deliverables than hours in the day"
+      ]
+    },
+    {
+      "name": "Sarah Johnson",
+      "title": "VP of Sales",
+      "company": "TechStart Solutions",
+      "website": "techstart.io",
+      "personalized_first_line": "Sarah, bet your sales team spends more time on CRM updates than actual selling.",
+      "pain_point": "Sales teams at growing tech companies waste significant time on administrative tasks like data entry, lead qualification, and pipeline updates instead of focusing on revenue-generating activities",
+      "personalization_source": "role-based",
+      "research_notes": "As VP of Sales at a tech startup, likely managing scaling challenges with limited resources and pressure to maximize team productivity.",
+      "confidence_score": 75,
+      "alternative_angles": [
+        "Managing sales ops manually while trying to scale the team",
+        "Struggling with lead qualification and follow-up consistency across reps"
+      ]
+    }
+  ]
+}

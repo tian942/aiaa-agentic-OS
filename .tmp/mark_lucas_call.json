@@ -1,0 +1,3185 @@
+{
+  "title": "Mark Lucas",
+  "meeting_title": "Mark Lucas and Kasey Truong",
+  "url": "https://fathom.video/calls/511326868",
+  "created_at": "2025-12-19T21:25:54Z",
+  "scheduled_start_time": "2025-12-19T21:00:00Z",
+  "scheduled_end_time": "2025-12-19T21:30:00Z",
+  "recording_id": 110189723,
+  "recording_start_time": "2025-12-19T20:59:26Z",
+  "recording_end_time": "2025-12-19T21:25:48Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": [
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "This meeting is being recorded.",
+      "timestamp": "00:00:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Hi, Mark.",
+      "timestamp": "00:00:31"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "How's it going?",
+      "timestamp": "00:00:31"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Pretty good.",
+      "timestamp": "00:00:32"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "How's it going?",
+      "timestamp": "00:00:33"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Doing good.",
+      "timestamp": "00:00:35"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Where are you at with things?",
+      "timestamp": "00:00:35"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Let's see.",
+      "timestamp": "00:00:37"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Well, let's see.",
+      "timestamp": "00:00:38"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I have, I guess, a follow-up that's going to be going on on the 29th or 30th.",
+      "timestamp": "00:00:39"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "They're like outsourced operations for churches.",
+      "timestamp": "00:00:46"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Okay.",
+      "timestamp": "00:00:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And they do a lot of their work internally and manually.",
+      "timestamp": "00:00:52"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Well, internally, obviously.",
+      "timestamp": "00:00:56"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "They do it manually.",
+      "timestamp": "00:00:57"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "it manually, so.",
+      "timestamp": "00:00:58"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "You know, like sending out proposals, contracts, that kind of thing.",
+      "timestamp": "00:00:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And I had an NAN flow already.",
+      "timestamp": "00:01:05"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I didn't tell them it was basically finished, but I have a flow that does, like, proposals from transcripts from the sales call.",
+      "timestamp": "00:01:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And then from the proposal, contract creation is automated and then onboarding.",
+      "timestamp": "00:01:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So they needed help with that.",
+      "timestamp": "00:01:22"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And then other things that they need help to automate with.",
+      "timestamp": "00:01:24"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So I was going to do, like, an AI audit after that initial project.",
+      "timestamp": "00:01:29"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Is that initial project paid?",
+      "timestamp": "00:01:34"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "The AI audit isn't going to be paid.",
+      "timestamp": "00:01:37"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "But what I was thinking on and what I suggested was the revenue I would get paid on the back end.",
+      "timestamp": "00:01:39"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So if I capture the number of hours something takes now and I reduce it a certain number of hours, I know their hourly rate is around 130 an hour.",
+      "timestamp": "00:01:46"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So if I did that multiplication and said, okay, I'll take 30%.",
+      "timestamp": "00:01:56"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "of that savings, I thought that might be a good way to do it.",
+      "timestamp": "00:02:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "you also have to look at it a few ways, too, because it's not only, it's like that multiplied across the whole year, right?",
+      "timestamp": "00:02:04"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "It's not just for one month, right?",
+      "timestamp": "00:02:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And that's what I want to try and figure out how to communicate.",
+      "timestamp": "00:02:13"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Like, nope, it's not just one month.",
+      "timestamp": "00:02:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "How long is that?",
+      "timestamp": "00:02:17"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, like it's going to automate you and save you all this money for the whole year, right?",
+      "timestamp": "00:02:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then I think you can map it out for the whole year.",
+      "timestamp": "00:02:21"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But I also think if you have like a foot-in-the-door offer and they're already paying out $130,000, you know, to ask for $500,000 isn't all that much, right?",
+      "timestamp": "00:02:23"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Well, they're paying, they're charging their folks out at $130,000.",
+      "timestamp": "00:02:31"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I didn't give them any kind of hourly rate for me.",
+      "timestamp": "00:02:37"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Got it, got it.",
+      "timestamp": "00:02:39"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, but even I think like $500 for a first-round project could be reasonable, right?",
+      "timestamp": "00:02:40"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Right.",
+      "timestamp": "00:02:47"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Especially if you have that done and then you can have on, you know, calls with them and it's kind of just stacking $500 projects with them.",
+      "timestamp": "00:02:47"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I'm curious, how did you land this, find this client?",
+      "timestamp": "00:02:55"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Super warm.",
+      "timestamp": "00:02:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Lead, a friend of my wife's that I've known for a few years, and showed her a few of the, or let her listen to a few of the voice AI agents, and she was blown away by those, and then she was telling me about her pain point with the whole lead to sales, the proposal, and all that, and I said I could pretty much automate that, you know, if they're interested, you know.",
+      "timestamp": "00:03:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So more in the sales system sort of realm thing.",
+      "timestamp": "00:03:26"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Mm-hmm.",
+      "timestamp": "00:03:28"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, because I have some, like, no, just, there's multiple students doing AI automation, so I have some updates about what I'm seeing.",
+      "timestamp": "00:03:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Talk to Shenni, talk to Lucas, and there's also another student who's doing pretty well.",
+      "timestamp": "00:03:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "You might see him in the Wynn channel, Dobby, or Dobby.",
+      "timestamp": "00:03:41"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Mm-hmm.",
+      "timestamp": "00:03:44"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So, but, and then Dobby is working with one of my students who's taking over his cold email, and then we were having a chat today, and he said they just started cold email for Dobby, and what did he say?",
+      "timestamp": "00:03:45"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "He got him, how many?",
+      "timestamp": "00:03:58"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "How",
+      "timestamp": "00:03:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Leads did he already bring him?",
+      "timestamp": "00:04:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Let's see where this is.",
+      "timestamp": "00:04:02"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Work for Adobe Channel.",
+      "timestamp": "00:04:05"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Only two weeks.",
+      "timestamp": "00:04:08"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Okay, so they've been going at it for two weeks so far since he launched his cold email.",
+      "timestamp": "00:04:09"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And he said they're averaging about a lead a day, which is great for cold email front.",
+      "timestamp": "00:04:13"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I asked more specifically what they're, how they're positioning the offer.",
+      "timestamp": "00:04:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And they said right now they're testing lead nurture automation that revives dead leads.",
+      "timestamp": "00:04:21"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So in the realm of sales systems, the realm of what you're doing.",
+      "timestamp": "00:04:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then he said next they're taking a more specific approach and they're doing automations in regards to HubSpot.",
+      "timestamp": "00:04:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So they're targeting HubSpot specific automations and things like that.",
+      "timestamp": "00:04:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I think that's kind of nice because I know HubSpot, like not everyone uses HubSpot, but the people who do tend to be slightly larger organizations, right?",
+      "timestamp": "00:04:40"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So then that's another indicator that they have money.",
+      "timestamp": "00:04:47"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I do know that we are starting to see people crack the cold traffic front with that.",
+      "timestamp": "00:04:49"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Talking to Shennie, he says people, they, you know, they don't really care too much.",
+      "timestamp": "00:04:55"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "They, you",
+      "timestamp": "00:04:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "just want their bottleneck solved, and he's noticing that the emotional pain point is people are feeling like, I don't want to be the bottleneck in the business.",
+      "timestamp": "00:05:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Whether they're upper management, they're a CEO, whatever it may be, no one wants to feel like they're the reason that the bottleneck is happening, right?",
+      "timestamp": "00:05:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then just kind of listening and hearing that, and then Shinny's like, yeah, I think he charged like over $500 because one guy was like, everything is done through my account, and anytime someone logs in, they need the two-factor authentication, they need the code from my phone.",
+      "timestamp": "00:05:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So he's like, all day, it's like people texting me, needing the code, needing the code, and he's like, you could just, you know, and Shinny's just coming in and giving one authenticator app that everyone can use or whatever, changing up how the authentication's set, and then that's going to be clear, but that is like a bottleneck that people are facing, and it makes sense, multiple accounts and all that.",
+      "timestamp": "00:05:28"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So it's not even in necessarily the realm of AI, and then Lucas was also talking, and Lucas was like, yeah, a lot of this just goes back to system science and helping people have better systems and making sure that, you know, their systems are clear, simplified.",
+      "timestamp": "00:05:47"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But organized and, you know, things run and, you know, could be all kind of mapped out on flowcharts and they can actually visually see their systems and then all the tech that enables those systems to run smoothly.",
+      "timestamp": "00:06:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Yeah, that's cool.",
+      "timestamp": "00:06:12"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And back to that, the email with the, so how much is he spending on email per whatever, per month?",
+      "timestamp": "00:06:14"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I don't know the deal that he went with with Justin.",
+      "timestamp": "00:06:22"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Justin didn't tell me that.",
+      "timestamp": "00:06:26"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I don't know how much Justin signed him for, but I was talking to Justin and starting in the new year, I'll probably have him do a call and talk about what he's seeing on the frontline AI automation, any cold email tricks, things about list building, all of that.",
+      "timestamp": "00:06:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Because Justin's been CA for probably over a year now.",
+      "timestamp": "00:06:42"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "He's making, you know, around 20K on average.",
+      "timestamp": "00:06:45"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So he's definitely doing well for himself.",
+      "timestamp": "00:06:48"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But yeah, that was our conversation today.",
+      "timestamp": "00:06:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I got really excited because I'm like, oh, okay, finally, I'm getting live feedback that someone is having.",
+      "timestamp": "00:06:53"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But",
+      "timestamp": "00:06:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "That's the results with an AI automation thing, because we hadn't seen that before, and now it's just like, okay, we're starting to see it happen.",
+      "timestamp": "00:07:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Good, good.",
+      "timestamp": "00:07:09"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Yeah, because that's, I mean, my offer is pretty simple, and it's easy to do the performance-based, like basically what he's doing, the database reactivation.",
+      "timestamp": "00:07:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So I'm doing it both with voice AI agents and text.",
+      "timestamp": "00:07:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So that's what I wanted to try and focus on.",
+      "timestamp": "00:07:23"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, and I'm not sure if Dobby's going to fulfill on that with email or whatever, but I would recommend I could send you his name.",
+      "timestamp": "00:07:26"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "You shoot him a message and just, you know, kind of ask him, hey, what he sees working, see if you could form a friendship there.",
+      "timestamp": "00:07:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "He's a really smart kid.",
+      "timestamp": "00:07:41"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "He was at the event, and Dobby had a lot of success on, I'm going send you his name here.",
+      "timestamp": "00:07:43"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "He had a lot of success on Upwork, similar to Shenni, where they had their first few clients on Upwork.",
+      "timestamp": "00:07:50"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "They were put on hourly retainers as, you know, like AI engineers.",
+      "timestamp": "00:07:55"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then from there, after joining CA, it built some of his confidence, and he's been able to now sell those people on retainer and get off Upwork.",
+      "timestamp": "00:08:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So that's that.",
+      "timestamp": "00:08:06"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And now Dobie is experimenting with different outreach strategies and stuff.",
+      "timestamp": "00:08:08"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I mean, I'm not his coach.",
+      "timestamp": "00:08:11"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "If I was his coach, I'd also be having him continue to push Upwork if that's where he's also been having success.",
+      "timestamp": "00:08:12"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And now just have him speed up his cycles of going from hourly to like contracted monthly work, right?",
+      "timestamp": "00:08:17"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Yeah.",
+      "timestamp": "00:08:23"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So, yeah.",
+      "timestamp": "00:08:24"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then this is, just so you have an idea, he sold a bunch of students on CA, but it was a little bit weird because he ended up like raising his prices midway through and like kind of burned some bridges there.",
+      "timestamp": "00:08:25"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And it's like CA in one regards, it's kind of like, you know, I personally feel like we're one big family.",
+      "timestamp": "00:08:39"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I didn't like that.",
+      "timestamp": "00:08:44"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "He, you know, I know there's that whole advice of like, after you sign three clients, raise your advice.",
+      "timestamp": "00:08:46"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I'm like, if I was his coach, I wouldn't have told him that.",
+      "timestamp": "00:08:50"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I had to, I had to talk with his coach of being like, Hey, this is a little bit suspect here that he's doing this.",
+      "timestamp": "00:08:52"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So, but I can also.",
+      "timestamp": "00:08:58"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So send you what he was sending other students.",
+      "timestamp": "00:09:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Okay.",
+      "timestamp": "00:09:03"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Nick.",
+      "timestamp": "00:09:04"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Did Nick?",
+      "timestamp": "00:09:05"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "That's cool.",
+      "timestamp": "00:09:06"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And I'm starting to, after I filled out the form, I realized, uh-oh, I haven't been reaching out.",
+      "timestamp": "00:09:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So during the meeting yesterday, I reached out to like Chris Shoup, Chris Coronada, and Jim, the Jim guy.",
+      "timestamp": "00:09:11"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I forget his last name, but connected with them on Slack.",
+      "timestamp": "00:09:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So hopefully I can start building some relationships there.",
+      "timestamp": "00:09:25"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Uh-huh.",
+      "timestamp": "00:09:28"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, because I do know, like, and like one thing I was talking about with, yeah, where's this message?",
+      "timestamp": "00:09:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "must have got cleared because this Slack got reset.",
+      "timestamp": "00:09:37"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I don't have his message anymore, unfortunately, of what Dobie was pitching people on.",
+      "timestamp": "00:09:40"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But it's super vague, and it was just like custom AI solutions.",
+      "timestamp": "00:09:45"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then what I was talking with Lucas and Shinny about is they're also noticing at like a slightly higher enterprise level, like know, like, and trust you becomes a big factor because a lot of- it's gotta",
+      "timestamp": "00:09:49"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Business owners, they are actually scared that they're going to bring someone in to automate something and it's going to break what's already working.",
+      "timestamp": "00:10:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So there's that whole attitude of don't break it if it's not broken, right?",
+      "timestamp": "00:10:06"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yet we have new tools to optimize.",
+      "timestamp": "00:10:09"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And so that's a whole kind of fear thing.",
+      "timestamp": "00:10:11"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then one of the narratives that we picked up on is business owners don't actually want to fire people.",
+      "timestamp": "00:10:14"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "They would rather empower their own team to use the AI skills to get more out of their team.",
+      "timestamp": "00:10:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So messaging around that is going to do a lot better too.",
+      "timestamp": "00:10:25"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "How do you get more out of your team with AI?",
+      "timestamp": "00:10:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then you can even take that angle.",
+      "timestamp": "00:10:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Hey, we can come in here, build some of these systems, and help some of your employees dust off their AI skills, show them how to build these things, and kind of taking also like consulting empowerment lens, right?",
+      "timestamp": "00:10:31"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Like, hey, we can definitely come in, do done-for-you services, really help solve bottlenecks.",
+      "timestamp": "00:10:43"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But also we can empower your team and show them the latest and greatest AI tools and stuff.",
+      "timestamp": "00:10:47"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I know that is part of Dobby's offer to some of his bigger clients of having weekly AI meetings with them.",
+      "timestamp": "00:10:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And it's like, one, what do you guys want me to automate next?",
+      "timestamp": "00:10:57"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then",
+      "timestamp": "00:10:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And two, there might be other staff on the call that is asking you questions in regard to AI and how they should be using it for their role.",
+      "timestamp": "00:11:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And so I know that's how Adobe's priced out his higher offer.",
+      "timestamp": "00:11:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I was like, if I was his coach, I would have challenged him on that because I'm like, is that really what the market wants?",
+      "timestamp": "00:11:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Because I know if I'm a business owner, I don't want more meetings.",
+      "timestamp": "00:11:17"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I want you to solve the bottleneck.",
+      "timestamp": "00:11:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I want to pay once and I want to be done with it, right?",
+      "timestamp": "00:11:21"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Another bottleneck and I know you're the guy, I'll call you up, right?",
+      "timestamp": "00:11:23"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "It's kind of like a plumber, right?",
+      "timestamp": "00:11:26"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I don't want the plumber at my house every day or every week, you know, trying to talk to me.",
+      "timestamp": "00:11:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I was challenging him, you know, but I lost my voice.",
+      "timestamp": "00:11:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I couldn't challenge him on like, is that what they really want?",
+      "timestamp": "00:11:33"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Or is that what the market's saying?",
+      "timestamp": "00:11:35"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But I could see how if it's more than just the founders and it's other people and he's just kind of like, I'm the AI expert here to give tips and tricks and to help you with your specific position.",
+      "timestamp": "00:11:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Now I could see how that'd be a value add for a company, right?",
+      "timestamp": "00:11:47"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Because it's like, I'll just pop in the CEO of like, hey, we need help with something.",
+      "timestamp": "00:11:50"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Otherwise, it's just kind of a nice to have thing where I can send my employees to where I can trust.",
+      "timestamp": "00:11:54"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "That they're getting expertise on like, you know, how to work with AI and stuff.",
+      "timestamp": "00:12:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So that, these are some of the insights I've seen in the AI automation space thus far.",
+      "timestamp": "00:12:04"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Cool.",
+      "timestamp": "00:12:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Cool.",
+      "timestamp": "00:12:11"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Yeah.",
+      "timestamp": "00:12:12"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And I was going to add that to the training piece.",
+      "timestamp": "00:12:12"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "It's a non-profit, but I was going to do a workshop for their staff.",
+      "timestamp": "00:12:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I pitched like the proposal, whatever, to the leadership team a few weeks ago.",
+      "timestamp": "00:12:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So they were going to make up their minds by January.",
+      "timestamp": "00:12:25"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So I'll find out in January because they're kind of slow moving.",
+      "timestamp": "00:12:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "But yeah, I just need to really nail the outreach.",
+      "timestamp": "00:12:32"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I could start, I guess, so I've been warming mailboxes for like two months on Instantly.",
+      "timestamp": "00:12:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So I need to like maybe send something so that maybe so I can start sending something out while I'm doing warm outreach, I guess.",
+      "timestamp": "00:12:41"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah.",
+      "timestamp": "00:12:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah.",
+      "timestamp": "00:12:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I would, you could also message Justin.",
+      "timestamp": "00:12:52"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I could put Justin's name in here as well and just kind of maybe tell him like, Hey, I already have a infrastructure.",
+      "timestamp": "00:12:53"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Structure set up.",
+      "timestamp": "00:13:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Could you just give me some advice on like a lead list or who I should reach out to?",
+      "timestamp": "00:13:01"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I don't know how guarded he's going to be because he is a savvy businessman, but I also know he is very helpful for CA students as well.",
+      "timestamp": "00:13:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So, you know, that's, but he might have some insights for you there as well.",
+      "timestamp": "00:13:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So, yeah, Dobby is the one who's currently having success with the AI automation.",
+      "timestamp": "00:13:23"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Justin is the cold email guy who's pretty much running the cold traffic for Dobby right now, only two weeks in, but they're starting to see results.",
+      "timestamp": "00:13:28"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So, I mean, even if you put together a lead list in a campaign and then you ask Justin, hey, could you review this or something, right?",
+      "timestamp": "00:13:35"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Then he might be more willing to do that.",
+      "timestamp": "00:13:42"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But, yeah, it's kind of like generic, hey, we'll help revive leads for you.",
+      "timestamp": "00:13:45"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "That's reasonable.",
+      "timestamp": "00:13:50"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Yeah, and it's getting results.",
+      "timestamp": "00:13:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So maybe I'll just try that.",
+      "timestamp": "00:13:53"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Cool.",
+      "timestamp": "00:13:55"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, but, yeah, it's time to start, you know.",
+      "timestamp": "00:13:57"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I'm really cranking the outreach numbers here now for you because I'd love to see you get some wins.",
+      "timestamp": "00:14:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So pretty much like, yeah, I know we covered a lot, but what I know is working for sure is Upwork.",
+      "timestamp": "00:14:05"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "That is a thing I'm very, very sure of.",
+      "timestamp": "00:14:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I know Adobe's having success with Cold Email, but he's also working with a Cold Email veteran who's been in the game for a while now and has a lot of experience working with various marketing agencies.",
+      "timestamp": "00:14:13"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So that is also taken with caveat there, but we have proof that it's working and it is regards to these kind of revenue offers, but more the specifics, right?",
+      "timestamp": "00:14:25"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And just like you had the call with this lady of, you know, her being like, well, this kind of lead nurturing flow and where people falling off and all the way, you know, from kind of initial contact all the way to proposal and kind of speaking the specifics of what she gave you.",
+      "timestamp": "00:14:34"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I think there's universal message, like messaging in there of what they actually want and what's going to break through on cold traffic.",
+      "timestamp": "00:14:48"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Cool.",
+      "timestamp": "00:14:55"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "If they needed lead help too, because they're...",
+      "timestamp": "00:14:56"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "only getting like four or five leads a month, like in from whatever marketing they're doing.",
+      "timestamp": "00:15:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Maybe I should just focus on what I do first and then maybe offer another service to get them more leads.",
+      "timestamp": "00:15:05"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, or you could, that could be a referral thing right there, right?",
+      "timestamp": "00:15:11"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Of like, okay, what do you want to do that?",
+      "timestamp": "00:15:14"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Okay, and then you could always reach out to Justin and be like, hey, I have this client.",
+      "timestamp": "00:15:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "you think Cold Email would work for them?",
+      "timestamp": "00:15:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "You know, can I send them your way or whatever?",
+      "timestamp": "00:15:21"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And then maybe that's some sort of trade, right?",
+      "timestamp": "00:15:24"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Where it scratches back and then he's helping you out with Cold Email or something, right?",
+      "timestamp": "00:15:25"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Because you help bring in more lead flows or something, right?",
+      "timestamp": "00:15:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So that's, you know, that's kind of the name of the game, right?",
+      "timestamp": "00:15:32"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Okay.",
+      "timestamp": "00:15:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Doing that, yeah.",
+      "timestamp": "00:15:37"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So, yeah, I want to, yeah, I'm thinking like fastest ways for you.",
+      "timestamp": "00:15:38"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I would encourage you to at least start an Upwork profile and just be browsing on there.",
+      "timestamp": "00:15:44"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "That's also one of Shani's tips.",
+      "timestamp": "00:15:48"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Shani will go on there and he'll search things like, you know, automation, you know, make, zap your, voice agent.",
+      "timestamp": "00:15:50"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "He just has a bunch of these search terms he searches every day.",
+      "timestamp": "00:15:57"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And he's trying to get insight.",
+      "timestamp": "00:16:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then he goes, I know if like one person in one niche is having a problem and looking for that, then that's kind of like his market research.",
+      "timestamp": "00:16:01"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "know the whole niche is having issues like that.",
+      "timestamp": "00:16:08"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So then he's launching campaigns and stuff around all of that.",
+      "timestamp": "00:16:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So he's been doing research on Upwork and then is like going broad in that whole niche to message them.",
+      "timestamp": "00:16:16"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So then that's kind of a way to pick up signals.",
+      "timestamp": "00:16:22"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So just having Upwork profile and being on the search will give you ideas and like understand the language they're talking I mean, I would encourage you also to, you know, apply for like, you know, one to three a day, because I know that's going to be the easiest way to get money in.",
+      "timestamp": "00:16:24"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And Upwork is serves as like almost that warm market because you have people saying, hey, you know, raising their hand saying, I have this pain problem, right?",
+      "timestamp": "00:16:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Right.",
+      "timestamp": "00:16:44"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So they're actually actively taking action to get it solved, right?",
+      "timestamp": "00:16:45"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I do know that's a great place to start.",
+      "timestamp": "00:16:48"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And like I said, Dobie has upsold a lot of people into contracts and retainer work and all sorts of things from Upwork.",
+      "timestamp": "00:16:50"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I know that's working and I just got word today.",
+      "timestamp": "00:16:56"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Hey, the Adobe's two weeks in on a cold email campaign, and we're starting to see results, right?",
+      "timestamp": "00:17:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I'm like, okay, this can be cracked on cold traffic as well.",
+      "timestamp": "00:17:03"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Nice.",
+      "timestamp": "00:17:08"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "That sounds good.",
+      "timestamp": "00:17:09"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I guess those are the main things.",
+      "timestamp": "00:17:11"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I do need to start getting revenue in so I can make the payments easier.",
+      "timestamp": "00:17:13"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, I could pull it up here.",
+      "timestamp": "00:17:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I'm guessing we don't have too much data to report right now.",
+      "timestamp": "00:17:22"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But here, next month, I would like to actually fill this out with you, which is going to be the start of our BHA.",
+      "timestamp": "00:17:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So data front, it's going to be, you know, how many cold emails are you sending?",
+      "timestamp": "00:17:35"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "If you're doing Dream 100, Warm Outreach, you're starting to do things on LinkedIn, okay, how many LinkedIn messages are you sending?",
+      "timestamp": "00:17:40"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "If you want to start doing, you know, content and position yourself as an expert, you know, we'll track that.",
+      "timestamp": "00:17:48"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then where are all calls coming from, right?",
+      "timestamp": "00:17:53"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But the biggest thing is that you have systems either for Dream 100 or your team.",
+      "timestamp": "00:17:55"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Taking LinkedIn Outreach serious, sending connections or Upwork or however you want to do it, and you're doing, you know, and doing cold email.",
+      "timestamp": "00:18:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So everything's warmed up now.",
+      "timestamp": "00:18:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "It's probably about, like, activating, sending that, and then, you know, LinkedIn or Upwork, right, could be the options for you as well, right?",
+      "timestamp": "00:18:09"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Well, I would recommend, just because I've seen it work, Upwork in this, in your case, starting to do some sort of Upwork outreach, right?",
+      "timestamp": "00:18:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Because even if you're sending one to three proposals a day, then, you know, we'll track that.",
+      "timestamp": "00:18:26"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "We'll see how many calls that's getting booked, and then same with emails.",
+      "timestamp": "00:18:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So this is what I do with all my students, even students as big as, you know, Justin and bigger, right?",
+      "timestamp": "00:18:35"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So every month we meet, and yeah, like a lot of you guys who just started, who are like a month, you know, second month in, you've been getting your bearings set, understanding Dream 100, understanding cold email, understanding how to position and offer, all of that stuff.",
+      "timestamp": "00:18:40"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And now it's like, I'm pushing all of you guys to start building out your systems, where we can start testing.",
+      "timestamp": "00:18:52"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Thank",
+      "timestamp": "00:18:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Okay, cool.",
+      "timestamp": "00:19:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I kind of lost track on where I should be on the Trello board.",
+      "timestamp": "00:19:01"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "There seem to be so many boxes that I need to do.",
+      "timestamp": "00:19:04"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I'm not sure where to pick up from.",
+      "timestamp": "00:19:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So should I just pick up from where I left off and just keep going or just focus on what we're talking about now?",
+      "timestamp": "00:19:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Focus on what we're talking about now.",
+      "timestamp": "00:19:16"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Like, it's kind of going to be like a pick and choose adventure for you now.",
+      "timestamp": "00:19:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "The biggest thing is that you're setting for yourself outreach numbers.",
+      "timestamp": "00:19:22"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I can, like some of my best students, this is what they do with me.",
+      "timestamp": "00:19:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I'll send you an example right here.",
+      "timestamp": "00:19:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Well, that we check in daily and this is what they're sending me daily.",
+      "timestamp": "00:19:31"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Where's Moise at?",
+      "timestamp": "00:19:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Moise is one of the best in here.",
+      "timestamp": "00:19:38"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So Moise sends me something like this and I'll put it in your VIP chat here.",
+      "timestamp": "00:19:41"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Awesome.",
+      "timestamp": "00:19:47"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So this is kind of like where I'd like you to be.",
+      "timestamp": "00:19:48"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Of course, it's going to be different, right?",
+      "timestamp": "00:19:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But how many automated emails he's sending.",
+      "timestamp": "00:19:52"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then on top of emails, he does LinkedIn outreach.",
+      "timestamp": "00:19:54"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then he also does like warm calls.",
+      "timestamp": "00:19:57"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "to people that give them positive replies.",
+      "timestamp": "00:20:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then he's also tracking his follow-up.",
+      "timestamp": "00:20:03"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then it's just how many new positive replies came in, how many meetings got booked daily.",
+      "timestamp": "00:20:05"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I'd like you to be able to report cold email.",
+      "timestamp": "00:20:09"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then maybe it's not LinkedIn, but maybe it's Upwork, right?",
+      "timestamp": "00:20:11"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Okay, I sent this many Upwork proposals, right?",
+      "timestamp": "00:20:14"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Or maybe you're running, however it's going to evolve for you, right?",
+      "timestamp": "00:20:17"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So something where it's like just an idea of, and you can see how this is kind of directly related to that BHA form, right?",
+      "timestamp": "00:20:23"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So he chose his two channels, his cold email, LinkedIn, and then he's doing more advanced follow-ups, and he does a weekly video on YouTube, right?",
+      "timestamp": "00:20:30"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So that's that.",
+      "timestamp": "00:20:37"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And he's booking about a call a day right now.",
+      "timestamp": "00:20:38"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So he's doing really great for himself, yeah.",
+      "timestamp": "00:20:41"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But I can see the numbers right here.",
+      "timestamp": "00:20:44"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then I was like, bro, what happened on LinkedIn, right?",
+      "timestamp": "00:20:46"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Because he has some subscription where he can send 100 emails a day.",
+      "timestamp": "00:20:49"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So I'm like, what happened there?",
+      "timestamp": "00:20:53"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then, you you only did one warm call.",
+      "timestamp": "00:20:54"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Why did you only do one, right?",
+      "timestamp": "00:20:57"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "He says he has a list of 200 people he needs to call.",
+      "timestamp": "00:20:58"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So it makes my kind of accountability even easier instead of guessing, and then he's just rinsing and repeating, like he knows his daily task of what he's got to do, and then he's putting that up, right?",
+      "timestamp": "00:21:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then of course, like now him, he's more attending all the sales call trainings, right?",
+      "timestamp": "00:21:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Rewatching sales videos because he's booking so many calls, right?",
+      "timestamp": "00:21:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "He's actually, that's actually the bottleneck is himself and getting better at closing now, right?",
+      "timestamp": "00:21:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So he's at, but where I need to get you at is like, okay, you're sending daily volume, right?",
+      "timestamp": "00:21:23"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah, and think, yeah, and I think, you know, you got the cold email infrastructure ready, you might just need to, you know, work on getting a list together of like, who should you target first, some angles you want to test, right?",
+      "timestamp": "00:21:28"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I kind of gave you the one here, which is like lead nurture and lead reactivation that we know is doing well.",
+      "timestamp": "00:21:40"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I don't know the volume Justin's sending.",
+      "timestamp": "00:21:49"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Justin has a pretty robust infrastructure, so he could be sending, you know, probably around, you I wouldn't be surprised if he's sending around 44,000 a day for Adobe as well, right?",
+      "timestamp": "00:21:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Like.",
+      "timestamp": "00:21:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I'm just not sure the numbers, but Justin might, I don't know how guarded he's going to be on sharing what's working and what's not working, but you can read that to him.",
+      "timestamp": "00:22:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then I would recommend subbing out LinkedIn work for doing Upwork, right?",
+      "timestamp": "00:22:08"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So, and then sending, you know, X amount of proposals a day, right?",
+      "timestamp": "00:22:12"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Okay.",
+      "timestamp": "00:22:16"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then once you get in the groove of that, then we could talk on like, all right, how do you, we make our Upwork proposals better and stuff.",
+      "timestamp": "00:22:17"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then one thing is like, I had one student start to look at Upwork and he said, a job was posted like 45 minutes ago.",
+      "timestamp": "00:22:25"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I looked at it and there was already, like it said, like 50 plus applications, right?",
+      "timestamp": "00:22:31"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Well, I wouldn't, I would still recommend that you don't let that discourage you from joining because a lot of that is just like AI slop, automated, quick sort of thing.",
+      "timestamp": "00:22:35"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And people just trying to play a volume game and get in anything.",
+      "timestamp": "00:22:45"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And looking at it, cause I've hired off talent off that you're, you're kind of looking for someone who's kind of taking a little bit of time.",
+      "timestamp": "00:22:48"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And so it can double as like dream 100.",
+      "timestamp": "00:22:55"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But what my strategy was when I was on.",
+      "timestamp": "00:22:58"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Upwork is I would make like a little loom video and I'd pretty much read them their job description and say, I'm totally the man for the job.",
+      "timestamp": "00:23:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "This is my background.",
+      "timestamp": "00:23:06"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "These are things I've built.",
+      "timestamp": "00:23:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Let's hop on a call and see if I'm a right fit.",
+      "timestamp": "00:23:08"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And that would set me apart from the competition because I had posted jobs myself and I knew a lot of it was just AI slop.",
+      "timestamp": "00:23:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then I'm like, what stands out, right?",
+      "timestamp": "00:23:16"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And so like if you have five-star review, you have, you know, and you can always kind of talk to friends and family, 20 bucks here, you know, 100 bucks there.",
+      "timestamp": "00:23:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And you can kind of get your numbers up a little bit and then have them write you a comment that's like, oh, it was great.",
+      "timestamp": "00:23:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "You know, he automated this, automated that.",
+      "timestamp": "00:23:32"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And you kind of give them what to write and everything.",
+      "timestamp": "00:23:34"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And yeah, Upwork is going to take a little bit of the money, but it's a way to start boosting those initial things.",
+      "timestamp": "00:23:37"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But once you're on Upwork, you're more comfortable with the thing and you're actually sending proposals daily, then we could talk about optimizing it.",
+      "timestamp": "00:23:42"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "It's just that'd be the playground I'd recommend you to dive into first as well as sending your emails too.",
+      "timestamp": "00:23:49"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Cool.",
+      "timestamp": "00:23:55"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Yeah, I have a, I have an Upwork profile and I started doing.",
+      "timestamp": "00:23:56"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "morning.",
+      "timestamp": "00:23:59"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "You know, outreach, but I kind of let it go because of that 50 apps on one thing.",
+      "timestamp": "00:24:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "I'm like, ah, look at the competition.",
+      "timestamp": "00:24:04"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So I'll definitely crank that up again.",
+      "timestamp": "00:24:07"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So like I said, just doing a quick little Loom video being like, you know, reading them their job description back and then just say, hey, I built voice agents.",
+      "timestamp": "00:24:10"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "I have a deep engineering background.",
+      "timestamp": "00:24:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Like this is going to be no sweat for me.",
+      "timestamp": "00:24:20"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "You know, I'm watching NADN tutorials before I fall asleep.",
+      "timestamp": "00:24:21"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "You know, it's like, you know, I eat, breathe, sleep this stuff.",
+      "timestamp": "00:24:24"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Like I'm going to crush it for you.",
+      "timestamp": "00:24:26"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Right.",
+      "timestamp": "00:24:27"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Yeah.",
+      "timestamp": "00:24:28"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So that's pretty much like how I would recommend you stand out against the competition right there.",
+      "timestamp": "00:24:29"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Okay.",
+      "timestamp": "00:24:33"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Quick little Loom videos that are just like short and sweet for them right to the point and just, you know, kind of having that confidence play.",
+      "timestamp": "00:24:34"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Sounds good.",
+      "timestamp": "00:24:42"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "All righty.",
+      "timestamp": "00:24:45"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "All right.",
+      "timestamp": "00:24:46"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "So any other questions you have for me?",
+      "timestamp": "00:24:47"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "No, I think you guys probably have training on the cold email because I'm, I'm just at the point where I just need to like come up with the copy for the.",
+      "timestamp": "00:24:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And then just best practices on loading it up and sending out the campaign.",
+      "timestamp": "00:25:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "So basic stuff.",
+      "timestamp": "00:25:05"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But I guess it's all For copy, let's see what time it is right now.",
+      "timestamp": "00:25:06"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "What time is Christian's call?",
+      "timestamp": "00:25:11"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "There's usually a cold email.",
+      "timestamp": "00:25:13"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "might have already happened.",
+      "timestamp": "00:25:14"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Oh, okay.",
+      "timestamp": "00:25:16"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But Christian usually, yeah, it's already happened.",
+      "timestamp": "00:25:17"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Christian does a cold email call on Scripps.",
+      "timestamp": "00:25:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Is there anyone on Monday doing a...",
+      "timestamp": "00:25:21"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "No, there's no Monday.",
+      "timestamp": "00:25:23"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "But, I mean, I would go through here on Slack, go through the cold email 2025 channel, and I think you'll pick it up because people are always putting their copy in there and things.",
+      "timestamp": "00:25:26"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And any questions you have, you can ask them in there, ask people for resources, and they're really good to reply there.",
+      "timestamp": "00:25:36"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "There's a bunch of killers who just live in that channel all day.",
+      "timestamp": "00:25:42"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then, you know, you can even put your copy in there and be like, hey, rip this apart for me, right?",
+      "timestamp": "00:25:45"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then people will give you advice and stuff.",
+      "timestamp": "00:25:49"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Sweet.",
+      "timestamp": "00:25:51"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "All right.",
+      "timestamp": "00:25:52"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then, yeah, there should be trainings on, like, how to get instantly fully set up and everything in the Kajabi as well.",
+      "timestamp": "00:25:53"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Awesome.",
+      "timestamp": "00:25:58"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "All righty.",
+      "timestamp": "00:26:00"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "All right, my man.",
+      "timestamp": "00:26:01"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "That's it.",
+      "timestamp": "00:26:02"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Okay.",
+      "timestamp": "00:26:03"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "All right.",
+      "timestamp": "00:26:04"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "That's all I got to report.",
+      "timestamp": "00:26:04"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And I'm hoping, you know, next month you'll have big numbers on the board.",
+      "timestamp": "00:26:05"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "And then, yeah, keep me in the loop with how this church client goes.",
+      "timestamp": "00:26:09"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "And we'll go from there.",
+      "timestamp": "00:26:13"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "All right.",
+      "timestamp": "00:26:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Sounds good.",
+      "timestamp": "00:26:15"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Appreciate it.",
+      "timestamp": "00:26:16"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "All right, Mark.",
+      "timestamp": "00:26:17"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Have a good one.",
+      "timestamp": "00:26:18"
+    },
+    {
+      "speaker": {
+        "display_name": "Mark Lucas",
+        "matched_calendar_invitee_email": "mark@marklucas.info"
+      },
+      "text": "Thanks.",
+      "timestamp": "00:26:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "You too.",
+      "timestamp": "00:26:19"
+    },
+    {
+      "speaker": {
+        "display_name": "Kasey Truong",
+        "matched_calendar_invitee_email": "kasey@clientascension.com"
+      },
+      "text": "Bye.",
+      "timestamp": "00:26:20"
+    }
+  ],
+  "transcript_language": "en",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Define Mark's immediate outreach strategy for AI automation clients.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=837.0)\n\n## Key Takeaways\n\n  - [**Prioritize Upwork & Cold Email:** Immediately activate outreach on Upwork and with cold email (using the proven \"dead lead reactivation\" angle) to generate revenue.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=837.0)\n  - [**Track Daily Metrics:** Implement daily tracking of outreach volume (proposals, emails) and results (replies, calls booked) to enable data-driven optimization.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1047.0)\n  - [**Differentiate on Upwork:** Stand out from automated proposals by submitting personalized Loom videos that read the job description back to the client, proving engagement.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1378.0)\n  - [**Position as an Enabler:** Frame AI as a tool to empower existing teams, not replace them, to overcome client fear of disruption and job loss.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=614.0)\n\n## Topics\n\n### Current Client Project\n\n  - [**Client:** Outsourced operations for churches (warm lead).](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=35.0)\n  - [**Problem:** Manual sales processes (proposals, contracts, onboarding).](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=52.0)\n  - [**Solution:** Pre-built n8n flow to automate the sales system.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=65.0)\n  - [**Proposed Pricing Model:** Performance-based, taking 30% of annual savings.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=94.0)\n      - [**Rationale:** This model is compelling because it highlights long-term value, not just a one-time fee.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=124.0)\n      - [**Alternative:** A low-cost \"foot-in-the-door\" offer (\\~$500) could be an easier first sale.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=143.0)\n  - [**Next Step:** Follow-up call scheduled for Dec 29/30.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=35.0)\n\n### Outreach Strategy & Market Insights\n\n  - [**Upwork:** A proven channel for initial clients.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=845.0)\n      - [**Success Story:** Dobby used Upwork to land hourly gigs, then upsold clients to retainers.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=463.0)\n      - [**Tactic:** Use Upwork as a market research tool to identify common pain points.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=944.0)\n  - [**Cold Email:** Now proven effective for AI automation.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=225.0)\n      - [**Success Story:** Dobby's campaign (run by Justin) is averaging \\~1 lead/day after 2 weeks.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=225.0)\n      - [**Winning Angle:** \"Lead nurture automation that revives dead leads.\"](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=258.0)\n      - [**Future Test:** Hyper-specific HubSpot automations to target larger organizations.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=258.0)\n  - [**Market Psychology:**](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=589.0)\n      - [**Primary Fear:** Clients are afraid of breaking what's already working.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=589.0)\n      - [**Key Insight:** Clients prefer empowering their team with AI, not replacing staff.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=614.0)\n      - [**Effective Messaging:** Frame AI as a way to \"get more out of your team\" and solve personal bottlenecks.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=614.0)\n\n### Execution Plan\n\n  - [**Immediate Focus:** Pause Trello board tasks and prioritize revenue-generating outreach.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1141.0)\n  - [**Daily Tracking:** Implement a system to track daily metrics (proposals, emails, replies, calls booked) to enable data-driven optimization.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1047.0)\n  - [**Upwork Differentiation:**](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1345.0)\n      - [**Problem:** High competition (50+ applications per job).](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1345.0)\n      - [**Solution:** Submit a personalized Loom video with each proposal.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1378.0)\n          - [**Content:** Read the job description back to the client \u2192 state expertise \u2192 offer a call.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1378.0)\n          - [**Rationale:** This proves engagement and stands out from generic, automated responses.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1345.0)\n  - [**Cold Email Execution:**](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1491.0)\n      - [**Infrastructure:** Mailboxes are warmed on Instantly and ready.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=752.0)\n      - [**Next Step:** Draft copy using the \"dead lead reactivation\" angle.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1288.0)\n      - **Resource:** Use the `#cold-email-2025` Slack channel for copy feedback.\n\n## Next Steps\n\n  - [**Mark:**](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=837.0)\n      - [Activate cold email campaigns using the \"dead lead reactivation\" angle.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1288.0)\n      - [Resume Upwork outreach (1\u20133 proposals/day), using personalized Loom videos.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1328.0)\n      - [Implement daily tracking for all outreach metrics.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=1047.0)\n      - [Connect with Dobby and Justin on Slack for insights.](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=446.0)\n      - [Follow up on the church client project (Dec 29/30).](https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--?tab=summary&timestamp=35.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Set daily outreach targets; send daily metrics to Kasey",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:19:11",
+      "recording_playback_url": "https://fathom.video/calls/511326868?timestamp=1151.9999",
+      "assignee": {
+        "name": "Mark Lucas",
+        "email": "mark@marklucas.info",
+        "team": null
+      }
+    },
+    {
+      "description": "Draft cold email copy (lead nurture/reactivation); post in Slack #cold-email-2025 for feedback",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:24:40",
+      "recording_playback_url": "https://fathom.video/calls/511326868?timestamp=1480.9999",
+      "assignee": {
+        "name": "Mark Lucas",
+        "email": "mark@marklucas.info",
+        "team": null
+      }
+    },
+    {
+      "description": "Review Kajabi re: Instantly setup; launch cold email campaign",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:25:42",
+      "recording_playback_url": "https://fathom.video/calls/511326868?timestamp=1542.9999",
+      "assignee": {
+        "name": "Mark Lucas",
+        "email": "mark@marklucas.info",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Mark Lucas",
+      "email": "mark@marklucas.info",
+      "email_domain": "marklucas.info",
+      "is_external": true,
+      "matched_speaker_display_name": "Mark Lucas"
+    },
+    {
+      "name": "Kasey Truong",
+      "email": "kasey@clientascension.com",
+      "email_domain": "clientascension.com",
+      "is_external": false,
+      "matched_speaker_display_name": "Kasey Truong"
+    }
+  ],
+  "recorded_by": {
+    "name": "Kasey Truong",
+    "email": "kasey@clientascension.com",
+    "email_domain": "clientascension.com",
+    "team": "Customer Success"
+  },
+  "share_url": "https://fathom.video/share/bNh9E6k6mP6GQMxuK8VZNyZ1Nhry2z--",
+  "crm_matches": null
+}

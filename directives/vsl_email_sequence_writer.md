@@ -53,3 +53,32 @@ OPENROUTER_API_KEY=your_key
 ## Integration
 Position 4/7 in VSL funnel pipeline.
 **Inputs:** Research, VSL script, sales page → **Outputs:** Email sequence → Google Doc Creator
+
+## Related Skill Bibles
+
+### PRIMARY: Max Sturtevant's $40M+ Email Methodology
+
+**[SKILL_BIBLE_sturtevant_email_master_system.md](../skills/SKILL_BIBLE_sturtevant_email_master_system.md)** ⭐ ESSENTIAL
+- Complete email system (6,968 words)
+- SCE Framework (Skimmable, Clear, Engaging)
+- 75-word max body copy rule
+
+**[SKILL_BIBLE_sturtevant_copywriting.md](../skills/SKILL_BIBLE_sturtevant_copywriting.md)** ⭐ FOR SEQUENCES
+- Email copywriting formulas (5,395 words)
+- Subject line swipe files
+- CTA optimization
+
+**[SKILL_BIBLE_sturtevant_welcome_flow.md](../skills/SKILL_BIBLE_sturtevant_welcome_flow.md)**
+- Sequence structure blueprint (7,281 words)
+- Value-first positioning
+- Educational email tactics
+
+### SUPPLEMENTARY: Sales Psychology
+
+**[SKILL_BIBLE_hormozi_email_marketing_complete.md](../skills/SKILL_BIBLE_hormozi_email_marketing_complete.md)**
+- Sales psychology for email
+- Urgency and scarcity frameworks
+
+**[SKILL_BIBLE_hormozi_sales_training.md](../skills/SKILL_BIBLE_hormozi_sales_training.md)**
+- Objection handling for email copy
+- Closing psychology in written form

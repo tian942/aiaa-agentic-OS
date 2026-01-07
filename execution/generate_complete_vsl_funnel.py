@@ -194,10 +194,10 @@ class VSLFunnelOrchestrator:
                 "--content", filepath,
                 "--title", f"{self.company} - {title}",
                 "--folder-id", "1M_2lHBzVQuIv1fptf8BUfVcGJgL6jxf7",
-                "--output-json", str(doc_metadata_file),
             ]
 
-            success, output = self.run_script("create_google_doc_formatted.py", args)
+            # Use centralized formatted doc creator
+            success, output = self.run_script("create_formatted_google_doc.py", args)
 
             if success and os.path.exists(doc_metadata_file):
                 with open(doc_metadata_file, "r") as f:
