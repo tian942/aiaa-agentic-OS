@@ -23,8 +23,8 @@ Claude Code will:
 
 **Or run setup manually:**
 ```bash
-git clone https://github.com/stopmoclay/Agentic-Workflows.git
-cd Agentic-Workflows
+git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
+cd AIAA-Agentic-OS
 python3 install.py    # Install dependencies
 python3 wizard.py     # Interactive setup wizard
 python3 run.py        # Launch the system
