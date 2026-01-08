@@ -18,7 +18,7 @@ Run: git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
 Then change into that directory.
 
 ## Step 2: Install Dependencies
-Run: python3 install.py
+Run: pip install -r requirements.txt
 
 ## Step 3: Walk Me Through Setup
 Be my setup wizard. Ask me questions ONE AT A TIME to configure:

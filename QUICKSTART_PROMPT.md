@@ -18,8 +18,8 @@ Then change into that directory so we can work from there.
 
 ## Step 2: Install Dependencies
 
-Run the installer to set up Python packages:
-python3 install.py
+Install the required Python packages:
+pip install -r requirements.txt
 
 ## Step 3: Walk Me Through Setup
 
@@ -91,7 +91,6 @@ Give me a quick tour of what workflows I can now run:
 - If I don't know an answer, help me figure it out or skip it
 - Save everything to the appropriate files as we go
 - Be encouraging and explain why each step matters
-- After setup, remind me I can always run "python3 run.py" for the interactive menu
 
 Let's start! Begin with Step 1.
 ```
@@ -103,7 +102,7 @@ Let's start! Begin with Step 1.
 When you paste this prompt, Claude Code becomes your personal setup assistant:
 
 1. **Downloads the system** - Clones the GitHub repo
-2. **Installs dependencies** - Runs the Python installer
+2. **Installs dependencies** - Runs pip install
 3. **Configures API keys** - Walks you through getting each key, one at a time
 4. **Creates your agency profile** - Asks questions and saves your brand info
 5. **Sets up your first client** - Optional client profile creation
