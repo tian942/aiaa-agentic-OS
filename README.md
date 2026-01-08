@@ -1,180 +1,263 @@
-# VSL Funnel Automation System + Trigger.dev Integration
+# AIAA Agentic OS
 
-**Status:** ✅ Production Ready
-**Created:** 2026-01-05
+A production-ready agentic workflow system that turns Claude Code into an autonomous marketing agency operator. Built on the **DOE (Directive-Orchestration-Execution)** architecture pattern.
+
+**Version:** 5.0 | **Last Updated:** January 2026
 
 ---
 
-## 🚀 Quick Start
+## System Overview
 
-### Generate Complete VSL Funnel (One Command)
+| Resource | Count | Location |
+|----------|-------|----------|
+| Directives (SOPs) | 118 | `directives/` |
+| Execution Scripts | 126 | `execution/` |
+| Skill Bibles | 264 | `skills/` |
+| Agency Context | 4 files | `context/` |
+| Client Profiles | Template ready | `clients/` |
+| Cloud Deployments | Modal AI | `execution/modal_apps/` |
+
+---
+
+## Architecture
+
+The system uses a 3-layer **DOE** pattern that separates concerns for reliability:
+
+```
+USER REQUEST
+     │
+     ▼
+┌─────────────────────────────────────────────────┐
+│  DIRECTIVES (What to do)                        │
+│  Natural language SOPs with quality gates       │
+│  Location: directives/*.md                      │
+└─────────────────────────────────────────────────┘
+     │
+     ▼
+┌─────────────────────────────────────────────────┐
+│  ORCHESTRATION (Decision making)                │
+│  Claude Code agent reads directives,            │
+│  loads skill bibles, routes to scripts          │
+└─────────────────────────────────────────────────┘
+     │
+     ▼
+┌─────────────────────────────────────────────────┐
+│  EXECUTION (Doing the work)                     │
+│  Deterministic Python scripts for API calls     │
+│  Location: execution/*.py                       │
+└─────────────────────────────────────────────────┘
+     │
+     ▼
+OUTPUT → Local files, Google Docs, Slack
+```
+
+**Why DOE works:** LLMs are probabilistic. Pushing deterministic work into Python scripts keeps reliability high across multi-step workflows.
+
+---
+
+## Quick Start
+
+### Generate a Complete VSL Funnel
 ```bash
 python3 execution/generate_complete_vsl_funnel.py \
-  --company "Client Name" \
-  --website "https://clientsite.com" \
-  --offer "Their Main Offer"
+  --company "Acme Corp" \
+  --website "https://acmecorp.com" \
+  --offer "B2B Lead Generation"
 ```
 
 **Output (3-5 minutes):**
-- Market Research Report (Google Doc)
-- VSL Script (2500+ words, 16-20 min)
+- Market Research Report
+- VSL Script (2500+ words)
 - Sales Page Copy (1500+ words)
-- Email Sequence (7 emails, 300-500 words each)
-- Slack notification with all links
+- Email Sequence (7 emails)
+- Google Docs + Slack notification
 
----
-
-## 📚 What's Included
-
-### 1. VSL Funnel System (Complete & Working)
-**7 Agentic Workflows:**
-1. Company Market Research (Perplexity)
-2. VSL Script Writer (Claude Opus 4.5 + Skill Bibles)
-3. Sales Page Writer (Claude Opus 4.5)
-4. Email Sequence Writer (Claude Opus 4.5)
-5. Google Doc Creator (Standalone Utility)
-6. Slack Notifier (Standalone Utility)
-7. VSL Funnel Orchestrator (Master Coordinator)
-
-**Key Features:**
-- Follows AGENTS.MD 3-layer architecture
-- Uses skill bibles for VSL frameworks
-- Proper content length (2500+ word VSLs, 1500+ word sales pages)
-- Formatted Google Docs (headers, bold, bullets)
-- Complete automation (one command → complete funnel)
-
-### 2. Trigger.dev Integration (Ready to Deploy)
-- [trigger.config.ts](trigger.config.ts) configured
-- [trigger/](trigger/) directory set up
-- Conversion tools ready
-- Dev server tested and working
-
----
-
-## 📖 Documentation
-
-### Start Here
-- **[VSL_FUNNEL_COMPLETE.md](VSL_FUNNEL_COMPLETE.md)** - System overview
-- **[QUICK_START_VSL_FUNNEL.md](QUICK_START_VSL_FUNNEL.md)** - Usage guide
-- **[CONTENT_LENGTH_FIX.md](CONTENT_LENGTH_FIX.md)** - Recent improvements
-
-### Trigger.dev
-- **[TRIGGER_DEV_SETUP.md](TRIGGER_DEV_SETUP.md)** - Integration guide
-- **[skills/SKILL_BIBLE_trigger_dev_automation.md](skills/SKILL_BIBLE_trigger_dev_automation.md)** - Comprehensive guide
-- **[directives/upload_to_trigger_dev.md](directives/upload_to_trigger_dev.md)** - Conversion SOP
-
-### Architecture
-- **[AGENTS.MD](AGENTS.MD)** - System architecture
-- **[CLAUDE.MD](CLAUDE.MD)** - Agent instructions
-
----
-
-## 🔑 Configuration
-
-### API Keys (all configured in .env)
-- ✅ OPENAI_API_KEY
-- ✅ OPENROUTER_API_KEY
-- ✅ PERPLEXITY_API_KEY
-- ✅ SLACK_WEBHOOK_URL
-
-### Google OAuth
-- ✅ client_secrets.json (OAuth client)
-- ✅ token.pickle (auto-generated on first run)
-- ✅ Folder ID: `1M_2lHBzVQuIv1fptf8BUfVcGJgL6jxf7`
-
----
-
-## 📊 Content Standards (Enforced)
-
-| Content Type | Minimum Words | Target Range | Duration |
-|--------------|---------------|--------------|----------|
-| VSL Script (short) | 2,000 | 2,000-2,500 | 13-17 min |
-| VSL Script (medium) | 2,500 | 2,500-3,000 | 16-20 min |
-| VSL Script (long) | 3,500 | 3,500-4,000 | 23-27 min |
-| Sales Page | 1,500 | 1,500-3,000 | N/A |
-| Email (each) | 300 | 300-500 | N/A |
-| Total Sequence | 2,500 | 2,500-3,500 | 7 emails |
-
----
-
-## 🏗️ Architecture
-
-### 3-Layer System (Per AGENTS.MD)
-
-**Layer 1: Directives** (What to do)
-- 7 workflow SOPs in [directives/](directives/)
-- Natural language instructions
-- Quality gates and checklists
-
-**Layer 2: Orchestration** (Decision making)
-- Claude (intelligent routing)
-- [generate_complete_vsl_funnel.py](execution/generate_complete_vsl_funnel.py:1) (pipeline coordinator)
-
-**Layer 3: Execution** (Doing the work)
-- 7 Python scripts in [execution/](execution/)
-- Deterministic, testable, reliable
-- Skill bible integration
-
----
-
-## 🎯 Recent Improvements
-
-### Content Length Fix (2026-01-05)
-- VSL scripts now 2500+ words (was 800)
-- Sales pages now 1500+ words (was 600)
-- Emails now 300-500 words each (was 150-200)
-- Using Claude Opus 4.5 (was GPT-4)
-- Full skill bible context loaded (was truncated)
-
-### Standalone Utilities
-- Google Doc creator reusable by all workflows
-- Slack notifier reusable by all workflows
-- Proper markdown → Google Docs formatting
-
----
-
-## 🚀 Next Steps
-
-### Phase 1: Production Use (Ready Now!)
-Generate VSL funnels for clients using Python scripts.
-
-### Phase 2: Convert to Trigger.dev
-- Convert workflows to TypeScript tasks
-- Add webhook triggers
-- Enable scheduled generation
-- Full dashboard observability
-
-### Phase 3: Expand
-- Add more funnel types (webinar, challenge, etc.)
-- Integrate with CRM
-- A/B testing variants
-- Performance tracking
-
----
-
-## 📁 Project Structure
-
+### Research a Company
+```bash
+python3 execution/research_company_offer.py \
+  --company "Target Company" \
+  --website "https://targetcompany.com"
 ```
-.
-├── directives/              # 7 VSL funnel workflows + 60+ others
-├── execution/               # Python scripts (deterministic layer)
-├── skills/                  # 50+ skill bibles (75K+ words)
-├── trigger/                 # Trigger.dev tasks (ready for deployment)
-├── .tmp/                    # Generated funnels (gitignored)
-├── AGENTS.MD                # System architecture
-├── trigger.config.ts        # Trigger.dev configuration
-└── README.md                # This file
+
+### Write Cold Emails
+```bash
+python3 execution/write_cold_emails.py \
+  --sender "John Smith" \
+  --company "Acme Corp" \
+  --offer "Lead generation" \
+  --target "Marketing agencies"
 ```
 
 ---
 
-## ✅ System Status
+## Project Structure
 
-- ✅ VSL Funnel System: Operational
-- ✅ Google Docs: Formatted correctly
-- ✅ Slack Notifications: Working
-- ✅ Content Length: Fixed (2500+ words)
-- ✅ Model: Claude Opus 4.5
-- ⏳ Trigger.dev: Ready for conversion
+```
+Agentic Workflows/
+├── context/                 # Agency identity & brand voice
+│   ├── agency.md           # Agency positioning & mission
+│   ├── owner.md            # Owner background & expertise
+│   ├── brand_voice.md      # Tone & style guidelines
+│   └── services.md         # Service offerings & pricing
+│
+├── clients/                 # Per-client profiles & rules
+│   └── _template/          # Template for new clients
+│
+├── directives/              # 118 workflow SOPs
+│   ├── vsl_funnel_orchestrator.md
+│   ├── company_market_research.md
+│   ├── cold_email_scriptwriter.md
+│   └── ...
+│
+├── execution/               # 126 Python scripts
+│   ├── generate_complete_vsl_funnel.py
+│   ├── research_company_offer.py
+│   ├── create_google_doc.py
+│   ├── deploy_to_modal.py
+│   └── modal_apps/         # Cloud-deployed workflows
+│
+├── skills/                  # 264 skill bibles
+│   ├── SKILL_BIBLE_vsl_writing_production.md
+│   ├── SKILL_BIBLE_cold_email_mastery.md
+│   ├── SKILL_BIBLE_funnel_copywriting_mastery.md
+│   └── ...
+│
+├── CLAUDE.md               # Agent instructions (load this)
+└── .env                    # API keys (never commit)
+```
 
-**The system can generate complete, professional VSL funnels in 3-5 minutes!** 🚀
+---
+
+## Key Capabilities
+
+### Content & Copy
+| Capability | Directive | Script |
+|------------|-----------|--------|
+| VSL Funnels | `vsl_funnel_orchestrator.md` | `generate_complete_vsl_funnel.py` |
+| Sales Pages | `sales_page_writer.md` | `generate_sales_page.py` |
+| Cold Emails | `cold_email_scriptwriter.md` | `write_cold_emails.py` |
+| Email Sequences | `email_sequence_writer.md` | `generate_email_sequence.py` |
+| Blog Posts | `blog_post_writer.md` | `generate_blog_post.py` |
+
+### Lead Generation
+| Capability | Directive | Script |
+|------------|-----------|--------|
+| LinkedIn Scraping | `linkedin_lead_scraper.md` | `scrape_linkedin_apify.py` |
+| Company Research | `company_market_research.md` | `research_company_offer.py` |
+| Google Maps Scraping | `google_maps_scraper.md` | `scrape_google_maps.py` |
+| Website Contact Scraping | `website_contact_scraper.md` | `scrape_website_contacts.py` |
+
+### Operations
+| Capability | Directive | Script |
+|------------|-----------|--------|
+| Client Onboarding | `ai_customer_onboarding_agent.md` | `onboard_new_client.py` |
+| Google Doc Creation | `create_google_doc.md` | `create_google_doc.py` |
+| Slack Notifications | `send_slack_notification.md` | `send_slack_notification.py` |
+| Modal Deployment | `deploy_to_modal.md` | `deploy_to_modal.py` |
+
+---
+
+## Cloud Deployment (Modal AI)
+
+Deploy any workflow as a cloud webhook:
+
+```bash
+# List deployable workflows
+python3 execution/deploy_to_modal.py --list
+
+# Deploy to Modal
+python3 execution/deploy_to_modal.py --directive vsl_funnel_writer
+
+# Setup secrets from .env
+python3 execution/deploy_to_modal.py --setup-secrets
+```
+
+Each deployed app gets webhook, health, and info endpoints.
+
+---
+
+## Context System
+
+### Agency Context (`context/`)
+Load before generating any branded content:
+- `agency.md` - Name, positioning, unique value
+- `owner.md` - Background, expertise, credentials
+- `brand_voice.md` - Tone, vocabulary, style rules
+- `services.md` - Offerings, pricing, packages
+
+### Client Profiles (`clients/{name}/`)
+Load for client-specific work:
+- `profile.md` - Business info, goals, audience
+- `rules.md` - Must-follow guidelines
+- `preferences.md` - Style preferences
+- `history.md` - Past work, outcomes
+
+---
+
+## Configuration
+
+### Required API Keys (.env)
+```
+OPENROUTER_API_KEY     # Primary LLM access
+PERPLEXITY_API_KEY     # Market research
+SLACK_WEBHOOK_URL      # Notifications
+```
+
+### Optional
+```
+OPENAI_API_KEY                    # Direct OpenAI access
+GOOGLE_APPLICATION_CREDENTIALS    # Google Docs/Sheets
+```
+
+### First-Time Setup
+```bash
+pip install -r requirements.txt
+cp .env.example .env  # Edit with your keys
+
+# Google OAuth (for Docs)
+python3 execution/create_google_doc.py --test
+
+# Modal AI (for cloud deployment)
+pip install modal
+python3 -m modal setup
+python3 execution/deploy_to_modal.py --setup-secrets
+```
+
+---
+
+## Content Standards
+
+| Content Type | Minimum | Target | Notes |
+|--------------|---------|--------|-------|
+| VSL Script | 2,000 | 2,500-3,000 | 16-20 min video |
+| Sales Page | 1,500 | 1,500-3,000 | Long-form |
+| Email (each) | 300 | 300-500 | 7-email sequences |
+
+---
+
+## How It Works
+
+1. **Parse Intent** - Understand what's needed
+2. **Load Context** - Agency context + client context + skill bibles
+3. **Find Directive** - Locate the SOP for the task
+4. **Execute** - Run Python scripts in sequence
+5. **Quality Gate** - Validate outputs
+6. **Deliver** - Google Docs + Slack notification
+7. **Self-Anneal** - Learn and improve the system
+
+---
+
+## Recent Updates (V5)
+
+- Context system for agency identity and client profiles
+- 264 skill bibles covering marketing, sales, and operations
+- Modal AI cloud deployment
+- 118 workflow directives
+- 126 execution scripts
+- Improved VSL script frameworks with proper length enforcement
+
+---
+
+## License
+
+Private repository - Client Ascension internal use.
