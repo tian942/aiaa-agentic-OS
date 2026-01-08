@@ -6,29 +6,30 @@ A production-ready agentic workflow system that turns Claude Code into an autono
 
 ---
 
-## Recommended Setup: Use Claude Code
+## Quick Start (New to Claude Code?)
 
-**The easiest way to set up this system is with Claude Code.**
+**Just paste this into Claude Code:**
 
-1. Clone this repository
-2. Open the folder in Claude Code
-3. Copy the prompt from [`QUICKSTART_PROMPT.md`](QUICKSTART_PROMPT.md) and paste it
-
-Claude Code will:
-- Run the installer (`python3 install.py`)
-- Walk you through the setup wizard (`python3 wizard.py`)
-- Configure your API keys and agency profile
-- Teach you the system interactively
-- Run your first workflow
-
-**Or run setup manually:**
-```bash
-git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
-cd AIAA-Agentic-OS
-python3 install.py    # Install dependencies
-python3 wizard.py     # Interactive setup wizard
-python3 run.py        # Launch the system
 ```
+Clone and set up AIAA Agentic OS for me.
+
+1. First, clone the repository:
+   git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
+
+2. Change into that directory
+
+3. Run the installer:
+   python3 install.py
+
+4. Run the setup wizard:
+   python3 wizard.py
+
+Walk me through each step and help me configure everything. I'm new to this.
+```
+
+That's it. Claude Code downloads the system, installs everything, and walks you through setup.
+
+See [`QUICKSTART_PROMPT.md`](QUICKSTART_PROMPT.md) for more details.
 
 ---
 
