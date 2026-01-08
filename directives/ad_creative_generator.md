@@ -150,6 +150,13 @@ Generate variations for testing:
 
 Load these skill bibles for high-converting ad creative:
 
+**[SKILL_BIBLE_meta_ads_manager_technical.md](../skills/SKILL_BIBLE_meta_ads_manager_technical.md)** (PRIMARY)
+- Complete Meta Ads Manager technical setup and optimization
+- Pixel implementation, Conversions API, audience infrastructure
+- Persona-led creative diversification (90% success rate)
+- Andromeda update strategies and incremental reach optimization
+- Campaign structure, budget allocation, and scaling frameworks
+
 **[SKILL_BIBLE_hormozi_paid_ads_mastery.md](../skills/SKILL_BIBLE_hormozi_paid_ads_mastery.md)**
 - Complete paid ads framework (30 minutes condensed)
 - Ad structure and hook formulas

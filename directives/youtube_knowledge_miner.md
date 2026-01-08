@@ -8,7 +8,7 @@ An automated system that extracts best practices and how-to knowledge from top Y
 
 1. **Find Top Channels** - Search YouTube for authority channels in your niche
 2. **Extract Best Videos** - Get highest-performing educational videos
-3. **Transcribe Content** - Use Whisper or Gemini for accurate transcription
+3. **Get Transcripts** - Use transcript APIs (Supadata, TranscriptAPI, or YouTube captions)
 4. **Convert to Manuals** - Transform transcripts into structured how-to guides
 5. **Filter Quality** - Rate and filter manuals worth keeping
 6. **Generate Skill Bibles** - Synthesize multiple sources into comprehensive guides
@@ -19,21 +19,22 @@ An automated system that extracts best practices and how-to knowledge from top Y
 - `OPENROUTER_API_KEY` - For Claude manual generation
 - YouTube Data API enabled in Google Cloud Console
 
+**Transcript APIs (at least one recommended):**
+- `SUPADATA_API_KEY` - Primary transcript API (supadata.ai) - Free: 100/mo, Pro: $9/1000
+- `TRANSCRIPTAPI_KEY` - Secondary transcript API (transcriptapi.com) - $5/mo starter
+
 **Optional:**
-- `OPENAI_API_KEY` - For Whisper transcription (fallback only)
-- `GOOGLE_API_KEY` - For Gemini (cheaper alternative)
+- `GOOGLE_API_KEY` - For Gemini Flash (cheaper alternative to Claude)
 
 **Installation:**
 ```bash
-pip install google-api-python-client google-auth google-auth-oauthlib youtube-transcript-api python-dotenv
+pip install google-api-python-client google-auth google-auth-oauthlib youtube-transcript-api python-dotenv requests
 ```
 
-**Note:** Primary transcript source is YouTube's built-in captions (free, fast). Falls back to Whisper transcription if captions unavailable.
-
-**Rate Limiting:** YouTube may temporarily block transcript requests from your IP. Solutions:
-1. Wait 5-10 minutes between large batch runs
-2. Export cookies from your browser to `youtube_cookies.txt` in the project root
-3. Use `--parallel 1` to process videos sequentially
+**Transcript Fallback Chain:**
+1. Supadata API (if SUPADATA_API_KEY set)
+2. TranscriptAPI (if TRANSCRIPTAPI_KEY set)
+3. youtube-transcript-api (free, may be rate limited)
 
 ## How to Run
 
@@ -74,7 +75,7 @@ python3 execution/youtube_knowledge_miner.py \
 | `--min-skill-rating` | int | No | 7 | Minimum quality rating (1-10) |
 | `--use-gemini` | flag | No | False | Use Gemini Flash (cheaper) |
 | `--output-dir` | string | No | .tmp/knowledge_mine | Output directory |
-| `--parallel` | int | No | 3 | Parallel video processing |
+| `--parallel` | int | No | 1 | Parallel video processing |
 
 ## Process
 
@@ -85,19 +86,15 @@ python3 execution/youtube_knowledge_miner.py \
 
 ### Step 2: Video Selection
 - Get uploads playlist for each channel
-- Filter by view count and duration
+- Filter by view count and duration (min 5 minutes)
 - Select top-performing educational content
 
-### Step 3: Audio Extraction
-- Download audio using yt-dlp
-- Optimize for transcription quality
+### Step 3: Transcript Retrieval
+- Try Supadata API first (fast, reliable)
+- Fall back to TranscriptAPI if needed
+- Final fallback to youtube-transcript-api (free, may be rate limited)
 
-### Step 4: Transcription
-- Use Whisper (OpenAI) for accurate transcription
-- Alternative: Gemini Flash for cost savings
-- Handle long videos with chunking
-
-### Step 5: Manual Generation
+### Step 4: Manual Generation
 - Send transcript to Claude/Gemini
 - Generate structured how-to format:
   - Executive Summary
@@ -105,15 +102,16 @@ python3 execution/youtube_knowledge_miner.py \
   - Step-by-Step Process
   - Best Practices
   - Common Mistakes
+  - Tools/Resources Mentioned
   - Actionable Takeaways
-  - Skill Rating
+  - Skill Rating (1-10)
 
-### Step 6: Quality Filtering
+### Step 5: Quality Filtering
 - AI rates each manual 1-10
-- Filter by minimum rating
+- Filter by minimum rating (default: 7)
 - Rank by potential automation value
 
-### Step 7: Skill Bible Synthesis
+### Step 6: Skill Bible Synthesis
 - Combine multiple high-quality manuals
 - Generate comprehensive skill bible
 - Save to skills/ directory
@@ -127,32 +125,46 @@ python3 execution/youtube_knowledge_miner.py \
 ├── manuals/               # Individual how-to manuals
 │   ├── video_title_1.md
 │   └── video_title_2.md
-├── manuals_index.json     # Manual metadata
-├── SKILL_BIBLE_*.md       # Generated skill bible
-└── audio/                 # Temporary (cleaned up)
+├── manuals_index.json     # Manual metadata with ratings
+└── SKILL_BIBLE_*.md       # Generated skill bible
 ```
 
 ## Quality Gates
 
 - [ ] Found at least 3 qualifying channels
 - [ ] Processed at least 5 videos successfully
-- [ ] At least 3 manuals rated 7+ 
+- [ ] At least 3 manuals rated 7+
 - [ ] Skill bible generated and saved
 
 ## Cost Estimates
 
 | Component | Cost per Video |
 |-----------|---------------|
-| YouTube API | Free (10K quota/day) |
-| Whisper transcription | ~$0.006/min |
+| YouTube Data API | Free (10K quota/day) |
+| Supadata transcript | ~$0.01 (1 credit) |
+| TranscriptAPI | ~$0.005 (1 credit) |
 | Claude manual generation | ~$0.03/video |
 | Gemini (alternative) | ~$0.001/video |
 
 **Typical run (10 channels, 5 videos each):**
-- 50 videos x 15 min avg = 750 minutes
-- Whisper: ~$4.50
+- 50 videos
+- Supadata: ~$0.50
 - Claude: ~$1.50
-- **Total: ~$6.00**
+- **Total: ~$2.00**
+
+## Environment Variables
+
+```bash
+# Required
+OPENROUTER_API_KEY=your_key        # Claude via OpenRouter
+
+# Transcript APIs (at least one recommended)
+SUPADATA_API_KEY=your_key          # supadata.ai
+TRANSCRIPTAPI_KEY=your_key         # transcriptapi.com
+
+# Optional
+GOOGLE_API_KEY=your_key            # Gemini (--use-gemini flag)
+```
 
 ## Related Workflows
 

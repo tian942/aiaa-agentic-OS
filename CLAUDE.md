@@ -118,9 +118,8 @@ Agentic Workflows/
 │
 ├── AGENTS.md              # THIS FILE - Agent instructions
 ├── CLAUDE.md              # Mirrored instructions for Claude
-├── install.py             # First-time setup
-├── run.py                 # Main interface
-└── wizard.py              # Interactive onboarding
+├── install.py             # First-time setup (installs dependencies)
+└── run.py                 # Main interface
 ```
 
 ---

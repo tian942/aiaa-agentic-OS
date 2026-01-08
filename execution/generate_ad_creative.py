@@ -51,9 +51,35 @@ def call_llm(client: OpenAI, system: str, user: str, temp: float = 0.7) -> str:
     return ""
 
 
+def load_skill_bible() -> str:
+    """Load Meta Ads Manager skill bible for enhanced context."""
+    skill_path = Path(__file__).parent.parent / "skills" / "SKILL_BIBLE_meta_ads_manager_technical.md"
+    if skill_path.exists():
+        content = skill_path.read_text(encoding="utf-8")
+        # Extract key sections for context
+        sections = []
+        if "## Core Principles" in content:
+            start = content.find("## Core Principles")
+            end = content.find("## Complete Process", start)
+            if end > start:
+                sections.append(content[start:end])
+        if "## Best Practices" in content:
+            start = content.find("## Best Practices")
+            end = content.find("## Common Mistakes", start)
+            if end > start:
+                sections.append(content[start:end])
+        return "\n\n".join(sections)
+    return ""
+
+
 def generate_ads(client: OpenAI, product: str, platform: str, goal: str, audience: str, offer: str) -> str:
     """Generate ad creative for specified platform."""
-    
+
+    # Load skill bible context for Meta/Facebook ads
+    skill_context = ""
+    if platform in ["facebook", "meta"]:
+        skill_context = load_skill_bible()
+
     platform_specs = {
         "facebook": {
             "headline_chars": 40,
@@ -72,11 +98,27 @@ def generate_ads(client: OpenAI, product: str, platform: str, goal: str, audienc
             "formats": ["Sponsored Content", "Message Ad", "Text Ad"]
         }
     }
-    
+
     specs = platform_specs.get(platform, platform_specs["facebook"])
-    
+
+    # Enhanced system prompt with skill bible knowledge for Meta ads
+    meta_expertise = ""
+    if platform in ["facebook", "meta"]:
+        meta_expertise = """
+KEY META ADS EXPERTISE (apply these principles):
+- Create PERSONA-LED variations - different personas drive 10x more impact than copy changes alone
+- Ensure TRUE creative diversity - vary location, narrative, AND person across variations
+- Focus on INCREMENTAL REACH - ads should reach new audiences, not just increase frequency
+- Use EMOTIONAL narratives that connect personally - avoid rational feature lists
+- Design for mobile-first (90%+ of Meta traffic is mobile)
+- Create strong hooks that stop scroll within first 3 seconds
+- Apply Andromeda update strategies - persona + angle changes > copy modifications"""
+        if skill_context:
+            meta_expertise += f"\n\nADDITIONAL CONTEXT FROM SKILL BIBLE:\n{skill_context[:2000]}"
+
     system_prompt = f"""You are an expert {platform} ads copywriter with proven ROAS results.
-Create high-converting ad copy that follows platform best practices and character limits."""
+Create high-converting ad copy that follows platform best practices and character limits.
+{meta_expertise}"""
     
     user_prompt = f"""Create ad creative for {platform}:
 

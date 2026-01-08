@@ -553,7 +553,7 @@ def menu_client_work(agency, clients):
         
         if not clients:
             print(f"  {Colors.DIM}No clients configured yet.{Colors.END}")
-            print(f"  {Colors.DIM}Run 'python3 wizard.py' to add clients.{Colors.END}\n")
+            print(f"  {Colors.DIM}Ask Claude Code to help you add a client.{Colors.END}\n")
             input(f"  {Colors.DIM}Press Enter to go back...{Colors.END}")
             return
         
@@ -718,9 +718,9 @@ def main_menu():
     # Check if setup has been run
     if not agency:
         print_header()
-        print(f"  {Colors.YELLOW}Welcome! It looks like you haven't run the setup wizard yet.{Colors.END}\n")
-        print(f"  Run: {Colors.CYAN}python3 wizard.py{Colors.END}")
-        print(f"  {Colors.DIM}This will configure your agency profile and API keys.{Colors.END}\n")
+        print(f"  {Colors.YELLOW}Welcome! It looks like you need to set up your agency profile.{Colors.END}\n")
+        print(f"  Ask Claude Code: {Colors.CYAN}\"Help me set up my agency profile\"{Colors.END}")
+        print(f"  {Colors.DIM}Claude will create your context files and configure the system.{Colors.END}\n")
         return
     
     while True:
@@ -736,11 +736,10 @@ def main_menu():
             f"{Colors.GREEN}📊{Colors.END} Lead Generation (scrape & enrich)",
             f"{Colors.GREEN}👥{Colors.END} Client Work (reports, case studies)",
             f"{Colors.DIM}📋{Colors.END} All Workflows (see everything)",
-            f"{Colors.DIM}⚙️{Colors.END}  Settings (re-run wizard)",
         ]
-        
+
         choice = prompt_choice(options, "What would you like to do?", allow_back=False)
-        
+
         if choice is None:
             continue
         elif choice == 0:
@@ -755,8 +754,6 @@ def main_menu():
             menu_client_work(agency, clients)
         elif choice == 5:
             menu_all_workflows()
-        elif choice == 6:
-            subprocess.run([sys.executable, str(BASE_DIR / "wizard.py")])
 
 
 def main():
@@ -787,10 +784,7 @@ Examples:
         return
     
     if args.add_client:
-        # Run just the client addition part of wizard
-        load_env()
-        from wizard import step_add_clients
-        step_add_clients()
+        print("To add a client, ask Claude Code: \"Help me add a new client\"")
         return
     
     # Default: run interactive menu

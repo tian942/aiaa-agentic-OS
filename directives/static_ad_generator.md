@@ -125,6 +125,13 @@ Data is normalized/transformed for the next step.
 
 ## Related Skill Bibles
 
+**[SKILL_BIBLE_meta_ads_manager_technical.md](../skills/SKILL_BIBLE_meta_ads_manager_technical.md)** (PRIMARY)
+- Complete Meta Ads Manager technical setup and optimization
+- Pixel implementation and conversion tracking
+- Persona-led creative diversification strategies
+- Andromeda update best practices
+- Campaign structure and budget optimization
+
 **[SKILL_BIBLE_hormozi_paid_ads_mastery.md](../skills/SKILL_BIBLE_hormozi_paid_ads_mastery.md)**
 - Paid ads framework
 - Ad creative principles

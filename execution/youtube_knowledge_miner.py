@@ -5,7 +5,7 @@ YouTube Knowledge Miner - Extract best practices from YouTube channels
 Workflow:
 1. Find top channels in your niche
 2. Get their best performing videos
-3. Transcribe videos using Whisper
+3. Get transcripts via transcript APIs (Supadata -> TranscriptAPI -> youtube-transcript-api)
 4. Convert transcripts to how-to manuals using Claude/Gemini
 5. Filter manuals worth turning into skills
 6. Generate skill bibles
@@ -17,6 +17,11 @@ Usage:
         --videos-per-channel 5 \
         --output-dir .tmp/knowledge_mine
 
+Environment Variables:
+    SUPADATA_API_KEY      - Primary transcript API (supadata.ai)
+    TRANSCRIPTAPI_KEY     - Secondary transcript API (transcriptapi.com)
+    OPENROUTER_API_KEY    - For Claude manual generation
+
 Follows directive: directives/youtube_knowledge_miner.md
 """
 
@@ -25,8 +30,6 @@ import sys
 import json
 import argparse
 import time
-import tempfile
-import subprocess
 from datetime import datetime
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -48,16 +51,12 @@ except ImportError:
     sys.exit(1)
 
 try:
-    from openai import OpenAI
-    OPENAI_AVAILABLE = True
-except ImportError:
-    OPENAI_AVAILABLE = False
-
-try:
     import requests
     REQUESTS_AVAILABLE = True
 except ImportError:
     REQUESTS_AVAILABLE = False
+    print("Error: requests library required")
+    sys.exit(1)
 
 YOUTUBE_SCOPES = ["https://www.googleapis.com/auth/youtube.readonly"]
 
@@ -67,43 +66,43 @@ def get_youtube_credentials():
     project_root = Path(__file__).parent.parent
     token_path = project_root / "token_youtube.json"
     credentials_path = project_root / "client_secrets.json"
-    
+
     creds = None
     if token_path.exists():
         try:
             creds = Credentials.from_authorized_user_file(str(token_path), YOUTUBE_SCOPES)
         except Exception:
             pass
-    
+
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             try:
                 creds.refresh(Request())
             except Exception:
                 creds = None
-        
+
         if not creds and credentials_path.exists():
             print("  Authorizing YouTube API...")
             flow = InstalledAppFlow.from_client_secrets_file(str(credentials_path), YOUTUBE_SCOPES)
             creds = flow.run_local_server(port=0)
-        
+
         if creds:
             with open(token_path, "w") as f:
                 f.write(creds.to_json())
-    
+
     return creds
 
 
 def find_top_channels(keywords: list, max_channels: int = 10, min_subscribers: int = 5000) -> list:
     """Find top YouTube channels for given keywords."""
     print(f"\n[1/6] Finding top channels for: {', '.join(keywords)}")
-    
+
     creds = get_youtube_credentials()
     youtube = build("youtube", "v3", credentials=creds)
-    
+
     all_channels = []
     seen_ids = set()
-    
+
     for keyword in keywords:
         print(f"  Searching: '{keyword}'...")
         try:
@@ -114,22 +113,22 @@ def find_top_channels(keywords: list, max_channels: int = 10, min_subscribers: i
                 maxResults=25,
                 relevanceLanguage="en"
             ).execute()
-            
+
             channel_ids = [item["snippet"]["channelId"] for item in search_response.get("items", [])]
-            
+
             if channel_ids:
                 channels_response = youtube.channels().list(
                     id=",".join(channel_ids),
                     part="snippet,statistics,contentDetails"
                 ).execute()
-                
+
                 for channel in channels_response.get("items", []):
                     if channel["id"] in seen_ids:
                         continue
-                    
+
                     stats = channel.get("statistics", {})
                     subs = int(stats.get("subscriberCount", 0))
-                    
+
                     if subs >= min_subscribers:
                         seen_ids.add(channel["id"])
                         all_channels.append({
@@ -145,53 +144,53 @@ def find_top_channels(keywords: list, max_channels: int = 10, min_subscribers: i
         except Exception as e:
             print(f"    Error: {e}")
             continue
-    
+
     # Sort by subscribers and limit
     all_channels.sort(key=lambda x: x["subscribers"], reverse=True)
     all_channels = all_channels[:max_channels]
-    
+
     print(f"  Found {len(all_channels)} qualifying channels")
     for i, ch in enumerate(all_channels[:5], 1):
         print(f"    {i}. {ch['name']} ({ch['subscribers']:,} subs)")
-    
+
     return all_channels
 
 
 def get_channel_videos(channel: dict, youtube, max_videos: int = 10, min_views: int = 1000, min_duration_minutes: int = 5) -> list:
     """Get top performing videos from a channel."""
     videos = []
-    
+
     try:
         # Get videos from uploads playlist
         playlist_id = channel.get("uploads_playlist")
         if not playlist_id:
             return videos
-        
+
         playlist_response = youtube.playlistItems().list(
             playlistId=playlist_id,
             part="snippet,contentDetails",
             maxResults=50
         ).execute()
-        
+
         video_ids = [item["contentDetails"]["videoId"] for item in playlist_response.get("items", [])]
-        
+
         if not video_ids:
             return videos
-        
+
         # Get video details
         videos_response = youtube.videos().list(
             id=",".join(video_ids),
             part="snippet,statistics,contentDetails"
         ).execute()
-        
+
         for video in videos_response.get("items", []):
             stats = video.get("statistics", {})
             views = int(stats.get("viewCount", 0))
-            
+
             # Parse duration (PT1H2M3S format)
             duration_str = video.get("contentDetails", {}).get("duration", "PT0S")
             duration_minutes = parse_duration(duration_str)
-            
+
             if views >= min_views and duration_minutes >= min_duration_minutes:
                 videos.append({
                     "id": video["id"],
@@ -206,14 +205,14 @@ def get_channel_videos(channel: dict, youtube, max_videos: int = 10, min_views: 
                     "description": video["snippet"].get("description", "")[:500],
                     "url": f"https://youtube.com/watch?v={video['id']}"
                 })
-        
+
         # Sort by views and limit
         videos.sort(key=lambda x: x["views"], reverse=True)
         videos = videos[:max_videos]
-        
+
     except Exception as e:
         print(f"    Error getting videos for {channel['name']}: {e}")
-    
+
     return videos
 
 
@@ -229,21 +228,104 @@ def parse_duration(duration_str: str) -> int:
     return hours * 60 + minutes + (1 if seconds > 30 else 0)
 
 
-def get_youtube_transcript(video_id: str, retries: int = 3) -> str:
-    """Get transcript directly from YouTube (free, no download needed)."""
+# ============================================================================
+# TRANSCRIPT API FUNCTIONS
+# ============================================================================
+
+def get_transcript_supadata(video_id: str) -> str:
+    """Get transcript using Supadata API (primary)."""
+    api_key = os.getenv("SUPADATA_API_KEY")
+    if not api_key:
+        return None
+
+    try:
+        response = requests.get(
+            f"https://api.supadata.ai/v1/transcript",
+            params={"url": f"https://youtube.com/watch?v={video_id}"},
+            headers={"x-api-key": api_key},
+            timeout=30
+        )
+
+        if response.status_code == 200:
+            data = response.json()
+            # Extract text from transcript segments
+            content = data.get("content", [])
+            if content:
+                full_text = " ".join([segment.get("text", "") for segment in content])
+                return full_text.strip()
+        elif response.status_code == 404:
+            return None  # No transcript available
+        else:
+            print(f"    Supadata API error: {response.status_code}")
+            return None
+
+    except Exception as e:
+        print(f"    Supadata error: {e}")
+        return None
+
+
+def get_transcript_transcriptapi(video_id: str) -> str:
+    """Get transcript using TranscriptAPI (secondary fallback)."""
+    api_key = os.getenv("TRANSCRIPTAPI_KEY")
+    if not api_key:
+        return None
+
+    try:
+        response = requests.get(
+            "https://transcriptapi.com/api/v2/youtube/transcript",
+            params={
+                "video_url": video_id,
+                "format": "json"
+            },
+            headers={"Authorization": f"Bearer {api_key}"},
+            timeout=30
+        )
+        response.raise_for_status()
+
+        data = response.json()
+        transcript = data.get("transcript", [])
+
+        # Handle list of segments format
+        if isinstance(transcript, list):
+            return " ".join([t.get("text", "") for t in transcript]).strip()
+        elif isinstance(transcript, str):
+            return transcript.strip()
+
+        return None
+
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 404:
+            return None  # No transcript available
+        print(f"    TranscriptAPI error: {e.response.status_code}")
+        return None
+    except Exception as e:
+        print(f"    TranscriptAPI error: {e}")
+        return None
+
+
+def get_transcript_youtube_api(video_id: str, retries: int = 2) -> str:
+    """Get transcript using youtube-transcript-api (final fallback)."""
     try:
         from youtube_transcript_api import YouTubeTranscriptApi
-        import time as time_module
-        
+        from http.cookiejar import MozillaCookieJar
+
         # Check for cookies file to bypass rate limiting
         project_root = Path(__file__).parent.parent
         cookies_path = project_root / "youtube_cookies.txt"
-        
+
+        # Create API instance with cookies if available
         if cookies_path.exists():
-            api = YouTubeTranscriptApi(cookies=str(cookies_path))
+            try:
+                cookie_jar = MozillaCookieJar(str(cookies_path))
+                cookie_jar.load(ignore_discard=True, ignore_expires=True)
+                session = requests.Session()
+                session.cookies = cookie_jar
+                api = YouTubeTranscriptApi(http_client=session)
+            except Exception:
+                api = YouTubeTranscriptApi()
         else:
             api = YouTubeTranscriptApi()
-        
+
         for attempt in range(retries):
             try:
                 # Try to get English transcript first
@@ -253,137 +335,73 @@ def get_youtube_transcript(video_id: str, retries: int = 3) -> str:
                     return full_text
                 except Exception:
                     pass
-                
-                # Try to list available transcripts and get any available
+
+                # Try to list available transcripts
                 transcript_list = api.list(video_id)
-                
-                # Try to get any English variant or auto-generated
+
+                # Try any English variant
                 for t in transcript_list:
                     if 'en' in t.language_code.lower():
                         transcript = t.fetch()
-                        full_text = " ".join([snippet.text for snippet in transcript])
-                        return full_text
-                
-                # Try auto-generated in any language
+                        return " ".join([snippet.text for snippet in transcript])
+
+                # Try auto-generated
                 for t in transcript_list:
                     if t.is_generated:
                         try:
-                            # Try to translate to English
                             translated = t.translate('en')
                             transcript = translated.fetch()
-                            full_text = " ".join([snippet.text for snippet in transcript])
-                            return full_text
+                            return " ".join([snippet.text for snippet in transcript])
                         except Exception:
-                            # Just use the original
                             transcript = t.fetch()
-                            full_text = " ".join([snippet.text for snippet in transcript])
-                            return full_text
-                
-                # Last resort: get any transcript
-                for t in transcript_list:
-                    try:
-                        transcript = t.fetch()
-                        full_text = " ".join([snippet.text for snippet in transcript])
-                        return full_text
-                    except Exception:
-                        continue
-                        
+                            return " ".join([snippet.text for snippet in transcript])
+
             except Exception as e:
-                error_str = str(e)
-                if "blocking" in error_str.lower() or "IP" in error_str:
+                error_str = str(e).lower()
+                if "blocking" in error_str or "ip" in error_str:
                     if attempt < retries - 1:
-                        wait_time = (attempt + 1) * 5
-                        print(f"    Rate limited, waiting {wait_time}s...")
-                        time_module.sleep(wait_time)
+                        time.sleep((attempt + 1) * 3)
                         continue
-                # If not rate limited, break and try next method
                 break
-        
+
         return None
-        
-    except Exception as e:
-        print(f"    No YouTube transcript available: {e}")
+
+    except ImportError:
+        return None
+    except Exception:
         return None
 
 
-def download_audio(video_id: str, output_dir: Path) -> Path:
-    """Download audio from YouTube video using yt-dlp."""
-    output_path = output_dir / f"{video_id}.mp3"
-    
-    if output_path.exists():
-        return output_path
-    
-    try:
-        cmd = [
-            "yt-dlp",
-            "-x",
-            "--audio-format", "mp3",
-            "--audio-quality", "0",
-            "-o", str(output_path),
-            f"https://youtube.com/watch?v={video_id}"
-        ]
-        subprocess.run(cmd, capture_output=True, check=True, timeout=300)
-        return output_path
-    except subprocess.CalledProcessError as e:
-        print(f"    yt-dlp failed, trying transcript API...")
-        return None
-    except FileNotFoundError:
-        print("    yt-dlp not installed, trying transcript API...")
-        return None
-    except subprocess.TimeoutExpired:
-        print(f"    yt-dlp timed out, trying transcript API...")
-        return None
+def get_transcript(video_id: str) -> str:
+    """Get transcript using fallback chain: Supadata -> TranscriptAPI -> youtube-transcript-api."""
 
+    # Try Supadata first (primary)
+    if os.getenv("SUPADATA_API_KEY"):
+        transcript = get_transcript_supadata(video_id)
+        if transcript:
+            return transcript
 
-def transcribe_audio(audio_path: Path, use_gemini: bool = False) -> str:
-    """Transcribe audio using Whisper or Gemini."""
-    if use_gemini and os.getenv("GOOGLE_API_KEY"):
-        return transcribe_with_gemini(audio_path)
-    
-    if not OPENAI_AVAILABLE or not os.getenv("OPENAI_API_KEY"):
-        print("    Error: OpenAI API key required for transcription")
-        return ""
-    
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    
-    try:
-        with open(audio_path, "rb") as f:
-            transcript = client.audio.transcriptions.create(
-                model="whisper-1",
-                file=f,
-                response_format="text"
-            )
+    # Try TranscriptAPI second (secondary)
+    if os.getenv("TRANSCRIPTAPI_KEY"):
+        transcript = get_transcript_transcriptapi(video_id)
+        if transcript:
+            return transcript
+
+    # Try youtube-transcript-api last (free fallback, may be rate limited)
+    transcript = get_transcript_youtube_api(video_id)
+    if transcript:
         return transcript
-    except Exception as e:
-        print(f"    Error transcribing: {e}")
-        return ""
+
+    return None
 
 
-def transcribe_with_gemini(audio_path: Path) -> str:
-    """Transcribe using Gemini (cheaper alternative)."""
-    import google.generativeai as genai
-    
-    genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-    
-    try:
-        # Upload audio file
-        audio_file = genai.upload_file(str(audio_path))
-        
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content([
-            "Transcribe this audio accurately. Output only the transcript, no commentary.",
-            audio_file
-        ])
-        
-        return response.text
-    except Exception as e:
-        print(f"    Error with Gemini transcription: {e}")
-        return ""
-
+# ============================================================================
+# MANUAL GENERATION FUNCTIONS
+# ============================================================================
 
 def convert_to_howto_manual(transcript: str, video_info: dict, use_gemini: bool = False) -> dict:
     """Convert transcript to structured how-to manual using Claude or Gemini."""
-    
+
     prompt = f"""Convert this video transcript into a comprehensive how-to manual.
 
 VIDEO: {video_info['title']}
@@ -418,7 +436,7 @@ def call_claude(prompt: str, video_info: dict) -> dict:
     if not api_key:
         print("    Error: OPENROUTER_API_KEY required")
         return None
-    
+
     try:
         response = requests.post(
             "https://openrouter.ai/api/v1/chat/completions",
@@ -434,10 +452,10 @@ def call_claude(prompt: str, video_info: dict) -> dict:
             },
             timeout=120
         )
-        
+
         if response.status_code == 200:
             content = response.json()["choices"][0]["message"]["content"]
-            
+
             # Extract skill rating
             skill_rating = 5
             if "Skill Rating" in content:
@@ -445,7 +463,7 @@ def call_claude(prompt: str, video_info: dict) -> dict:
                 match = re.search(r'Skill Rating[:\s]*(\d+)', content)
                 if match:
                     skill_rating = int(match.group(1))
-            
+
             return {
                 "video_id": video_info["id"],
                 "video_title": video_info["title"],
@@ -459,7 +477,7 @@ def call_claude(prompt: str, video_info: dict) -> dict:
         else:
             print(f"    Claude API error: {response.status_code}")
             return None
-            
+
     except Exception as e:
         print(f"    Error calling Claude: {e}")
         return None
@@ -467,22 +485,22 @@ def call_claude(prompt: str, video_info: dict) -> dict:
 
 def call_gemini(prompt: str, video_info: dict) -> dict:
     """Call Gemini Flash (cheaper)."""
-    import google.generativeai as genai
-    
-    genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-    
     try:
+        import google.generativeai as genai
+
+        genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
         model = genai.GenerativeModel("gemini-1.5-flash")
         response = model.generate_content(prompt)
         content = response.text
-        
+
         # Extract skill rating
         skill_rating = 5
         import re
         match = re.search(r'Skill Rating[:\s]*(\d+)', content)
         if match:
             skill_rating = int(match.group(1))
-        
+
         return {
             "video_id": video_info["id"],
             "video_title": video_info["title"],
@@ -493,7 +511,7 @@ def call_gemini(prompt: str, video_info: dict) -> dict:
             "skill_rating": skill_rating,
             "generated_at": datetime.now().isoformat()
         }
-        
+
     except Exception as e:
         print(f"    Error calling Gemini: {e}")
         return None
@@ -502,31 +520,31 @@ def call_gemini(prompt: str, video_info: dict) -> dict:
 def filter_valuable_manuals(manuals: list, min_rating: int = 7) -> list:
     """Filter manuals worth turning into skills."""
     print(f"\n[5/6] Filtering valuable manuals (min rating: {min_rating})...")
-    
+
     valuable = [m for m in manuals if m and m.get("skill_rating", 0) >= min_rating]
-    
+
     print(f"  {len(valuable)}/{len(manuals)} manuals rated {min_rating}+ for skill conversion")
-    
+
     for m in valuable[:5]:
         print(f"    - {m['video_title'][:50]}... (Rating: {m['skill_rating']})")
-    
+
     return valuable
 
 
 def generate_skill_bible(manuals: list, niche: str, output_dir: Path) -> Path:
     """Generate a comprehensive skill bible from multiple manuals."""
     print(f"\n[6/6] Generating Skill Bible...")
-    
+
     if not manuals:
         print("  No manuals to process")
         return None
-    
+
     # Combine all manual content
     combined_content = "\n\n---\n\n".join([
         f"## From: {m['video_title']}\n**Channel:** {m['channel_name']} | **Views:** {m['views']:,}\n\n{m['manual_content']}"
         for m in manuals[:10]  # Limit to top 10
     ])
-    
+
     prompt = f"""You are creating a comprehensive SKILL BIBLE for: {niche}
 
 Based on the following how-to manuals extracted from top YouTube experts, create a unified skill bible.
@@ -597,7 +615,7 @@ Make this comprehensive, actionable, and production-ready for an AI agent to exe
     if not api_key:
         print("  Error: OPENROUTER_API_KEY required")
         return None
-    
+
     try:
         response = requests.post(
             "https://openrouter.ai/api/v1/chat/completions",
@@ -613,68 +631,54 @@ Make this comprehensive, actionable, and production-ready for an AI agent to exe
             },
             timeout=180
         )
-        
+
         if response.status_code == 200:
             content = response.json()["choices"][0]["message"]["content"]
-            
+
             # Generate filename
             safe_niche = niche.lower().replace(" ", "_").replace("-", "_")[:30]
             filename = f"SKILL_BIBLE_{safe_niche}.md"
             output_path = output_dir / filename
-            
+
             # Also save to skills folder
             skills_dir = Path(__file__).parent.parent / "skills"
             skills_path = skills_dir / filename
-            
+
             # Write to both locations
             output_path.write_text(content, encoding="utf-8")
             skills_path.write_text(content, encoding="utf-8")
-            
+
             print(f"  Saved: {output_path}")
             print(f"  Saved: {skills_path}")
-            
+
             return output_path
         else:
             print(f"  API error: {response.status_code}")
             return None
-            
+
     except Exception as e:
         print(f"  Error generating skill bible: {e}")
         return None
 
 
-def process_video(video: dict, audio_dir: Path, use_gemini: bool = False) -> dict:
-    """Process a single video: get transcript (or download+transcribe), convert to manual."""
-    import time as time_module
-    
+def process_video(video: dict, use_gemini: bool = False) -> dict:
+    """Process a single video: get transcript, convert to manual."""
+
     print(f"    Processing: {video['title'][:50]}...")
-    
-    transcript = None
-    
+
     # Add a small delay to avoid rate limiting
-    time_module.sleep(2)
-    
-    # Try YouTube transcript API first (free, fast)
-    transcript = get_youtube_transcript(video["id"])
-    
-    # If no transcript, try download + Whisper
-    if not transcript:
-        audio_path = download_audio(video["id"], audio_dir)
-        if audio_path and audio_path.exists():
-            transcript = transcribe_audio(audio_path, use_gemini)
-            # Cleanup audio file
-            try:
-                audio_path.unlink()
-            except:
-                pass
-    
+    time.sleep(1)
+
+    # Get transcript using fallback chain
+    transcript = get_transcript(video["id"])
+
     if not transcript:
         print(f"    Could not get transcript for {video['id']}")
         return None
-    
+
     # Convert to how-to manual
     manual = convert_to_howto_manual(transcript, video, use_gemini)
-    
+
     return manual
 
 
@@ -682,7 +686,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="Mine knowledge from top YouTube channels in your niche"
     )
-    
+
     parser.add_argument(
         "--niche", "-n",
         nargs="+",
@@ -735,9 +739,15 @@ def main():
         default=1,
         help="Parallel video processing (default: 1, increase carefully to avoid rate limits)"
     )
-    
+
     args = parser.parse_args()
-    
+
+    # Check for at least one transcript API key
+    has_transcript_api = (
+        os.getenv("SUPADATA_API_KEY") or
+        os.getenv("TRANSCRIPTAPI_KEY")
+    )
+
     print("=" * 60)
     print("YouTube Knowledge Miner")
     print("=" * 60)
@@ -745,36 +755,46 @@ def main():
     print(f"Max Channels: {args.max_channels}")
     print(f"Videos/Channel: {args.videos_per_channel}")
     print(f"Using: {'Gemini Flash' if args.use_gemini else 'Claude'}")
+    print(f"Transcript APIs: ", end="")
+    apis = []
+    if os.getenv("SUPADATA_API_KEY"):
+        apis.append("Supadata")
+    if os.getenv("TRANSCRIPTAPI_KEY"):
+        apis.append("TranscriptAPI")
+    apis.append("youtube-transcript-api (fallback)")
+    print(" -> ".join(apis))
     print("=" * 60)
-    
+
+    if not has_transcript_api:
+        print("\nWarning: No transcript API keys found (SUPADATA_API_KEY or TRANSCRIPTAPI_KEY)")
+        print("Falling back to youtube-transcript-api which may be rate limited.\n")
+
     # Setup output directory
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    audio_dir = output_dir / "audio"
-    audio_dir.mkdir(exist_ok=True)
-    
+
     # Step 1: Find top channels
     channels = find_top_channels(
         args.niche,
         max_channels=args.max_channels,
         min_subscribers=args.min_subscribers
     )
-    
+
     if not channels:
         print("No channels found. Try different keywords.")
         return 1
-    
+
     # Save channels list
     channels_file = output_dir / "channels.json"
     with open(channels_file, "w") as f:
         json.dump(channels, f, indent=2)
-    
+
     # Step 2: Get videos from each channel
     print(f"\n[2/6] Getting top videos from {len(channels)} channels...")
-    
+
     creds = get_youtube_credentials()
     youtube = build("youtube", "v3", credentials=creds)
-    
+
     all_videos = []
     for channel in channels:
         print(f"  {channel['name']}...")
@@ -785,24 +805,24 @@ def main():
         )
         all_videos.extend(videos)
         print(f"    Found {len(videos)} qualifying videos")
-    
+
     print(f"  Total videos to process: {len(all_videos)}")
-    
+
     # Save videos list
     videos_file = output_dir / "videos.json"
     with open(videos_file, "w") as f:
         json.dump(all_videos, f, indent=2)
-    
-    # Step 3: Process videos (download, transcribe, convert)
-    print(f"\n[3/6] Processing videos (transcribe + convert to manuals)...")
-    
+
+    # Step 3: Process videos (get transcripts, convert to manuals)
+    print(f"\n[3/6] Processing videos (transcripts + manuals)...")
+
     manuals = []
     with ThreadPoolExecutor(max_workers=args.parallel) as executor:
         futures = {
-            executor.submit(process_video, video, audio_dir, args.use_gemini): video
+            executor.submit(process_video, video, args.use_gemini): video
             for video in all_videos
         }
-        
+
         for future in as_completed(futures):
             video = futures[future]
             try:
@@ -812,32 +832,32 @@ def main():
                     print(f"      Completed: {video['title'][:40]}... (Rating: {manual.get('skill_rating', 'N/A')})")
             except Exception as e:
                 print(f"      Failed: {video['title'][:40]}... ({e})")
-    
+
     print(f"  Successfully processed: {len(manuals)}/{len(all_videos)} videos")
-    
+
     # Step 4: Save all manuals
     print(f"\n[4/6] Saving how-to manuals...")
-    
+
     manuals_dir = output_dir / "manuals"
     manuals_dir.mkdir(exist_ok=True)
-    
+
     for manual in manuals:
         safe_title = manual["video_title"][:50].replace("/", "-").replace("\\", "-")
         manual_file = manuals_dir / f"{safe_title}.md"
         manual_file.write_text(manual["manual_content"], encoding="utf-8")
-    
+
     # Save manuals index
     manuals_index = output_dir / "manuals_index.json"
     with open(manuals_index, "w") as f:
         json.dump(manuals, f, indent=2)
-    
+
     # Step 5: Filter valuable manuals
     valuable_manuals = filter_valuable_manuals(manuals, args.min_skill_rating)
-    
+
     # Step 6: Generate skill bible
     niche_name = " ".join(args.niche)
     skill_bible_path = generate_skill_bible(valuable_manuals, niche_name, output_dir)
-    
+
     # Summary
     print("\n" + "=" * 60)
     print("KNOWLEDGE MINING COMPLETE")
@@ -852,7 +872,7 @@ def main():
     if skill_bible_path:
         print(f"  Skill Bible: {skill_bible_path}")
     print("=" * 60)
-    
+
     return 0
 
 

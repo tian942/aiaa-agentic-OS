@@ -106,7 +106,7 @@ def check_env_file():
     
     # Create .env template
     template = """# AIAA Agentic OS - API Keys
-# Fill these in during the setup wizard, or manually here
+# Ask Claude Code to help you set these up, or fill them in manually
 
 # Required: Powers the AI (get free key at https://openrouter.ai/keys)
 OPENROUTER_API_KEY=
@@ -126,7 +126,7 @@ APIFY_API_TOKEN=
     
     env_file.write_text(template)
     print_success(".env template created")
-    print_info("You'll add your API keys in the setup wizard")
+    print_info("Ask Claude Code to help you configure your API keys")
     return True
 
 def verify_core_files():
@@ -198,9 +198,9 @@ def main():
         print(f"{Colors.GREEN}{Colors.BOLD}  ✓ Installation complete!{Colors.END}")
         print(f"{Colors.GREEN}{'═' * 60}{Colors.END}")
         print()
-        print(f"  {Colors.BOLD}Next step:{Colors.END} Run the setup wizard to configure your agency:")
+        print(f"  {Colors.BOLD}Next step:{Colors.END} Ask Claude Code to walk you through setup:")
         print()
-        print(f"    {Colors.CYAN}python3 wizard.py{Colors.END}")
+        print(f"    {Colors.CYAN}\"Help me set up my agency profile and API keys\"{Colors.END}")
         print()
     else:
         print(f"{Colors.RED}{'═' * 60}{Colors.END}")

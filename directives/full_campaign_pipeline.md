@@ -223,6 +223,25 @@ The `08_followup_sequences.md` can be imported to:
 - Instantly
 - GoHighLevel
 
+## Related Skill Bibles
+
+**[SKILL_BIBLE_meta_ads_manager_technical.md](../skills/SKILL_BIBLE_meta_ads_manager_technical.md)** (PRIMARY FOR META ADS)
+- Complete Meta Ads Manager technical setup and optimization
+- Pixel implementation, Conversions API, audience infrastructure
+- Persona-led creative diversification (90% success rate in CPM/CPL improvement)
+- Andromeda update strategies and incremental reach optimization
+- Campaign structure, budget allocation, and scaling frameworks
+
+**[SKILL_BIBLE_hormozi_paid_ads_mastery.md](../skills/SKILL_BIBLE_hormozi_paid_ads_mastery.md)**
+- Paid ads framework and strategy
+- Ad creative principles and hooks
+- Platform optimization tactics
+
+**[SKILL_BIBLE_agency_funnel_building.md](../skills/SKILL_BIBLE_agency_funnel_building.md)**
+- Landing page optimization
+- Conversion funnel design
+- Lead generation best practices
+
 ## Related Workflows
 
 - `youtube_knowledge_miner.md` - Learn best practices first

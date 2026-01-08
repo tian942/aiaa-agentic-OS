@@ -38,19 +38,39 @@ load_dotenv()
 
 class CampaignPipeline:
     """Full campaign generation pipeline."""
-    
+
     def __init__(self, client_name: str, website: str, offer: str, output_dir: Path):
         self.client_name = client_name
         self.website = website
         self.offer = offer
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.research = {}
         self.ad_copy = {}
         self.landing_page = {}
         self.email_sequence = {}
         self.images = {}
+        self.meta_ads_context = self._load_meta_ads_skill_bible()
+
+    def _load_meta_ads_skill_bible(self) -> str:
+        """Load Meta Ads Manager skill bible for enhanced context."""
+        skill_path = Path(__file__).parent.parent / "skills" / "SKILL_BIBLE_meta_ads_manager_technical.md"
+        if skill_path.exists():
+            content = skill_path.read_text(encoding="utf-8")
+            # Extract key sections for context
+            sections = []
+            for section in ["## Core Principles", "## Best Practices", "## Common Mistakes"]:
+                if section in content:
+                    start = content.find(section)
+                    # Find next section
+                    next_section = content.find("\n## ", start + len(section))
+                    if next_section > start:
+                        sections.append(content[start:next_section])
+                    else:
+                        sections.append(content[start:start + 2000])
+            return "\n".join(sections)[:4000]  # Limit context size
+        return ""
         
     def log(self, message: str):
         print(f"  {message}")
@@ -234,9 +254,23 @@ Output ONLY valid JSON.
         """Phase 2: Generate Meta Ads campaign structure."""
         print("\n[PHASE 2/8] Meta Ads Campaign Setup")
         print("-" * 40)
-        
+
         self.log("Generating campaign structure...")
-        
+
+        # Add skill bible context for enhanced Meta Ads expertise
+        meta_expertise = """
+META ADS EXPERTISE (Apply these principles):
+- Create PERSONA-LED creative strategy - persona changes drive 10x more impact than copy changes
+- Ensure TRUE creative diversity - vary location, narrative, AND person across variations
+- Focus on INCREMENTAL REACH - optimize for reaching new audiences, not increased frequency
+- Technical setup first - proper pixel implementation, Conversions API, audience infrastructure
+- Budget allocation: 70% proven performers, 30% testing
+- Maintain 50+ conversions per week per ad set for optimization
+- Apply Andromeda update strategies for 2025/2026
+"""
+        if self.meta_ads_context:
+            meta_expertise += f"\n\nDETAILED CONTEXT:\n{self.meta_ads_context[:2000]}"
+
         prompt = f"""
 Create a complete Meta Ads campaign structure for:
 
@@ -244,6 +278,8 @@ CLIENT: {self.client_name}
 OFFER: {self.offer}
 MONTHLY BUDGET: ${budget}
 TARGET AUDIENCE: {json.dumps(self.research.get('target_audience', {}), indent=2)[:2000]}
+
+{meta_expertise}
 
 Generate a campaign structure with:
 
@@ -310,9 +346,20 @@ Format as detailed JSON structure ready for API integration.
         """Phase 3: Generate ad copy variations."""
         print("\n[PHASE 3/8] Ad Copy Generation")
         print("-" * 40)
-        
+
         self.log("Generating ad copy variations...")
-        
+
+        # Enhanced prompt with Meta Ads skill bible context
+        creative_expertise = """
+META ADS CREATIVE PRINCIPLES (Apply these):
+- PERSONA-LED variations - create truly different personas, not just copy changes
+- EMOTIONAL narratives - connect personally, avoid rational feature lists
+- MOBILE-FIRST - 90%+ of Meta traffic is mobile, design for thumb-stopping
+- STRONG HOOKS - must stop scroll within first 3 seconds
+- TRUE DIVERSITY - vary location, narrative, AND person across variations
+- INCREMENTAL REACH focus - creative should unlock new audiences
+"""
+
         prompt = f"""
 Create high-converting Meta ad copy for:
 
@@ -321,6 +368,8 @@ OFFER: {self.offer}
 TARGET AUDIENCE PAIN POINTS: {json.dumps(self.research.get('target_audience', {}).get('pain_points', []))}
 HOOKS: {json.dumps(self.research.get('hooks', []))}
 TRANSFORMATION: {json.dumps(self.research.get('transformation', {}))}
+
+{creative_expertise}
 
 Generate 10 ad copy variations across these formats:
 
