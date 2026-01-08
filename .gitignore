@@ -2,10 +2,23 @@ node_modules
 .tmp/
 __pycache__/
 *.pyc
-.env
 .DS_Store
 *.mp4
 *.mp4.part
 *.ytdl
 *.wav
 *.mp3
+
+# Credentials and secrets
+.env
+.env.*
+*.pickle
+token.pickle
+token_*.json
+client_secrets.json
+credentials.json
+*_credentials.json
+*_cookies.txt
+*.pem
+*.key
+service_account*.json
