@@ -6,6 +6,32 @@ A production-ready agentic workflow system that turns Claude Code into an autono
 
 ---
 
+## Recommended Setup: Use Claude Code
+
+**The easiest way to set up this system is with Claude Code.**
+
+1. Clone this repository
+2. Open the folder in Claude Code
+3. Copy the prompt from [`QUICKSTART_PROMPT.md`](QUICKSTART_PROMPT.md) and paste it
+
+Claude Code will:
+- Run the installer (`python3 install.py`)
+- Walk you through the setup wizard (`python3 wizard.py`)
+- Configure your API keys and agency profile
+- Teach you the system interactively
+- Run your first workflow
+
+**Or run setup manually:**
+```bash
+git clone https://github.com/stopmoclay/Agentic-Workflows.git
+cd Agentic-Workflows
+python3 install.py    # Install dependencies
+python3 wizard.py     # Interactive setup wizard
+python3 run.py        # Launch the system
+```
+
+---
+
 ## System Overview
 
 | Resource | Count | Location |
