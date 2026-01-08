@@ -6,30 +6,47 @@ A production-ready agentic workflow system that turns Claude Code into an autono
 
 ---
 
-## Quick Start (New to Claude Code?)
+## Quick Start
 
-**Just paste this into Claude Code:**
+**Open Claude Code and paste this prompt:**
 
 ```
-Clone and set up AIAA Agentic OS for me.
+I want to set up AIAA Agentic OS. Please help me through the entire process.
 
-1. First, clone the repository:
-   git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
+## Step 1: Clone the Repository
+Run: git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
+Then change into that directory.
 
-2. Change into that directory
+## Step 2: Install Dependencies
+Run: python3 install.py
 
-3. Run the installer:
-   python3 install.py
+## Step 3: Walk Me Through Setup
+Be my setup wizard. Ask me questions ONE AT A TIME to configure:
 
-4. Run the setup wizard:
-   python3 wizard.py
+1. API Keys (.env file)
+   - OPENROUTER_API_KEY (required) - https://openrouter.ai/keys
+   - PERPLEXITY_API_KEY (optional) - https://perplexity.ai/settings/api
+   - SLACK_WEBHOOK_URL (optional) - for notifications
 
-Walk me through each step and help me configure everything. I'm new to this.
+2. Agency Profile (context/ folder)
+   Ask me: agency name, website, services, target audience, brand voice
+   Save to: agency.md, brand_voice.md, services.md
+
+3. First Client (optional - clients/{name}/ folder)
+   Ask me: company name, industry, what they sell, their audience
+
+## Step 4: Test the System
+Run a simple workflow to verify everything works.
+
+## Step 5: Show Me What's Available
+Tour me through the content, sales copy, research, and lead gen workflows.
+
+Be encouraging, explain why each step matters, and save files as we go. Start now!
 ```
 
-That's it. Claude Code downloads the system, installs everything, and walks you through setup.
+Claude Code becomes your setup wizard - cloning the repo, installing dependencies, configuring your API keys, creating your agency profile, and walking you through your first workflow.
 
-See [`QUICKSTART_PROMPT.md`](QUICKSTART_PROMPT.md) for more details.
+See [`QUICKSTART_PROMPT.md`](QUICKSTART_PROMPT.md) for the full prompt with detailed instructions.
 
 ---
 
