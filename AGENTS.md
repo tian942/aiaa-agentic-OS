@@ -1,6 +1,6 @@
 # AIAA Agentic OS - Complete Agent Instructions
 
-> **Version:** 2.0 | **Last Updated:** January 5, 2026
+> **Version:** 3.0 | **Last Updated:** January 7, 2026
 > This file provides ALL context for a Claude Code agent to operate this system.
 
 ---
@@ -9,9 +9,11 @@
 
 | Resource | Count | Location |
 |----------|-------|----------|
-| Directives (SOPs) | 110 | `directives/*.md` |
-| Execution Scripts | 114 | `execution/*.py` |
-| Skill Bibles | 137 | `skills/SKILL_BIBLE_*.md` |
+| Directives (SOPs) | 110+ | `directives/*.md` |
+| Execution Scripts | 120+ | `execution/*.py` |
+| Skill Bibles | 260+ | `skills/SKILL_BIBLE_*.md` |
+| Agency Context | - | `context/` |
+| Client Profiles | - | `clients/{client_name}/` |
 | Deployed Apps | Modal AI | `execution/modal_apps/` |
 
 **Environment Variables Required:**
@@ -84,34 +86,121 @@ Agentic Workflows/
 ├── credentials.json        # Google OAuth credentials
 ├── token.pickle           # Google OAuth token
 │
-├── directives/            # SOPs - What to do (110 files)
+├── context/               # AGENCY CONTEXT - Who you are
+│   ├── agency.md          # Agency info, services, positioning
+│   ├── owner.md           # Owner profile, background, expertise
+│   ├── brand_voice.md     # Tone, style, communication preferences
+│   └── services.md        # Service offerings, pricing, packages
+│
+├── clients/               # CLIENT PROFILES - Who you serve
+│   └── {client_name}/     # One folder per client
+│       ├── profile.md     # Client info, business, goals
+│       ├── rules.md       # Specific rules for this client
+│       ├── preferences.md # Style, tone, do's and don'ts
+│       └── history.md     # Past work, context, outcomes
+│
+├── directives/            # SOPs - What to do (110+ files)
 │   ├── vsl_funnel_orchestrator.md
-│   ├── vsl_script_writer.md
 │   ├── company_market_research.md
 │   ├── deploy_to_modal.md
-│   └── ... (106 more)
+│   └── ...
 │
-├── execution/             # Python scripts - Doing (114 files)
-│   ├── deploy_to_modal.py      # Deploy workflows to Modal AI
-│   ├── generate_vsl_funnel.py  # VSL generation
-│   ├── research_company_offer.py
+├── execution/             # Python scripts - Doing (120+ files)
+│   ├── deploy_to_modal.py
+│   ├── generate_vsl_funnel.py
 │   ├── create_google_doc.py
-│   ├── send_slack_notification.py
 │   ├── modal_apps/             # Generated Modal deployments
-│   └── ... (108 more)
+│   └── ...
 │
-├── skills/                # Domain expertise (137 skill bibles)
-│   ├── SKILL_BIBLE_vsl_writing_production.md
-│   ├── SKILL_BIBLE_cold_email_mastery.md
-│   ├── SKILL_BIBLE_agency_sales_system.md
-│   └── ... (134 more)
-│
-├── trainings/             # Source material (transcripts, courses)
-├── N8N Workflows/         # Original N8N workflow JSONs
+├── skills/                # Domain expertise (260+ skill bibles)
+│   ├── SKILL_BIBLE_*.md
+│   └── ...
 │
 ├── AGENTS.md              # THIS FILE - Agent instructions
 ├── CLAUDE.md              # Mirrored instructions for Claude
-└── QUICKSTART.md          # Human quick start guide
+├── install.py             # First-time setup
+├── run.py                 # Main interface
+└── wizard.py              # Interactive onboarding
+```
+
+---
+
+## Agency Context & Client Profiles
+
+### Agency Context (`context/`)
+This folder contains information about YOU and YOUR AGENCY. Load this context before generating any content to ensure outputs reflect your brand, voice, and positioning.
+
+**Required Files:**
+
+| File | Purpose | Example Content |
+|------|---------|-----------------|
+| `agency.md` | Agency identity | Name, founding story, mission, positioning, unique value proposition |
+| `owner.md` | Owner profile | Name, background, expertise, credentials, personal brand |
+| `brand_voice.md` | Communication style | Tone (professional/casual), vocabulary, phrases to use/avoid, style rules |
+| `services.md` | Service offerings | Services, pricing tiers, packages, deliverables, timelines |
+
+**When to Load Agency Context:**
+- Content creation (blogs, emails, social posts)
+- Client proposals and pitches
+- Sales scripts and cold outreach
+- Any branded deliverables
+
+### Client Profiles (`clients/{client_name}/`)
+Each client gets their own folder with specific context. Load these files when doing work FOR a specific client.
+
+**Client Folder Structure:**
+```
+clients/
+├── acme_corp/
+│   ├── profile.md      # Business info, industry, goals, target audience
+│   ├── rules.md        # MUST-FOLLOW rules for this client
+│   ├── preferences.md  # Style preferences, tone, formatting
+│   └── history.md      # Past projects, outcomes, learnings
+│
+├── startup_xyz/
+│   ├── profile.md
+│   ├── rules.md
+│   └── ...
+```
+
+**Client Profile Fields (`profile.md`):**
+- Company name and description
+- Industry and niche
+- Target audience
+- Business goals
+- Key products/services
+- Competitors
+- Unique selling points
+
+**Client Rules (`rules.md`):**
+- Content guidelines (words to use/avoid)
+- Brand voice requirements
+- Approval processes
+- Compliance requirements
+- Formatting standards
+
+**When to Load Client Context:**
+- Any deliverable FOR that client
+- Client-specific campaigns
+- Personalized content
+- Before any client meeting prep
+
+### Loading Context in Practice
+
+```python
+# Before generating content, always:
+1. Check if context/agency.md exists → Load it
+2. Check if client is specified → Load clients/{client}/*.md
+3. Apply context to all prompts and outputs
+```
+
+**Example: Writing cold emails for client "Acme Corp"**
+```
+Load: context/agency.md          # Your agency voice
+Load: context/brand_voice.md     # Your style rules
+Load: clients/acme_corp/profile.md    # Their business info
+Load: clients/acme_corp/rules.md      # Their specific rules
+Then: Execute cold_email_scriptwriter directive
 ```
 
 ---
@@ -147,19 +236,39 @@ ls execution/ | grep -i "<keyword>"
 ### Phase 3: Load Context
 Before execution, load ALL required context:
 ```
-1. Primary Directive    → directives/<workflow>.md
-2. Skill Bibles         → skills/SKILL_BIBLE_<topic>.md
-3. Related Directives   → Check "Related Directives" section
-4. Execution Scripts    → execution/<script>.py
+1. Agency Context       → context/*.md (who YOU are)
+2. Client Context       → clients/{client}/  (if client-specific work)
+3. Primary Directive    → directives/<workflow>.md
+4. Skill Bibles         → skills/SKILL_BIBLE_<topic>.md
+5. Related Directives   → Check "Related Directives" section
+6. Execution Scripts    → execution/<script>.py
 ```
 
-**Example for VSL funnel:**
+**CRITICAL: Always Load Agency Context First**
+Before generating ANY content, check `context/` for:
+- `agency.md` - Your agency's name, positioning, services
+- `owner.md` - Owner's name, background, expertise
+- `brand_voice.md` - Tone, style guide, communication rules
+- `services.md` - What you offer, pricing, packages
+
+**For Client-Specific Work, Also Load:**
 ```
+clients/{client_name}/
+├── profile.md      # Who they are, their business, goals
+├── rules.md        # MUST follow these rules for this client
+├── preferences.md  # Their style preferences
+└── history.md      # Past work, what worked, what didn't
+```
+
+**Example for client VSL funnel:**
+```
+context/agency.md                    # Your agency context
+context/brand_voice.md               # Your voice/style
+clients/acme_corp/profile.md         # Client info
+clients/acme_corp/rules.md           # Client-specific rules
 directives/vsl_funnel_orchestrator.md
 ├── skills/SKILL_BIBLE_vsl_writing_production.md
 ├── skills/SKILL_BIBLE_funnel_copywriting_mastery.md
-├── directives/vsl_script_writer.md
-├── directives/company_market_research.md
 └── execution/generate_vsl_funnel.py
 ```
 
@@ -601,18 +710,30 @@ python3 execution/<script>.py 2>&1 | tee output.log
 You are the **brain** of this system. Your responsibilities:
 
 1. **Parse Intent** → Understand what the user wants
-2. **Find Capability** → Locate directive + script + skill bible
-3. **Load Context** → Read all relevant files before execution
-4. **Execute** → Run scripts, follow SOPs, check quality gates
-5. **Deliver** → Save locally, upload to Google Docs, notify via Slack
-6. **Self-Anneal** → Learn from every execution, update the system
+2. **Load Agency Context** → Read `context/` to understand who you're representing
+3. **Load Client Context** → If client-specific, read `clients/{client}/` for their rules
+4. **Find Capability** → Locate directive + script + skill bible
+5. **Execute** → Run scripts, follow SOPs, check quality gates
+6. **Deliver** → Save locally, upload to Google Docs, notify via Slack
+7. **Self-Anneal** → Learn from every execution, update the system
 
 **Core Principles:**
+- **ALWAYS load agency context before generating content**
+- **ALWAYS load client context when doing client-specific work**
 - Check for existing tools before creating new ones
 - Load skill bibles for domain expertise
 - Push deterministic work into Python scripts
 - Self-anneal when things break
 - Update directives as you learn
+
+**Context Loading Priority:**
+```
+1. context/agency.md      → Always load first
+2. context/brand_voice.md → For any content creation
+3. clients/{name}/*.md    → For client-specific work
+4. skills/SKILL_BIBLE_*   → For domain expertise
+5. directives/*.md        → For workflow SOPs
+```
 
 **The bottleneck isn't ideas or execution. It's deciding what to build next.**
 

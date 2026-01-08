@@ -1325,26 +1325,388 @@ def step_agency_profile():
 # STEP 3: ADD CLIENTS
 # ═══════════════════════════════════════════════════════════════
 
+def create_client_profile_md(client_data):
+    """Generate profile.md content for a client."""
+    return f"""# {client_data['name']} - Client Profile
+
+## Company Overview
+- **Company Name:** {client_data['name']}
+- **Website:** {client_data.get('website', 'N/A')}
+- **Industry:** {client_data.get('industry', 'N/A')}
+- **Description:** {client_data.get('description', 'N/A')}
+
+## Business Details
+- **Business Model:** {client_data.get('business_model', 'N/A')}
+- **Main Products/Services:** {client_data.get('products_services', 'N/A')}
+- **Price Range:** {client_data.get('price_range', 'N/A')}
+- **Founded:** {client_data.get('founded', 'N/A')}
+- **Company Size:** {client_data.get('company_size', 'N/A')}
+
+## Target Audience
+- **Primary Audience:** {client_data.get('target_audience', 'N/A')}
+- **Customer Avatar:** {client_data.get('customer_avatar', 'N/A')}
+- **Pain Points:** {client_data.get('pain_points', 'N/A')}
+
+## Market Position
+- **Unique Value Proposition:** {client_data.get('uvp', 'N/A')}
+- **Main Competitors:** {client_data.get('competitors', 'N/A')}
+- **Differentiators:** {client_data.get('differentiators', 'N/A')}
+
+## Contact Information
+- **Primary Contact:** {client_data.get('contact_name', 'N/A')}
+- **Email:** {client_data.get('contact_email', 'N/A')}
+- **Phone:** {client_data.get('contact_phone', 'N/A')}
+
+## Social Profiles
+- **LinkedIn:** {client_data.get('social', {}).get('linkedin', 'N/A')}
+- **Twitter/X:** {client_data.get('social', {}).get('twitter', 'N/A')}
+- **Instagram:** {client_data.get('social', {}).get('instagram', 'N/A')}
+- **YouTube:** {client_data.get('social', {}).get('youtube', 'N/A')}
+- **Facebook:** {client_data.get('social', {}).get('facebook', 'N/A')}
+
+## Goals & Objectives
+{client_data.get('goals', 'To be defined')}
+
+## Notes
+{client_data.get('notes', 'No additional notes')}
+
+---
+*Profile created: {client_data.get('created_at', 'Unknown')}*
+"""
+
+def create_client_rules_md(client_data):
+    """Generate rules.md content for a client."""
+    return f"""# {client_data['name']} - Content Rules
+
+## Brand Guidelines
+
+### Voice & Tone
+{client_data.get('voice_tone', '- Professional yet approachable\n- Confident but not arrogant\n- Educational and helpful')}
+
+### Words to USE
+{client_data.get('words_to_use', '- [Add preferred terminology]\n- [Industry-specific terms]\n- [Brand keywords]')}
+
+### Words to AVOID
+{client_data.get('words_to_avoid', '- [Competitor names]\n- [Negative terms]\n- [Off-brand language]')}
+
+## Content Requirements
+
+### Required Elements
+{client_data.get('required_elements', '- Always include CTA\n- Use approved brand colors\n- Include social proof when possible')}
+
+### Approval Process
+{client_data.get('approval_process', 'All content requires client review before publishing')}
+
+### Compliance Notes
+{client_data.get('compliance_notes', 'N/A - Add any regulatory or legal requirements')}
+
+## Formatting Standards
+{client_data.get('formatting_standards', '- Use sentence case for headlines\n- Keep paragraphs short (2-3 sentences)\n- Include bullet points for readability')}
+
+## DO's
+{client_data.get('dos', '- Highlight customer success stories\n- Emphasize ROI and results\n- Use data and statistics')}
+
+## DON'Ts
+{client_data.get('donts', "- Don't make unsubstantiated claims\n- Don't disparage competitors\n- Don't use jargon without explanation")}
+
+---
+*Rules last updated: {client_data.get('created_at', 'Unknown')}*
+"""
+
+def create_client_preferences_md(client_data):
+    """Generate preferences.md content for a client."""
+    return f"""# {client_data['name']} - Style Preferences
+
+## Communication Style
+- **Formality Level:** {client_data.get('formality', 'Professional')}
+- **Emoji Usage:** {client_data.get('emoji_usage', 'Minimal/None')}
+- **Humor Level:** {client_data.get('humor_level', 'Light/Professional')}
+
+## Content Preferences
+
+### Preferred Content Types
+{client_data.get('preferred_content', '- Educational blog posts\n- Case studies\n- Social proof content')}
+
+### Content Length Preferences
+{client_data.get('content_length', '- Social posts: 150-300 words\n- Blog posts: 1500-2500 words\n- Emails: 200-400 words')}
+
+### Visual Style
+{client_data.get('visual_style', '- Clean and modern\n- Brand color palette\n- Professional imagery')}
+
+## Platform-Specific Preferences
+
+### LinkedIn
+{client_data.get('linkedin_style', '- Thought leadership focus\n- Industry insights\n- Professional tone')}
+
+### Email Marketing
+{client_data.get('email_style', '- Personal, from founder\n- Value-first approach\n- Clear CTAs')}
+
+### Website/Blog
+{client_data.get('website_style', '- SEO-optimized\n- Educational content\n- Clear navigation')}
+
+## Scheduling Preferences
+{client_data.get('scheduling', '- Best posting times: Business hours\n- Content calendar: Weekly review\n- Approval timeline: 48 hours')}
+
+---
+*Preferences last updated: {client_data.get('created_at', 'Unknown')}*
+"""
+
+def create_client_history_md(client_data):
+    """Generate history.md content for a client."""
+    return f"""# {client_data['name']} - Project History
+
+## Engagement Summary
+- **Client Since:** {client_data.get('created_at', 'Unknown')[:10]}
+- **Current Status:** Active
+- **Engagement Type:** {client_data.get('engagement_type', 'Ongoing Retainer')}
+
+## Services Provided
+{client_data.get('services_provided', '- [List services you provide to this client]')}
+
+## Completed Projects
+
+### Project 1: Initial Setup
+- **Date:** {client_data.get('created_at', 'Unknown')[:10]}
+- **Deliverables:** Client profile setup
+- **Outcome:** Client onboarded successfully
+
+<!-- Add more projects as you complete them -->
+
+## Performance Metrics
+- **Content Pieces Created:** 0
+- **Campaigns Launched:** 0
+- **Results Achieved:** Pending first project
+
+## What's Working
+- [Add insights as you learn what works for this client]
+
+## What to Avoid
+- [Add learnings about what doesn't work]
+
+## Key Learnings
+- [Document important discoveries about this client]
+
+## Upcoming Projects
+- [List planned work]
+
+---
+*History last updated: {client_data.get('created_at', 'Unknown')}*
+"""
+
+def add_single_client(client_num=1, steps=None, show_header=True):
+    """Add a single client with comprehensive profile creation."""
+    if steps is None:
+        steps = ["API Keys", "Agency Profile", "Add Clients", "Learn the System", "First Workflow", "Create Workflows", "Complete!"]
+    
+    if show_header:
+        print_header(f"Add Client #{client_num}", "Let's create a comprehensive client profile")
+        print_step_indicator(2, len(steps), steps)
+    
+    print(f"""  {Colors.BOLD}Client Profile Setup{Colors.END}
+  
+  We'll collect information in 4 categories:
+  1. {Colors.CYAN}Basic Info{Colors.END} - Company name, industry, website
+  2. {Colors.CYAN}Business Details{Colors.END} - Products, audience, competitors
+  3. {Colors.CYAN}Contact & Social{Colors.END} - Who to reach, social profiles
+  4. {Colors.CYAN}Style Preferences{Colors.END} - Tone, voice, content rules
+  
+  {Colors.DIM}Press Enter to skip any field you don't know yet.{Colors.END}
+""")
+    
+    wait_for_enter("Press Enter to start...")
+    
+    client = {}
+    
+    # === SECTION 1: BASIC INFO ===
+    if show_header:
+        print_header(f"Client #{client_num}: Basic Information", "Essential details about the company")
+        print_step_indicator(2, len(steps), steps)
+    
+    print(f"  {Colors.BOLD}{Colors.CYAN}Section 1: Basic Information{Colors.END}\n")
+    
+    client['name'] = prompt("Company/Client name")
+    client['website'] = prompt("Website URL", required=False)
+    client['industry'] = prompt("Industry (e.g., SaaS, E-commerce, Agency)")
+    client['description'] = prompt("One-sentence description of what they do")
+    
+    wait_for_enter()
+    
+    # === SECTION 2: BUSINESS DETAILS ===
+    if show_header:
+        print_header(f"Client #{client_num}: Business Details", "Understanding their business model")
+        print_step_indicator(2, len(steps), steps)
+    
+    print(f"  {Colors.BOLD}{Colors.CYAN}Section 2: Business Details{Colors.END}\n")
+    
+    client['business_model'] = prompt("Business model (B2B, B2C, D2C, SaaS)", required=False)
+    client['products_services'] = prompt("Main products or services", required=False)
+    client['price_range'] = prompt("Price range (e.g., $500-5000, Premium, Budget)", required=False)
+    client['company_size'] = prompt("Company size (employees or revenue range)", required=False)
+    
+    print()
+    print(f"  {Colors.DIM}Target Market:{Colors.END}\n")
+    
+    client['target_audience'] = prompt("Who is their target audience?", required=False)
+    client['customer_avatar'] = prompt("Ideal customer avatar (job title, demographics)", required=False)
+    client['pain_points'] = prompt("Main customer pain points (comma-separated)", required=False)
+    
+    print()
+    print(f"  {Colors.DIM}Market Position:{Colors.END}\n")
+    
+    client['uvp'] = prompt("Unique value proposition (what makes them different)", required=False)
+    client['competitors'] = prompt("Main competitors (comma-separated)", required=False)
+    client['differentiators'] = prompt("Key differentiators from competitors", required=False)
+    
+    wait_for_enter()
+    
+    # === SECTION 3: CONTACT & SOCIAL ===
+    if show_header:
+        print_header(f"Client #{client_num}: Contact & Social", "How to reach them and their online presence")
+        print_step_indicator(2, len(steps), steps)
+    
+    print(f"  {Colors.BOLD}{Colors.CYAN}Section 3: Contact Information{Colors.END}\n")
+    
+    client['contact_name'] = prompt("Primary contact name", required=False)
+    client['contact_email'] = prompt("Contact email", required=False)
+    client['contact_phone'] = prompt("Contact phone", required=False)
+    
+    print()
+    print(f"  {Colors.DIM}Social Profiles (press Enter to skip):{Colors.END}\n")
+    
+    client['social'] = {
+        'linkedin': prompt("LinkedIn company page URL", required=False),
+        'twitter': prompt("Twitter/X URL", required=False),
+        'instagram': prompt("Instagram URL", required=False),
+        'youtube': prompt("YouTube channel URL", required=False),
+        'facebook': prompt("Facebook page URL", required=False),
+    }
+    
+    wait_for_enter()
+    
+    # === SECTION 4: STYLE PREFERENCES ===
+    if show_header:
+        print_header(f"Client #{client_num}: Style Preferences", "How they want content to sound")
+        print_step_indicator(2, len(steps), steps)
+    
+    print(f"  {Colors.BOLD}{Colors.CYAN}Section 4: Content Style{Colors.END}\n")
+    
+    print(f"  {Colors.DIM}What tone should we use for their content?{Colors.END}\n")
+    
+    tone_options = [
+        "Professional & Formal",
+        "Professional & Friendly",
+        "Casual & Conversational",
+        "Bold & Confident",
+        "Educational & Helpful",
+        "Custom (specify)"
+    ]
+    
+    tone_choice = prompt_choice("Select their preferred tone:", tone_options, allow_skip=True)
+    if tone_choice is not None:
+        if tone_choice == 5:  # Custom
+            client['voice_tone'] = prompt("Describe their preferred tone")
+        else:
+            client['voice_tone'] = tone_options[tone_choice]
+    
+    print()
+    client['formality'] = prompt("Formality level (Formal/Semi-formal/Casual)", required=False) or "Professional"
+    client['emoji_usage'] = prompt("Use emojis? (Yes/Minimal/No)", required=False) or "Minimal"
+    
+    print()
+    print(f"  {Colors.DIM}Content rules (optional):{Colors.END}\n")
+    
+    client['words_to_use'] = prompt("Keywords or phrases to emphasize", required=False)
+    client['words_to_avoid'] = prompt("Words or phrases to avoid", required=False)
+    
+    wait_for_enter()
+    
+    # === SECTION 5: GOALS & NOTES ===
+    if show_header:
+        print_header(f"Client #{client_num}: Goals & Notes", "What are we trying to achieve?")
+        print_step_indicator(2, len(steps), steps)
+    
+    print(f"  {Colors.BOLD}{Colors.CYAN}Section 5: Goals & Additional Notes{Colors.END}\n")
+    
+    client['goals'] = prompt("What are their main goals? (e.g., More leads, Brand awareness)", required=False)
+    client['engagement_type'] = prompt("Engagement type (Retainer/Project/Consultation)", required=False)
+    client['services_provided'] = prompt("What services are you providing?", required=False)
+    client['notes'] = prompt("Any other important notes?", required=False)
+    
+    # === CREATE CLIENT FOLDER & FILES ===
+    client_slug = client['name'].lower().replace(' ', '_').replace('-', '_')
+    client_slug = ''.join(c for c in client_slug if c.isalnum() or c == '_')
+    
+    client_dir = CLIENTS_DIR / client_slug
+    client_dir.mkdir(parents=True, exist_ok=True)
+    (client_dir / "outputs").mkdir(exist_ok=True)
+    
+    client['created_at'] = datetime.now().isoformat()
+    client['folder'] = str(client_dir)
+    client['slug'] = client_slug
+    
+    # Create all the markdown files
+    (client_dir / "profile.md").write_text(create_client_profile_md(client))
+    (client_dir / "rules.md").write_text(create_client_rules_md(client))
+    (client_dir / "preferences.md").write_text(create_client_preferences_md(client))
+    (client_dir / "history.md").write_text(create_client_history_md(client))
+    
+    # Also save as JSON for programmatic access
+    (client_dir / "context.json").write_text(json.dumps(client, indent=2))
+    
+    print(f"\n  {Colors.GREEN}{'═' * 56}{Colors.END}")
+    print(f"  {Colors.GREEN}✓ Client '{client['name']}' created successfully!{Colors.END}")
+    print(f"  {Colors.GREEN}{'═' * 56}{Colors.END}")
+    print()
+    print(f"  {Colors.BOLD}Created files:{Colors.END}")
+    print(f"  {Colors.DIM}clients/{client_slug}/{Colors.END}")
+    print(f"  {Colors.DIM}  ├── profile.md      {Colors.END}{Colors.CYAN}← Business info & overview{Colors.END}")
+    print(f"  {Colors.DIM}  ├── rules.md        {Colors.END}{Colors.CYAN}← Content rules & guidelines{Colors.END}")
+    print(f"  {Colors.DIM}  ├── preferences.md  {Colors.END}{Colors.CYAN}← Style & tone preferences{Colors.END}")
+    print(f"  {Colors.DIM}  ├── history.md      {Colors.END}{Colors.CYAN}← Project history & learnings{Colors.END}")
+    print(f"  {Colors.DIM}  ├── context.json    {Colors.END}{Colors.CYAN}← Machine-readable data{Colors.END}")
+    print(f"  {Colors.DIM}  └── outputs/        {Colors.END}{Colors.CYAN}← Generated content goes here{Colors.END}")
+    
+    print(f"""
+  {Colors.BOLD}What's next:{Colors.END}
+  • The AI will automatically load this client's context
+  • Say "create content for {client['name']}" and it knows everything
+  • Edit the .md files anytime to update client info
+  • Generated content saves to clients/{client_slug}/outputs/
+""")
+    
+    return client
+
 def step_add_clients():
-    """Add client profiles."""
+    """Add client profiles with comprehensive setup."""
     steps = ["API Keys", "Agency Profile", "Add Clients", "Learn the System", "First Workflow", "Create Workflows", "Complete!"]
     
-    print_header("Step 3: Add Your Clients", "Create profiles for each client you serve")
+    print_header("Step 3: Add Your Clients", "Create comprehensive profiles for each client")
     print_step_indicator(2, len(steps), steps)
     
     print(f"""  {Colors.BOLD}Why add clients?{Colors.END}
   
-  Each client gets their own folder with:
-  • Context profile (AI knows their business)
-  • Output folder (all generated content saved here)
-  • Custom settings (tone, style preferences)
+  Each client gets their own folder with 4 key files:
   
-  This means you can say "Write a LinkedIn post for Acme Corp"
-  and the AI already knows everything about them.
+  📄 {Colors.CYAN}profile.md{Colors.END}      - Who they are, their business, audience
+  📄 {Colors.CYAN}rules.md{Colors.END}        - Content rules, words to use/avoid
+  📄 {Colors.CYAN}preferences.md{Colors.END}  - Tone, style, platform preferences
+  📄 {Colors.CYAN}history.md{Colors.END}      - Past projects, what works, learnings
+  
+  {Colors.BOLD}Benefits:{Colors.END}
+  • AI automatically knows each client's business
+  • Content matches their voice and style
+  • Never repeat past mistakes
+  • All outputs organized by client
+  
+  {Colors.DIM}Example: "Write a LinkedIn post for Acme Corp" - the AI loads
+  all their context files and writes in their voice.{Colors.END}
 """)
     
     if not prompt_yes_no("Add clients now?", default=True):
-        print(f"\n  {Colors.DIM}Skipped - you can add clients later with: python3 run.py --add-client{Colors.END}")
+        print(f"\n  {Colors.DIM}Skipped - you can add clients anytime with:{Colors.END}")
+        print(f"  {Colors.CYAN}python3 wizard.py --add-client{Colors.END}")
+        print(f"  {Colors.DIM}or{Colors.END}")
+        print(f"  {Colors.CYAN}python3 run.py --add-client{Colors.END}")
         wait_for_enter()
         return []
     
@@ -1352,59 +1714,22 @@ def step_add_clients():
     
     while True:
         client_num = len(clients) + 1
-        
-        print_header(f"Step 3: Add Client #{client_num}", "Enter client details")
-        print_step_indicator(2, len(steps), steps)
-        
-        client = {}
-        
-        client['name'] = prompt("Client/Company name")
-        client['website'] = prompt("Website", required=False)
-        client['industry'] = prompt("Industry")
-        client['description'] = prompt("What do they do? (one sentence)")
-        
-        print()
-        
-        client['contact_name'] = prompt("Main contact name", required=False)
-        client['contact_email'] = prompt("Contact email", required=False)
-        
-        print()
-        print(f"  {Colors.DIM}Social profiles (press Enter to skip):{Colors.END}\n")
-        
-        client['social'] = {
-            'linkedin': prompt("LinkedIn URL", required=False),
-            'twitter': prompt("Twitter/X URL", required=False),
-        }
-        
-        client['notes'] = prompt("Any notes? (stage, special requirements)", required=False)
-        
-        # Create client folder
-        client_slug = client['name'].lower().replace(' ', '_').replace('-', '_')
-        client_slug = ''.join(c for c in client_slug if c.isalnum() or c == '_')
-        
-        client_dir = CLIENTS_DIR / client_slug
-        client_dir.mkdir(parents=True, exist_ok=True)
-        (client_dir / "outputs").mkdir(exist_ok=True)
-        
-        client['created_at'] = datetime.now().isoformat()
-        client['folder'] = str(client_dir)
-        
-        context_path = client_dir / "context.json"
-        context_path.write_text(json.dumps(client, indent=2))
-        
+        client = add_single_client(client_num, steps, show_header=True)
         clients.append(client)
         
-        print(f"\n  {Colors.GREEN}✓ Created: clients/{client_slug}/{Colors.END}")
-        print(f"  {Colors.DIM}  ├── context.json{Colors.END}")
-        print(f"  {Colors.DIM}  └── outputs/{Colors.END}")
+        wait_for_enter()
         
-        print()
         if not prompt_yes_no("Add another client?", default=False):
             break
     
     print(f"\n  {Colors.GREEN}{'═' * 56}{Colors.END}")
-    print(f"  {Colors.GREEN}✓ {len(clients)} client(s) added!{Colors.END}")
+    print(f"  {Colors.GREEN}✓ {len(clients)} client(s) added successfully!{Colors.END}")
     print(f"  {Colors.GREEN}{'═' * 56}{Colors.END}")
+    
+    if clients:
+        print(f"\n  {Colors.BOLD}Your clients:{Colors.END}")
+        for c in clients:
+            print(f"  • {c['name']} → clients/{c['slug']}/")
     
     wait_for_enter()
     
@@ -2008,8 +2333,54 @@ def step_complete():
 
 def main():
     """Run the complete setup wizard."""
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description="AIAA Agentic OS - Setup Wizard",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python3 wizard.py              Run the full setup wizard
+  python3 wizard.py --add-client Add a new client interactively
+  python3 wizard.py --api-keys   Configure API keys only
+  python3 wizard.py --agency     Update agency profile only
+        """
+    )
+    parser.add_argument('--add-client', action='store_true', 
+                        help='Add a new client interactively')
+    parser.add_argument('--api-keys', action='store_true',
+                        help='Configure API keys only')
+    parser.add_argument('--agency', action='store_true',
+                        help='Update agency profile only')
+    parser.add_argument('--version', action='version', version='AIAA Agentic OS Wizard v2.0')
+    
+    args = parser.parse_args()
+    
     load_env()
     
+    # Handle specific commands
+    if args.add_client:
+        print_header("Add New Client", "Create a comprehensive client profile")
+        
+        # Count existing clients
+        existing_clients = list(CLIENTS_DIR.iterdir()) if CLIENTS_DIR.exists() else []
+        client_num = len(existing_clients) + 1
+        
+        client = add_single_client(client_num, show_header=False)
+        
+        print(f"\n  {Colors.GREEN}Client '{client['name']}' added successfully!{Colors.END}")
+        print(f"  {Colors.DIM}Folder: clients/{client['slug']}/{Colors.END}\n")
+        return
+    
+    if args.api_keys:
+        step_api_keys()
+        return
+    
+    if args.agency:
+        step_agency_profile()
+        return
+    
+    # Default: Full wizard flow
     # Check if already set up
     agency_profile = CONTEXT_DIR / "agency_profile.json"
     if agency_profile.exists():
