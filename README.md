@@ -1,6 +1,6 @@
 # AIAA Agentic OS
 
-A production-ready agentic workflow system that turns Claude Code into an autonomous marketing agency operator. Built on the **DOE (Directive-Orchestration-Execution)** architecture pattern.
+An AI-powered agency operating system that runs inside Claude Code. Just paste prompts and Claude handles everything - from VSL funnels to cold emails to market research.
 
 **Version:** 5.0 | **Last Updated:** January 2026
 
@@ -8,7 +8,7 @@ A production-ready agentic workflow system that turns Claude Code into an autono
 
 ## Quick Start
 
-**Open Claude Code and paste this prompt:**
+**Open Claude Code and paste this prompt to get started:**
 
 ```
 I want to set up AIAA Agentic OS. Please help me through the entire process.
@@ -25,280 +25,152 @@ Be my setup wizard. Ask me questions ONE AT A TIME to configure:
 
 1. API Keys (.env file)
    - OPENROUTER_API_KEY (required) - https://openrouter.ai/keys
-   - PERPLEXITY_API_KEY (optional) - https://perplexity.ai/settings/api
+   - PERPLEXITY_API_KEY (optional) - for deep research
    - SLACK_WEBHOOK_URL (optional) - for notifications
 
 2. Agency Profile (context/ folder)
    Ask me: agency name, website, services, target audience, brand voice
-   Save to: agency.md, brand_voice.md, services.md
 
-3. First Client (optional - clients/{name}/ folder)
+3. First Client (optional)
    Ask me: company name, industry, what they sell, their audience
 
 ## Step 4: Test the System
 Run a simple workflow to verify everything works.
 
-## Step 5: Show Me What's Available
-Tour me through the content, sales copy, research, and lead gen workflows.
-
 Be encouraging, explain why each step matters, and save files as we go. Start now!
 ```
 
-Claude Code becomes your setup wizard - cloning the repo, installing dependencies, configuring your API keys, creating your agency profile, and walking you through your first workflow.
+---
 
-See [`QUICKSTART_PROMPT.md`](QUICKSTART_PROMPT.md) for the full prompt with detailed instructions.
+## What You Can Do
+
+Once set up, just tell Claude what you need. Here are example prompts:
+
+### Sales Copy
+
+**VSL Funnel:**
+```
+Create a complete VSL funnel for [COMPANY NAME]. Their website is [WEBSITE] and they sell [PRODUCT/SERVICE] to [TARGET AUDIENCE].
+```
+
+**Sales Page:**
+```
+Write a long-form sales page for [PRODUCT]. Price point is [PRICE]. Target audience is [AUDIENCE]. Focus on [MAIN BENEFIT].
+```
+
+**Cold Emails:**
+```
+Write a cold email sequence for my [SERVICE] targeting [INDUSTRY]. I'm [YOUR NAME] from [YOUR COMPANY]. Focus on [PAIN POINT].
+```
+
+### Content Creation
+
+**Blog Post:**
+```
+Write a 1500-word blog post about [TOPIC] for [TARGET AUDIENCE]. Tone should be [PROFESSIONAL/CASUAL/etc].
+```
+
+**LinkedIn Post:**
+```
+Write a LinkedIn post about [TOPIC]. Style: [STORY/EDUCATIONAL/LISTICLE]. Make it engaging and end with a call to action.
+```
+
+**YouTube Script:**
+```
+Write a YouTube script about [TOPIC]. Target length: [X] minutes. Style: [EDUCATIONAL/TUTORIAL/STORY].
+```
+
+### Research
+
+**Company Research:**
+```
+Research [COMPANY NAME]. Their website is [WEBSITE]. I need to understand their business model, target audience, competitors, and positioning.
+```
+
+**Market Research:**
+```
+Research the [INDUSTRY] market. I need to understand key players, trends, opportunities, and challenges.
+```
+
+**Competitor Analysis:**
+```
+Analyze [COMPETITOR NAME] as a competitor. Their website is [WEBSITE]. Compare them to [YOUR COMPANY/PRODUCT].
+```
+
+### Lead Generation
+
+**Google Maps Leads:**
+```
+Find [BUSINESS TYPE] in [LOCATION]. I need their name, address, phone, website, and reviews.
+```
+
+**LinkedIn Scraping:**
+```
+Find [JOB TITLES] at companies in [INDUSTRY] located in [LOCATION].
+```
+
+### Client Work
+
+**Add a New Client:**
+```
+Help me add a new client: [CLIENT NAME]. Their website is [WEBSITE]. They're in the [INDUSTRY] industry and sell [PRODUCTS/SERVICES] to [AUDIENCE].
+```
+
+**Monthly Report:**
+```
+Create a monthly report for [CLIENT NAME]. Key metrics: [LIST METRICS]. Highlights: [ACHIEVEMENTS].
+```
 
 ---
 
 ## System Overview
 
-| Resource | Count | Location |
-|----------|-------|----------|
-| Directives (SOPs) | 118 | `directives/` |
-| Execution Scripts | 126 | `execution/` |
-| Skill Bibles | 264 | `skills/` |
-| Agency Context | 4 files | `context/` |
-| Client Profiles | Template ready | `clients/` |
-| Cloud Deployments | Modal AI | `execution/modal_apps/` |
+| What | Count |
+|------|-------|
+| Workflow Templates | 118 |
+| Execution Scripts | 126 |
+| Skill Bibles (AI Knowledge) | 264 |
+
+The system uses a **DOE** architecture:
+- **Directives** - Natural language SOPs that define what to do
+- **Orchestration** - Claude Code reads directives and makes decisions
+- **Execution** - Python scripts handle API calls and data processing
 
 ---
 
-## Architecture
+## Required API Keys
 
-The system uses a 3-layer **DOE** pattern that separates concerns for reliability:
-
-```
-USER REQUEST
-     │
-     ▼
-┌─────────────────────────────────────────────────┐
-│  DIRECTIVES (What to do)                        │
-│  Natural language SOPs with quality gates       │
-│  Location: directives/*.md                      │
-└─────────────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────────────┐
-│  ORCHESTRATION (Decision making)                │
-│  Claude Code agent reads directives,            │
-│  loads skill bibles, routes to scripts          │
-└─────────────────────────────────────────────────┘
-     │
-     ▼
-┌─────────────────────────────────────────────────┐
-│  EXECUTION (Doing the work)                     │
-│  Deterministic Python scripts for API calls     │
-│  Location: execution/*.py                       │
-└─────────────────────────────────────────────────┘
-     │
-     ▼
-OUTPUT → Local files, Google Docs, Slack
-```
-
-**Why DOE works:** LLMs are probabilistic. Pushing deterministic work into Python scripts keeps reliability high across multi-step workflows.
-
----
-
-## Quick Start
-
-### Generate a Complete VSL Funnel
-```bash
-python3 execution/generate_complete_vsl_funnel.py \
-  --company "Acme Corp" \
-  --website "https://acmecorp.com" \
-  --offer "B2B Lead Generation"
-```
-
-**Output (3-5 minutes):**
-- Market Research Report
-- VSL Script (2500+ words)
-- Sales Page Copy (1500+ words)
-- Email Sequence (7 emails)
-- Google Docs + Slack notification
-
-### Research a Company
-```bash
-python3 execution/research_company_offer.py \
-  --company "Target Company" \
-  --website "https://targetcompany.com"
-```
-
-### Write Cold Emails
-```bash
-python3 execution/write_cold_emails.py \
-  --sender "John Smith" \
-  --company "Acme Corp" \
-  --offer "Lead generation" \
-  --target "Marketing agencies"
-```
-
----
-
-## Project Structure
-
-```
-Agentic Workflows/
-├── context/                 # Agency identity & brand voice
-│   ├── agency.md           # Agency positioning & mission
-│   ├── owner.md            # Owner background & expertise
-│   ├── brand_voice.md      # Tone & style guidelines
-│   └── services.md         # Service offerings & pricing
-│
-├── clients/                 # Per-client profiles & rules
-│   └── _template/          # Template for new clients
-│
-├── directives/              # 118 workflow SOPs
-│   ├── vsl_funnel_orchestrator.md
-│   ├── company_market_research.md
-│   ├── cold_email_scriptwriter.md
-│   └── ...
-│
-├── execution/               # 126 Python scripts
-│   ├── generate_complete_vsl_funnel.py
-│   ├── research_company_offer.py
-│   ├── create_google_doc.py
-│   ├── deploy_to_modal.py
-│   └── modal_apps/         # Cloud-deployed workflows
-│
-├── skills/                  # 264 skill bibles
-│   ├── SKILL_BIBLE_vsl_writing_production.md
-│   ├── SKILL_BIBLE_cold_email_mastery.md
-│   ├── SKILL_BIBLE_funnel_copywriting_mastery.md
-│   └── ...
-│
-├── CLAUDE.md               # Agent instructions (load this)
-└── .env                    # API keys (never commit)
-```
-
----
-
-## Key Capabilities
-
-### Content & Copy
-| Capability | Directive | Script |
-|------------|-----------|--------|
-| VSL Funnels | `vsl_funnel_orchestrator.md` | `generate_complete_vsl_funnel.py` |
-| Sales Pages | `sales_page_writer.md` | `generate_sales_page.py` |
-| Cold Emails | `cold_email_scriptwriter.md` | `write_cold_emails.py` |
-| Email Sequences | `email_sequence_writer.md` | `generate_email_sequence.py` |
-| Blog Posts | `blog_post_writer.md` | `generate_blog_post.py` |
-
-### Lead Generation
-| Capability | Directive | Script |
-|------------|-----------|--------|
-| LinkedIn Scraping | `linkedin_lead_scraper.md` | `scrape_linkedin_apify.py` |
-| Company Research | `company_market_research.md` | `research_company_offer.py` |
-| Google Maps Scraping | `google_maps_scraper.md` | `scrape_google_maps.py` |
-| Website Contact Scraping | `website_contact_scraper.md` | `scrape_website_contacts.py` |
-
-### Operations
-| Capability | Directive | Script |
-|------------|-----------|--------|
-| Client Onboarding | `ai_customer_onboarding_agent.md` | `onboard_new_client.py` |
-| Google Doc Creation | `create_google_doc.md` | `create_google_doc.py` |
-| Slack Notifications | `send_slack_notification.md` | `send_slack_notification.py` |
-| Modal Deployment | `deploy_to_modal.md` | `deploy_to_modal.py` |
-
----
-
-## Cloud Deployment (Modal AI)
-
-Deploy any workflow as a cloud webhook:
-
-```bash
-# List deployable workflows
-python3 execution/deploy_to_modal.py --list
-
-# Deploy to Modal
-python3 execution/deploy_to_modal.py --directive vsl_funnel_writer
-
-# Setup secrets from .env
-python3 execution/deploy_to_modal.py --setup-secrets
-```
-
-Each deployed app gets webhook, health, and info endpoints.
+| Key | What It's For | Get It At |
+|-----|---------------|-----------|
+| OPENROUTER_API_KEY | Powers all AI generation (required) | https://openrouter.ai/keys |
+| PERPLEXITY_API_KEY | Deep research capabilities | https://perplexity.ai/settings/api |
+| SLACK_WEBHOOK_URL | Notifications | https://api.slack.com/apps |
+| APIFY_API_TOKEN | Lead scraping | https://console.apify.com |
 
 ---
 
 ## Context System
 
-### Agency Context (`context/`)
-Load before generating any branded content:
-- `agency.md` - Name, positioning, unique value
-- `owner.md` - Background, expertise, credentials
-- `brand_voice.md` - Tone, vocabulary, style rules
-- `services.md` - Offerings, pricing, packages
+### Your Agency (`context/` folder)
+- `agency.md` - Your agency name, positioning, mission
+- `brand_voice.md` - Your tone and style guidelines
+- `services.md` - What you offer
 
-### Client Profiles (`clients/{name}/`)
-Load for client-specific work:
-- `profile.md` - Business info, goals, audience
-- `rules.md` - Must-follow guidelines
-- `preferences.md` - Style preferences
-- `history.md` - Past work, outcomes
-
----
-
-## Configuration
-
-### Required API Keys (.env)
-```
-OPENROUTER_API_KEY     # Primary LLM access
-PERPLEXITY_API_KEY     # Market research
-SLACK_WEBHOOK_URL      # Notifications
-```
-
-### Optional
-```
-OPENAI_API_KEY                    # Direct OpenAI access
-GOOGLE_APPLICATION_CREDENTIALS    # Google Docs/Sheets
-```
-
-### First-Time Setup
-```bash
-pip install -r requirements.txt
-cp .env.example .env  # Edit with your keys
-
-# Google OAuth (for Docs)
-python3 execution/create_google_doc.py --test
-
-# Modal AI (for cloud deployment)
-pip install modal
-python3 -m modal setup
-python3 execution/deploy_to_modal.py --setup-secrets
-```
+### Your Clients (`clients/{name}/` folders)
+- `profile.md` - Client business info
+- `rules.md` - Content rules for this client
+- `preferences.md` - Their style preferences
 
 ---
 
 ## Content Standards
 
-| Content Type | Minimum | Target | Notes |
-|--------------|---------|--------|-------|
-| VSL Script | 2,000 | 2,500-3,000 | 16-20 min video |
-| Sales Page | 1,500 | 1,500-3,000 | Long-form |
-| Email (each) | 300 | 300-500 | 7-email sequences |
-
----
-
-## How It Works
-
-1. **Parse Intent** - Understand what's needed
-2. **Load Context** - Agency context + client context + skill bibles
-3. **Find Directive** - Locate the SOP for the task
-4. **Execute** - Run Python scripts in sequence
-5. **Quality Gate** - Validate outputs
-6. **Deliver** - Google Docs + Slack notification
-7. **Self-Anneal** - Learn and improve the system
-
----
-
-## Recent Updates (V5)
-
-- Context system for agency identity and client profiles
-- 264 skill bibles covering marketing, sales, and operations
-- Modal AI cloud deployment
-- 118 workflow directives
-- 126 execution scripts
-- Improved VSL script frameworks with proper length enforcement
+| Content Type | Target Length |
+|--------------|---------------|
+| VSL Script | 2,500-3,000 words (16-20 min video) |
+| Sales Page | 1,500-3,000 words |
+| Blog Post | 1,500-2,500 words |
+| Email | 300-500 words each |
 
 ---
 
