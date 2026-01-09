@@ -20,17 +20,48 @@ except ImportError as e:
     exit(1)
 
 
+def load_landing_page_skill_bible() -> str:
+    """Load landing page skill bible for enhanced sales page generation."""
+    skill_path = Path(__file__).parent.parent / "skills" / "SKILL_BIBLE_landing_page_ai_mastery.md"
+    if skill_path.exists():
+        content = skill_path.read_text(encoding="utf-8")
+        # Extract key sections for context
+        sections = []
+        for section in ["## Core Principles", "## Best Practices", "## Advanced Techniques"]:
+            if section in content:
+                start = content.find(section)
+                next_section = content.find("\n## ", start + len(section))
+                if next_section > start:
+                    sections.append(content[start:next_section])
+                else:
+                    sections.append(content[start:start + 1500])
+        return "\n".join(sections)[:3500]
+    return ""
+
+
 def generate_sales_page(research_data: dict, vsl_script: str, page_style: str, client: OpenAI) -> str:
     """Generate complete sales page copy"""
     print(f"📄 Generating {page_style} sales page...")
 
+    # Load skill bible for enhanced context
+    skill_context = load_landing_page_skill_bible()
+
     # Use Claude Opus 4.5
     model = "anthropic/claude-opus-4.5" if "openrouter" in str(client.base_url).lower() else "gpt-4o"
 
-    system_prompt = """You are a master funnel copywriter specializing in long-form sales pages for high-ticket B2B offers.
+    skill_section = ""
+    if skill_context:
+        skill_section = f"""
+
+APPLY THESE LANDING PAGE BEST PRACTICES:
+{skill_context[:2500]}
+"""
+
+    system_prompt = f"""You are a master funnel copywriter specializing in long-form sales pages for high-ticket B2B offers.
 
 Your sales pages are comprehensive, persuasive, and hit 1500-3000 words minimum.
-You write FULL copy, not outlines or summaries. Every section is fully developed."""
+You write FULL copy, not outlines or summaries. Every section is fully developed.
+{skill_section}"""
 
     prompt = f"""Generate a complete, long-form sales page to accompany this VSL.
 

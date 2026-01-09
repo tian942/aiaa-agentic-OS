@@ -270,6 +270,12 @@ Data is normalized/transformed for the next step.
 
 ## Related Skill Bibles
 
+**[SKILL_BIBLE_landing_page_ai_mastery.md](../skills/SKILL_BIBLE_landing_page_ai_mastery.md)** (PRIMARY FOR REGISTRATION PAGE)
+- Complete landing page optimization framework
+- AI-powered content creation and design automation
+- Conversion-first design philosophy
+- Registration page best practices
+
 **[SKILL_BIBLE_hormozi_marketing_mastery.md](../skills/SKILL_BIBLE_hormozi_marketing_mastery.md)**
 - Webinar marketing principles
 - Funnel optimization

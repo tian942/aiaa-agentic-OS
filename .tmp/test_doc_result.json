@@ -1,7 +1,0 @@
-{
-  "documentId": null,
-  "documentUrl": null,
-  "title": "VSL Funnel Test Document",
-  "status": "error",
-  "error": "<HttpError 403 when requesting https://docs.googleapis.com/v1/documents?alt=json returned \"The caller does not have permission\". Details: \"The caller does not have permission\">"
-}

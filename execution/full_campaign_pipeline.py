@@ -475,12 +475,12 @@ For each include:
         
         self.images["ad_prompts"] = image_prompts
         
-        # Generate actual images if OPENAI_API_KEY available
-        if os.getenv("OPENAI_API_KEY"):
-            self.log("Generating images with DALL-E...")
-            self._generate_images_dalle(image_prompts, "ad")
+        # Generate actual images if FAL_KEY available
+        if os.getenv("FAL_KEY") or os.getenv("FAL_API_KEY"):
+            self.log("Generating images with Nano Banana Pro...")
+            self._generate_images_nano_banana(image_prompts, "ad")
         else:
-            self.log("Note: Set OPENAI_API_KEY to generate actual images")
+            self.log("Note: Set FAL_KEY to generate actual images")
         
         images_file = self.output_dir / "04_ad_images.md"
         images_file.write_text(f"""# Ad Image Prompts: {self.client_name}
@@ -495,10 +495,12 @@ For each include:
         self.log(f"Saved: {images_file}")
         return self.images
     
-    def _generate_images_dalle(self, prompts_text: str, prefix: str):
-        """Generate images using DALL-E 3."""
-        from openai import OpenAI
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    def _generate_images_nano_banana(self, prompts_text: str, prefix: str):
+        """Generate images using fal.ai Nano Banana Pro."""
+        fal_key = os.getenv("FAL_KEY") or os.getenv("FAL_API_KEY")
+        if not fal_key:
+            self.log("FAL_KEY not set, skipping image generation")
+            return
         
         # Extract prompts (simplified)
         import re
@@ -509,24 +511,35 @@ For each include:
         
         for i, prompt in enumerate(prompt_matches[:3], 1):  # Limit to 3 for cost
             try:
-                self.log(f"  Generating image {i}...")
-                response = client.images.generate(
-                    model="dall-e-3",
-                    prompt=prompt[:1000],
-                    size="1024x1024",
-                    quality="standard",
-                    n=1
+                self.log(f"  Generating image {i} with Nano Banana Pro...")
+                response = requests.post(
+                    "https://fal.run/fal-ai/nano-banana-pro",
+                    headers={
+                        "Authorization": f"Key {fal_key}",
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "prompt": prompt[:2000],
+                        "aspect_ratio": "1:1",
+                        "resolution": "2K"
+                    },
+                    timeout=180
                 )
                 
-                # Download and save image
-                image_url = response.data[0].url
-                img_response = requests.get(image_url)
-                
-                img_path = images_dir / f"{prefix}_image_{i}.png"
-                with open(img_path, "wb") as f:
-                    f.write(img_response.content)
-                
-                self.log(f"    Saved: {img_path}")
+                if response.status_code == 200:
+                    result = response.json()
+                    images = result.get("images", [])
+                    if images:
+                        image_url = images[0].get("url")
+                        if image_url:
+                            img_response = requests.get(image_url, timeout=60)
+                            if img_response.status_code == 200:
+                                img_path = images_dir / f"{prefix}_image_{i}.png"
+                                with open(img_path, "wb") as f:
+                                    f.write(img_response.content)
+                                self.log(f"    Saved: {img_path}")
+                else:
+                    self.log(f"    Error: {response.status_code} - {response.text[:100]}")
                 
             except Exception as e:
                 self.log(f"    Error generating image {i}: {e}")
@@ -672,9 +685,9 @@ For each provide:
         
         self.images["landing_page_prompts"] = lp_image_prompts
         
-        if os.getenv("OPENAI_API_KEY"):
-            self.log("Generating landing page images...")
-            self._generate_images_dalle(lp_image_prompts, "lp")
+        if os.getenv("FAL_KEY") or os.getenv("FAL_API_KEY"):
+            self.log("Generating landing page images with Nano Banana Pro...")
+            self._generate_images_nano_banana(lp_image_prompts, "lp")
         
         lp_images_file = self.output_dir / "06_landing_page_images.md"
         lp_images_file.write_text(f"""# Landing Page Images: {self.client_name}

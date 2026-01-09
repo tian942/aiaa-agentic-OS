@@ -50,6 +50,13 @@ Position 3/7 in VSL funnel pipeline.
 
 ## Related Skill Bibles
 
+**[SKILL_BIBLE_landing_page_ai_mastery.md](../skills/SKILL_BIBLE_landing_page_ai_mastery.md)** (PRIMARY)
+- Complete landing page optimization framework
+- AI-powered content creation and design automation
+- Conversion-first design philosophy
+- Mobile-first responsive design principles
+- A/B testing and optimization methodologies
+
 **[SKILL_BIBLE_funnel_copywriting_mastery.md](../skills/SKILL_BIBLE_funnel_copywriting_mastery.md)**
 - Sales page structure and flow
 - Conversion element placement

@@ -528,6 +528,13 @@ This orchestrator is **perfect for Trigger.dev** because:
 
 Load these skill bibles for complete VSL funnel creation:
 
+**[SKILL_BIBLE_landing_page_ai_mastery.md](../skills/SKILL_BIBLE_landing_page_ai_mastery.md)** (PRIMARY FOR LANDING PAGES)
+- Complete landing page optimization framework
+- AI-powered content creation and design automation
+- Conversion-first design philosophy
+- Mobile-first responsive design principles
+- A/B testing and optimization methodologies
+
 **[SKILL_BIBLE_vsl_writing_production.md](../skills/SKILL_BIBLE_vsl_writing_production.md)**
 - 10-part VSL structure framework
 - Hook formulas and pattern interrupts

@@ -155,6 +155,14 @@ Global rules:
 
 Load these skill bibles for comprehensive CRO analysis:
 
+**[SKILL_BIBLE_landing_page_ai_mastery.md](../skills/SKILL_BIBLE_landing_page_ai_mastery.md)** (PRIMARY)
+- Complete landing page optimization framework
+- AI-powered content creation and design automation
+- Conversion-first design philosophy
+- Mobile-first responsive design principles
+- A/B testing and optimization methodologies
+- Pre-launch and technical performance checklists
+
 **[SKILL_BIBLE_hormozi_marketing_mastery.md](../skills/SKILL_BIBLE_hormozi_marketing_mastery.md)**
 - 14 years of marketing advice condensed
 - Landing page optimization principles

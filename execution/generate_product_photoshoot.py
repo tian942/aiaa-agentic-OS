@@ -337,19 +337,21 @@ Do not include any other text, explanations, or formatting. Just the 5 labeled p
 # =============================================================================
 
 def create_image_fal(prompt: str, image_url: str, scene_type: str) -> str:
-    """Create image using Fal.ai Nano Banana Pro."""
+    """Create image using Fal.ai Nano Banana Pro (edit endpoint)."""
     print(f"   Creating {scene_type}...")
     
-    # Submit job to queue
+    # Submit job to queue - using nano-banana-pro/edit for better quality
     resp = requests.post(
-        "https://queue.fal.run/fal-ai/nano-banana/edit",
+        "https://queue.fal.run/fal-ai/nano-banana-pro/edit",
         headers={
             "Authorization": f"Key {FAL_API_KEY}",
             "Content-Type": "application/json"
         },
         json={
             "prompt": f"{scene_type} - {prompt}",
-            "image_urls": [image_url]
+            "image_urls": [image_url],
+            "aspect_ratio": "1:1",
+            "resolution": "2K"
         },
         timeout=60
     )
@@ -364,7 +366,7 @@ def create_image_fal(prompt: str, image_url: str, scene_type: str) -> str:
         time.sleep(30)
         
         status_resp = requests.get(
-            f"https://queue.fal.run/fal-ai/nano-banana/requests/{request_id}/status",
+            f"https://queue.fal.run/fal-ai/nano-banana-pro/requests/{request_id}/status",
             headers={"Authorization": f"Key {FAL_API_KEY}"},
             timeout=30
         )
