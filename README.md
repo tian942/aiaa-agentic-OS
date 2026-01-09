@@ -2,7 +2,7 @@
 
 An AI-powered agency operating system that runs inside Claude Code. Just paste prompts and Claude handles everything - from VSL funnels to cold emails to market research.
 
-**Version:** 5.0 | **Last Updated:** January 2026
+**Version:** 1.0 | **Last Updated:** January 2026
 
 ---
 
