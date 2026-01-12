@@ -23,26 +23,110 @@ Execute these commands and confirm they complete successfully before moving on.
 
 ## Step 2: Configure API Keys (.env file)
 
-Create my .env file with API keys. Ask me for each one individually:
+Create my .env file with API keys. Ask me for each one individually, and walk me through getting each key with detailed instructions:
 
-**Required Keys:**
-- OPENROUTER_API_KEY (required for all AI features)
-  - Get free at: https://openrouter.ai/keys
-  - Sign up takes 2 minutes
+---
 
-**Recommended Keys (ask if I want each):**
-- PERPLEXITY_API_KEY - Deep research & prospect intel
-  - Get at: https://perplexity.ai/settings/api
-- ANTHROPIC_API_KEY - Direct Claude access (faster)
-  - Get at: https://console.anthropic.com
-- APIFY_API_TOKEN - Lead scraping (Google Maps, LinkedIn)
-  - Get at: https://console.apify.com/account/integrations
-- FAL_KEY - AI image generation (Nano Banana Pro)
-  - Get at: https://fal.ai/dashboard/keys
-- SLACK_WEBHOOK_URL - Notifications
-  - Create at: https://api.slack.com/messaging/webhooks
+### OPENROUTER_API_KEY (REQUIRED - Powers all AI features)
 
-For each missing key, provide simple step-by-step instructions to get it.
+**What it does:** Routes requests to Claude, GPT-4, and other AI models. This is the only required key.
+
+**How to get it:**
+1. Go to https://openrouter.ai
+2. Click "Sign Up" (top right) - use Google or email
+3. Once logged in, click your profile icon → "Keys"
+4. Click "Create Key"
+5. Name it "AIAA" and click "Create"
+6. Copy the key (starts with `sk-or-`)
+
+**Cost:** Pay-as-you-go. Most workflows cost $0.01-0.10. Add $5-10 credits to start.
+
+---
+
+### PERPLEXITY_API_KEY (Recommended - Deep research & prospect intel)
+
+**What it does:** Powers all research workflows - company research, market analysis, prospect intelligence, competitor monitoring.
+
+**How to get it:**
+1. Go to https://perplexity.ai
+2. Sign up or log in
+3. Click your profile icon (bottom left) → "Settings"
+4. Click "API" in the left sidebar
+5. Click "Generate" to create a new API key
+6. Copy the key (starts with `pplx-`)
+
+**Cost:** $5/month for 1000 requests, or pay-as-you-go at ~$0.005 per request.
+
+---
+
+### SLACK_WEBHOOK_URL (Recommended - Notifications & alerts)
+
+**What it does:** Sends notifications when workflows complete, meetings are booked, leads are found, etc.
+
+**How to get it:**
+1. Go to https://api.slack.com/apps
+2. Click "Create New App" → "From scratch"
+3. Name it "AIAA Notifications" and select your workspace
+4. Click "Create App"
+5. In the left sidebar, click "Incoming Webhooks"
+6. Toggle "Activate Incoming Webhooks" to ON
+7. Click "Add New Webhook to Workspace"
+8. Select the channel for notifications (e.g., #aiaa-alerts)
+9. Click "Allow"
+10. Copy the Webhook URL (starts with `https://hooks.slack.com/services/`)
+
+**Cost:** Free
+
+---
+
+### ANTHROPIC_API_KEY (Optional - Direct Claude access, faster)
+
+**What it does:** Direct access to Claude without going through OpenRouter. Slightly faster responses.
+
+**How to get it:**
+1. Go to https://console.anthropic.com
+2. Sign up with email
+3. Verify your email and complete setup
+4. Click "Get API Keys" in the dashboard
+5. Click "Create Key"
+6. Name it "AIAA" and copy the key (starts with `sk-ant-`)
+
+**Cost:** Pay-as-you-go, similar pricing to OpenRouter.
+
+---
+
+### FAL_KEY (Optional - AI image generation)
+
+**What it does:** Generates ad creatives, thumbnails, and marketing images using Nano Banana Pro model.
+
+**How to get it:**
+1. Go to https://fal.ai
+2. Click "Sign Up" → use Google or GitHub
+3. Once logged in, click your profile → "Dashboard"
+4. Click "Keys" in the left sidebar
+5. Click "Create Key"
+6. Copy the key
+
+**Cost:** Pay-as-you-go. ~$0.02-0.05 per image.
+
+---
+
+### APIFY_API_TOKEN (Optional - Lead scraping)
+
+**What it does:** Scrapes Google Maps for local businesses, LinkedIn for prospects, and other lead generation tasks.
+
+**How to get it:**
+1. Go to https://console.apify.com
+2. Sign up with email or Google
+3. Once logged in, click "Settings" (gear icon, bottom left)
+4. Click "Integrations" in the left sidebar
+5. Your API token is displayed - click to copy
+
+**Cost:** Free tier includes $5/month credits. Most scraping tasks cost $0.25-2.00.
+
+---
+
+For each key, ask me: "Do you have [KEY_NAME]? If yes, paste it. If no, I'll help you get it."
 
 ## Step 3: Google OAuth Setup (Optional but Recommended)
 
