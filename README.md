@@ -11,92 +11,91 @@ An AI-powered agency operating system that runs inside Claude Code. Just paste p
 **Open Claude Code and paste this entire prompt to get started:**
 
 ```
-I want to set up AIAA Agentic OS. Please help me through the entire process.
+I want to set up AIAA Agentic OS v2.3. Please help me through the entire process interactively, asking me ONE question at a time and waiting for my response before moving on.
 
-## Step 1: Clone the Repository
+## Step 1: Clone & Install
 
-Run this command to download the system:
+Run these commands to download and install the system:
+
 git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
-
-Then change into that directory so we can work from there.
-
-## Step 2: Install Dependencies
-
-Install the required Python packages:
+cd AIAA-Agentic-OS
 pip install -r requirements.txt
 
-## Step 3: Walk Me Through Setup
+Execute these commands and confirm they complete successfully before moving on.
 
-Now I need you to be my setup wizard. Walk me through configuring everything by asking me questions one at a time. Here's what we need to set up:
+## Step 2: Configure API Keys (.env file)
 
-### 3a. API Keys (.env file)
+Create my .env file with API keys. Ask me for each one individually:
 
-Create or update my .env file with API keys. Ask me for each one:
-
-**Required:**
+**Required Keys:**
 - OPENROUTER_API_KEY (required for all AI features)
-  - Get it free at: https://openrouter.ai/keys
-  - Takes 2 minutes to sign up
+  - Get free at: https://openrouter.ai/keys
 
-**Recommended (ask if I want each one):**
-- PERPLEXITY_API_KEY - For deep research (https://perplexity.ai/settings/api)
-- APIFY_API_TOKEN - For lead scraping (https://console.apify.com/account/integrations)
-- SLACK_WEBHOOK_URL - For notifications (https://api.slack.com/messaging/webhooks)
-- FAL_API_KEY - For AI image generation (https://fal.ai/dashboard/keys)
+**Recommended Keys (ask if I want each):**
+- PERPLEXITY_API_KEY - Deep research (https://perplexity.ai/settings/api)
+- ANTHROPIC_API_KEY - Direct Claude access (https://console.anthropic.com)
+- APIFY_API_TOKEN - Lead scraping (https://console.apify.com/account/integrations)
+- FAL_KEY - AI image generation (https://fal.ai/dashboard/keys)
+- SLACK_WEBHOOK_URL - Notifications (https://api.slack.com/messaging/webhooks)
 
-For each key I don't have, give me simple step-by-step instructions to get it.
+## Step 3: Agency Profile Setup
 
-### 3b. Agency Profile (context/ folder)
+Ask me questions one at a time to create my agency profile:
+1. Agency name?
+2. Website URL?
+3. Services offered?
+4. Target audience?
+5. What makes you different?
+6. Brand voice?
 
-Ask me questions to create my agency profile. Save the answers to context/agency_profile.json:
+Save to: context/agency.md, context/brand_voice.md, context/services.md
 
-- What's your agency name?
-- What's your website?
-- What services do you offer? (list them)
-- Who is your target audience?
-- What makes you different from competitors?
-- What's your brand voice? (professional, casual, bold, friendly, etc.)
+## Step 4: Deploy AIAA Dashboard to Railway (AUTOMATE THIS)
 
-Also create these markdown files in context/:
-- agency.md - Summary of my agency
-- brand_voice.md - My tone and style guidelines
-- services.md - My service offerings
+Deploy my monitoring dashboard. Handle as much as possible automatically:
 
-### 3c. First Client (optional)
+### 4a: Check Prerequisites
+- Check: railway --version (if missing: npm install -g @railway/cli)
+- Check: railway whoami (if not logged in: railway login)
 
-Ask if I want to add a client. If yes, create a folder in clients/{client_name}/ with:
+### 4b: Get My Credentials
+Ask me: "What username for your dashboard?" and "What password?"
+Then YOU generate the password hash:
+python3 -c "import hashlib; print(hashlib.sha256(b'MY_PASSWORD'.encode()).hexdigest())"
 
-- profile.md - Their company info, industry, target audience
-- rules.md - Content rules and guidelines for this client
-- preferences.md - Their style preferences
+### 4c: Deploy
+cd railway_apps/aiaa_dashboard
+railway init
+railway up
 
-Ask me:
-- Client/company name?
-- Their website?
-- Their industry?
-- What do they sell?
-- Who is their target audience?
-- Any specific content rules or tone preferences?
+### 4d: Set Environment Variables
+railway variables set DASHBOARD_USERNAME="[my_username]"
+railway variables set DASHBOARD_PASSWORD_HASH="[hash_you_generated]"
+railway variables set FLASK_SECRET_KEY="[generate with: python3 -c 'import secrets; print(secrets.token_hex(32))']"
 
-## Step 4: Test the System
+### 4e: Generate Domain & Verify
+railway domain
+curl https://[domain]/health
 
-Once setup is complete, help me run a simple test workflow to make sure everything works. Suggest something based on what I told you about my agency.
+### 4f: Give Me My Login Details
+- Dashboard URL
+- Username
+- Password
 
-## Step 5: Show Me What's Available
+## Step 5: Test the System
 
-Give me a quick tour of what workflows I can now run:
-- Content creation (blogs, social posts, scripts)
-- Sales copy (VSL funnels, emails, landing pages)
-- Research (company research, market analysis)
-- Lead generation (if I set up Apify)
-- Ad creative generation (if I set up FAL_API_KEY)
+Run a test workflow based on my agency type.
 
-## Important Notes
+## Step 6: Show What's Available
 
-- Ask me ONE question at a time - don't overwhelm me
-- If I don't know an answer, help me figure it out or skip it
-- Save everything to the appropriate files as we go
-- Be encouraging and explain why each step matters
+Tour of 139 workflows: Content, Sales, Research, Lead Gen, Ads, Client Management.
+
+## Important Instructions
+
+- Ask ONE question at a time
+- For Railway deployment, DO AS MUCH AUTOMATICALLY AS POSSIBLE
+- Generate hashes, secrets, and run commands for me
+- Only ask for input when absolutely needed
 
 Let's start! Begin with Step 1.
 ```
@@ -107,15 +106,20 @@ Let's start! Begin with Step 1.
 
 When you paste this prompt, Claude Code becomes your personal setup assistant:
 
-1. **Downloads the system** - Clones the GitHub repo
-2. **Installs dependencies** - Runs pip install
-3. **Configures API keys** - Walks you through getting each key, one at a time
-4. **Creates your agency profile** - Asks questions and saves your brand info
-5. **Sets up your first client** - Optional client profile creation
-6. **Tests the system** - Runs a workflow to verify everything works
-7. **Shows you around** - Explains what you can do next
+1. **Downloads & installs** - Clones repo and installs dependencies
+2. **Configures API keys** - One-by-one walkthrough with instructions
+3. **Creates agency profile** - Your brand voice and services
+4. **Deploys dashboard to Railway** - **Fully automated:**
+   - Creates Railway project
+   - Deploys dashboard code
+   - Sets all environment variables (generates hashes/secrets for you)
+   - Generates public domain
+   - Verifies deployment
+   - Provides login credentials
+5. **Tests the system** - Verifies everything works
+6. **Shows capabilities** - Tour of all 139 workflows
 
-The whole process takes about 10-15 minutes, and Claude explains everything as you go.
+**Time to complete:** 15-20 minutes
 
 ---
 
