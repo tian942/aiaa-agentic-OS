@@ -60,8 +60,12 @@ Deploy my monitoring dashboard. Handle as much as possible automatically:
 
 ### 4b: Get My Credentials
 Ask me: "What username for your dashboard?" and "What password?"
-Then YOU generate the password hash:
-python3 -c "import hashlib; print(hashlib.sha256(b'MY_PASSWORD'.encode()).hexdigest())"
+Then YOU generate the password hash using heredoc (avoids escape issues with special chars):
+python3 << 'PYHASH'
+import hashlib
+password = "MY_PASSWORD"
+print(hashlib.sha256(password.encode()).hexdigest())
+PYHASH
 
 ### 4c: Deploy
 cd railway_apps/aiaa_dashboard
@@ -287,9 +291,13 @@ In Railway's dashboard (https://railway.app), add these variables:
 | `PERPLEXITY_API_KEY` | Your Perplexity API key |
 | `SLACK_WEBHOOK_URL` | Slack notifications (optional) |
 
-**Generate password hash:**
+**Generate password hash (use heredoc to avoid escape issues with special characters like ! or \):**
 ```bash
-python3 -c "import hashlib; print(hashlib.sha256(b'YOUR_PASSWORD_HERE').hexdigest())"
+python3 << 'PYHASH'
+import hashlib
+password = "YOUR_PASSWORD_HERE"
+print(hashlib.sha256(password.encode()).hexdigest())
+PYHASH
 ```
 
 **Step 6: Generate domain**
