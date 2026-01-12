@@ -301,7 +301,7 @@ def main():
     parser = argparse.ArgumentParser(description="Research company and offer")
     parser.add_argument("--company", required=True, help="Company name")
     parser.add_argument("--website", required=True, help="Company website")
-    parser.add_argument("--offer", required=True, help="Offer/product name")
+    parser.add_argument("--offer", help="Offer/product name (optional - will research company's main offering if not specified)")
     parser.add_argument("--industry", help="Industry/niche")
     parser.add_argument("--price", help="Price point")
     parser.add_argument("--output", required=True, help="Output file path (.json)")
@@ -315,17 +315,20 @@ def main():
         print("   Add to .env file")
         return 1
 
+    # Default offer to company's main product/service if not specified
+    offer = args.offer or f"{args.company}'s main product/service"
+
     print(f"🚀 Starting market research for {args.company}...")
-    print(f"   Offer: {args.offer}")
+    print(f"   Offer: {offer}")
 
     # Execute research pipeline
     company_data = research_company_overview(args.company, args.website, api_key)
-    offer_data = research_offer_analysis(args.company, args.offer, api_key)
+    offer_data = research_offer_analysis(args.company, offer, api_key)
     audience_data = research_target_audience(
-        args.offer, args.industry or "business services", api_key
+        offer, args.industry or "business services", api_key
     )
-    competitors_data = research_competitors(args.company, args.offer, api_key)
-    social_proof_data = research_social_proof(args.company, args.offer, api_key)
+    competitors_data = research_competitors(args.company, offer, api_key)
+    social_proof_data = research_social_proof(args.company, offer, api_key)
 
     # Synthesize
     research_dossier = synthesize_research(
@@ -340,7 +343,7 @@ def main():
         json.dump(research_dossier, f, indent=2)
 
     # Generate formatted markdown report (for Google Docs / human reading)
-    markdown_report = generate_markdown_report(research_dossier, args.company, args.offer)
+    markdown_report = generate_markdown_report(research_dossier, args.company, offer)
     markdown_path = output_path.with_suffix('.md')
 
     with open(markdown_path, "w") as f:
