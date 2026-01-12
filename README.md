@@ -1,8 +1,8 @@
 # AIAA Agentic OS
 
-An AI-powered agency operating system that runs inside Claude Code. Just paste prompts and Claude handles everything - from VSL funnels to cold emails to market research.
+An AI-powered agency operating system that runs inside Claude Code. Just paste prompts and Claude handles everything - from VSL funnels to cold emails to market research. Includes a beautiful web dashboard for monitoring workflows and managing your system.
 
-**Version:** 1.0 | **Last Updated:** January 2026
+**Version:** 2.3 | **139 Workflows** | **Last Updated:** January 2026
 
 ---
 
@@ -218,7 +218,7 @@ Create a monthly report for [CLIENT NAME]. Key metrics: [LIST METRICS]. Highligh
 
 | What | Count |
 |------|-------|
-| Workflow Templates | 140+ |
+| Workflow Templates | 139 |
 | Execution Scripts | 130+ |
 | Skill Bibles (AI Knowledge) | 280+ |
 
@@ -226,6 +226,83 @@ The system uses a **DOE** architecture:
 - **Directives** - Natural language SOPs that define what to do
 - **Orchestration** - Claude Code reads directives and makes decisions
 - **Execution** - Python scripts handle API calls and data processing
+
+---
+
+## AIAA Dashboard (v2.3)
+
+A beautiful web dashboard for monitoring and managing your AIAA system. Deploy to Railway in minutes.
+
+### Dashboard Features
+
+- **139 Documented Workflows** - Full descriptions, prerequisites, how-to-run instructions
+- **Light/Dark Mode** - Toggle with localStorage persistence
+- **Environment Variables** - View and set API keys from the UI
+- **Webhook Monitoring** - Track incoming webhooks and events
+- **Real-time Logs** - See all workflow executions
+- **Mobile Responsive** - Works on phones and tablets
+- **Password Protected** - Secure login system
+
+### Deploy to Railway
+
+**Prerequisites:**
+- Railway account (https://railway.app)
+- Railway CLI installed: `npm install -g @railway/cli`
+
+**Step 1: Login to Railway**
+```bash
+railway login
+```
+
+**Step 2: Navigate to dashboard folder**
+```bash
+cd railway_apps/aiaa_dashboard
+```
+
+**Step 3: Initialize Railway project**
+```bash
+railway init
+```
+Select "Empty Project" when prompted.
+
+**Step 4: Deploy**
+```bash
+railway up
+```
+
+**Step 5: Configure environment variables**
+
+In Railway's dashboard (https://railway.app), add these variables:
+
+| Variable | Description |
+|----------|-------------|
+| `DASHBOARD_USERNAME` | Login username (default: admin) |
+| `DASHBOARD_PASSWORD_HASH` | SHA-256 hash of your password |
+| `FLASK_SECRET_KEY` | Random secret for sessions (optional) |
+| `OPENROUTER_API_KEY` | Your OpenRouter API key |
+| `PERPLEXITY_API_KEY` | Your Perplexity API key |
+| `SLACK_WEBHOOK_URL` | Slack notifications (optional) |
+
+**Generate password hash:**
+```bash
+python3 -c "import hashlib; print(hashlib.sha256(b'YOUR_PASSWORD_HERE').hexdigest())"
+```
+
+**Step 6: Generate domain**
+
+In Railway dashboard, go to Settings → Generate Domain to get your public URL.
+
+Your dashboard will be available at: `https://your-app.up.railway.app`
+
+### Dashboard Screenshots
+
+Once deployed, your dashboard includes:
+- **Overview** - Stats, recent events, quick workflow access
+- **Workflows** - Browse all 139 workflows with search
+- **Workflow Details** - Full documentation with code examples
+- **Environment** - Manage API keys
+- **Webhooks** - Available endpoints
+- **Logs** - Event history
 
 ---
 
@@ -255,13 +332,28 @@ The system uses a **DOE** architecture:
 
 ---
 
-## New Features (January 2026)
+## New Features (v2.3 - January 2026)
+
+### AIAA Dashboard
+Beautiful web dashboard deployed to Railway with:
+- 139 fully documented workflows
+- Light/dark mode toggle
+- Environment variable management
+- Webhook monitoring & logs
+- Mobile-responsive design
 
 ### AI Ad Creative Generation
 All ad workflows now generate actual images using **fal.ai Nano Banana Pro**:
 - `generate_meta_ads_campaign.py --generate-images`
 - `generate_ad_creative.py --generate-images`
 - `generate_static_ad.py --generate-images`
+
+### Calendly Meeting Prep Automation
+Automatic research when meetings are booked:
+- Instant Slack alerts
+- Company & prospect research via Perplexity
+- AI-generated talking points via Claude
+- Formatted Google Docs with meeting briefs
 
 ### Landing Page Generator with PROPS Formula
 Generate high-converting landing pages with the PROPS funnel structure:
@@ -271,15 +363,13 @@ Generate high-converting landing pages with the PROPS funnel structure:
 - Objection handling (FAQ)
 - Simple next step (offer stack)
 
-### 20+ New Ultimate Workflows
-- Cold Email Campaign
-- Meta Ads Campaign
-- Google Ads Campaign
-- Content Calendar
-- Client Reporting
-- SEO Campaign
-- LinkedIn Outreach
-- And more...
+### 139 Workflow Categories
+- **Content Creation** (25+): Blogs, social posts, YouTube scripts, newsletters
+- **Sales & Funnels** (30+): VSL scripts, sales pages, webinar funnels, email sequences
+- **Research** (20+): Company research, competitor monitoring, niche validation
+- **Lead Generation** (15+): Google Maps, LinkedIn, email enrichment
+- **Paid Advertising** (15+): Meta ads, Google Ads, ad creative generation
+- **Client Management** (20+): Onboarding, QBRs, churn alerts, invoices
 
 ---
 
