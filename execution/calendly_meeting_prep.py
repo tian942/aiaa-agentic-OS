@@ -494,9 +494,10 @@ def create_google_doc(research: dict) -> str:
         creds = None
         
         # First, try service account from environment (Modal)
+        # NOTE: Service accounts have storage limits - if quota exceeded, return None to use Slack fallback
         service_account_json = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON")
         if service_account_json:
-            print("  → Using service account credentials")
+            print("  → Using service account credentials (may have storage limits)")
             sa_info = json.loads(service_account_json)
             creds = service_account.Credentials.from_service_account_info(sa_info, scopes=SCOPES)
         
@@ -530,20 +531,24 @@ def create_google_doc(research: dict) -> str:
         
         title = f"Meeting Prep: {research['prospect_name']} - {datetime.now().strftime('%Y-%m-%d')}"
         
-        doc = docs_service.documents().create(body={'title': title}).execute()
-        doc_id = doc.get('documentId')
+        # Create doc directly in shared folder using Drive API (service accounts need this)
+        file_metadata = {
+            'name': title,
+            'mimeType': 'application/vnd.google-apps.document',
+            'parents': [MEETING_PREP_FOLDER_ID]
+        }
         
-        # Move doc to shared folder
         try:
-            drive_service.files().update(
-                fileId=doc_id,
-                addParents=MEETING_PREP_FOLDER_ID,
-                removeParents='root',
-                fields='id, parents'
-            ).execute()
-            print(f"  → Moved doc to shared folder")
+            # Create in shared folder first
+            file = drive_service.files().create(body=file_metadata, fields='id').execute()
+            doc_id = file.get('id')
+            print(f"  → Created doc in shared folder: {doc_id}")
         except Exception as e:
-            print(f"  → Could not move to folder: {e}")
+            print(f"  → Could not create in shared folder: {e}")
+            # Fallback: try creating without folder (might fail for service accounts)
+            doc = docs_service.documents().create(body={'title': title}).execute()
+            doc_id = doc.get('documentId')
+            print(f"  → Created doc without folder: {doc_id}")
         
         content = build_doc_content(research)
         plain_text, formatting_requests = parse_markdown_to_plain_text(content)
@@ -589,11 +594,16 @@ def create_google_doc(research: dict) -> str:
         
     except Exception as e:
         print(f"Google Docs error: {e}")
+        # Return None so we use Slack fallback instead of local file
+        # (local files aren't accessible on Modal anyway)
+        if os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON"):
+            print("  → Will send via Slack instead")
+            return None
         return save_local_doc(research)
 
 
 def save_local_doc(research: dict) -> str:
-    """Save research to local file as fallback."""
+    """Save research to local file as fallback (only works locally, not on Modal)."""
     
     output_dir = Path(__file__).parent.parent / ".tmp" / "meeting_prep"
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -656,6 +666,26 @@ def build_doc_content(research: dict) -> str:
 
 
 # =============================================================================
+# Deduplication - Track processed webhooks
+# =============================================================================
+
+# Simple in-memory cache for processed webhook URIs (works per container)
+_processed_webhooks = set()
+
+def is_duplicate_webhook(invitee_uri: str) -> bool:
+    """Check if we've already processed this webhook."""
+    if not invitee_uri:
+        return False
+    if invitee_uri in _processed_webhooks:
+        return True
+    _processed_webhooks.add(invitee_uri)
+    # Keep cache from growing too large
+    if len(_processed_webhooks) > 1000:
+        _processed_webhooks.clear()
+    return False
+
+
+# =============================================================================
 # Calendly Webhook Handler
 # =============================================================================
 
@@ -672,6 +702,12 @@ def handle_calendly_webhook(payload: dict) -> dict:
     
     # Extract invitee data
     invitee_data = payload.get("payload", {})
+    
+    # DEDUPLICATION: Check if we've already processed this invitee
+    invitee_uri = invitee_data.get("uri", "") or invitee_data.get("scheduled_event", "")
+    if is_duplicate_webhook(invitee_uri):
+        print(f"[INFO] Skipping duplicate webhook for: {invitee_uri}")
+        return {"status": "duplicate", "message": "Already processed this booking"}
     print(f"[DEBUG] Invitee data keys: {invitee_data.keys()}")
     
     invitee_name = invitee_data.get("name", "Unknown")
@@ -803,6 +839,9 @@ try:
         "google-auth-oauthlib", "google-api-python-client", "regex"
     )
     
+    # Persistent deduplication dict - survives across container restarts
+    processed_webhooks = modal.Dict.from_name("calendly-processed-webhooks", create_if_missing=True)
+    
     @app.function(
         image=image,
         secrets=[
@@ -817,6 +856,31 @@ try:
     @modal.fastapi_endpoint(method="POST")
     def webhook(payload: dict):
         """Modal webhook endpoint for Calendly."""
+        # DEDUPLICATION: Use multiple keys to ensure uniqueness
+        invitee_data = payload.get("payload", {})
+        
+        # Create unique key from email + scheduled_event
+        email = invitee_data.get("email", "")
+        scheduled_event = invitee_data.get("scheduled_event", "")
+        invitee_uri = invitee_data.get("uri", "")
+        
+        # Use combination of email + event URI as dedup key
+        dedup_key = f"{email}:{scheduled_event}" if email and scheduled_event else invitee_uri
+        
+        if dedup_key:
+            try:
+                # Check if already processed
+                existing = processed_webhooks.get(dedup_key)
+                if existing:
+                    print(f"[INFO] DUPLICATE - Already processed: {dedup_key}")
+                    return {"status": "duplicate", "message": "Already processed this booking"}
+                
+                # Mark as processing IMMEDIATELY before doing anything else
+                processed_webhooks[dedup_key] = datetime.now().isoformat()
+                print(f"[INFO] Processing new booking: {dedup_key}")
+            except Exception as e:
+                print(f"[WARN] Dedup check failed (continuing): {e}")
+        
         return handle_calendly_webhook(payload)
     
     @app.function(image=image)

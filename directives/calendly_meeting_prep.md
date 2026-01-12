@@ -1,144 +1,103 @@
-# Calendly Meeting Prep Webhook
+# Calendly Meeting Prep Workflow
 
-## What This Workflow Is
-Automated meeting preparation that triggers when someone books a meeting on Calendly. Researches the prospect, creates a detailed prep document, and alerts you via Slack.
+## What This Workflow Does
+Automatically prepares you for sales calls when someone books a Calendly meeting:
 
-## What It Does
-1. Receives Calendly webhook when meeting is booked
-2. Fetches full event details (name, time) from Calendly API
-3. Sends immediate Slack alert with prospect details and meeting time
-4. Researches prospect and their company (via Perplexity Sonar)
-5. Looks up LinkedIn profile information
-6. Generates personalized talking points (via Claude)
-7. Creates formatted Google Doc with full research (using service account)
-8. Moves doc to shared Google Drive folder
-9. Sends second Slack message with summary + doc link
+1. **Instant Slack Alert** - Get notified immediately with prospect details and meeting time
+2. **Deep Research** - Researches prospect and company via Perplexity AI
+3. **Talking Points** - Claude generates personalized questions and discussion topics
+4. **Google Doc** - Creates formatted prep document in your shared folder
+5. **Summary to Slack** - Sends brief summary with link to full research doc
 
-## Prerequisites
+## Trigger
+Calendly webhook fires on `invitee.created` event (when someone books a meeting).
 
-### Required API Keys (in .env)
-```
-CALENDLY_API_KEY=your_calendly_token
-OPENROUTER_API_KEY=your_openrouter_key
-PERPLEXITY_API_KEY=your_perplexity_key
-SLACK_WEBHOOK_URL=your_slack_webhook
-```
+## Research Performed
 
-### Required Modal Secrets
-```bash
-modal secret create calendly-secret CALENDLY_API_KEY="your_key"
-modal secret create openrouter-secret OPENROUTER_API_KEY="your_key"
-modal secret create perplexity-secret PERPLEXITY_API_KEY="your_key"
-modal secret create slack-webhook SLACK_WEBHOOK_URL="your_url"
-modal secret create google-service-account GOOGLE_SERVICE_ACCOUNT_JSON="$(cat service-account.json)"
-```
+### Company Research
+- What the company does
+- Company size and target market
+- Recent news and developments
 
-### Google Service Account Setup
-1. Create service account in Google Cloud Console
-2. Enable Google Docs API and Google Drive API
-3. Download JSON key file
-4. Create Modal secret with the JSON
-5. Share a Google Drive folder with the service account email
+### Prospect Research
+- Role and background
+- Professional expertise
+- Relevant experience
 
-## How to Run
-
-### Local Test
-```bash
-python3 execution/calendly_meeting_prep.py --test --email "prospect@company.com" --name "John Smith" --company "Acme Corp"
-```
-
-### Deploy to Modal
-```bash
-modal deploy execution/calendly_meeting_prep.py
-```
-
-### Register Webhook with Calendly
-```python
-import requests
-
-resp = requests.post(
-    'https://api.calendly.com/webhook_subscriptions',
-    headers={'Authorization': f'Bearer {CALENDLY_API_KEY}'},
-    json={
-        'url': 'https://your-workspace--calendly-meeting-prep-webhook.modal.run',
-        'events': ['invitee.created'],
-        'organization': 'https://api.calendly.com/organizations/YOUR_ORG_ID',
-        'user': 'https://api.calendly.com/users/YOUR_USER_ID',
-        'scope': 'user'
-    }
-)
-```
-
-## Deployed Endpoints
-- **Webhook:** `https://lucas-37998--calendly-meeting-prep-webhook.modal.run`
-- **Health:** `https://lucas-37998--calendly-meeting-prep-health.modal.run`
-
-## Webhook Payload (from Calendly)
-```json
-{
-  "event": "invitee.created",
-  "payload": {
-    "name": "John Smith",
-    "email": "john@acmecorp.com",
-    "scheduled_event": "https://api.calendly.com/scheduled_events/EVENT_UUID",
-    "event_type": "https://api.calendly.com/event_types/TYPE_UUID",
-    "questions_and_answers": [
-      {"question": "Company name", "answer": "Acme Corp"}
-    ]
-  }
-}
-```
+### Generated Content
+- 5 personalized talking points
+- 3 thoughtful questions to ask
+- Potential pain points to address
+- Meeting goals and strategy
 
 ## Output
 
 ### Slack Message 1 (Immediate)
-- Meeting booked alert
-- Prospect name and email
-- Meeting type (fetched from Calendly API)
-- Meeting time (fetched from Calendly API)
-- "Researching now..." status
+```
+📅 New Meeting Booked!
 
-### Google Doc Contents
-- Executive Summary (3-4 sentence overview)
-- Company Research (products, size, funding, competitors)
-- Prospect Research (role, background, content)
-- LinkedIn Profile Summary
-- Talking Points & Strategy
-  - 5 personalized talking points
-  - 3 questions to ask
-  - Potential pain points
-  - Connection points
-  - Meeting goals
+Prospect: John Smith from Acme Corp
+Email: john@acmecorp.com
+Meeting: 30 Minute Meeting
+When: January 15, 2026 at 2:00 PM UTC
+
+🔍 Researching prospect now...
+```
+
+### Google Doc
+Full meeting prep document with:
+- Executive Summary (3-4 sentences)
+- Company Research
+- Prospect Research  
+- Talking Points & Questions
+- Meeting Details
 
 ### Slack Message 2 (After Research)
-- Quick summary (3-4 sentences)
-- Button link to full Google Doc
+```
+📋 Meeting Prep Ready: John Smith
 
-## Configuration
+Company: Acme Corp
 
-### Shared Google Drive Folder
-Docs are saved to: `1Xhgr63LTNqRI8ofFaVE-_zXYJLgjbBiF`
+[Brief 3-4 sentence summary]
 
-### Calendly Webhook Subscription
-- ID: `7fef4d67-e65e-4230-aad9-a3d36016c4b5`
-- Events: `invitee.created`
-- Scope: `user`
+📄 View Full Research Doc
+```
+
+## Required API Keys
+
+| Key | Purpose |
+|-----|---------|
+| `CALENDLY_API_KEY` | Fetch event details from Calendly |
+| `OPENROUTER_API_KEY` | Claude for generating talking points |
+| `PERPLEXITY_API_KEY` | Research via Perplexity Sonar |
+| `SLACK_WEBHOOK_URL` | Send Slack notifications |
+| `GOOGLE_OAUTH_TOKEN_JSON` | Create Google Docs in your Drive |
+
+## Local Testing
+
+```bash
+python3 execution/calendly_meeting_prep.py \
+  --test \
+  --email "prospect@company.com" \
+  --name "John Smith" \
+  --company "Acme Corp"
+```
+
+## How It Extracts Company Name
+
+1. Checks Calendly form questions for "company" field
+2. Falls back to extracting from email domain
+3. Skips generic domains (gmail.com, yahoo.com, etc.)
 
 ## Quality Gates
-- [x] Calendly API fetches event name and time
-- [x] Slack messages send successfully
-- [x] Company extracted from email domain or form questions
-- [x] Perplexity research returns data (using Sonar model)
-- [x] Claude generates talking points
-- [x] Google Doc created with formatting
-- [x] Doc moved to shared folder
-- [x] Summary generated and sent with doc link
 
-## Self-Annealing Notes
+- [ ] Slack alert sends within seconds of booking
+- [ ] Company name extracted correctly
+- [ ] Perplexity research returns relevant data
+- [ ] Claude generates actionable talking points
+- [ ] Google Doc created with proper formatting
+- [ ] Summary + doc link sent to Slack
 
-### 2026-01-09
-- Fixed Perplexity model: changed from `llama-3.1-sonar-large-128k-online` to `sonar`
-- Added Calendly API integration to fetch event details (name, start_time)
-- Added Google service account for Modal deployment
-- Added shared folder support for Google Docs
-- Added detailed debug logging for troubleshooting
+## Related Skills
+- `skills/SKILL_BIBLE_sales_call_preparation.md`
+- `skills/SKILL_BIBLE_prospect_research.md`
