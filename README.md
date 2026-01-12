@@ -111,7 +111,37 @@ Create my .env file with API keys. Ask me for each one individually, and walk me
 
 For each key, ask me: "Do you have [KEY_NAME]? If yes, paste it. If no, I'll help you get it."
 
-## Step 3: Agency Profile Setup
+## Step 3: Google Drive, Docs & Sheets Setup (Recommended)
+
+This enables automatic document creation, lead exports to Sheets, and file management.
+
+### Step 3a: Create Google Cloud Project
+1. Go to https://console.cloud.google.com
+2. Click the project dropdown → "NEW PROJECT"
+3. Name it "AIAA Agentic OS" → Click "CREATE"
+
+### Step 3b: Enable Required APIs
+1. Go to "APIs & Services" → "Library"
+2. Search and ENABLE each: **Google Docs API**, **Google Sheets API**, **Google Drive API**
+
+### Step 3c: Create OAuth 2.0 Credentials
+1. Go to "APIs & Services" → "Credentials"
+2. Click "+ CREATE CREDENTIALS" → "OAuth client ID"
+3. If prompted, configure consent screen (External, add your email as test user)
+4. Application type: "Desktop app" → Name: "AIAA Desktop Client" → CREATE
+
+### Step 3d: Download Credentials
+1. Click "DOWNLOAD JSON" on the popup
+2. Rename to `credentials.json`
+3. Move to project root folder
+
+### Step 3e: Test Integration
+```bash
+python3 execution/create_google_doc.py --test
+```
+A browser opens → Sign in → Grant permissions → Done!
+
+## Step 4: Agency Profile Setup
 
 Ask me questions one at a time to create my agency profile:
 1. Agency name?
@@ -123,15 +153,15 @@ Ask me questions one at a time to create my agency profile:
 
 Save to: context/agency.md, context/brand_voice.md, context/services.md
 
-## Step 4: Deploy AIAA Dashboard to Railway (AUTOMATE THIS)
+## Step 5: Deploy AIAA Dashboard to Railway (AUTOMATE THIS)
 
 Deploy my monitoring dashboard. Handle as much as possible automatically:
 
-### 4a: Check Prerequisites
+### 5a: Check Prerequisites
 - Check: railway --version (if missing: npm install -g @railway/cli)
 - Check: railway whoami (if not logged in: railway login)
 
-### 4b: Get My Credentials
+### 5b: Get My Credentials
 Ask me: "What username for your dashboard?" and "What password?"
 Then YOU generate the password hash using heredoc (avoids escape issues with special chars):
 python3 << 'PYHASH'
@@ -140,30 +170,30 @@ password = "MY_PASSWORD"
 print(hashlib.sha256(password.encode()).hexdigest())
 PYHASH
 
-### 4c: Deploy
+### 5c: Deploy
 cd railway_apps/aiaa_dashboard
 railway init
 railway up
 
-### 4d: Set Environment Variables
+### 5d: Set Environment Variables
 railway variables set DASHBOARD_USERNAME="[my_username]"
 railway variables set DASHBOARD_PASSWORD_HASH="[hash_you_generated]"
 railway variables set FLASK_SECRET_KEY="[generate with: python3 -c 'import secrets; print(secrets.token_hex(32))']"
 
-### 4e: Generate Domain & Verify
+### 5e: Generate Domain & Verify
 railway domain
 curl https://[domain]/health
 
-### 4f: Give Me My Login Details
+### 5f: Give Me My Login Details
 - Dashboard URL
 - Username
 - Password
 
-## Step 5: Test the System
+## Step 6: Test the System
 
 Run a test workflow based on my agency type.
 
-## Step 6: Show What's Available
+## Step 7: Show What's Available
 
 Tour of 139 workflows: Content, Sales, Research, Lead Gen, Ads, Client Management.
 
@@ -184,19 +214,20 @@ Let's start! Begin with Step 1.
 When you paste this prompt, Claude Code becomes your personal setup assistant:
 
 1. **Downloads & installs** - Clones repo and installs dependencies
-2. **Configures API keys** - One-by-one walkthrough with instructions
-3. **Creates agency profile** - Your brand voice and services
-4. **Deploys dashboard to Railway** - **Fully automated:**
+2. **Configures API keys** - One-by-one walkthrough with detailed instructions
+3. **Sets up Google integration** - Drive, Docs & Sheets for auto-documents and exports
+4. **Creates agency profile** - Your brand voice and services
+5. **Deploys dashboard to Railway** - **Fully automated:**
    - Creates Railway project
    - Deploys dashboard code
    - Sets all environment variables (generates hashes/secrets for you)
    - Generates public domain
    - Verifies deployment
    - Provides login credentials
-5. **Tests the system** - Verifies everything works
-6. **Shows capabilities** - Tour of all 139 workflows
+6. **Tests the system** - Verifies everything works
+7. **Shows capabilities** - Tour of all 139 workflows
 
-**Time to complete:** 15-20 minutes
+**Time to complete:** 20-30 minutes
 
 ---
 
