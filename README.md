@@ -136,9 +136,7 @@ This enables automatic document creation, lead exports to Sheets, and file manag
 3. Move to project root folder
 
 ### Step 3e: Test Integration
-```bash
-python3 execution/create_google_doc.py --test
-```
+Run: python3 execution/create_google_doc.py --test
 A browser opens → Sign in → Grant permissions → Done!
 
 ## Step 4: Agency Profile Setup
