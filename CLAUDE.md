@@ -390,6 +390,9 @@ railway up            # Deploy the app
 ```
 
 **Configure Environment Variables:**
+
+**CRITICAL:** When deploying to Railway, you MUST set the environment variables the app needs. Railway apps don't have access to your local `.env` file - you must explicitly set each variable.
+
 ```bash
 # Generate password hash (use heredoc to avoid escape issues)
 python3 << 'PYHASH'
@@ -398,17 +401,42 @@ password = "your-password"
 print(hashlib.sha256(password.encode()).hexdigest())
 PYHASH
 
-# Set variables
+# Set dashboard auth variables
 railway variables set DASHBOARD_USERNAME="admin"
 railway variables set DASHBOARD_PASSWORD_HASH="<hash-from-above>"
 railway variables set FLASK_SECRET_KEY="$(python3 -c 'import secrets; print(secrets.token_hex(32))')"
+
+# Set API keys from your .env (copy values from local .env file)
 railway variables set OPENROUTER_API_KEY="<your-key>"
 railway variables set PERPLEXITY_API_KEY="<your-key>"
+railway variables set ANTHROPIC_API_KEY="<your-key>"
 railway variables set SLACK_WEBHOOK_URL="<your-webhook>"
 
 # Generate public domain
 railway domain
 ```
+
+**Quick way to sync .env to Railway:**
+```bash
+# View your current .env values
+cat .env
+
+# Then set each one that the app needs:
+railway variables set KEY_NAME="value"
+```
+
+**Required Variables by Feature:**
+| Variable | Required For |
+|----------|-------------|
+| `DASHBOARD_USERNAME` | Dashboard login |
+| `DASHBOARD_PASSWORD_HASH` | Dashboard login |
+| `FLASK_SECRET_KEY` | Session security |
+| `OPENROUTER_API_KEY` | All AI generation workflows |
+| `PERPLEXITY_API_KEY` | Research workflows |
+| `ANTHROPIC_API_KEY` | Direct Claude access |
+| `SLACK_WEBHOOK_URL` | Notifications |
+| `FAL_KEY` | Image generation |
+| `APIFY_API_TOKEN` | Lead scraping |
 
 ### Dashboard Endpoints
 
