@@ -25,18 +25,91 @@ Execute these commands and confirm they complete successfully before moving on.
 
 ## Step 2: Configure API Keys (.env file)
 
-Create my .env file with API keys. Ask me for each one individually:
+Create my .env file with API keys. Ask me for each one individually, and walk me through getting each key with detailed instructions:
 
-**Required Keys:**
-- OPENROUTER_API_KEY (required for all AI features)
-  - Get free at: https://openrouter.ai/keys
+---
 
-**Recommended Keys (ask if I want each):**
-- PERPLEXITY_API_KEY - Deep research (https://perplexity.ai/settings/api)
-- ANTHROPIC_API_KEY - Direct Claude access (https://console.anthropic.com)
-- APIFY_API_TOKEN - Lead scraping (https://console.apify.com/account/integrations)
-- FAL_KEY - AI image generation (https://fal.ai/dashboard/keys)
-- SLACK_WEBHOOK_URL - Notifications (https://api.slack.com/messaging/webhooks)
+### OPENROUTER_API_KEY (REQUIRED - Powers all AI features)
+
+**What it does:** Routes requests to Claude, GPT-4, and other AI models. This is the only required key.
+
+**How to get it:**
+1. Go to https://openrouter.ai
+2. Click "Sign Up" (top right) - use Google or email
+3. Once logged in, click your profile icon → "Keys"
+4. Click "Create Key"
+5. Name it "AIAA" and click "Create"
+6. Copy the key (starts with `sk-or-`)
+
+**Cost:** Pay-as-you-go. Most workflows cost $0.01-0.10. Add $5-10 credits to start.
+
+---
+
+### PERPLEXITY_API_KEY (Recommended - Deep research & prospect intel)
+
+**What it does:** Powers all research workflows - company research, market analysis, prospect intelligence, competitor monitoring.
+
+**How to get it:**
+1. Go to https://perplexity.ai
+2. Sign up or log in
+3. Click your profile icon (bottom left) → "Settings"
+4. Click "API" in the left sidebar
+5. Click "Generate" to create a new API key
+6. Copy the key (starts with `pplx-`)
+
+**Cost:** $5/month for 1000 requests, or pay-as-you-go at ~$0.005 per request.
+
+---
+
+### SLACK_WEBHOOK_URL (Recommended - Notifications & alerts)
+
+**What it does:** Sends notifications when workflows complete, meetings are booked, leads are found, etc.
+
+**How to get it:**
+1. Go to https://api.slack.com/apps
+2. Click "Create New App" → "From scratch"
+3. Name it "AIAA Notifications" and select your workspace
+4. Click "Create App"
+5. In the left sidebar, click "Incoming Webhooks"
+6. Toggle "Activate Incoming Webhooks" to ON
+7. Click "Add New Webhook to Workspace"
+8. Select the channel for notifications (e.g., #aiaa-alerts)
+9. Click "Allow"
+10. Copy the Webhook URL (starts with `https://hooks.slack.com/services/`)
+
+**Cost:** Free
+
+---
+
+### ANTHROPIC_API_KEY (Optional - Direct Claude access, faster)
+
+**How to get it:**
+1. Go to https://console.anthropic.com
+2. Sign up with email
+3. Click "Get API Keys" → "Create Key"
+4. Copy the key (starts with `sk-ant-`)
+
+---
+
+### FAL_KEY (Optional - AI image generation)
+
+**How to get it:**
+1. Go to https://fal.ai
+2. Sign up → click your profile → "Dashboard" → "Keys"
+3. Click "Create Key" and copy it
+
+---
+
+### APIFY_API_TOKEN (Optional - Lead scraping)
+
+**How to get it:**
+1. Go to https://console.apify.com
+2. Sign up → click "Settings" → "Integrations"
+3. Copy your API token
+
+---
+
+For each key, ask me: "Do you have [KEY_NAME]? If yes, paste it. If no, I'll help you get it."
 
 ## Step 3: Agency Profile Setup
 
