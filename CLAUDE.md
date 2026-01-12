@@ -9,12 +9,12 @@
 
 | Resource | Count | Location |
 |----------|-------|----------|
-| Directives (SOPs) | 110+ | `directives/*.md` |
-| Execution Scripts | 120+ | `execution/*.py` |
-| Skill Bibles | 260+ | `skills/SKILL_BIBLE_*.md` |
+| Directives (SOPs) | 139+ | `directives/*.md` |
+| Execution Scripts | 130+ | `execution/*.py` |
+| Skill Bibles | 280+ | `skills/SKILL_BIBLE_*.md` |
 | Agency Context | - | `context/` |
 | Client Profiles | - | `clients/{client_name}/` |
-| Deployed Apps | Modal AI | `execution/modal_apps/` |
+| Dashboard | Railway | `railway_apps/aiaa_dashboard/` |
 
 **Environment Variables Required:**
 ```
@@ -99,18 +99,21 @@ Agentic Workflows/
 │       ├── preferences.md # Style, tone, do's and don'ts
 │       └── history.md     # Past work, context, outcomes
 │
-├── directives/            # SOPs - What to do (110+ files)
+├── directives/            # SOPs - What to do (139+ files)
 │   ├── vsl_funnel_orchestrator.md
 │   ├── company_market_research.md
-│   ├── deploy_to_modal.md
 │   └── ...
 │
-├── execution/             # Python scripts - Doing (120+ files)
-│   ├── deploy_to_modal.py
+├── execution/             # Python scripts - Doing (130+ files)
 │   ├── generate_vsl_funnel.py
 │   ├── create_google_doc.py
-│   ├── modal_apps/             # Generated Modal deployments
 │   └── ...
+│
+├── railway_apps/          # Dashboard deployment
+│   └── aiaa_dashboard/    # Flask dashboard app
+│       ├── app.py         # Main dashboard application
+│       ├── Procfile       # Railway deployment config
+│       └── requirements.txt
 │
 ├── skills/                # Domain expertise (260+ skill bibles)
 │   ├── SKILL_BIBLE_*.md
@@ -212,9 +215,9 @@ When you receive ANY request, follow this flow:
 Extract intent and map to capability:
 ```
 "Write a VSL for my coaching business" → vsl_funnel_orchestrator
-"Deploy the newsletter workflow"       → deploy_to_modal
 "Research this company"                → company_market_research
 "Generate cold emails"                 → cold_email_scriptwriter
+"Show me available workflows"          → Check AIAA Dashboard
 ```
 
 ### Phase 2: Capability Check
@@ -355,50 +358,131 @@ python3 execution/generate_newsletter.py --theme "Weekly AI updates"
 
 ---
 
-## Cloud Deployment (Modal AI)
+## AIAA Dashboard & Webhook Deployment
 
-Deploy any workflow as a cloud webhook:
+All workflows are managed through the AIAA Dashboard deployed on Railway. The dashboard provides a central hub for monitoring, executing, and configuring workflows.
 
-### Deploy a Workflow
+### Dashboard Features
+
+| Feature | Description |
+|---------|-------------|
+| **139 Workflows** | Full documentation with prerequisites, how-to-run, and process steps |
+| **Light/Dark Mode** | Toggle with localStorage persistence |
+| **Environment Variables** | View and set API keys from the UI |
+| **Webhook Monitoring** | Track incoming webhooks and events |
+| **Real-time Logs** | See all workflow executions |
+| **Mobile Responsive** | Works on phones and tablets |
+| **Password Protected** | Secure SHA-256 hashed login |
+
+### Deploy Dashboard to Railway
+
+**Prerequisites:**
 ```bash
-# List all deployable workflows
-python3 execution/deploy_to_modal.py --list
-
-# Check what a workflow needs
-python3 execution/deploy_to_modal.py --info vsl_funnel_writer
-
-# Deploy to Modal
-python3 execution/deploy_to_modal.py --directive vsl_funnel_writer
-
-# Dry run (generate without deploying)
-python3 execution/deploy_to_modal.py --directive vsl_funnel_writer --dry-run
+npm install -g @railway/cli
+railway login
 ```
 
-### Setup Modal Secrets
+**Deploy:**
 ```bash
-# Auto-create secrets from .env
-python3 execution/deploy_to_modal.py --setup-secrets
-
-# Or manually via Modal CLI
-modal secret create anthropic-secret ANTHROPIC_API_KEY=<key>
-modal secret create openrouter-secret OPENROUTER_API_KEY=<key>
-modal secret create slack-webhook SLACK_WEBHOOK_URL=<url>
+cd railway_apps/aiaa_dashboard
+railway init          # Select "Empty Project"
+railway up            # Deploy the app
 ```
 
-### Deployed Endpoints
-Each deployed app gets 3 endpoints:
-```
-POST https://<workspace>--<app>-webhook.modal.run  # Execute workflow
-GET  https://<workspace>--<app>-health.modal.run   # Health check
-GET  https://<workspace>--<app>-info.modal.run     # Workflow info
-```
-
-**Example:**
+**Configure Environment Variables:**
 ```bash
-curl -X POST "https://lucas-37998--vsl-funnel-writer-webhook.modal.run" \
-  -H "Content-Type: application/json" \
-  -d '{"data": {"product": "AI Course", "price": "$997", "audience": "Marketers"}}'
+# Generate password hash (use heredoc to avoid escape issues)
+python3 << 'PYHASH'
+import hashlib
+password = "your-password"
+print(hashlib.sha256(password.encode()).hexdigest())
+PYHASH
+
+# Set variables
+railway variables set DASHBOARD_USERNAME="admin"
+railway variables set DASHBOARD_PASSWORD_HASH="<hash-from-above>"
+railway variables set FLASK_SECRET_KEY="$(python3 -c 'import secrets; print(secrets.token_hex(32))')"
+railway variables set OPENROUTER_API_KEY="<your-key>"
+railway variables set PERPLEXITY_API_KEY="<your-key>"
+railway variables set SLACK_WEBHOOK_URL="<your-webhook>"
+
+# Generate public domain
+railway domain
 ```
+
+### Dashboard Endpoints
+
+Once deployed, your dashboard provides these endpoints:
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Dashboard home (requires login) |
+| `/health` | GET | Health check (public) |
+| `/login` | GET/POST | Authentication |
+| `/workflows` | GET | Browse all 139 workflows |
+| `/workflow/<id>` | GET | Workflow details & documentation |
+| `/env` | GET | Environment variable management |
+| `/webhooks` | GET | Available webhook endpoints |
+| `/logs` | GET | Execution logs |
+
+### Webhook Integration
+
+The dashboard can receive webhooks from external services (Calendly, Stripe, etc.):
+
+**Example: Calendly Meeting Prep Webhook**
+```bash
+# Webhook URL format
+POST https://your-dashboard.up.railway.app/webhook/calendly
+
+# Payload
+{
+  "event": "invitee.created",
+  "payload": {
+    "invitee": {
+      "name": "John Smith",
+      "email": "john@company.com"
+    },
+    "event_type": {
+      "name": "Discovery Call"
+    }
+  }
+}
+```
+
+**Setting Up Webhooks:**
+1. Deploy dashboard to Railway
+2. Get your public URL: `https://your-app.up.railway.app`
+3. Configure external service to POST to: `https://your-app.up.railway.app/webhook/<service>`
+4. Monitor incoming webhooks in Dashboard → Webhooks tab
+
+### Workflow Execution via Dashboard
+
+**Option 1: Manual Execution (Dashboard UI)**
+1. Login to dashboard
+2. Navigate to Workflows
+3. Find workflow (search or browse)
+4. Click workflow for full documentation
+5. Copy the execution command
+6. Run in Claude Code
+
+**Option 2: Direct Script Execution**
+```bash
+# All workflows run via execution scripts
+python3 execution/<workflow_script>.py --arg1 "value" --arg2 "value"
+```
+
+**Option 3: Webhook Trigger**
+External services trigger workflows automatically via webhooks configured in the dashboard.
+
+### Viewing Workflow Documentation
+
+Each workflow in the dashboard includes:
+- **Description**: What the workflow does
+- **Prerequisites**: Required API keys and setup
+- **How to Run**: Exact command with arguments
+- **Process Steps**: Step-by-step breakdown
+- **Inputs/Outputs**: Expected data format
+- **Related Workflows**: Connected workflows
 
 ---
 
@@ -428,7 +512,6 @@ curl -X POST "https://lucas-37998--vsl-funnel-writer-webhook.modal.run" \
 |--------|---------|
 | `create_google_doc.py` | Upload to Google Docs |
 | `send_slack_notification.py` | Send Slack messages |
-| `deploy_to_modal.py` | Deploy workflows to Modal AI |
 
 ### Utilities
 | Script | Purpose |
@@ -648,12 +731,13 @@ cp .env.example .env
 # Place credentials.json in project root
 python3 execution/create_google_doc.py --test
 
-# 4. Setup Modal AI (for cloud deployment)
-pip install modal
-python3 -m modal setup
-
-# 5. Create Modal secrets
-python3 execution/deploy_to_modal.py --setup-secrets
+# 4. Deploy AIAA Dashboard to Railway
+npm install -g @railway/cli
+railway login
+cd railway_apps/aiaa_dashboard
+railway init
+railway up
+railway domain
 ```
 
 ### Required API Keys
@@ -695,11 +779,14 @@ curl https://api.perplexity.ai/chat/completions \
 
 ### View Execution Logs
 ```bash
-# Modal logs
-modal logs <app-name>
+# Dashboard logs (via Railway)
+railway logs
 
 # Local execution
 python3 execution/<script>.py 2>&1 | tee output.log
+
+# Check dashboard health
+curl https://your-app.up.railway.app/health
 ```
 
 ---
@@ -741,14 +828,8 @@ You are the **brain** of this system. Your responsibilities:
 ## Quick Commands Reference
 
 ```bash
-# List all workflows
-python3 execution/deploy_to_modal.py --list
-
-# Get workflow info
-python3 execution/deploy_to_modal.py --info <directive_name>
-
-# Deploy to cloud
-python3 execution/deploy_to_modal.py --directive <directive_name>
+# View all workflows
+# Open your AIAA Dashboard at https://your-app.up.railway.app
 
 # Run VSL funnel
 python3 execution/generate_complete_vsl_funnel.py --company "X" --website "Y" --offer "Z"
@@ -761,4 +842,10 @@ python3 execution/create_google_doc.py --file ".tmp/output.md" --title "Doc Titl
 
 # Send Slack notification
 python3 execution/send_slack_notification.py --message "Task complete" --channel "#general"
+
+# Deploy/update dashboard
+cd railway_apps/aiaa_dashboard && railway up
+
+# Check dashboard health
+curl https://your-app.up.railway.app/health
 ```
