@@ -128,16 +128,141 @@ Create my .env file with API keys. Ask me for each one individually, and walk me
 
 For each key, ask me: "Do you have [KEY_NAME]? If yes, paste it. If no, I'll help you get it."
 
-## Step 3: Google OAuth Setup (Optional but Recommended)
+## Step 3: Google Drive, Docs & Sheets Setup (Recommended)
 
-Ask if I want Google Docs/Sheets integration. If yes, walk me through:
+This enables automatic document creation, lead exports to Sheets, and file management. Walk me through the complete setup:
+
+---
+
+### Why This Matters
+
+Google integration powers these workflows:
+- **Auto-create Google Docs** from generated content (VSL scripts, sales pages, emails)
+- **Export leads to Sheets** from scraping workflows
+- **Meeting prep documents** created automatically from Calendly webhooks
+- **Client deliverables** formatted and shared via Google Drive
+
+---
+
+### Step 3a: Create Google Cloud Project
+
 1. Go to https://console.cloud.google.com
-2. Create a project and enable Google Docs + Sheets APIs
-3. Create OAuth 2.0 credentials (Desktop app)
-4. Download credentials.json to project root
-5. Run: python3 execution/create_google_doc.py --test
+2. Click the project dropdown (top left, next to "Google Cloud")
+3. Click "NEW PROJECT" (top right of popup)
+4. Name it "AIAA Agentic OS" 
+5. Click "CREATE"
+6. Wait for project creation (takes 10-30 seconds)
+7. Make sure the new project is selected in the dropdown
 
-This enables automatic document creation and lead exports.
+---
+
+### Step 3b: Enable Required APIs
+
+1. In the left sidebar, click "APIs & Services" → "Library"
+2. Search for and enable EACH of these APIs (click each one, then click "ENABLE"):
+
+**Required APIs:**
+- **Google Docs API** - For creating/editing documents
+- **Google Sheets API** - For spreadsheet exports
+- **Google Drive API** - For file management and sharing
+
+For each API:
+1. Search the name in the API Library
+2. Click on the API
+3. Click the blue "ENABLE" button
+4. Wait for it to enable, then go back and enable the next one
+
+---
+
+### Step 3c: Create OAuth 2.0 Credentials
+
+1. In the left sidebar, click "APIs & Services" → "Credentials"
+2. Click "+ CREATE CREDENTIALS" (top of page)
+3. Select "OAuth client ID"
+
+**If you see "Configure Consent Screen" warning:**
+1. Click "CONFIGURE CONSENT SCREEN"
+2. Select "External" (unless you have Google Workspace, then "Internal")
+3. Click "CREATE"
+4. Fill in required fields:
+   - App name: "AIAA Agentic OS"
+   - User support email: Your email
+   - Developer contact: Your email
+5. Click "SAVE AND CONTINUE"
+6. On Scopes page, click "SAVE AND CONTINUE" (no changes needed)
+7. On Test Users page, click "ADD USERS"
+8. Add your Gmail address
+9. Click "SAVE AND CONTINUE"
+10. Click "BACK TO DASHBOARD"
+11. Go back to Credentials and create OAuth client ID again
+
+**Create the OAuth Client:**
+1. Click "+ CREATE CREDENTIALS" → "OAuth client ID"
+2. Application type: Select "Desktop app"
+3. Name: "AIAA Desktop Client"
+4. Click "CREATE"
+
+---
+
+### Step 3d: Download and Place Credentials
+
+1. After creating, you'll see a popup with your Client ID
+2. Click "DOWNLOAD JSON" button
+3. Rename the downloaded file to exactly: `credentials.json`
+4. Move it to your AIAA project root folder:
+   ```
+   AIAA-Agentic-OS/
+   ├── credentials.json    ← Place it here
+   ├── directives/
+   ├── execution/
+   └── ...
+   ```
+
+---
+
+### Step 3e: Test the Integration
+
+Run this command to test Google authentication:
+```bash
+python3 execution/create_google_doc.py --test
+```
+
+**What happens:**
+1. A browser window opens asking you to sign in to Google
+2. Select your Google account
+3. You may see "Google hasn't verified this app" - click "Continue" (it's your own app)
+4. Grant permissions for Docs, Sheets, and Drive
+5. You'll see "The authentication flow has completed"
+6. A `token.pickle` file is created (saves your auth for future use)
+
+**Success looks like:**
+```
+Authentication successful!
+Token saved to token.pickle
+Test document created: https://docs.google.com/document/d/...
+```
+
+---
+
+### Troubleshooting Google Setup
+
+**"credentials.json not found"**
+- Make sure the file is named exactly `credentials.json` (not `credentials (1).json`)
+- Make sure it's in the project root, not a subfolder
+
+**"Access blocked" or "App not verified"**
+- Click "Advanced" → "Go to AIAA Agentic OS (unsafe)"
+- This is safe - it's your own app
+
+**"Token has been expired or revoked"**
+- Delete `token.pickle` and `token_docs.json` files
+- Run the test command again to re-authenticate
+
+**"API not enabled"**
+- Go back to Google Cloud Console → APIs & Services → Library
+- Make sure all 3 APIs are enabled (Docs, Sheets, Drive)
+
+---
 
 ## Step 4: Agency Profile Setup
 
