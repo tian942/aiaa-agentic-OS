@@ -108,10 +108,16 @@ Ask me TWO questions:
 1. "What username do you want for your dashboard? (default: admin)"
 2. "What password do you want for your dashboard?"
 
-Then YOU (Claude) generate the password hash automatically:
+Then YOU (Claude) generate the password hash automatically using a heredoc to avoid escape sequence issues with special characters:
 ```bash
-python3 -c "import hashlib; print(hashlib.sha256(b'THE_PASSWORD_I_GAVE_YOU'.encode()).hexdigest())"
+python3 << 'PYHASH'
+import hashlib
+password = "THE_PASSWORD_I_GAVE_YOU"
+print(hashlib.sha256(password.encode()).hexdigest())
+PYHASH
 ```
+
+IMPORTANT: Use this heredoc method instead of `python3 -c` to avoid escape sequence issues with special characters like `!`, `\`, etc. in passwords.
 
 Save the hash - you'll need it for environment variables.
 
@@ -299,8 +305,12 @@ railway up
 
 ### Configure
 ```bash
-# Generate password hash
-python3 -c "import hashlib; print(hashlib.sha256(b'your-password'.encode()).hexdigest())"
+# Generate password hash (use heredoc to avoid escape sequence issues)
+python3 << 'PYHASH'
+import hashlib
+password = "your-password"
+print(hashlib.sha256(password.encode()).hexdigest())
+PYHASH
 
 # Set variables
 railway variables set DASHBOARD_USERNAME="admin"
@@ -338,9 +348,14 @@ railway init
 Select "Empty Project" when prompted.
 
 ### Dashboard shows "Invalid credentials"
-Regenerate password hash and update:
+Regenerate password hash using heredoc (avoids escape sequence issues with special characters):
 ```bash
-python3 -c "import hashlib; print(hashlib.sha256(b'your-password'.encode()).hexdigest())"
+python3 << 'PYHASH'
+import hashlib
+password = "your-password"
+print(hashlib.sha256(password.encode()).hexdigest())
+PYHASH
+
 railway variables set DASHBOARD_PASSWORD_HASH="new-hash"
 ```
 
