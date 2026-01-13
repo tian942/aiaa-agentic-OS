@@ -6,20 +6,112 @@ Paste this entire prompt into Claude Code to get a fully interactive setup exper
 
 ---
 
+## Prerequisites
+
+Before you begin, make sure you have these accounts and tools ready:
+
+### Required
+- **GitHub Account** - To clone the repository
+- **Railway Account** - For deploying the dashboard (sign up at https://railway.app)
+- **Python 3.8+** - Check with `python3 --version`
+- **Git** - Check with `git --version`
+- **npm** - Check with `npm --version` (needed for Railway CLI)
+
+### Recommended (Can set up during installation)
+- **Google Account** - For Google Docs/Sheets integration (optional but very useful)
+- **OpenRouter Account** - For AI model access (you'll create this during setup)
+- **Perplexity Account** - For research features (optional)
+- **Slack Workspace** - For notifications (optional)
+
+### Installation Check
+
+Run these commands to verify you have the required tools:
+```bash
+python3 --version   # Should show 3.8 or higher
+git --version       # Should show installed version
+npm --version       # Should show installed version
+```
+
+**If anything is missing:**
+- **Python:** Download from https://python.org/downloads
+- **Git:** Download from https://git-scm.com/downloads
+- **npm:** Comes with Node.js - download from https://nodejs.org
+
+**Create Railway Account:**
+1. Go to https://railway.app
+2. Click "Sign Up"
+3. Connect with GitHub (recommended) or use email
+4. Verify your email if needed
+
+Once you have everything above, you're ready to proceed!
+
+---
+
 ## The Prompt (Copy Everything Below)
 
 ```
 I want to set up AIAA Agentic OS v2.3. Please help me through the entire process interactively, asking me ONE question at a time and waiting for my response before moving on.
 
+## Prerequisites Check (Do This FIRST)
+
+Before we begin Step 1, say:
+
+"Before we get started, let's make sure you have everything you need! You'll need the following accounts and tools set up:
+
+**REQUIRED:**
+- GitHub Account (to clone the repository)
+- Railway Account (for dashboard deployment - sign up at https://railway.app)
+- Python 3.8+ installed
+- Git installed
+- npm installed (for Railway CLI)
+
+**RECOMMENDED (we can set these up during installation):**
+- Google Account (for Google Docs/Sheets integration)
+- OpenRouter Account (for AI model access)
+- Perplexity Account (for research features)
+- Slack Workspace (for notifications)
+
+Let me check if you have the required tools installed..."
+
+Then RUN these commands automatically (don't ask me to run them):
+
+```bash
+python3 --version
+git --version
+npm --version
+```
+
+Based on the results:
+- If all 3 are installed: Tell me "Great! All required tools are installed."
+- If any are missing: Tell me which ones are missing and provide download links:
+  - Python: https://python.org/downloads
+  - Git: https://git-scm.com/downloads
+  - npm: Comes with Node.js from https://nodejs.org
+  - Ask me to install the missing tools and let you know when done
+
+Then ask: "Do you have a Railway account? If not, please:
+1. Go to https://railway.app
+2. Click 'Sign Up'
+3. Connect with GitHub (recommended) or use email
+4. Verify your email
+
+Reply 'yes' when you have a Railway account and we'll proceed to Step 1!"
+
+Wait for my response before continuing.
+
 ## Step 1: Clone & Install
 
-Run these commands to download and install the system:
+Say: "Great! Let me download and install AIAA Agentic OS for you..."
 
+Then RUN these commands automatically:
+
+```bash
 git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
 cd AIAA-Agentic-OS
 pip install -r requirements.txt
+```
 
-Execute these commands and confirm they complete successfully before moving on.
+After running them, tell me if they completed successfully or if there were any errors.
 
 ## Step 2: Configure API Keys (.env file)
 
@@ -222,25 +314,22 @@ For each API:
 
 ### Step 3e: Test the Integration
 
-Run this command to test Google authentication:
+Say: "Now let me test the Google integration..."
+
+Then RUN this command:
 ```bash
 python3 execution/create_google_doc.py --test
 ```
 
-**What happens:**
-1. A browser window opens asking you to sign in to Google
-2. Select your Google account
-3. You may see "Google hasn't verified this app" - click "Continue" (it's your own app)
-4. Grant permissions for Docs, Sheets, and Drive
-5. You'll see "The authentication flow has completed"
-6. A `token.pickle` file is created (saves your auth for future use)
+Tell me: "A browser window should open asking you to sign in to Google. Please:
+1. Select your Google account
+2. If you see 'Google hasn't verified this app' - click 'Continue' (it's your own app)
+3. Grant permissions for Docs, Sheets, and Drive
+4. You'll see 'The authentication flow has completed'
 
-**Success looks like:**
-```
-Authentication successful!
-Token saved to token.pickle
-Test document created: https://docs.google.com/document/d/...
-```
+Let me know when you've completed the authentication, or if you see any errors!"
+
+Wait for my response. If successful, confirm the test document was created.
 
 ---
 
@@ -295,29 +384,36 @@ Ask if I want to set up a client profile. If yes, create clients/{client_name}/ 
 This is the key step. Deploy my monitoring dashboard to Railway. Handle as much as possible automatically.
 
 ### Step 6a: Check Prerequisites
-First, check if Railway CLI is installed:
+
+Say: "Let me check if Railway CLI is installed..."
+
+Then RUN this command:
 ```bash
 railway --version
 ```
 
-If not installed, tell me to run:
+If not installed, say "I need to install Railway CLI for you..." and RUN:
 ```bash
 npm install -g @railway/cli
 ```
 
-Then check if I'm logged in:
+Then RUN this command to check if you're logged in:
 ```bash
 railway whoami
 ```
 
-If not logged in, tell me to run `railway login` and complete the browser authentication.
+If not logged in, tell me: "Please run 'railway login' in your terminal and complete the browser authentication, then let me know when done!"
+
+Wait for my response before continuing.
 
 ### Step 6b: Ask for Dashboard Credentials
-Ask me TWO questions:
+Ask me TWO questions (one at a time):
 1. "What username do you want for your dashboard? (default: admin)"
 2. "What password do you want for your dashboard?"
 
-Then YOU (Claude) generate the password hash automatically using a heredoc to avoid escape sequence issues with special characters:
+After I provide the password, say "Let me generate the secure password hash..."
+
+Then RUN this command to generate the hash (using heredoc to avoid escape issues):
 ```bash
 python3 << 'PYHASH'
 import hashlib
@@ -326,65 +422,78 @@ print(hashlib.sha256(password.encode()).hexdigest())
 PYHASH
 ```
 
-IMPORTANT: Use this heredoc method instead of `python3 -c` to avoid escape sequence issues with special characters like `!`, `\`, etc. in passwords.
-
-Save the hash - you'll need it for environment variables.
+Save the username and hash - you'll need them for environment variables.
 
 ### Step 6c: Create Railway Project and Deploy
-Navigate to the dashboard folder and deploy:
+
+Say: "Now let me deploy your dashboard to Railway..."
+
+Then RUN these commands:
 
 ```bash
 cd railway_apps/aiaa_dashboard
 railway init
 ```
 
-When prompted, select "Empty Project" and give it a name like "aiaa-dashboard".
+Tell me: "When prompted, please select 'Empty Project' and give it a name like 'aiaa-dashboard'. Let me know when that's done!"
 
-Then deploy:
+Wait for my response.
+
+Then say "Deploying the dashboard code to Railway..." and RUN:
 ```bash
 railway up
 ```
 
-Wait for the deployment to complete. This uploads the dashboard code to Railway.
+Tell me when the deployment completes.
 
 ### Step 6d: Set Environment Variables
-After deployment, set the environment variables using Railway CLI:
 
-```bash
-railway variables set DASHBOARD_USERNAME="[USERNAME_I_CHOSE]"
-railway variables set DASHBOARD_PASSWORD_HASH="[THE_HASH_YOU_GENERATED]"
-railway variables set FLASK_SECRET_KEY="[GENERATE_A_RANDOM_32_CHAR_STRING]"
-```
+Say: "Now I'll configure the environment variables..."
 
-Generate the FLASK_SECRET_KEY with:
+First, generate the FLASK_SECRET_KEY by RUNNING:
 ```bash
 python3 -c "import secrets; print(secrets.token_hex(32))"
 ```
 
-If I provided API keys in Step 2, also set them:
+Then RUN these commands with the username and hash you saved earlier:
 ```bash
-railway variables set OPENROUTER_API_KEY="[MY_KEY]"
-railway variables set PERPLEXITY_API_KEY="[MY_KEY]"
-railway variables set SLACK_WEBHOOK_URL="[MY_WEBHOOK]"
+railway variables set DASHBOARD_USERNAME="[USERNAME_I_CHOSE]"
+railway variables set DASHBOARD_PASSWORD_HASH="[THE_HASH_YOU_GENERATED]"
+railway variables set FLASK_SECRET_KEY="[THE_SECRET_KEY_YOU_JUST_GENERATED]"
 ```
 
-### Step 6e: Generate Public Domain
-Generate a public URL for the dashboard:
+If I provided API keys in Step 2, also RUN:
+```bash
+railway variables set OPENROUTER_API_KEY="[MY_KEY_FROM_STEP_2]"
+railway variables set PERPLEXITY_API_KEY="[MY_KEY_FROM_STEP_2]"
+railway variables set SLACK_WEBHOOK_URL="[MY_WEBHOOK_FROM_STEP_2]"
+```
 
+Tell me when all variables are set.
+
+### Step 6e: Generate Public Domain
+
+Say: "Let me generate a public URL for your dashboard..."
+
+Then RUN:
 ```bash
 railway domain
 ```
 
-This creates a URL like: https://aiaa-dashboard-production.up.railway.app
+Save the generated URL (it will look like: https://aiaa-dashboard-production.up.railway.app)
 
 ### Step 6f: Verify Deployment
-Test that the dashboard is running:
 
+Say: "Testing that your dashboard is live..."
+
+Then RUN (using the domain from Step 6e):
 ```bash
-curl -s "https://[GENERATED_DOMAIN]/health"
+curl -s "https://[THE_GENERATED_DOMAIN]/health"
 ```
 
-Should return: {"status": "ok", "version": "2.3.0", "workflows": 139}
+Check if it returns: {"status": "ok", "version": "2.3.0", "workflows": 139}
+
+If successful, tell me "Dashboard is live!" If it fails, wait 30 seconds and try again (deployment may still be starting).
 
 ### Step 6g: Provide Login Details
 Once everything is deployed, give me:
@@ -397,13 +506,17 @@ Tell me: "Your AIAA Dashboard is now live! You can monitor all 139 workflows, ma
 
 ## Step 7: Test the System
 
-Run a simple test based on my agency type:
-- If marketing agency: Generate a cold email sequence
-- If content agency: Create a blog post or social content
-- If design agency: Generate an ad creative concept
-- General: Run company research on a sample company
+Say: "Let's test the system with a quick workflow!"
 
-Verify output and show me the result.
+Ask me: "What type of agency/business are you? (marketing/content/design/other)"
+
+Based on my answer, RUN one of these test commands:
+- If marketing: `python3 execution/write_cold_emails.py --sender "Test" --company "TestCo" --offer "Marketing services" --target "Small businesses"`
+- If content: `python3 execution/generate_blog_post.py --topic "Getting started with AI" --length 500`
+- If design: Ask for a sample project to research
+- If other: `python3 execution/research_company_offer.py --company "Apple" --website "https://apple.com"`
+
+Show me the output file location and tell me if it was successful.
 
 ## Step 8: Show What's Available
 
@@ -443,15 +556,18 @@ Give me a quick tour of the 139 workflows:
 
 - Ask me ONE question at a time
 - Wait for my response before continuing
+- **RUN ALL COMMANDS AUTOMATICALLY** - Don't ask me to run them manually
+- When you see "RUN this command" or "Run these commands", execute them using your Bash tool
 - If I don't know something, help me or skip it
 - Save files as we complete each section
 - Be encouraging and explain why each step matters
 - If errors occur, help me debug them
 - For the Railway deployment, DO AS MUCH AUTOMATICALLY AS POSSIBLE
-- Generate hashes, secrets, and run commands for me
-- Only ask me for input when you absolutely need it (username, password, API keys)
+- Generate hashes, secrets, and execute all commands for me
+- Only ask me for input when you absolutely need it (username, password, API keys, confirming interactive prompts)
+- Save any important values (URLs, hashes, passwords) so you can reuse them later in the setup
 
-Let's start! Begin with Step 1: Clone & Install.
+Let's start! Begin with the Prerequisites Check.
 ```
 
 ---
