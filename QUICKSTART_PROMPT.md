@@ -75,11 +75,9 @@ Let me check if you have the required tools installed..."
 
 Then RUN these commands automatically (don't ask me to run them):
 
-```bash
 python3 --version
 git --version
 npm --version
-```
 
 Based on the results:
 - If all 3 are installed: Tell me "Great! All required tools are installed."
@@ -105,11 +103,9 @@ Say: "Great! Let me download and install AIAA Agentic OS for you..."
 
 Then RUN these commands automatically:
 
-```bash
 git clone https://github.com/stopmoclay/AIAA-Agentic-OS.git
 cd AIAA-Agentic-OS
 pip install -r requirements.txt
-```
 
 After running them, tell me if they completed successfully or if there were any errors.
 
@@ -317,9 +313,8 @@ For each API:
 Say: "Now let me test the Google integration..."
 
 Then RUN this command:
-```bash
+
 python3 execution/create_google_doc.py --test
-```
 
 Tell me: "A browser window should open asking you to sign in to Google. Please:
 1. Select your Google account
@@ -388,19 +383,16 @@ This is the key step. Deploy my monitoring dashboard to Railway. Handle as much 
 Say: "Let me check if Railway CLI is installed..."
 
 Then RUN this command:
-```bash
+
 railway --version
-```
 
 If not installed, say "I need to install Railway CLI for you..." and RUN:
-```bash
+
 npm install -g @railway/cli
-```
 
 Then RUN this command to check if you're logged in:
-```bash
+
 railway whoami
-```
 
 If not logged in, tell me: "Please run 'railway login' in your terminal and complete the browser authentication, then let me know when done!"
 
@@ -414,13 +406,12 @@ Ask me TWO questions (one at a time):
 After I provide the password, say "Let me generate the secure password hash..."
 
 Then RUN this command to generate the hash (using heredoc to avoid escape issues):
-```bash
+
 python3 << 'PYHASH'
 import hashlib
 password = "THE_PASSWORD_I_GAVE_YOU"
 print(hashlib.sha256(password.encode()).hexdigest())
 PYHASH
-```
 
 Save the username and hash - you'll need them for environment variables.
 
@@ -430,19 +421,16 @@ Say: "Now let me deploy your dashboard to Railway..."
 
 Then RUN these commands:
 
-```bash
 cd railway_apps/aiaa_dashboard
 railway init
-```
 
 Tell me: "When prompted, please select 'Empty Project' and give it a name like 'aiaa-dashboard'. Let me know when that's done!"
 
 Wait for my response.
 
 Then say "Deploying the dashboard code to Railway..." and RUN:
-```bash
+
 railway up
-```
 
 Tell me when the deployment completes.
 
@@ -451,23 +439,20 @@ Tell me when the deployment completes.
 Say: "Now I'll configure the environment variables..."
 
 First, generate the FLASK_SECRET_KEY by RUNNING:
-```bash
+
 python3 -c "import secrets; print(secrets.token_hex(32))"
-```
 
 Then RUN these commands with the username and hash you saved earlier:
-```bash
+
 railway variables set DASHBOARD_USERNAME="[USERNAME_I_CHOSE]"
 railway variables set DASHBOARD_PASSWORD_HASH="[THE_HASH_YOU_GENERATED]"
 railway variables set FLASK_SECRET_KEY="[THE_SECRET_KEY_YOU_JUST_GENERATED]"
-```
 
 If I provided API keys in Step 2, also RUN:
-```bash
+
 railway variables set OPENROUTER_API_KEY="[MY_KEY_FROM_STEP_2]"
 railway variables set PERPLEXITY_API_KEY="[MY_KEY_FROM_STEP_2]"
 railway variables set SLACK_WEBHOOK_URL="[MY_WEBHOOK_FROM_STEP_2]"
-```
 
 Tell me when all variables are set.
 
@@ -476,9 +461,8 @@ Tell me when all variables are set.
 Say: "Let me generate a public URL for your dashboard..."
 
 Then RUN:
-```bash
+
 railway domain
-```
 
 Save the generated URL (it will look like: https://aiaa-dashboard-production.up.railway.app)
 
@@ -487,9 +471,8 @@ Save the generated URL (it will look like: https://aiaa-dashboard-production.up.
 Say: "Testing that your dashboard is live..."
 
 Then RUN (using the domain from Step 6e):
-```bash
+
 curl -s "https://[THE_GENERATED_DOMAIN]/health"
-```
 
 Check if it returns: {"status": "ok", "version": "2.3.0", "workflows": 139}
 
