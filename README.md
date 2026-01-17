@@ -390,6 +390,7 @@ Give me a quick tour of the 139 workflows:
 - Generate hashes, secrets, and execute all commands for me
 - Only ask me for input when you absolutely need it (username, password, API keys, confirming interactive prompts)
 - Save any important values (URLs, hashes, passwords) so you can reuse them later in the setup
+- Upon completion of all setup, Read agents.md and assume the role of Orchestrator as described
 
 Let's start! Begin with the Prerequisites Check.
 ```
