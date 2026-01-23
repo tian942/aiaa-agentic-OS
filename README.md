@@ -8,10 +8,11 @@ An AI-powered agency operating system that runs inside Claude Code. Just paste p
 
 ## Quick Start
 
-**Prerequisites:** Before starting, make sure you have:
-- Python 3.8+, Git, and npm installed
-- A Railway account (sign up at https://railway.app)
-- GitHub account
+**Prerequisites:** You just need TWO accounts - Claude will auto-install all tools!
+- **GitHub account** - Sign up at https://github.com
+- **Railway account** - Sign up at https://railway.app
+
+Claude will automatically install: Homebrew, Python, Git, Node.js, Railway CLI, and the Railway skill.
 
 **Open Claude Code and paste this entire prompt to get started:**
 
@@ -22,36 +23,71 @@ I want to set up AIAA Agentic OS v2.3. Please help me through the entire process
 
 Before we begin Step 1, say:
 
-"Before we get started, let's make sure you have everything you need! You'll need the following accounts and tools set up:
+"Before we get started, let me check if you have the required tools installed. I'll automatically install anything that's missing - you don't need to do anything!"
 
-**REQUIRED:**
-- GitHub Account (to clone the repository)
-- Railway Account (for dashboard deployment - sign up at https://railway.app)
-- Python 3.8+ installed
-- Git installed
-- npm installed (for Railway CLI)
+### Step 0a: Check for Homebrew (macOS only)
 
-**RECOMMENDED (we can set these up during installation):**
-- Google Account (for Google Docs/Sheets integration)
-- OpenRouter Account (for AI model access)
-- Perplexity Account (for research features)
-- Slack Workspace (for notifications)
+First, RUN this command to check the operating system:
 
-Let me check if you have the required tools installed..."
+uname -s
 
-Then RUN these commands automatically (don't ask me to run them):
+If macOS (Darwin), check if Homebrew is installed by RUNNING:
+
+which brew
+
+If Homebrew is NOT installed (command not found), say "I need to install Homebrew first - this is a package manager that makes installing other tools easy..." and RUN:
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+After Homebrew installs, RUN these commands to add it to the PATH:
+
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+### Step 0b: Check and Auto-Install Required Tools
+
+Now check each required tool and AUTOMATICALLY install any that are missing:
+
+**Check Python:**
+RUN: python3 --version
+
+If Python is NOT installed, say "Installing Python..." and RUN:
+- On macOS: brew install python3
+- On Linux: sudo apt-get install -y python3 python3-pip
+
+**Check Git:**
+RUN: git --version
+
+If Git is NOT installed, say "Installing Git..." and RUN:
+- On macOS: brew install git
+- On Linux: sudo apt-get install -y git
+
+**Check npm/Node.js:**
+RUN: npm --version
+
+If npm is NOT installed, say "Installing Node.js (includes npm)..." and RUN:
+- On macOS: brew install node
+- On Linux: curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt-get install -y nodejs
+
+### Step 0c: Install Railway CLI and Railway Skill
+
+After all tools are installed, say "Now I'll install the Railway CLI and Railway skill for easier deployments..."
+
+RUN these commands:
+
+npm install -g @railway/cli
+npx add-skill mshumer/claude-skill-railway
+
+### Step 0d: Verify Everything is Ready
+
+RUN these commands to confirm everything is installed:
 
 python3 --version
 git --version
 npm --version
+railway --version
 
-Based on the results:
-- If all 3 are installed: Tell me "Great! All required tools are installed."
-- If any are missing: Tell me which ones are missing and provide download links:
-  - Python: https://python.org/downloads
-  - Git: https://git-scm.com/downloads
-  - npm: Comes with Node.js from https://nodejs.org
-  - Ask me to install the missing tools and let you know when done
+If all 4 commands succeed, say: "All required tools are installed and ready!"
 
 Then ask: "Do you have a Railway account? If not, please:
 1. Go to https://railway.app

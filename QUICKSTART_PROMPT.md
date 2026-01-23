@@ -8,42 +8,35 @@ Paste this entire prompt into Claude Code to get a fully interactive setup exper
 
 ## Prerequisites
 
-Before you begin, make sure you have these accounts and tools ready:
+**Good news: Claude will automatically install any missing tools for you!**
 
-### Required
-- **GitHub Account** - To clone the repository
-- **Railway Account** - For deploying the dashboard (sign up at https://railway.app)
-- **Python 3.8+** - Check with `python3 --version`
-- **Git** - Check with `git --version`
-- **npm** - Check with `npm --version` (needed for Railway CLI)
+You just need TWO things before starting:
 
-### Recommended (Can set up during installation)
-- **Google Account** - For Google Docs/Sheets integration (optional but very useful)
+### Required Accounts (Create These First)
+1. **GitHub Account** - To clone the repository
+   - Go to https://github.com and sign up if you don't have one
+2. **Railway Account** - For deploying the dashboard
+   - Go to https://railway.app
+   - Click "Sign Up"
+   - Connect with GitHub (recommended) or use email
+   - Verify your email if needed
+
+### Tools (Auto-Installed)
+Claude will automatically check for and install these if missing:
+- **Homebrew** (macOS only) - Package manager for easy installs
+- **Python 3.8+** - Programming language
+- **Git** - Version control
+- **Node.js & npm** - JavaScript runtime
+- **Railway CLI** - Deploy to Railway from terminal
+- **Railway Skill** - Enhanced Railway integration for Claude
+
+### Optional Accounts (Can set up during installation)
+- **Google Account** - For Google Docs/Sheets integration
 - **OpenRouter Account** - For AI model access (you'll create this during setup)
-- **Perplexity Account** - For research features (optional)
-- **Slack Workspace** - For notifications (optional)
+- **Perplexity Account** - For research features
+- **Slack Workspace** - For notifications
 
-### Installation Check
-
-Run these commands to verify you have the required tools:
-```bash
-python3 --version   # Should show 3.8 or higher
-git --version       # Should show installed version
-npm --version       # Should show installed version
-```
-
-**If anything is missing:**
-- **Python:** Download from https://python.org/downloads
-- **Git:** Download from https://git-scm.com/downloads
-- **npm:** Comes with Node.js - download from https://nodejs.org
-
-**Create Railway Account:**
-1. Go to https://railway.app
-2. Click "Sign Up"
-3. Connect with GitHub (recommended) or use email
-4. Verify your email if needed
-
-Once you have everything above, you're ready to proceed!
+**That's it!** Just have your GitHub and Railway accounts ready, then paste the prompt below. Claude handles everything else!
 
 ---
 
@@ -56,36 +49,71 @@ I want to set up AIAA Agentic OS v2.3. Please help me through the entire process
 
 Before we begin Step 1, say:
 
-"Before we get started, let's make sure you have everything you need! You'll need the following accounts and tools set up:
+"Before we get started, let me check if you have the required tools installed. I'll automatically install anything that's missing - you don't need to do anything!"
 
-**REQUIRED:**
-- GitHub Account (to clone the repository)
-- Railway Account (for dashboard deployment - sign up at https://railway.app)
-- Python 3.8+ installed
-- Git installed
-- npm installed (for Railway CLI)
+### Step 0a: Check for Homebrew (macOS only)
 
-**RECOMMENDED (we can set these up during installation):**
-- Google Account (for Google Docs/Sheets integration)
-- OpenRouter Account (for AI model access)
-- Perplexity Account (for research features)
-- Slack Workspace (for notifications)
+First, RUN this command to check the operating system:
 
-Let me check if you have the required tools installed..."
+uname -s
 
-Then RUN these commands automatically (don't ask me to run them):
+If macOS (Darwin), check if Homebrew is installed by RUNNING:
+
+which brew
+
+If Homebrew is NOT installed (command not found), say "I need to install Homebrew first - this is a package manager that makes installing other tools easy..." and RUN:
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+After Homebrew installs, RUN these commands to add it to the PATH:
+
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+### Step 0b: Check and Auto-Install Required Tools
+
+Now check each required tool and AUTOMATICALLY install any that are missing:
+
+**Check Python:**
+RUN: python3 --version
+
+If Python is NOT installed, say "Installing Python..." and RUN:
+- On macOS: brew install python3
+- On Linux: sudo apt-get install -y python3 python3-pip
+
+**Check Git:**
+RUN: git --version
+
+If Git is NOT installed, say "Installing Git..." and RUN:
+- On macOS: brew install git
+- On Linux: sudo apt-get install -y git
+
+**Check npm/Node.js:**
+RUN: npm --version
+
+If npm is NOT installed, say "Installing Node.js (includes npm)..." and RUN:
+- On macOS: brew install node
+- On Linux: curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt-get install -y nodejs
+
+### Step 0c: Install Railway CLI and Railway Skill
+
+After all tools are installed, say "Now I'll install the Railway CLI and Railway skill for easier deployments..."
+
+RUN these commands:
+
+npm install -g @railway/cli
+npx add-skill mshumer/claude-skill-railway
+
+### Step 0d: Verify Everything is Ready
+
+RUN these commands to confirm everything is installed:
 
 python3 --version
 git --version
 npm --version
+railway --version
 
-Based on the results:
-- If all 3 are installed: Tell me "Great! All required tools are installed."
-- If any are missing: Tell me which ones are missing and provide download links:
-  - Python: https://python.org/downloads
-  - Git: https://git-scm.com/downloads
-  - npm: Comes with Node.js from https://nodejs.org
-  - Ask me to install the missing tools and let you know when done
+If all 4 commands succeed, say: "All required tools are installed and ready!"
 
 Then ask: "Do you have a Railway account? If not, please:
 1. Go to https://railway.app
