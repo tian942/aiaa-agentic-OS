@@ -2433,21 +2433,8 @@ PENDING_PAGE_TEMPLATE = """
 """
 
 # =============================================================================
-# Ron Breitenbach — Lead Capture → Google Sheet
+# Ron Breitenbach — Lead Capture
 # =============================================================================
-#
-# Required environment variables:
-#   GOOGLE_APPLICATION_CREDENTIALS — path to service account JSON
-#
-# Master sheet: 1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk
-# Tab: "Ron Leads — Apr 2026"
-# =============================================================================
-
-import gspread
-from google.oauth2.service_account import Credentials as ServiceCredentials
-
-MASTER_SHEET_ID = "1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk"
-RON_SHEET_TAB   = "Ron Leads — Apr 2026"
 
 # ---------------------------------------------------------------------------
 # DB table for Ron's leads (backup)
@@ -2629,37 +2616,11 @@ def _UNUSED_get_ron_emails(first_name, guide_url):
     ]
 
 # ---------------------------------------------------------------------------
-# Google Sheets helper
-# ---------------------------------------------------------------------------
-
-def append_ron_lead_to_sheet(first_name, last_name, email, phone):
-    try:
-        creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "credentials.json")
-        scopes = [
-            "https://www.googleapis.com/auth/spreadsheets",
-            "https://www.googleapis.com/auth/drive",
-        ]
-        creds = ServiceCredentials.from_service_account_file(creds_path, scopes=scopes)
-        gc = gspread.authorize(creds)
-        sh = gc.open_by_key(MASTER_SHEET_ID)
-        try:
-            ws = sh.worksheet(RON_SHEET_TAB)
-        except gspread.exceptions.WorksheetNotFound:
-            ws = sh.add_worksheet(title=RON_SHEET_TAB, rows=1000, cols=10)
-            ws.append_row(["First Name", "Last Name", "Email", "Phone", "Source", "Created At"])
-        ws.append_row([first_name, last_name, email, phone, "landing_page",
-                       datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")])
-        print(f"[SHEETS] Appended lead {email} to '{RON_SHEET_TAB}'")
-    except Exception as e:
-        print(f"[SHEETS] Error saving lead to sheet: {e}")
-
-# ---------------------------------------------------------------------------
-# Webhook endpoint: POST /webhook/ron-lead
+# Webhook: POST /webhook/ron-lead
 # ---------------------------------------------------------------------------
 
 @app.route("/webhook/ron-lead", methods=["POST", "OPTIONS"])
 def ron_lead_webhook():
-    # CORS preflight
     if request.method == "OPTIONS":
         resp = app.make_default_options_response()
         resp.headers["Access-Control-Allow-Origin"] = "*"
@@ -2678,27 +2639,91 @@ def ron_lead_webhook():
         resp.headers["Access-Control-Allow-Origin"] = "*"
         return resp, 400
 
-    # 1. Save to SQLite as backup
     conn = sqlite3.connect(DATABASE_PATH)
     c = conn.cursor()
-    c.execute("""
-        INSERT INTO ron_leads (first_name, last_name, email, phone)
-        VALUES (?, ?, ?, ?)
-    """, (first_name, last_name, email, phone))
+    c.execute("INSERT INTO ron_leads (first_name, last_name, email, phone) VALUES (?,?,?,?)",
+              (first_name, last_name, email, phone))
     conn.commit()
     conn.close()
+    print(f"[RON] New lead: {first_name} {last_name} <{email}> {phone}")
 
-    # 2. Save to Google Sheet (non-blocking)
-    sheet_thread = threading.Thread(
-        target=append_ron_lead_to_sheet,
-        args=(first_name, last_name, email, phone),
-        daemon=True,
-    )
-    sheet_thread.start()
-
-    resp = jsonify({"success": True, "message": "Lead captured."})
+    resp = jsonify({"success": True})
     resp.headers["Access-Control-Allow-Origin"] = "*"
     return resp, 200
+
+
+# ---------------------------------------------------------------------------
+# Leads viewer: GET /ron-leads  (password protected via dashboard login)
+# ---------------------------------------------------------------------------
+
+@app.route("/ron-leads")
+@login_required
+def ron_leads_page():
+    conn = sqlite3.connect(DATABASE_PATH)
+    conn.row_factory = sqlite3.Row
+    leads = conn.execute(
+        "SELECT * FROM ron_leads ORDER BY created_at DESC"
+    ).fetchall()
+    conn.close()
+
+    rows_html = ""
+    for l in leads:
+        rows_html += f"""
+        <tr>
+          <td>{l['created_at'][:16]}</td>
+          <td>{l['first_name'] or ''} {l['last_name'] or ''}</td>
+          <td>{l['email']}</td>
+          <td>{l['phone'] or '—'}</td>
+        </tr>"""
+
+    return f"""<!DOCTYPE html>
+<html>
+<head>
+  <title>Ron Leads</title>
+  <style>
+    body {{ font-family: sans-serif; background: #f9f9f9; padding: 40px; }}
+    h1 {{ font-size: 22px; margin-bottom: 20px; }}
+    table {{ width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 6px rgba(0,0,0,.08); }}
+    th {{ background: #6F00FF; color: #fff; padding: 12px 16px; text-align: left; font-size: 13px; }}
+    td {{ padding: 11px 16px; border-bottom: 1px solid #eee; font-size: 14px; }}
+    tr:last-child td {{ border-bottom: none; }}
+    .count {{ color: #888; font-size: 14px; margin-bottom: 16px; }}
+    a.export {{ display:inline-block; margin-bottom:20px; background:#6F00FF; color:#fff; padding:8px 18px; border-radius:6px; text-decoration:none; font-size:14px; }}
+  </style>
+</head>
+<body>
+  <h1>Ron Breitenbach — Leads</h1>
+  <p class="count">{len(leads)} total leads</p>
+  <a class="export" href="/ron-leads/export">Download CSV</a>
+  <table>
+    <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Phone</th></tr></thead>
+    <tbody>{rows_html or '<tr><td colspan=4 style="color:#888;text-align:center;padding:24px">No leads yet</td></tr>'}</tbody>
+  </table>
+</body>
+</html>"""
+
+
+@app.route("/ron-leads/export")
+@login_required
+def ron_leads_export():
+    import csv, io
+    conn = sqlite3.connect(DATABASE_PATH)
+    conn.row_factory = sqlite3.Row
+    leads = conn.execute("SELECT * FROM ron_leads ORDER BY created_at DESC").fetchall()
+    conn.close()
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(["Date", "First Name", "Last Name", "Email", "Phone"])
+    for l in leads:
+        writer.writerow([l['created_at'], l['first_name'], l['last_name'], l['email'], l['phone']])
+
+    from flask import Response
+    return Response(
+        output.getvalue(),
+        mimetype="text/csv",
+        headers={"Content-Disposition": "attachment; filename=ron_leads.csv"}
+    )
 
 
 # =============================================================================
