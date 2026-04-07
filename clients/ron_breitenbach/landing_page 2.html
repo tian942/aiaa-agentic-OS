@@ -505,7 +505,9 @@
 
 <script>
   // ── FORM SUBMISSION ─────────────────────────────────────────────────
-  const WEBHOOK_URL = "https://ron-leads-production.up.railway.app/webhook/ron-lead";
+  // Replace this URL with your deployed Railway app URL once live.
+  // Example: "https://your-app.up.railway.app/webhook/ron-lead"
+  const WEBHOOK_URL = "https://YOUR_RAILWAY_APP.up.railway.app/webhook/ron-lead";
 
   document.getElementById('lead-form').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -522,7 +524,6 @@
       last_name:  document.getElementById('last_name').value.trim(),
       email:      document.getElementById('email').value.trim(),
       phone:      document.getElementById('phone').value.trim(),
-      source:     'Investor ID Guide',
     };
 
     try {
