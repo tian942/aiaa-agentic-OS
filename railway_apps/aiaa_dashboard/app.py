@@ -2433,33 +2433,24 @@ PENDING_PAGE_TEMPLATE = """
 """
 
 # =============================================================================
-# Ron Breitenbach — Lead Capture + Email Sequence
+# Ron Breitenbach — Lead Capture → Google Sheet
 # =============================================================================
 #
 # Required environment variables:
-#   SENDGRID_API_KEY   — SendGrid API key for sending emails
-#   FROM_EMAIL         — Sender address (e.g. ron@yourdomain.com)
-#   FROM_NAME          — Sender display name (e.g. "Ron Breitenbach")
-#   RON_GUIDE_URL      — Direct link to the PDF/page with the Investor ID Guide
+#   GOOGLE_APPLICATION_CREDENTIALS — path to service account JSON
 #
-# Google Sheets (master sheet, existing):
-#   Sheet ID: 1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk
-#   Tab name: "Ron Leads — Apr 2026"
+# Master sheet: 1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk
+# Tab: "Ron Leads — Apr 2026"
 # =============================================================================
 
 import gspread
 from google.oauth2.service_account import Credentials as ServiceCredentials
 
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", "")
-FROM_EMAIL       = os.getenv("FROM_EMAIL", "ron@kairoscales.com")
-FROM_NAME        = os.getenv("FROM_NAME", "Ron Breitenbach")
-RON_GUIDE_URL    = os.getenv("RON_GUIDE_URL", "https://kairoscales.com/investor-id-guide")
-
-MASTER_SHEET_ID  = "1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk"
-RON_SHEET_TAB    = "Ron Leads — Apr 2026"
+MASTER_SHEET_ID = "1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk"
+RON_SHEET_TAB   = "Ron Leads — Apr 2026"
 
 # ---------------------------------------------------------------------------
-# DB tables for Ron's leads
+# DB table for Ron's leads (backup)
 # ---------------------------------------------------------------------------
 
 def init_ron_db():
@@ -2474,25 +2465,16 @@ def init_ron_db():
         source     TEXT DEFAULT 'landing_page',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )''')
-    c.execute('''CREATE TABLE IF NOT EXISTS ron_email_queue (
-        id          INTEGER PRIMARY KEY AUTOINCREMENT,
-        lead_id     INTEGER NOT NULL,
-        email_index INTEGER NOT NULL,
-        send_at     TIMESTAMP NOT NULL,
-        sent_at     TIMESTAMP,
-        status      TEXT DEFAULT 'pending',
-        FOREIGN KEY (lead_id) REFERENCES ron_leads(id)
-    )''')
     conn.commit()
     conn.close()
 
 init_ron_db()
 
 # ---------------------------------------------------------------------------
-# 8-email sequence copy
+# Google Sheets helper
 # ---------------------------------------------------------------------------
 
-def get_ron_emails(first_name, guide_url):
+def _UNUSED_get_ron_emails(first_name, guide_url):
     name = first_name or "there"
     return [
         # ── Email 0: Immediate ──────────────────────────────────────────────
@@ -2647,36 +2629,6 @@ def get_ron_emails(first_name, guide_url):
     ]
 
 # ---------------------------------------------------------------------------
-# Email sender (SendGrid)
-# ---------------------------------------------------------------------------
-
-def send_email_sendgrid(to_email, to_name, subject, html_body):
-    """Send a single email via SendGrid API."""
-    if not SENDGRID_API_KEY:
-        print(f"[EMAIL] No SENDGRID_API_KEY — skipping email to {to_email}")
-        return False
-    payload = {
-        "personalizations": [{"to": [{"email": to_email, "name": to_name}]}],
-        "from": {"email": FROM_EMAIL, "name": FROM_NAME},
-        "subject": subject,
-        "content": [{"type": "text/html", "value": html_body}],
-    }
-    resp = requests.post(
-        "https://api.sendgrid.com/v3/mail/send",
-        headers={
-            "Authorization": f"Bearer {SENDGRID_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json=payload,
-        timeout=15,
-    )
-    if resp.status_code in (200, 202):
-        print(f"[EMAIL] Sent '{subject}' to {to_email}")
-        return True
-    print(f"[EMAIL] SendGrid error {resp.status_code}: {resp.text}")
-    return False
-
-# ---------------------------------------------------------------------------
 # Google Sheets helper
 # ---------------------------------------------------------------------------
 
@@ -2700,66 +2652,6 @@ def append_ron_lead_to_sheet(first_name, last_name, email, phone):
         print(f"[SHEETS] Appended lead {email} to '{RON_SHEET_TAB}'")
     except Exception as e:
         print(f"[SHEETS] Error saving lead to sheet: {e}")
-
-# ---------------------------------------------------------------------------
-# Background email scheduler thread
-# ---------------------------------------------------------------------------
-
-def ron_email_scheduler():
-    """Runs in background. Every 60s, checks for pending emails and sends them."""
-    from datetime import timezone
-    while True:
-        try:
-            conn = sqlite3.connect(DATABASE_PATH)
-            conn.row_factory = sqlite3.Row
-            c = conn.cursor()
-            now_str = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
-            rows = c.execute("""
-                SELECT q.id, q.lead_id, q.email_index,
-                       l.first_name, l.last_name, l.email
-                FROM ron_email_queue q
-                JOIN ron_leads l ON l.id = q.lead_id
-                WHERE q.status = 'pending' AND q.send_at <= ?
-                ORDER BY q.send_at ASC
-                LIMIT 20
-            """, (now_str,)).fetchall()
-
-            for row in rows:
-                emails = get_ron_emails(row["first_name"], RON_GUIDE_URL)
-                idx = row["email_index"]
-                if idx < len(emails):
-                    email_data = emails[idx]
-                    full_name = f"{row['first_name'] or ''} {row['last_name'] or ''}".strip()
-                    ok = send_email_sendgrid(
-                        to_email=row["email"],
-                        to_name=full_name or row["email"],
-                        subject=email_data["subject"],
-                        html_body=email_data["html"],
-                    )
-                    status = "sent" if ok else "failed"
-                    c.execute("""
-                        UPDATE ron_email_queue
-                        SET status=?, sent_at=?
-                        WHERE id=?
-                    """, (status, now_str, row["id"]))
-                    conn.commit()
-        except Exception as e:
-            print(f"[SCHEDULER] Error: {e}")
-        finally:
-            try:
-                conn.close()
-            except Exception:
-                pass
-        time.sleep(60)
-
-# Start the scheduler in a background thread
-_scheduler_thread = threading.Thread(target=ron_email_scheduler, daemon=True)
-_scheduler_thread.start()
-
-# ---------------------------------------------------------------------------
-# Email send delays (days after signup)
-# ---------------------------------------------------------------------------
-EMAIL_SEND_DELAYS_DAYS = [0, 1, 3, 5, 7, 10, 14, 21]
 
 # ---------------------------------------------------------------------------
 # Webhook endpoint: POST /webhook/ron-lead
@@ -2786,33 +2678,17 @@ def ron_lead_webhook():
         resp.headers["Access-Control-Allow-Origin"] = "*"
         return resp, 400
 
-    # 1. Save lead to SQLite
+    # 1. Save to SQLite as backup
     conn = sqlite3.connect(DATABASE_PATH)
     c = conn.cursor()
     c.execute("""
         INSERT INTO ron_leads (first_name, last_name, email, phone)
         VALUES (?, ?, ?, ?)
     """, (first_name, last_name, email, phone))
-    lead_id = c.lastrowid
-
-    # 2. Schedule all 8 emails
-    now = datetime.utcnow()
-    for idx, delay_days in enumerate(EMAIL_SEND_DELAYS_DAYS):
-        from datetime import timedelta
-        send_at = now + timedelta(days=delay_days)
-        # Email 0 sends in 10 seconds so it arrives quickly
-        if delay_days == 0:
-            from datetime import timedelta as td
-            send_at = now + td(seconds=10)
-        c.execute("""
-            INSERT INTO ron_email_queue (lead_id, email_index, send_at)
-            VALUES (?, ?, ?)
-        """, (lead_id, idx, send_at.strftime("%Y-%m-%d %H:%M:%S")))
-
     conn.commit()
     conn.close()
 
-    # 3. Save to Google Sheet (non-blocking)
+    # 2. Save to Google Sheet (non-blocking)
     sheet_thread = threading.Thread(
         target=append_ron_lead_to_sheet,
         args=(first_name, last_name, email, phone),
@@ -2820,7 +2696,7 @@ def ron_lead_webhook():
     )
     sheet_thread.start()
 
-    resp = jsonify({"success": True, "message": "Lead captured and email sequence started."})
+    resp = jsonify({"success": True, "message": "Lead captured."})
     resp.headers["Access-Control-Allow-Origin"] = "*"
     return resp, 200
 
