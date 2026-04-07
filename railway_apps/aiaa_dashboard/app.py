@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """
-AIAA Agentic OS Dashboard - Complete Management System v2.3
+Kairo Marketing Automation Engine v1.0
+Premium AI-Powered Marketing Package Generator
 
 Features:
-- Password-protected authentication
-- Light/Dark mode toggle with localStorage persistence
-- 138 workflows with comprehensive documentation
-- Environment variable management (view AND set)
-- Webhook endpoint monitoring
-- Real-time logs and event tracking
-- Mobile-responsive design
+- Batch process up to 30 companies at once
+- Generate 5 marketing assets per company (VSL, Landing Page, Emails, Creative Brief, Offer Deep Dive)
+- Beautiful public landing pages for each company
+- Real-time progress tracking
+- Premium blue/gold/white design with animations
 """
 
 import os
@@ -17,13 +16,16 @@ import json
 import hashlib
 import secrets
 import re
+import sqlite3
+import threading
+import time
+import requests
 from datetime import datetime
 from functools import wraps
 from collections import deque
-import threading
+from urllib.parse import urlparse
 
-from flask import Flask, request, jsonify, render_template_string, redirect, url_for, session
-from markupsafe import Markup
+from flask import Flask, request, jsonify, render_template_string, redirect, url_for, session, g
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", secrets.token_hex(32))
@@ -34,2680 +36,1798 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", secrets.token_hex(32))
 
 DASHBOARD_USERNAME = os.getenv("DASHBOARD_USERNAME", "admin")
 DASHBOARD_PASSWORD_HASH = os.getenv("DASHBOARD_PASSWORD_HASH", "")
-
-TRACKED_ENV_VARS = [
-    "OPENROUTER_API_KEY",
-    "PERPLEXITY_API_KEY", 
-    "SLACK_WEBHOOK_URL",
-    "CALENDLY_API_KEY",
-    "GOOGLE_OAUTH_TOKEN_JSON",
-    "ANTHROPIC_API_KEY",
-    "OPENAI_API_KEY",
-    "FAL_KEY",
-]
-
-events_log = deque(maxlen=500)
-events_lock = threading.Lock()
-RUNTIME_ENV_VARS = {}
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+DATABASE_PATH = os.getenv("DATABASE_PATH", "marketing_engine.db")
 
 # =============================================================================
-# Simple Markdown to HTML Converter
+# Database Setup
 # =============================================================================
 
-def markdown_to_html(text):
-    """Convert markdown to HTML with proper formatting."""
-    if not text:
-        return ""
-    
-    # Escape HTML first
-    text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-    
-    # Code blocks (``` ... ```)
-    text = re.sub(r'```(\w*)\n(.*?)```', r'<pre><code class="language-\1">\2</code></pre>', text, flags=re.DOTALL)
-    
-    # Inline code (`code`)
-    text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
-    
-    # Headers
-    text = re.sub(r'^### (.+)$', r'<h4>\1</h4>', text, flags=re.MULTILINE)
-    text = re.sub(r'^## (.+)$', r'<h3>\1</h3>', text, flags=re.MULTILINE)
-    text = re.sub(r'^# (.+)$', r'<h2>\1</h2>', text, flags=re.MULTILINE)
-    
-    # Bold
-    text = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', text)
-    
-    # Italic
-    text = re.sub(r'\*([^*]+)\*', r'<em>\1</em>', text)
-    
-    # Lists - unordered
-    lines = text.split('\n')
-    in_list = False
-    result = []
-    for line in lines:
-        if re.match(r'^- ', line):
-            if not in_list:
-                result.append('<ul>')
-                in_list = True
-            result.append('<li>' + line[2:] + '</li>')
-        elif re.match(r'^\d+\. ', line):
-            if not in_list:
-                result.append('<ol>')
-                in_list = 'ol'
-            result.append('<li>' + re.sub(r'^\d+\. ', '', line) + '</li>')
-        else:
-            if in_list:
-                result.append('</ul>' if in_list == True else '</ol>')
-                in_list = False
-            result.append(line)
-    if in_list:
-        result.append('</ul>' if in_list == True else '</ol>')
-    text = '\n'.join(result)
-    
-    # Tables
-    text = re.sub(r'\|(.+)\|', lambda m: '<tr>' + ''.join(f'<td>{c.strip()}</td>' for c in m.group(1).split('|')) + '</tr>', text)
-    text = re.sub(r'(<tr>.*?</tr>\n?)+', r'<table class="md-table">\g<0></table>', text)
-    
-    # Paragraphs
-    text = re.sub(r'\n\n+', '</p><p>', text)
-    text = '<p>' + text + '</p>'
-    
-    # Clean up
-    text = text.replace('<p></p>', '').replace('<p><h', '<h').replace('</h2></p>', '</h2>')
-    text = text.replace('</h3></p>', '</h3>').replace('</h4></p>', '</h4>')
-    text = text.replace('<p><ul>', '<ul>').replace('</ul></p>', '</ul>')
-    text = text.replace('<p><ol>', '<ol>').replace('</ol></p>', '</ol>')
-    text = text.replace('<p><pre>', '<pre>').replace('</pre></p>', '</pre>')
-    text = text.replace('<p><table', '<table').replace('</table></p>', '</table>')
-    
-    return Markup(text)
-
-# =============================================================================
-# Workflow Registry with Comprehensive Descriptions (v2.3 - 138 Workflows)
-# =============================================================================
-
-WORKFLOWS = {
-    "ab_test_analyzer": {
-        "description": "Analyze A/B test results with statistical significance and clear recommendations",
-        "has_script": True,
-        "category": "Research",
-        "full_description": """## Overview
-Analyzes A/B test results, calculates statistical significance, and generates clear recommendations on whether to implement the variant.
-
-## Prerequisites
-- `OPENAI_API_KEY` (optional for AI insights)
-- scipy, numpy installed
-
-## How to Run
-```bash
-python3 execution/generate_ab_test_analysis.py \\
-  --control '{"visitors": 5000, "conversions": 250}' \\
-  --variant '{"visitors": 5000, "conversions": 325}' \\
-  --test_name "Homepage CTA"
-```
-
-## Process
-1. Input control vs variant data
-2. Calculate conversion rates and lift
-3. Perform statistical significance tests (chi-square, t-test)
-4. Generate confidence level and p-value
-5. Output recommendation with projected impact
-
-## Decision Framework
-| Confidence | Lift | Decision |
-|------------|------|----------|
-| >95% | >10% | Implement |
-| >95% | <10% | Consider |
-| <95% | Any | Continue testing |
-
-## Cost
-~$0.02 per analysis""",
-        "inputs": ["control_data", "variant_data", "test_name", "confidence_target"],
-        "outputs": ["Statistical analysis", "Recommendation", "Projected impact"]
-    },
-    
-    "ad_creative_generator": {
-        "description": "Generate ad creative concepts with copy, headlines, and AI-generated images via fal.ai",
-        "has_script": True,
-        "category": "Paid Advertising",
-        "full_description": """## Overview
-Generates ad copy and creative concepts for Meta, Google, and LinkedIn ads with multiple variations for A/B testing. Uses fal.ai Nano Banana Pro for image generation.
-
-## Prerequisites
-- `OPENAI_API_KEY` - For ad copy generation
-- `FAL_KEY` - For AI image generation
-
-## How to Run
-```bash
-python3 execution/generate_ad_creative.py \\
-  --product "[PRODUCT]" \\
-  --audience "[AUDIENCE]" \\
-  --platform meta \\
-  --type image \\
-  --variations 5
-```
-
-## Ad Copy Formulas
-- **Problem-Solution**: "Tired of [problem]? [Product] helps you [solution]."
-- **Social Proof**: "Join [X] companies who [benefit] with [product]."
-- **Curiosity**: "The secret to [result] that [audience] are using."
-
-## Platform Formats
-- **Meta**: 125 char primary + 40 char headline + 30 char description
-- **Google Search**: 3x30 char headlines + 2x90 char descriptions
-- **LinkedIn**: 150 char intro + 70 char headline
-
-## Cost
-~$0.05-0.10 per ad set (copy) + ~$0.04/image""",
-        "inputs": ["product", "audience", "platform", "ad_type", "variations"],
-        "outputs": ["Ad copy variations", "Headlines", "Image prompts", "CTA recommendations"]
-    },
-    
-    "ai_cold_email_personalizer": {
-        "description": "Personalize cold emails at scale using AI research on each prospect",
-        "has_script": True,
-        "category": "Sales Outreach",
-        "full_description": """## Overview
-Uses AI to research each prospect and generate hyper-personalized email openers that significantly increase response rates.
-
-## Prerequisites
-- `OPENAI_API_KEY` - For AI generation
-- `PERPLEXITY_API_KEY` - For web research
-- `GOOGLE_APPLICATION_CREDENTIALS` - For Sheets
-
-## How to Run
-```bash
-# Step 1: Research prospects
-python3 execution/research_prospect.py "[SHEET_URL]" -o .tmp/research.json
-
-# Step 2: Generate personalized lines
-python3 execution/personalize_emails_ai.py .tmp/research.json \\
-  --service "your service" --value_prop "key benefit"
-
-# Step 3: Update sheet
-python3 execution/update_sheet.py .tmp/personalized.json "[SHEET_URL]"
-```
-
-## First Line Patterns
-- **Recent Achievement**: "Congrats on the Series A..."
-- **Content Reference**: "Your LinkedIn post about X hit home..."
-- **Company Observation**: "Noticed you're hiring 3 SDRs..."
-
-## Personalization Levels
-- Light ($0.01/lead): Company website scan
-- Medium ($0.03/lead): Company + LinkedIn profile
-- Deep ($0.10/lead): Full prospect research
-
-## Quality Control
-- Specific (not generic)
-- Accurate (fact-checkable)
-- Concise (<25 words)""",
-        "inputs": ["lead_list_sheet", "service", "value_proposition"],
-        "outputs": ["Personalized first lines", "Pain points", "Research notes"]
-    },
-    
-    "ai_customer_onboarding_agent": {
-        "description": "Automated customer onboarding with Slack channels, Google Drive, and CRM tasks",
-        "has_script": True,
-        "category": "Client Management",
-        "full_description": """## Overview
-Automates new client onboarding by creating Slack channels, Google Drive folders, CRM contacts, and tasks from form submission.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - For AI processing
-- `SLACK_BOT_TOKEN` - For Slack integration
-- `GOOGLE_APPLICATION_CREDENTIALS` - For Drive
-
-## How to Run
-```bash
-python3 execution/onboard_client.py \\
-  --name "John Smith" \\
-  --email "john@company.com" \\
-  --company "Company Inc" \\
-  --website "https://company.com" \\
-  --proposal "[PATH_TO_FILE]"
-```
-
-## Process
-1. Receive onboarding form submission
-2. Create Slack channel and post welcome
-3. Create client folder in Google Drive
-4. Extract tasks from proposal document with AI
-5. Create tasks in project management
-6. Send welcome email
-
-## Integrations
-- Slack (channels, messages)
-- Google Drive (folders)
-- CRM (contact creation)
-- Task management""",
-        "inputs": ["client_name", "email", "company", "website", "proposal"],
-        "outputs": ["Slack channel", "Drive folder", "CRM contact", "Onboarding tasks"]
-    },
-    
-    "ai_image_generator": {
-        "description": "Generate images using AI models like DALL-E or fal.ai for content and ads",
-        "has_script": True,
-        "category": "Creative",
-        "full_description": """## Overview
-Generates custom images using DALL-E or fal.ai for use in content, ads, and social media.
-
-## Prerequisites
-- `OPENAI_API_KEY` - For DALL-E
-- `FAL_KEY` - For fal.ai models
-
-## How to Run
-```bash
-python3 execution/generate_image_prompt.py \\
-  --concept "Professional businessman smiling" \\
-  --style photorealistic \\
-  --platform midjourney \\
-  --variations 4
-```
-
-## Style Options
-- Photorealistic
-- Digital illustration
-- 3D render
-- Watercolor
-- Minimalist
-- Anime/cartoon
-
-## Prompt Best Practices
-`[Subject], [Style], [Lighting], [Composition], [Details]`
-
-## Cost
-- DALL-E: ~$0.04/image
-- fal.ai Nano Banana Pro: ~$0.02/image""",
-        "inputs": ["prompt", "style", "size", "quantity"],
-        "outputs": ["Generated images", "Image URLs"]
-    },
-    
-    "ai_landing_page_generator": {
-        "description": "Generate complete landing pages with PROPS formula and 5 design styles",
-        "has_script": True,
-        "category": "Content Generation",
-        "full_description": """## Overview
-Generate high-converting landing pages using the **PROPS formula** (Problem, Result, Offer, Proof, Scarcity). Creates complete HTML/CSS pages with modern design, responsive layouts, and conversion-optimized copy.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` or `ANTHROPIC_API_KEY`
-- `PERPLEXITY_API_KEY` (optional for research)
-
-## How to Run
-```bash
-python3 execution/generate_landing_page.py \\
-  --product "AI Course" \\
-  --audience "Agency owners" \\
-  --benefit "10x productivity" \\
-  --price "$997" \\
-  --style neo_noir
-```
-
-## PROPS Formula
-- **P**roblem Amplification (3-layer deep)
-- **R**esult Demonstration (Real, Relatable, Reachable)
-- **O**bjection Removal (Time, Money, Past failure)
-- **P**roof Stacking (Data → Testimonials → Case study)
-- **S**imple Next Step (Single CTA)
-
-## 5 Design Styles
-1. **Neo Noir** - Dark dramatic, cinematic
-2. **Editorial Luxury** - Elegant, high-ticket
-3. **Electric Tech** - Futuristic, SaaS
-4. **Warm Organic** - Wellness, coaching
-5. **Neubrutalism** - Bold, raw, startups
-
-## Quality Gates
-- Headlines under 10 words
-- Mobile responsive (375px, 768px, 1024px)
-- Unique mechanism named and differentiated
-
-## Cost
-~$0.06-0.20 per landing page""",
-        "inputs": ["product_name", "target_audience", "main_benefit", "price", "design_style"],
-        "outputs": ["Complete landing page HTML", "Mobile-responsive CSS", "Live Cloudflare URL"]
-    },
-    
-    "calendly_meeting_prep": {
-        "description": "Auto-research prospects when meetings are booked via Calendly webhook",
-        "has_script": True,
-        "category": "Sales Automation",
-        "full_description": """## Overview
-Automatically research prospects the moment they book a meeting on Calendly. Get instant Slack alerts, deep company research, personalized talking points, and a formatted Google Doc.
-
-## Step-by-Step Process
-
-### Step 1: Webhook Reception
-- Calendly fires webhook on `invitee.created` event
-- Extract prospect name, email, company from payload
-- Send immediate Slack alert with meeting details
-
-### Step 2: Company Research (Perplexity AI)
-Research includes:
-- What the company does
-- Company size and target market
-- Recent news and developments
-- Products/services offered
-- Key competitors
-
-### Step 3: Prospect Research (Perplexity AI)
-Research includes:
-- Role and job responsibilities
-- Professional background
-- LinkedIn activity and content
-- Relevant expertise areas
-
-### Step 4: Generate Talking Points (Claude)
-AI generates:
-- 5 personalized talking points based on research
-- 3 thoughtful questions to ask
-- Potential pain points to address
-- Connection points between your offer and their needs
-- Meeting goals and strategy
-
-### Step 5: Create Google Doc
-Formatted document includes:
-- Executive Summary (3-4 sentences)
-- Company Research section
-- Prospect Research section
-- Talking Points & Questions
-- Meeting Details
-
-### Step 6: Send Summary to Slack
-Brief summary with:
-- Company overview
-- Key talking points
-- Link to full Google Doc
-
-## Quality Gates
-- Slack alert sends within seconds of booking
-- Company name extracted correctly
-- Research returns relevant, current data
-- Google Doc formatted properly
-
-## Integration Requirements
-- Calendly API (webhook subscription)
-- Perplexity API (research)
-- OpenRouter/Claude (talking points)
-- Google OAuth (Docs creation)
-- Slack Webhook (notifications)""",
-        "inputs": ["Calendly webhook (automatic)"],
-        "outputs": ["Instant Slack alert", "Company research", "Prospect research", "Talking points", "Google Doc"]
-    },
-    
-    "cold_email_scriptwriter": {
-        "description": "Generate personalized cold email sequences with A/B variants using proven frameworks",
-        "has_script": True,
-        "category": "Sales Outreach",
-        "full_description": """## Overview
-Generate personalized cold email sequences with A/B variants using AI research and proven copywriting frameworks like AIDA, PAS, and BAB.
-
-## Step-by-Step Process
-
-### Step 1: Process Lead List
-- Upload CSV with prospect information
-- Normalize and validate data
-- Extract key fields (name, title, company, email)
-
-### Step 2: Prospect Research Agent
-For each prospect, research via Perplexity:
-- Pain points specific to their industry/role
-- Business priorities and challenges
-- Conversation starters (recent news, content)
-- Likely objections
-- Best timing context
-- Personalization angles
-
-### Step 3: First Line Writer
-Generate hyper-personalized first lines:
-- Reference specific research insights
-- Mention recent company news or achievements
-- Connect to their posted content
-- Show genuine understanding of their situation
-
-### Step 4: Email Sequence Generator
-Create 5-7 email sequence using proven patterns:
-
-**Pattern A: Problem + Social Proof + Soft Ask**
-1. Opening: Direct acknowledgment of their situation
-2. Social Proof: Concrete result from similar company
-3. Bridge: How you achieve this outcome
-4. CTA: Low-commitment question
-
-**Pattern B: Observation + Value + Permission**
-1. Opening: Specific observation about their business
-2. Value Tease: "I found X opportunities"
-3. Permission: "Mind if I send over?"
-
-### Step 5: A/B Variant Generator
-Create 3 variants for split testing:
-- **Variant A**: Before/After/Bridge framework
-- **Variant B**: Curiosity hook approach
-- **Variant C**: Direct problem/solution
-
-### Step 6: Export to Google Sheet
-Organized columns:
-- Prospect info
-- Research insights
-- First line options
-- Full email sequence
-- A/B variants
-- Subject line options
-
-## Email Sequence Structure
-- **Email 1**: Value-first introduction
-- **Email 2**: Social proof + case study
-- **Email 3**: Different angle/hook
-- **Email 4**: Break-up / last chance
-- **Email 5-7**: Nurture sequence
-
-## Quality Gates
-- Personalization verified (no generic openers)
-- Each email under 150 words
-- Clear CTA in every email
-- Subject lines A/B testable""",
-        "inputs": ["lead_list_csv", "sender_name", "product", "value_proposition"],
-        "outputs": ["5-7 email sequence", "A/B variants", "Subject lines", "Google Sheet"]
-    },
-    
-    "vsl_funnel_orchestrator": {
-        "description": "Master orchestrator for complete VSL funnel creation pipeline",
-        "has_script": True,
-        "category": "Funnel Building",
-        "full_description": """## Overview
-**Master orchestrator** that coordinates the complete VSL funnel creation pipeline. Single entry point that triggers all sub-workflows in sequence, manages data flow, handles errors, and delivers final outputs.
-
-## Step-by-Step Process
-
-### Step 1: Validate Inputs
-- Verify company name provided
-- Validate website URL is accessible
-- Confirm offer description is clear
-- Check all API keys configured
-
-### Step 2: Market Research (Workflow #1)
-Trigger `company_market_research` workflow:
-- Company background, funding, team
-- Products and pricing analysis
-- Target audience pain points
-- Competitor landscape
-- Social proof extraction
-
-**Checkpoint:** Save to `.tmp/vsl_funnel_{company}/01_research.json`
-
-### Step 3: VSL Script Writer (Workflow #2)
-Trigger `vsl_script_writer` workflow:
-
-**Script Structure (10 Parts):**
-1. Pattern interrupt hook (30 sec)
-2. Big promise and credibility (2 min)
-3. Problem agitation (5 min)
-4. Solution reveal (3 min)
-5. Mechanism explanation (5 min)
-6. Proof and testimonials (5 min)
-7. Offer presentation (5 min)
-8. Bonuses and stack (3 min)
-9. Guarantee (2 min)
-10. Urgency and close (3 min)
-
-**Checkpoint:** Save to `.tmp/vsl_funnel_{company}/02_vsl_script.md`
-
-### Step 4: Sales Page Writer (Workflow #3)
-Trigger `vsl_sales_page_writer` workflow:
-- Generate headline variations (3)
-- Write benefit bullets matching VSL
-- Create testimonials section
-- Build offer stack
-- Add FAQ addressing objections
-
-**Checkpoint:** Save to `.tmp/vsl_funnel_{company}/03_sales_page.md`
-
-### Step 5: Email Sequence Writer (Workflow #4)
-Trigger `vsl_email_sequence_writer` workflow:
-- 7-email follow-up sequence
-- Each email has 2 subject line options
-- Progression: value → urgency
-- Clear CTAs throughout
-
-**Checkpoint:** Save to `.tmp/vsl_funnel_{company}/04_email_sequence.md`
-
-### Step 6: Google Doc Creation (Workflow #5)
-Create 4 Google Docs in parallel:
-- Market Research document
-- VSL Script document
-- Sales Page Copy document
-- Email Sequence document
-
-### Step 7: Slack Notification (Workflow #6)
-Send completion message with:
-- All 4 document links
-- Execution time
-- VSL estimated length
-- Any warnings or notes
-
-## Error Handling Strategy
-- Research fails → Retry once → Fail workflow
-- VSL generation fails → Retry with adjusted params
-- Google Docs fails → Save local files → Continue
-- Slack fails → Log error → Workflow still succeeds
-
-## Quality Gates
-- All 6 sub-workflows completed
-- 4 Google Docs created
-- Slack notification sent
-- Execution time < 10 minutes""",
-        "inputs": ["company", "website", "offer", "price", "target_audience"],
-        "outputs": ["Market research doc", "VSL script doc", "Sales page doc", "Email sequence doc"]
-    },
-    
-    "company_market_research": {
-        "description": "Deep company and market research via Perplexity AI for VSL funnels",
-        "has_script": True,
-        "category": "Research",
-        "full_description": """## Overview
-Conduct comprehensive market research on any company and their offer using Perplexity AI to gather intelligence for VSL funnel creation, positioning strategy, and competitive analysis.
-
-## Step-by-Step Process
-
-### Step 1: Company Overview Research
-Perplexity query for:
-- Company overview and mission
-- Core products/services
-- Target market and ideal customers
-- Company size and stage
-- Recent news or announcements
-- Social media presence
-
-### Step 2: Offer Analysis
-Research the specific offer:
-- How the offer works (mechanism)
-- Key features and benefits
-- Pricing structure
-- Customer results or case studies
-- Unique selling propositions
-- Common objections
-
-### Step 3: Target Audience Research
-Deep dive into audience:
-- Demographic profile (titles, company size)
-- Primary pain points and challenges
-- Current solutions they're using
-- Buying triggers and motivations
-- Common objections to similar offers
-- Language and terminology they use
-
-### Step 4: Competitive Landscape
-Analyze competitors:
-- Top 3-5 direct competitors
-- How they position their offers
-- Pricing comparison
-- Strengths and weaknesses
-- Market gaps and opportunities
-
-### Step 5: Social Proof & Results
-Find validation:
-- Quantifiable results (revenue, leads, ROI)
-- Customer success stories
-- Reviews and ratings
-- Industry recognition or awards
-- Media mentions or features
-
-### Step 6: Synthesis
-Combine all research into:
-- Executive summary
-- Company & offer overview
-- Target audience profile
-- Unique mechanism identification
-- Transformation promise
-- Social proof library
-- Recommended messaging angles
-
-## Output Structure
-```json
-{
-  "company": { "name", "overview", "size", "industry" },
-  "offer": { "name", "mechanism", "price", "features" },
-  "targetAudience": { "demographics", "painPoints", "desires" },
-  "transformation": { "before", "after", "mechanism" },
-  "socialProof": { "results", "testimonials", "caseStudies" },
-  "competitors": [ { "name", "positioning", "price" } ],
-  "messaging": { "hooks", "angles", "objections" }
-}
-```
-
-## Quality Gates
-- All 5 research sections completed
-- Minimum 500 words per section
-- At least 3 pain points identified
-- At least 1 unique mechanism found
-- At least 3 social proof elements""",
-        "inputs": ["company", "website", "offer", "industry"],
-        "outputs": ["Research dossier JSON", "Markdown report", "Messaging recommendations"]
-    },
-    
-    "ultimate_meta_ads_campaign": {
-        "description": "Complete Meta/Facebook/Instagram ads campaign from creative to structure",
-        "has_script": True,
-        "category": "Paid Advertising",
-        "full_description": """## Overview
-Complete Meta advertising campaign system from creative generation to campaign structure. Produces ad copy, creative briefs, audience targeting, campaign architecture, and optimization playbook.
-
-## Step-by-Step Process
-
-### Phase 1: Competitive Research
-- Scrape Facebook Ad Library for competitor ads
-- Analyze ad copy patterns and hooks
-- Identify winning creative formats
-- Document audience targeting insights
-
-### Phase 2: Audience Strategy
-**Cold Audiences:**
-- Interest targeting (detailed)
-- Lookalike audiences (1%, 2%, 5%)
-- Broad targeting with creative filtering
-
-**Warm Audiences:**
-- Website visitors (30/60/90 days)
-- Video viewers (25%, 50%, 75%)
-- Engagement audiences
-
-**Hot Audiences:**
-- Cart abandoners
-- Past purchasers
-- High-intent page visitors
-
-### Phase 3: Ad Copy Generation
-**Primary Text (5 variations):**
-- Hook-focused (pattern interrupt)
-- Problem-focused (pain point)
-- Solution-focused (outcome)
-- Story-focused (testimonial)
-- FOMO-focused (urgency)
-
-**Headlines (5 variations):**
-- Benefit-driven
-- Curiosity-driven
-- Number-driven
-- Question-driven
-- Command-driven
-
-### Phase 4: Creative Briefs
-**Static Images:**
-- Hero product shot
-- Before/after comparison
-- Testimonial quote card
-- Feature highlight
-- Social proof collage
-
-**Video Concepts:**
-- UGC-style testimonial
-- Product demo
-- Problem/solution narrative
-- Founder story
-
-### Phase 5: Campaign Structure
-```
-Campaign: [Client] - [Objective] - [Stage]
-├── Ad Set: Cold - Interest Targeting
-│   ├── Ad: Hook v1 - Image A
-│   └── Ad: Hook v2 - Video A
-├── Ad Set: Cold - Lookalike 1%
-│   └── Ad: Problem v1 - Image B
-└── Ad Set: Warm - Retargeting
-    └── Ad: Testimonial v1
-```
-
-### Phase 6: Optimization Playbook
-**Day 1-3:** Learning phase, don't touch
-**Day 4-7:** Kill <1% CTR ads, scale winners
-**Week 2+:** Duplicate winners, increase budgets 20%
-
-## Performance Benchmarks
-| Metric | Cold | Warm | Hot |
-|--------|------|------|-----|
-| CTR | 1%+ | 2%+ | 3%+ |
-| CPC | <$2 | <$1.50 | <$1 |
-| ROAS | 1.5x+ | 3x+ | 5x+ |""",
-        "inputs": ["client", "product", "offer", "target_audience", "monthly_budget", "objective"],
-        "outputs": ["Campaign structure", "Ad copy variations", "Creative briefs", "Audience targeting", "Optimization playbook"]
-    },
-    
-    "youtube_knowledge_miner": {
-        "description": "Extract knowledge from YouTube videos into structured skill bibles",
-        "has_script": True,
-        "category": "Research",
-        "full_description": """## Overview
-Automated system that extracts best practices and how-to knowledge from top YouTube channels in any niche, converts video content into structured manuals, and generates comprehensive skill bibles.
-
-## Step-by-Step Process
-
-### Step 1: Channel Discovery
-- Search YouTube Data API for authority channels
-- Filter by subscriber count (min 5,000)
-- Filter by video count and consistency
-- Rank by authority metrics
-
-### Step 2: Video Selection
-- Get uploads playlist for each channel
-- Filter by view count (min 5,000)
-- Filter by duration (min 5 minutes)
-- Select top-performing educational content
-
-### Step 3: Transcript Retrieval
-Fallback chain:
-1. Supadata API (fast, reliable)
-2. TranscriptAPI (secondary)
-3. youtube-transcript-api (free fallback)
-
-### Step 4: Manual Generation
-Send transcript to Claude/Gemini for:
-- Executive Summary
-- Key Concepts
-- Step-by-Step Process
-- Best Practices
-- Common Mistakes
-- Tools/Resources Mentioned
-- Actionable Takeaways
-- Skill Rating (1-10)
-
-### Step 5: Quality Filtering
-- AI rates each manual 1-10
-- Filter by minimum rating (default: 7)
-- Rank by automation potential
-
-### Step 6: Skill Bible Synthesis
-- Combine multiple high-quality manuals
-- Generate comprehensive skill bible
-- Save to skills/ directory
-
-## Output Structure
-```
-.tmp/knowledge_mine/
-├── channels.json
-├── videos.json
-├── manuals/
-│   ├── video_title_1.md
-│   └── video_title_2.md
-├── manuals_index.json
-└── SKILL_BIBLE_*.md
-```
-
-## Cost Estimates
-| Component | Cost |
-|-----------|------|
-| YouTube Data API | Free (10K/day) |
-| Supadata transcript | ~$0.01/video |
-| Claude processing | ~$0.03/video |
-| **50 videos total** | **~$2.00** |""",
-        "inputs": ["niche_keywords", "max_channels", "videos_per_channel", "min_skill_rating"],
-        "outputs": ["Channel list", "Video metadata", "Individual manuals", "Synthesized skill bible"]
-    },
-    
-    "generate_content_calendar": {
-        "description": "Generate complete content calendars with topics, hooks, and schedules",
-        "has_script": True,
-        "category": "Content Marketing",
-        "full_description": """## Overview
-Generate complete content calendars with topics, platform-specific hooks, and optimal posting schedules. Output to Google Sheets for team collaboration.
-
-## Step-by-Step Process
-
-### Step 1: Define Content Strategy
-Gather from user:
-- Unique angle/expertise
-- Past high-performing content
-- Goals (leads, brand, thought leadership)
-- Topics to cover or avoid
-
-### Step 2: Generate Topic Ideas
-For each content pillar:
-- 10 educational topics (how-to, tips, frameworks)
-- 5 story-based topics (case studies, lessons)
-- 5 contrarian takes (myths, unpopular opinions)
-- 5 engagement topics (questions, polls)
-
-### Step 3: Create Platform-Specific Hooks
-
-**Twitter/X Format:**
-- Hook (first line stops scroll)
-- Thread outline (5-7 points)
-- CTA
-
-**LinkedIn Format:**
-- Hook (pattern interrupt)
-- Story/insight structure
-- Engagement question
-
-**YouTube Format:**
-- Title options (3)
-- Thumbnail concept
-- Video outline
-
-### Step 4: Build Calendar Structure
-Google Sheet tabs:
-- **Overview**: Monthly view with content mix
-- **Twitter**: Daily posts with hooks
-- **LinkedIn**: 3-5 posts/week
-- **YouTube**: Weekly video topics
-
-### Step 5: Schedule Distribution
-Based on:
-- Optimal posting times per platform
-- Content variety (no same pillar back-to-back)
-- Key dates/events in industry
-
-### Step 6: Export to Sheet
-Columns include date, pillar, topic, hook, full content, status.
-
-## Content Mix (per week)
-- 40% Educational (tips, how-to)
-- 25% Story/Case Study
-- 20% Engagement (questions, polls)
-- 15% Promotional
-
-## Hook Patterns
-1. "Stop [common advice]. Here's what actually works:"
-2. "I went from [bad] to [good] in [time]. Here's how:"
-3. "[Number] [things] that [benefit]:"
-4. "Why do most [people] fail at [thing]?"
-5. "[Bold claim]. Let me explain:"
-
-## Quality Gates
-- All platforms have content assigned
-- Hooks pass scroll-stopping test
-- No content pillar repeated consecutively""",
-        "inputs": ["content_pillars", "platforms", "weeks", "posting_frequency"],
-        "outputs": ["Google Sheet calendar", "Topic ideas", "Platform-specific hooks"]
-    },
-    
-    "blog_post_writer": {
-        "description": "Generate SEO-optimized long-form blog posts with proper structure",
-        "has_script": True,
-        "category": "Content Generation",
-        "full_description": """## Overview
-Generate long-form, SEO-optimized blog posts with proper keyword targeting, structure, and CTAs ready for publication.
-
-## Step-by-Step Process
-
-### Step 1: Keyword Research (Optional)
-Research includes:
-- Search volume
-- Keyword difficulty
-- Related keywords
-- Questions people ask
-- Competitor content analysis
-
-### Step 2: Generate Outline
-AI creates structure:
-- H1 with primary keyword
-- H2s with secondary keywords
-- H3s for subsections
-- FAQ section topics
-
-### Step 3: Write Article
-Using proven structure:
-```markdown
-# [H1: Primary Keyword in Title]
-
-[Hook paragraph - address reader's problem]
-
-**In this guide, you'll learn:**
-- [Benefit 1]
-- [Benefit 2]
-- [Benefit 3]
-
-## [H2: What is X?]
-[Definition and context]
-
-## [H2: Why X Matters]
-[Pain points and benefits]
-
-## [H2: How to X (Step-by-Step)]
-### Step 1: [Action]
-### Step 2: [Action]
-
-## [H2: Common Mistakes]
-[List with explanations]
-
-## [H2: Expert Tips]
-[Advanced insights]
-
-## [H2: FAQ]
-### [Question 1]?
-[Answer]
-
-## Conclusion
-[Summary + CTA]
-```
-
-### Step 4: SEO Optimization
-Checklist:
-- Primary keyword in title, H1, first 100 words
-- Secondary keywords in H2s
-- Meta description (150-160 chars)
-- Internal links (3-5)
-- External links (2-3 authoritative)
-- Image alt text with keywords
-
-### Step 5: Export
-- Full article (Markdown)
-- Meta title
-- Meta description
-- Featured image prompt
-
-## Quality Gates
-- Word count meets target (1500/2500/3500)
-- All SEO elements present
-- Readability score acceptable
-- No duplicate content flags
-
-## Cost Estimate
-~$0.30-0.50 per 2500-word article""",
-        "inputs": ["keyword", "word_count", "tone", "target_audience"],
-        "outputs": ["Full article markdown", "Meta title", "Meta description", "Image prompt"]
-    },
-    
-    "case_study_generator": {
-        "description": "Generate professional case studies from client results data",
-        "has_script": True,
-        "category": "Content Generation",
-        "full_description": """## Overview
-Generate professional case studies from client results data with storytelling, before/after metrics, testimonials, and multiple output formats.
-
-## Step-by-Step Process
-
-### Step 1: Gather Case Study Data
-Input structure:
-```json
-{
-  "client": "Acme SaaS",
-  "industry": "B2B Software",
-  "challenge": "Low reply rates, struggling to book meetings",
-  "solution": "AI-personalized cold email sequences",
-  "results": {
-    "reply_rate": {"before": "2%", "after": "12%"},
-    "meetings_booked": {"before": "5/mo", "after": "35/mo"}
-  },
-  "timeline": "90 days",
-  "testimonial": "We 7x'd our meeting rate in 3 months."
-}
-```
-
-### Step 2: Generate Case Study Structure
-```markdown
-# How [CLIENT] [ACHIEVED RESULT] in [TIMEFRAME]
-
-## The Challenge
-[CLIENT] is a [INDUSTRY] company struggling with [PROBLEM].
-
-**Before working with us:**
-- [Pain point 1 with metric]
-- [Pain point 2 with metric]
-
-## The Solution
-We implemented [SOLUTION]:
-
-### Phase 1: [Step Name]
-[Description]
-
-### Phase 2: [Step Name]
-[Description]
-
-## The Results
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| [Metric 1] | [X] | [Y] | [+Z%] |
-
-### Key Wins
-✅ [Result 1]
-✅ [Result 2]
-
-## Client Testimonial
-> "[TESTIMONIAL]"
-> — [NAME], [TITLE]
-
-## Key Takeaways
-1. [Lesson 1]
-2. [Lesson 2]
-```
-
-### Step 3: Generate Multiple Formats
-
-**Long-Form (Website/PDF):**
-Full 800-1500 word case study
-
-**Short-Form (Social):**
-3-5 key points with metrics
-
-**One-Liner:**
-"We helped [CLIENT] achieve [RESULT] in [TIME]."
-
-**Slide Deck:**
-5-7 slides for presentations
-
-### Step 4: Export
-- Markdown (blog)
-- PDF (downloadable)
-- Google Doc (editable)
-- Google Slides (presentation)
-
-## Quality Gates
-- Specific numbers used (not vague claims)
-- Timeline included for credibility
-- Client approval obtained
-- CTA included at end
-
-## Cost Estimate
-~$0.10-0.30 per case study""",
-        "inputs": ["client_name", "industry", "challenge", "solution", "results", "testimonial"],
-        "outputs": ["Long-form case study", "Social version", "One-liner", "Slide deck"]
-    },
-    
-    "seo_audit_automation": {
-        "description": "Automated SEO audits with AI-powered recommendations",
-        "has_script": True,
-        "category": "SEO",
-        "full_description": """## Overview
-Crawl a website, analyze technical SEO factors, and generate comprehensive audit report with prioritized fixes and AI-powered recommendations.
-
-## Step-by-Step Process
-
-### Step 1: Crawl Website
-Crawl target site up to specified depth:
-- Index all pages
-- Check response codes
-- Map internal links
-- Identify resources
-
-### Step 2: Technical SEO Audit
-
-**Site Speed (Core Web Vitals):**
-- LCP (Largest Contentful Paint): Target <2.5s
-- FID (First Input Delay): Target <100ms
-- CLS (Cumulative Layout Shift): Target <0.1
-
-**Crawlability:**
-- Pages crawled vs indexable
-- Blocked by robots.txt
-- Orphan pages
-- Crawl depth
-
-**Issues Checked:**
-- Broken links (4xx, 5xx)
-- Redirect chains
-- Missing canonical tags
-- Schema markup
-
-### Step 3: On-Page SEO Audit
-
-**Title Tags:**
-- Missing titles
-- Too long (>60 chars)
-- Duplicate titles
-
-**Meta Descriptions:**
-- Missing descriptions
-- Too short (<120 chars)
-- Duplicate descriptions
-
-**Header Structure:**
-- Missing H1s
-- Multiple H1s
-- Improper hierarchy
-
-**Images:**
-- Missing alt text
-- Oversized images
-- Missing lazy loading
-
-### Step 4: Content Analysis
-- Thin content pages (<300 words)
-- Duplicate content
-- Content gaps vs competitors
-- Readability scores
-
-### Step 5: Generate Report
-```markdown
-# SEO Audit Report
-**Website:** [URL]
-**Overall Score:** [X/100]
-
-## Critical Issues (Fix Immediately)
-🔴 [Issue] - [Impact] - [How to Fix]
-
-## Warnings (Address Soon)
-🟡 [Issue] - [Impact] - [How to Fix]
-
-## Technical SEO [Score: X/100]
-### Core Web Vitals
-- LCP: X.Xs ✅/❌
-- FID: Xms ✅/❌
-
-### Issues Found
-| Issue | Count | Priority |
-|-------|-------|----------|
-| Broken links | 12 | High |
-
-## Action Plan (Priority Order)
-1. [Action] - Impact: High
-2. [Action] - Impact: Medium
-```
-
-## Quality Gates
-- All pages crawled successfully
-- Core Web Vitals measured
-- Report generated with priorities
-- Action plan included
-
-## Cost Estimate
-~$0.50-1.00 per audit (APIs + AI)""",
-        "inputs": ["website_url", "crawl_depth", "competitors"],
-        "outputs": ["Crawl data", "SEO audit report", "Prioritized action plan"]
-    },
-    
-    "deploy_to_modal": {
-        "description": "Deploy any workflow directive as a cloud webhook to Modal AI",
-        "has_script": True,
-        "category": "Deployment",
-        "full_description": """## Overview
-Deploy any workflow directive as a separate Modal AI app with auto-detected tools and webhook endpoint.
-
-## Step-by-Step Process
-
-### Step 1: Parse Directive
-Analyze directive to extract:
-- Execution scripts referenced
-- Integrations needed (Slack, Google, etc.)
-- Input fields required
-- Output format expected
-- Skill bibles to include
-
-### Step 2: Determine Required Secrets
-Based on integrations:
-- `anthropic-secret` - Claude API
-- `openrouter-secret` - OpenRouter API
-- `slack-webhook` - Slack notifications
-- `google-token` - Google Docs/Sheets
-
-### Step 3: Generate Modal App
-Create Python file with:
-- Image definition (packages, files)
-- Secrets configuration
-- Webhook endpoint
-- Health check endpoint
-- Info endpoint
-- Script execution logic
-
-### Step 4: Deploy to Modal
-```bash
-modal deploy execution/modal_apps/{directive}_modal.py
-```
-
-### Step 5: Return Endpoints
-Three endpoints created:
-- **Webhook:** POST to trigger workflow
-- **Health:** GET for monitoring
-- **Info:** GET for workflow metadata
-
-## Example Usage
-```bash
-# List all deployable workflows
-python3 execution/deploy_to_modal.py --list
-
-# Get workflow info
-python3 execution/deploy_to_modal.py --info vsl_funnel_writer
-
-# Deploy to Modal
-python3 execution/deploy_to_modal.py --directive vsl_funnel_writer
-
-# Test deployed webhook
-curl -X POST "https://workspace--app-webhook.modal.run" \\
-  -H "Content-Type: application/json" \\
-  -d '{"data": {"product": "AI Course"}}'
-```
-
-## Quality Gates
-- Directive exists and is valid
-- Required secrets configured
-- Deployment successful
-- Webhook responds to requests""",
-        "inputs": ["directive_name"],
-        "outputs": ["Webhook URL", "Health endpoint", "Info endpoint"]
-    },
-    
-    "deploy_aiaa_dashboard": {
-        "description": "Deploy the AIAA Dashboard to Railway with authentication",
-        "has_script": True,
-        "category": "Deployment",
-        "full_description": """## Overview
-Deploy the complete AIAA Agentic OS Dashboard to Railway with password authentication, environment variable management, and workflow monitoring.
-
-## Step-by-Step Process
-
-### Step 1: Prerequisites Check
-- Verify Railway CLI installed
-- Confirm user logged into Railway
-- Locate dashboard source files
-
-### Step 2: Project Setup
-- Create new Railway project OR link to existing
-- Initialize project configuration
-
-### Step 3: Environment Configuration
-Set variables:
-- `DASHBOARD_USERNAME` - Login username
-- `DASHBOARD_PASSWORD_HASH` - SHA-256 hashed password
-- `FLASK_SECRET_KEY` - Session encryption key
-- API keys from local .env
-
-### Step 4: Deployment
-- Upload dashboard app to Railway
-- Wait for build completion
-- Generate public domain
-
-### Step 5: Verification
-- Confirm deployment successful
-- Return dashboard URL
-- Provide login credentials
-
-## Dashboard Features
-- Light/dark mode toggle
-- 90+ workflow catalog
-- Environment variable management
-- Webhook endpoint monitoring
-- Real-time event logs
-- Claude-style design
-
-## Security
-- Passwords hashed with SHA-256
-- Secure Flask sessions
-- No password recovery (re-deploy required)
-- HTTPS only (Railway SSL)
-
-## Quality Gates
-- Railway CLI authenticated
-- Dashboard deploys successfully
-- Public domain generated
-- Login works with credentials""",
-        "inputs": ["username", "password"],
-        "outputs": ["Dashboard URL", "Login credentials"]
-    },
-}
-
-# Complete workflow documentation for all 138 workflows
-# Each workflow has full documentation extracted from directives
-
-# Add comprehensive documentation for remaining workflows
-ADDITIONAL_WORKFLOWS = {
-    "gmaps_lead_generation": {
-        "category": "Lead Generation",
-        "description": "Generate B2B leads from Google Maps with deep contact enrichment",
-        "has_script": True,
-        "full_description": """## Overview
-Scrapes Google Maps for local businesses, enriches them with contact info from their websites, and outputs structured leads to Google Sheets.
-
-## Prerequisites
-- `APIFY_API_TOKEN` - Google Maps scraping
-- `ANTHROPIC_API_KEY` - Contact extraction
-- `GOOGLE_APPLICATION_CREDENTIALS` - Sheets export
-
-## How to Run
-```bash
-# Basic usage - creates new sheet
-python3 execution/gmaps_lead_pipeline.py --search "plumbers in Austin TX" --limit 10
-
-# Append to existing sheet
-python3 execution/gmaps_lead_pipeline.py --search "dentists in Miami FL" --limit 25 \\
-  --sheet-url "[SHEET_URL]"
-```
-
-## Process
-1. Scrapes Google Maps via Apify
-2. Fetches main + contact pages for each business
-3. Searches DuckDuckGo for additional contacts
-4. Claude extracts structured data (36 fields)
-5. Syncs to Google Sheet with deduplication
-
-## Output Fields (36)
-Business basics, extracted contacts, social media, owner info, team contacts, metadata
-
-## Cost
-~$0.012-0.022 per lead ($1.50-2.50 per 100 leads)""",
-        "inputs": ["search_query", "limit", "sheet_url"],
-        "outputs": ["Google Sheet with leads", "Contact info", "Social profiles"]
-    },
-    
-    "linkedin_lead_scraper": {
-        "category": "Lead Generation", 
-        "description": "Scrape LinkedIn profiles and enrich with verified emails for cold outreach",
-        "has_script": True,
-        "full_description": """## Overview
-Automates finding B2B leads on LinkedIn by scraping public profile data based on targeting criteria, then enriching with verified email addresses.
-
-## Prerequisites
-- `APIFY_API_TOKEN` - LinkedIn scraping
-- `HUNTER_API_KEY` or `APOLLO_API_KEY` - Email enrichment
-- `GOOGLE_APPLICATION_CREDENTIALS` - Sheets export
-
-## How to Run
-```bash
-# Step 1: Scrape LinkedIn
-python3 execution/scrape_linkedin_apify.py \\
-  --titles "CEO,Founder" \\
-  --industries "SaaS" \\
-  --locations "United States" \\
-  --company_size "11-50" \\
-  --max_items 500
-
-# Step 2: Enrich with emails
-python3 execution/enrich_emails.py .tmp/linkedin_leads.json --provider hunter
-
-# Step 3: Export to Sheets
-python3 execution/update_sheet.py .tmp/enriched_leads.json --title "LinkedIn Leads"
-```
-
-## Process
-1. Search LinkedIn by job title, industry, location
-2. Extract profile data (name, title, company, URL)
-3. Enrich with verified emails via Hunter/Apollo
-4. Export to Google Sheets
-
-## Cost
-~$0.02/profile + ~$0.03/email = ~$25 for 500 leads""",
-        "inputs": ["job_titles", "industries", "locations", "company_size", "max_items"],
-        "outputs": ["Lead list JSON", "Enriched emails", "Google Sheet"]
-    },
-    
-    "cold_email_mass_personalizer": {
-        "category": "Sales Outreach",
-        "description": "Personalize thousands of cold emails with AI-researched icebreakers",
-        "has_script": True,
-        "full_description": """## Overview
-Takes a cold email script and lead list CSV, then generates personalized icebreakers for each prospect using AI research.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - AI generation
-- `PERPLEXITY_API_KEY` - Prospect research
-- `GOOGLE_APPLICATION_CREDENTIALS` - Sheets
-
-## How to Run
-```bash
-python3 execution/personalize_cold_emails.py \\
-  --leads leads.csv \\
-  --email_body "Your base email script here..." \\
-  --output_sheet "[SHEET_URL]"
-```
-
-## Process
-1. Process CSV with prospect data
-2. Research each prospect (LinkedIn, news)
-3. Generate custom icebreaker (8-22 words)
-4. Append to email body
-5. Output to Google Sheet
-
-## Icebreaker Requirements
-- Length: 8-22 words max
-- Focus: 100% about them, 0% about you
-- Tone: Observational and conversational
-
-## Related Skill Bibles
-- SKILL_BIBLE_cold_email_mastery.md
-- SKILL_BIBLE_hormozi_email_marketing_complete.md""",
-        "inputs": ["lead_csv", "email_body", "sender_name"],
-        "outputs": ["Personalized emails", "Google Sheet"]
-    },
-    
-    "newsletter_writer": {
-        "category": "Content Marketing",
-        "description": "Generate email newsletters with curated content and original commentary",
-        "has_script": True,
-        "full_description": """## Overview
-Generates email newsletters by curating content from RSS feeds, social media, and news sources, formatting with original commentary and CTAs.
-
-## Prerequisites
-- `OPENAI_API_KEY` - Content generation
-- `CONVERTKIT_API_KEY` or email platform API
-
-## How to Run
-```bash
-# Step 1: Gather content
-python3 execution/gather_newsletter_content.py --topic "cold email" --sources "twitter,linkedin,rss"
-
-# Step 2: Generate newsletter
-python3 execution/generate_newsletter.py --content .tmp/content.json --template weekly --tone casual
-
-# Step 3: Send
-python3 execution/send_newsletter.py --html .tmp/newsletter.html --list "subscribers"
-```
-
-## Newsletter Structure
-- Intro with theme
-- News section (2-3 items)
-- Tip of the week
-- Tool spotlight
-- Stat that matters
-- Action item
-- Quick links
-
-## Subject Line Patterns
-- "[Topic] Weekly: [Hook]"
-- "The [X] thing about [topic] this week"
-- "[Number] things you missed in [topic]"
-""",
-        "inputs": ["topic", "sources", "template", "tone"],
-        "outputs": ["Newsletter HTML", "Subject lines", "Send confirmation"]
-    },
-    
-    "vsl_email_sequence_writer": {
-        "category": "Funnel Building",
-        "description": "Generate 5-7 email nurture sequence for VSL funnel follow-up",
-        "has_script": True,
-        "full_description": """## Overview
-Generates email sequences for VSL funnel viewers who didn't convert. Includes indoctrination, value delivery, objection handling, and urgency.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - AI generation
-
-## Email Sequence Structure
-- **Email 1**: "Did you watch?" (immediate follow-up)
-- **Email 2**: Indoctrination (your story/credentials)
-- **Email 3**: Case study deep dive
-- **Email 4**: Mechanism explanation
-- **Email 5**: Objection crusher
-- **Email 6**: Urgency reminder (spots filling)
-- **Email 7**: Last chance (deadline)
-
-## Process
-1. Load research, VSL script, sales page copy
-2. Extract key elements (mechanism, objections, proof)
-3. Generate each email with subject line options
-4. Add PS sections with secondary CTAs
-
-## Integration
-Position 4/7 in VSL funnel pipeline.
-
-## Related Skill Bibles
-- SKILL_BIBLE_sturtevant_email_master_system.md
-- SKILL_BIBLE_sturtevant_copywriting.md""",
-        "inputs": ["vsl_script", "sales_page_copy", "research_data"],
-        "outputs": ["7 email sequence", "Subject line variations", "Send timing"]
-    },
-    
-    "ultimate_webinar_funnel": {
-        "category": "Funnel Building",
-        "description": "Complete webinar funnel from registration to replay with all assets",
-        "has_script": True,
-        "full_description": """## Overview
-Complete webinar funnel system that generates registration pages, email sequences, webinar scripts, and follow-up campaigns.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - Content generation
-- `GOOGLE_APPLICATION_CREDENTIALS` - Docs/Slides
-
-## How to Run
-```bash
-python3 execution/generate_webinar_funnel.py \\
-  --topic "How to Scale Your Agency to $100K/Month" \\
-  --presenter "John Smith" \\
-  --offer "Agency Accelerator Program" \\
-  --price 2997 \\
-  --webinar-date "2026-02-15" \\
-  --target-audience "Agency owners at $10-30K/month"
-```
-
-## Deliverables
-1. **Registration Page** - Headline, bullets, about presenter
-2. **Pre-Webinar Emails** - Confirmation, reminders
-3. **Webinar Script** - 90-min Perfect Webinar format
-4. **Slides Outline** - Speaker notes included
-5. **Post-Webinar Sequence** - Replay + urgency emails
-6. **Replay Page** - Video embed + offer
-
-## Perfect Webinar Structure (90 min)
-- Intro (5 min)
-- The One Thing (5 min)
-- Secret 1-3 (45 min)
-- The Stack (10 min)
-- The Close (15 min)
-- Bonus/Q&A (10 min)""",
-        "inputs": ["topic", "presenter", "offer", "price", "webinar_date"],
-        "outputs": ["Registration page", "Email sequences", "Webinar script", "Slides", "Replay page"]
-    },
-    
-    "churn_risk_alert": {
-        "category": "Client Management",
-        "description": "Monitor client engagement and alert on churn risk signals",
-        "has_script": True,
-        "full_description": """## Overview
-Monitors client engagement, payments, and support data to calculate churn risk scores and trigger retention alerts.
-
-## Prerequisites
-- `HUBSPOT_API_KEY` or CRM API
-- `STRIPE_API_KEY` - Payment data
-- `SLACK_WEBHOOK_URL` - Alerts
-
-## How to Run
-```bash
-# Calculate risk scores
-python3 execution/calculate_churn_risk.py --source crm --output .tmp/risk_scores.json
-
-# Send alerts
-python3 execution/send_churn_alerts.py --scores .tmp/risk_scores.json --threshold 40
-```
-
-## Risk Indicators
-**High Risk (+20 pts):** No login 30+ days, missed payment, complaints, negative NPS
-**Medium Risk (+10 pts):** Declining usage, slow responses, missed meetings
-**Low Risk (+5 pts):** Reduced communication, support tickets increasing
-
-## Risk Classification
-| Score | Level | Action |
-|-------|-------|--------|
-| 60+ | Critical | Immediate intervention |
-| 40-59 | High | Proactive outreach |
-| 20-39 | Medium | Monitor closely |
-| 0-19 | Low | Standard service |
-
-## Automated Actions
-- Slack alert to account manager
-- Task created in CRM
-- Escalation to leadership (if critical)""",
-        "inputs": ["client_data", "risk_thresholds"],
-        "outputs": ["Risk scores", "Slack alerts", "CRM tasks"]
-    },
-    
-    "client_qbr_generator": {
-        "category": "Client Management",
-        "description": "Generate quarterly business review slide decks with AI insights",
-        "has_script": True,
-        "full_description": """## Overview
-Generates professional quarterly business review presentations with performance data, AI-generated insights, and strategic recommendations.
-
-## Prerequisites
-- `OPENAI_API_KEY` - AI insights
-- `GOOGLE_APPLICATION_CREDENTIALS` - Slides
-- CRM/Analytics APIs
-
-## How to Run
-```bash
-# Gather data
-python3 execution/gather_qbr_data.py --client "[CLIENT]" --quarter "Q4 2024"
-
-# Generate deck
-python3 execution/generate_qbr.py --data .tmp/qbr_data.json --template slides
-```
-
-## QBR Slide Structure
-1. Title slide
-2. Agenda
-3. Executive Summary
-4. KPI Dashboard (target vs actual)
-5-8. Deep Dives (channel breakdowns)
-9. Key Wins
-10. Challenges & Lessons
-11. Next Quarter Priorities
-12. Recommendations
-13. Q&A
-
-## AI-Generated Insights
-- Pattern analysis
-- Anomaly detection
-- Benchmark comparisons
-- Predictive recommendations""",
-        "inputs": ["client", "quarter", "data_sources"],
-        "outputs": ["QBR slide deck", "Performance data", "Recommendations"]
-    },
-    
-    "carousel_post_creator": {
-        "category": "Content Marketing",
-        "description": "Generate LinkedIn/Instagram carousel posts with slide content and captions",
-        "has_script": True,
-        "full_description": """## Overview
-Generates complete carousel posts including slide content, design specs, and captions optimized for engagement.
-
-## Prerequisites
-- `OPENAI_API_KEY` - Content generation
-- `CANVA_API_KEY` (optional) - Design
-
-## How to Run
-```bash
-python3 execution/generate_carousel.py \\
-  --topic "5 Cold Email Mistakes" \\
-  --slides 8 \\
-  --platform linkedin
-```
-
-## Carousel Structure
-- **Slide 1**: Hook (bold statement, curiosity)
-- **Slides 2-7**: Value (one point per slide, 10-20 words)
-- **Slide 8**: Summary (recap key points)
-- **Slide 9**: CTA (follow, save, share)
-
-## Design Specs
-- Size: 1080x1080 (square) or 1080x1350 (portrait)
-- Font: Bold, readable
-- Whitespace: Generous margins
-
-## Caption Template
-```
-[Hook - expand on slide 1]
-[Key takeaways in bullets]
-Which tip will you try first?
-Save this for later
-#hashtags
-```""",
-        "inputs": ["topic", "slides", "platform", "style"],
-        "outputs": ["Slide content", "Captions", "Hashtags", "Design specs"]
-    },
-    
-    "ultimate_content_calendar": {
-        "category": "Content Marketing",
-        "description": "Generate 30-90 days of content across all platforms with hooks and schedules",
-        "has_script": True,
-        "full_description": """## Overview
-Complete content planning system that generates 30-90 days of content ideas, topics, and hooks across all platforms with optimal posting schedules.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - AI generation
-- `PERPLEXITY_API_KEY` - Trend research
-
-## How to Run
-```bash
-python3 execution/generate_content_calendar.py \\
-  --client "Acme Corp" \\
-  --industry "B2B SaaS" \\
-  --platforms "linkedin,twitter,instagram" \\
-  --content-pillars "product tips,industry insights,behind the scenes" \\
-  --posts-per-week 5 \\
-  --days 30
-```
-
-## Content Pillar Framework
-- Educational (40%): How-to, tips, tutorials
-- Social Proof (25%): Case studies, testimonials
-- Behind the Scenes (20%): Team, process, culture
-- Engagement (15%): Questions, polls, trends
-
-## Platform-Specific Content
-- **LinkedIn**: Long-form posts, carousels
-- **Twitter/X**: Threads, zingers
-- **Instagram**: Carousels, Reels, Stories
-- **YouTube**: Scripts, Shorts
-
-## Related Skill Bibles
-- SKILL_BIBLE_content_calendar_creation.md
-- SKILL_BIBLE_content_strategy_growth.md""",
-        "inputs": ["client", "industry", "platforms", "content_pillars", "days"],
-        "outputs": ["Content calendar", "Topic ideas", "Platform hooks", "Posting schedule"]
-    },
-    
-    "ai_lead_scorer": {
-        "category": "Sales Automation",
-        "description": "Score leads using AI based on ICP fit, engagement, and behavior signals",
-        "has_script": True,
-        "full_description": """## Overview
-Uses AI to score and prioritize leads based on Ideal Customer Profile (ICP) fit, engagement signals, and behavior patterns.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - AI scoring
-- CRM API access
-
-## Scoring Categories
-**Fit Score (0-40):**
-- Company size match
-- Industry alignment
-- Job title seniority
-- Technology stack
-
-**Engagement Score (0-30):**
-- Email opens/clicks
-- Website visits
-- Content downloads
-- Meeting attendance
-
-**Behavior Score (0-30):**
-- Pricing page visits
-- Demo requests
-- Return visits
-- Time on site
-
-## Lead Classification
-| Score | Priority | Action |
-|-------|----------|--------|
-| 80+ | Hot | Immediate outreach |
-| 60-79 | Warm | Nurture sequence |
-| 40-59 | Cool | Long-term nurture |
-| <40 | Cold | Re-evaluate fit |""",
-        "inputs": ["lead_data", "icp_criteria", "engagement_data"],
-        "outputs": ["Lead scores", "Priority rankings", "Recommended actions"]
-    },
-    
-    "static_ad_generator": {
-        "category": "Paid Advertising",
-        "description": "Generate static ad creatives with AI images for Meta, Google, LinkedIn",
-        "has_script": True,
-        "full_description": """## Overview
-Generates static ad creatives with AI-generated images and optimized copy for Meta, Google, and LinkedIn ads.
-
-## Prerequisites
-- `FAL_KEY` - AI image generation (Nano Banana Pro)
-- `OPENAI_API_KEY` - Ad copy
-
-## How to Run
-```bash
-python3 execution/generate_static_ads.py \\
-  --product "[PRODUCT]" \\
-  --audience "[AUDIENCE]" \\
-  --platform meta \\
-  --variations 5
-```
-
-## Ad Formats by Platform
-**Meta**: 1080x1080, 1200x628, 1080x1920
-**Google Display**: 300x250, 728x90, 160x600
-**LinkedIn**: 1200x627, 1080x1080
-
-## Creative Styles
-- Product hero shot
-- Lifestyle imagery
-- Before/after
-- Text overlay
-- Testimonial card
-
-## Cost
-~$0.04/image (fal.ai Nano Banana Pro)""",
-        "inputs": ["product", "audience", "platform", "variations"],
-        "outputs": ["Ad images", "Ad copy", "Headlines", "CTAs"]
-    },
-    
-    "twitter_thread_writer": {
-        "category": "Content Marketing",
-        "description": "Write viral Twitter/X threads with hooks and engagement structure",
-        "has_script": True,
-        "full_description": """## Overview
-Generates engaging Twitter/X threads optimized for viral reach with proven hook patterns and engagement structures.
-
-## Prerequisites
-- `OPENAI_API_KEY` - Content generation
-
-## Thread Structure
-1. **Hook Tweet**: Pattern interrupt, curiosity gap
-2. **Promise**: What they'll learn
-3. **Tweets 3-8**: Value points (one idea each)
-4. **Summary**: Recap key points
-5. **CTA**: Follow, RT, bookmark
-
-## Hook Patterns
-- "I spent [time] doing [thing]. Here's what I learned:"
-- "[Number] [things] that [result]:"
-- "Stop [common advice]. Here's what actually works:"
-- "The [topic] playbook that [result]:"
-
-## Formatting Rules
-- 280 chars max per tweet
-- Use line breaks for readability
-- Number tweets for threads
-- End with engagement CTA""",
-        "inputs": ["topic", "thread_length", "hook_style"],
-        "outputs": ["Thread tweets", "Hooks", "CTAs"]
-    },
-    
-    "youtube_script_creator": {
-        "category": "Content Marketing",
-        "description": "Create YouTube video scripts with MrBeast-style retention engineering",
-        "has_script": True,
-        "full_description": """## Overview
-Creates YouTube video scripts optimized for retention with proven hook formulas, pattern interrupts, and engagement techniques.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - Script generation
-
-## Script Structure
-1. **Hook (0-30 sec)**: Pattern interrupt, promise payoff
-2. **Intro (30-60 sec)**: Set expectations, build curiosity
-3. **Content Sections**: 3-5 main points with transitions
-4. **Pattern Interrupts**: Every 2-3 minutes
-5. **Climax**: Deliver on promise
-6. **CTA**: Subscribe, watch next
-
-## Retention Techniques
-- Open loops throughout
-- Preview future content
-- "But wait, there's more"
-- Unexpected transitions
-- Payoff promises made
-
-## Related Skill Bibles
-- SKILL_BIBLE_youtube_script_writing.md
-- SKILL_BIBLE_youtube_retention_mastery.md""",
-        "inputs": ["topic", "video_length", "target_audience"],
-        "outputs": ["Full script", "Hook options", "Thumbnail concepts", "Title options"]
-    },
-    
-    "vsl_script_writer": {
-        "category": "Funnel Building",
-        "description": "Write video sales letter scripts using proven 10-part structure",
-        "has_script": True,
-        "full_description": """## Overview
-Generates VSL scripts using the proven 10-part structure optimized for high-ticket conversions.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - Script generation
-- Research data from company_market_research
-
-## 10-Part VSL Structure
-1. **Pattern Interrupt Hook** (30 sec)
-2. **Big Promise + Credibility** (2 min)
-3. **Problem Agitation** (5 min)
-4. **Solution Reveal** (3 min)
-5. **Mechanism Explanation** (5 min)
-6. **Proof & Testimonials** (5 min)
-7. **Offer Presentation** (5 min)
-8. **Bonuses & Stack** (3 min)
-9. **Guarantee** (2 min)
-10. **Urgency & Close** (3 min)
-
-## Related Skill Bibles
-- SKILL_BIBLE_vsl_writing_production.md
-- SKILL_BIBLE_vsl_script_mastery_fazio.md""",
-        "inputs": ["company", "offer", "price", "target_audience", "research_data"],
-        "outputs": ["VSL script", "B-roll suggestions", "Estimated length"]
-    },
-    
-    "vsl_sales_page_writer": {
-        "category": "Funnel Building",
-        "description": "Write VSL sales pages with headline variations and offer stacks",
-        "has_script": True,
-        "full_description": """## Overview
-Generates sales page copy to accompany VSL videos with headlines, bullets, offer stacks, and objection handlers.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - Copy generation
-
-## Page Elements
-- **Headlines** (3 variations)
-- **Subheadline** with specific result
-- **Benefit bullets** matching VSL
-- **Video embed area**
-- **Offer stack** with value
-- **Testimonials section**
-- **FAQ section**
-- **Guarantee badge**
-- **CTA buttons**
-
-## Headline Formulas
-- "How to [Result] Without [Obstacle]"
-- "The [Mechanism] That [Result]"
-- "[Number] [Audience] Are Using This to [Result]"
-
-## Related Skill Bibles
-- SKILL_BIBLE_funnel_copywriting_mastery.md""",
-        "inputs": ["vsl_script", "offer", "price", "testimonials"],
-        "outputs": ["Sales page copy", "Headline variations", "Offer stack", "FAQ"]
-    },
-    
-    "ultimate_hiring_system": {
-        "category": "Operations",
-        "description": "Complete hiring workflow from job post to offer with scorecards",
-        "has_script": False,
-        "full_description": """## Overview
-Complete hiring automation from job description creation through offer letter generation with AI-assisted candidate scoring.
-
-## Process
-1. **Job Description Generator**: Create compelling JDs
-2. **Candidate Screening**: AI scores applications
-3. **Interview Scheduler**: Automated scheduling
-4. **Interview Scorecards**: Structured evaluation
-5. **Reference Check Templates**: Questions to ask
-6. **Offer Letter Generator**: Custom offers
-
-## Scorecard Criteria
-- Technical skills (40%)
-- Culture fit (25%)
-- Communication (20%)
-- Growth potential (15%)
-
-## Integrations
-- ATS (Lever, Greenhouse)
-- Calendly
-- Google Docs
-- Slack notifications""",
-        "inputs": ["role", "requirements", "salary_range", "team"],
-        "outputs": ["Job description", "Scorecards", "Interview questions", "Offer letter"]
-    },
-    
-    "ultimate_lead_magnet_creator": {
-        "category": "Content Generation",
-        "description": "Create lead magnets: ebooks, checklists, templates, calculators",
-        "has_script": False,
-        "full_description": """## Overview
-Creates compelling lead magnets including ebooks, checklists, templates, and calculators optimized for conversion.
-
-## Lead Magnet Types
-1. **Ebook/Guide**: 10-30 pages of value
-2. **Checklist**: Step-by-step action items
-3. **Template**: Fill-in-the-blank documents
-4. **Swipe File**: Examples and copy
-5. **Calculator**: Interactive tool
-6. **Cheat Sheet**: Quick reference
-
-## Best Practices
-- Solve one specific problem
-- Deliver quick wins
-- Professional design
-- Clear next step CTA
-
-## Naming Patterns
-- "The [Audience] Guide to [Result]"
-- "[Number] [Things] to [Result]"
-- "The Ultimate [Topic] Checklist"
-- "[Topic] Template: [Benefit]"
-
-## Related Skill Bibles
-- SKILL_BIBLE_lead_magnet_creation.md""",
-        "inputs": ["topic", "audience", "magnet_type", "desired_result"],
-        "outputs": ["Lead magnet content", "Landing page copy", "Thank you page"]
-    },
-    
-    "ultimate_niche_research": {
-        "category": "Research",
-        "description": "Deep niche research and market analysis for business entry",
-        "has_script": False,
-        "full_description": """## Overview
-Comprehensive niche research and validation system for market entry decisions.
-
-## Research Areas
-1. **Market Size**: TAM, SAM, SOM
-2. **Competition**: Direct and indirect
-3. **Audience**: Demographics, psychographics
-4. **Pain Points**: Problems and desires
-5. **Pricing**: What market will bear
-6. **Channels**: Where to find customers
-7. **Trends**: Growth trajectory
-
-## Validation Criteria
-| Factor | Weight |
-|--------|--------|
-| Market size | 25% |
-| Competition level | 20% |
-| Profit margins | 20% |
-| Accessibility | 20% |
-| Personal fit | 15% |
-
-## Related Skill Bibles
-- SKILL_BIBLE_niche_research_validation.md
-- SKILL_BIBLE_market_research.md""",
-        "inputs": ["niche_idea", "budget", "timeline"],
-        "outputs": ["Market analysis", "Competition report", "Recommendation"]
-    },
-    
-    "ultimate_pricing_strategy": {
-        "category": "Strategy",
-        "description": "Pricing strategy optimization with competitive analysis",
-        "has_script": False,
-        "full_description": """## Overview
-Develops optimal pricing strategy based on market research, competitor analysis, and value perception.
-
-## Pricing Models
-- **Cost-Plus**: Cost + margin
-- **Value-Based**: Perceived value
-- **Competitor-Based**: Market rates
-- **Tiered**: Good/Better/Best
-- **Usage-Based**: Pay per use
-
-## Analysis Components
-1. Cost structure analysis
-2. Competitor pricing audit
-3. Customer willingness to pay
-4. Value stack development
-5. Pricing psychology
-
-## Pricing Psychology
-- Anchor pricing (show high first)
-- Charm pricing ($997 vs $1000)
-- Price bundling
-- Decoy effect
-
-## Related Skill Bibles
-- SKILL_BIBLE_pricing_strategy.md
-- SKILL_BIBLE_offer_positioning.md""",
-        "inputs": ["product", "costs", "competitors", "target_margin"],
-        "outputs": ["Pricing recommendation", "Tier structure", "Value stack"]
-    },
-    
-    "ultimate_linkedin_outreach": {
-        "category": "Sales Outreach",
-        "description": "LinkedIn outreach system with connection requests and messaging",
-        "has_script": False,
-        "full_description": """## Overview
-Complete LinkedIn outreach system including connection request templates, messaging sequences, and follow-up automation.
-
-## Outreach Sequence
-1. **Day 0**: Connection request (personalized)
-2. **Day 1**: Thank you message (after accept)
-3. **Day 3**: Value message (no pitch)
-4. **Day 7**: Soft pitch
-5. **Day 14**: Follow-up
-
-## Connection Request Templates
-- Mention shared connection
-- Reference their content
-- Compliment achievement
-- Ask relevant question
-
-## Message Best Practices
-- Under 300 characters
-- One clear question
-- No sales pitch in first message
-- Personalize each message""",
-        "inputs": ["target_audience", "value_proposition", "offer"],
-        "outputs": ["Connection templates", "Message sequences", "Follow-up cadence"]
-    },
-    
-    "ultimate_sales_call_system": {
-        "category": "Sales",
-        "description": "Sales call preparation, execution scripts, and follow-up system",
-        "has_script": False,
-        "full_description": """## Overview
-Complete sales call system with pre-call research, call scripts, objection handling, and follow-up sequences.
-
-## Call Structure
-1. **Rapport** (2 min): Build connection
-2. **Discovery** (15 min): Ask questions
-3. **Present** (10 min): Show solution
-4. **Handle Objections** (5 min): Address concerns
-5. **Close** (5 min): Ask for business
-
-## Key Questions
-- "What's your biggest challenge with [topic]?"
-- "What have you tried so far?"
-- "What would success look like?"
-- "What's holding you back?"
-
-## Common Objections
-- "Too expensive" → Value comparison
-- "Need to think" → Identify concern
-- "Bad timing" → Future commitment
-- "Need approval" → Bring decision maker
-
-## Related Skill Bibles
-- SKILL_BIBLE_sales_call_mastery.md
-- SKILL_BIBLE_hormozi_sales_training.md""",
-        "inputs": ["prospect_info", "offer", "pricing"],
-        "outputs": ["Pre-call research", "Call script", "Objection handlers", "Follow-up emails"]
-    },
-    
-    "ultimate_seo_campaign": {
-        "category": "SEO",
-        "description": "Complete SEO campaign management with keyword research and tracking",
-        "has_script": False,
-        "full_description": """## Overview
-Full SEO campaign system from keyword research through content creation and rank tracking.
-
-## Campaign Components
-1. **Keyword Research**: Find opportunities
-2. **Competitor Analysis**: Gap analysis
-3. **Content Strategy**: Topic clusters
-4. **On-Page SEO**: Optimization checklist
-5. **Link Building**: Outreach plan
-6. **Rank Tracking**: Monitor progress
-
-## Keyword Selection Criteria
-- Search volume (min 100/mo)
-- Keyword difficulty (<40 for new sites)
-- Business relevance (high intent)
-- Content opportunity
-
-## Content Cluster Model
-- Pillar page (2000+ words)
-- Cluster pages (1000+ words)
-- Internal linking strategy
-
-## Related Skill Bibles
-- SKILL_BIBLE_seo_mastery.md
-- SKILL_BIBLE_content_seo.md""",
-        "inputs": ["website", "target_keywords", "competitors"],
-        "outputs": ["Keyword list", "Content plan", "Technical audit", "Link building plan"]
-    },
-    
-    "ultimate_video_ad_script": {
-        "category": "Paid Advertising",
-        "description": "Video ad script writing with hooks and direct response CTAs",
-        "has_script": False,
-        "full_description": """## Overview
-Creates video ad scripts optimized for paid media with proven hook formulas and direct response CTAs.
-
-## Video Ad Structures
-**UGC Style (15-30 sec):**
-- Hook (3 sec)
-- Problem (5 sec)
-- Solution (10 sec)
-- CTA (5 sec)
-
-**Story Style (30-60 sec):**
-- Hook (5 sec)
-- Story setup (15 sec)
-- Transformation (15 sec)
-- Offer + CTA (10 sec)
-
-## Hook Formulas
-- "Stop scrolling if you [pain point]"
-- "I made [mistake] and here's what happened"
-- "This [product] changed everything"
-- "POV: You finally [desired result]"
-
-## Platform Specs
-- Meta: 4:5 or 9:16, <15 sec best
-- YouTube: 16:9, skip after 5 sec
-- TikTok: 9:16, <30 sec best
-
-## Related Skill Bibles
-- SKILL_BIBLE_video_ad_scripts.md""",
-        "inputs": ["product", "audience", "platform", "ad_length"],
-        "outputs": ["Video script", "Hook options", "B-roll suggestions", "CTA options"]
-    },
-    
-    "facebook_ad_library_analysis_automation": {
-        "category": "Paid Advertising",
-        "description": "Analyze competitor ads from Facebook Ad Library for insights",
-        "has_script": True,
-        "full_description": """## Overview
-Scrapes and analyzes competitor ads from Facebook Ad Library to identify winning creative patterns and copy formulas.
-
-## Prerequisites
-- `APIFY_API_TOKEN` - Scraping
-- `OPENAI_API_KEY` - Analysis
-
-## Analysis Components
-1. **Ad Creative Types**: Images, videos, carousels
-2. **Copy Patterns**: Headlines, primary text, CTAs
-3. **Offers**: Discounts, trials, demos
-4. **Run Time**: How long ads have been active
-5. **Platforms**: FB, IG, Messenger, Audience Network
-
-## Insights Extracted
-- Top-performing ad formats
-- Common hook patterns
-- Offer structures
-- Landing page strategies
-- Creative refresh frequency
-
-## Output
-- Competitor ad database
-- Pattern analysis report
-- Creative recommendations""",
-        "inputs": ["competitor_pages", "date_range"],
-        "outputs": ["Ad database", "Analysis report", "Creative recommendations"]
-    },
-    
-    "ecom_email_campaign_generator_agent": {
-        "category": "Sales Outreach",
-        "description": "E-commerce email campaigns using Max Sturtevant's $40M methodology",
-        "has_script": True,
-        "full_description": """## Overview
-Generates e-commerce email campaigns using Max Sturtevant's proven methodology that generated $40M+ in email revenue.
-
-## Prerequisites
-- `OPENROUTER_API_KEY` - AI generation
-
-## Campaign Types
-- Product launch
-- Flash sale
-- Abandoned cart
-- Win-back
-- VIP exclusive
-- Holiday/seasonal
-
-## SCE Framework
-- **S**kimmable: Scannable layout
-- **C**lear: One message, one CTA
-- **E**ngaging: Hooks and curiosity
-
-## Email Structure Rules
-- 75 words max body copy
-- Single column layout
-- One CTA per email
-- Mobile-first design
-
-## Related Skill Bibles
-- SKILL_BIBLE_sturtevant_email_master_system.md
-- SKILL_BIBLE_ecommerce_email_marketing.md""",
-        "inputs": ["product", "campaign_type", "discount", "urgency"],
-        "outputs": ["Email sequence", "Subject lines", "Preview text"]
-    },
-}
-
-# Merge additional workflows into main WORKFLOWS dict
-for name, data in ADDITIONAL_WORKFLOWS.items():
-    if name not in WORKFLOWS:
-        WORKFLOWS[name] = data
-
-# Add remaining workflows with basic descriptions
-remaining_workflows = {
-    "automated_prospecting_ghl_crm": ("Lead Generation", "Automated prospecting pipeline syncing to GoHighLevel CRM", True),
-    "booked_meeting_alert_prospect_research": ("Sales Automation", "Instant alerts and research when meetings are booked", True),
-    "brand_mention_monitor": ("Research", "Monitor brand mentions across web and social media", True),
-    "build_lead_list": ("Lead Generation", "Build targeted lead lists from multiple sources", True),
-    "bulk_email_validator": ("Utilities", "Validate email lists for deliverability before sending", True),
-    "contract_renewal_reminder": ("Client Management", "Automated contract renewal reminders and follow-ups", True),
-    "convert_n8n_workflow": ("Utilities", "Convert N8N workflow JSON to AIAA directive format", True),
-    "crm_deal_automator": ("Sales Automation", "Automate CRM deal stage updates and tasks", True),
-    "crunchbase_lead_finder": ("Lead Generation", "Find funded startups from Crunchbase for outreach", True),
-    "daily_campaign_reports_health_metrics_bounce_rate_alerts": ("Reporting", "Daily email campaign health reports with bounce alerts", True),
-    "demo_scheduler": ("Sales Automation", "Automated demo scheduling with calendar integration", True),
-    "dream_100_instagram_personalized_dm_automation": ("Sales Outreach", "Dream 100 Instagram DM outreach with personalization", True),
-    "email_deliverability_reputation_manager": ("Utilities", "Monitor and manage email deliverability reputation", True),
-    "email_reply_classifier": ("Sales Automation", "AI classifier for email replies (interested, not interested, OOO)", True),
-    "faq_chatbot": ("Client Management", "AI-powered FAQ chatbot for customer support", True),
-    "follow_up_sequence": ("Sales Outreach", "Automated follow-up email sequences", True),
-    "formatted_google_doc_creator": ("Utilities", "Create beautifully formatted Google Docs from markdown", True),
-    "full_campaign_pipeline": ("Sales Outreach", "End-to-end cold email campaign pipeline", True),
-    "funnel_outline_strategy_agent": ("Funnel Building", "AI agent for funnel strategy and outline creation", True),
-    "funding_round_tracker": ("Research", "Track funding rounds for prospecting opportunities", True),
-    "google_serp_lead_scraper": ("Lead Generation", "Scrape Google search results for lead generation", True),
-    "hubspot_enrichment": ("Lead Generation", "Enrich HubSpot contacts with additional data", True),
-    "instantly_autoreply": ("Sales Automation", "Automated replies for Instantly.ai email campaigns", True),
-    "job_board_lead_finder": ("Lead Generation", "Find leads from job board postings", True),
-    "jump_cut_vad": ("Content Marketing", "AI-powered jump cut detection for video editing", True),
-    "launch_cold_email_campaign": ("Sales Outreach", "Launch and manage cold email campaigns", True),
-    "lead_deduplication": ("Utilities", "Deduplicate lead lists across sources", True),
-    "lead_magnet_delivery": ("Content Marketing", "Automated lead magnet delivery system", True),
-    "lead_notification": ("Sales Automation", "Instant notifications when new leads arrive", True),
-    "linkedin_group_scraper": ("Lead Generation", "Scrape members from LinkedIn groups", True),
-    "linkedin_profile_tracker": ("Research", "Track LinkedIn profile changes and updates", True),
-    "payment_reminder": ("Client Management", "Automated payment reminder sequences", True),
-    "project_milestone_tracker": ("Operations", "Track project milestones and send updates", True),
-    "review_collection": ("Client Management", "Automated review and testimonial collection", True),
-    "rss_to_content_pipeline": ("Content Marketing", "Convert RSS feeds into social content", True),
-    "scrape_leads": ("Lead Generation", "Generic lead scraping from various sources", True),
-    "social_media_scheduler": ("Content Marketing", "Schedule posts across social platforms", True),
-    "stripe_client_onboarding": ("Client Management", "Trigger onboarding when Stripe payment received", True),
-    "team_task_assignment": ("Operations", "Automated task assignment to team members", True),
-    "ticket_auto_responder": ("Client Management", "Auto-respond to support tickets with AI", True),
-    "ticket_triage": ("Client Management", "AI triage for support tickets by priority", True),
-    "ultimate_ai_automation_builder": ("Automation", "Build custom AI automations from natural language", False),
-    "ultimate_client_onboarding": ("Client Management", "Complete client onboarding from contract to kickoff", True),
-    "ultimate_client_reporting": ("Reporting", "Comprehensive automated client reporting", True),
-    "ultimate_cold_email_campaign": ("Sales Outreach", "End-to-end cold email campaign management", True),
-    "ultimate_ecommerce_email": ("Sales Outreach", "E-commerce email marketing with flows and campaigns", True),
-    "ultimate_google_ads_campaign": ("Paid Advertising", "Complete Google Ads campaign setup and management", False),
-    "ultimate_local_newsletter": ("Content Marketing", "Local business newsletter with news and promotions", True),
-    "ultimate_proposal_generator": ("Sales", "Generate winning client proposals", False),
-    "upwork_scrape_apply": ("Lead Generation", "Scrape Upwork jobs and auto-apply", True),
-    "utm_generator": ("Utilities", "Generate UTM parameters for campaign tracking", True),
-    "video_shorts_extractor": ("Content Marketing", "Extract short clips from long videos", True),
-    "video_transcription_summary": ("Content Marketing", "Transcribe and summarize video content", True),
-    "vsl_funnel_writer": ("Funnel Building", "Write complete VSL funnel copy", True),
-    "webinar_followup": ("Funnel Building", "Webinar follow-up sequences for attendees", True),
-    "webinar_funnel_generator": ("Funnel Building", "Generate complete webinar funnels", True),
-    "website_contact_scraper": ("Lead Generation", "Scrape contact info from websites", True),
-    "whatsapp_support_bot": ("Client Management", "WhatsApp support bot with AI responses", True),
-    "win_loss_analysis": ("Sales", "Analyze sales wins and losses for insights", True),
-    "yelp_review_scraper": ("Lead Generation", "Scrape Yelp for business data and reviews", True),
-    "youtube_channel_finder": ("Research", "Find relevant YouTube channels in any niche", True),
-    "youtube_script_generator": ("Content Marketing", "Generate YouTube video scripts", True),
-    "youtube_scriptwriter_workflow": ("Content Marketing", "Complete YouTube scriptwriting workflow", True),
-    "youtube_to_campaign_pipeline": ("Content Marketing", "Convert YouTube content to marketing campaigns", True),
-    "zoom_call_multi_content_copywriter_scheduler": ("Content Marketing", "Repurpose Zoom calls into multiple content pieces", True),
-    "ai_prospect_researcher": ("Research", "Deep prospect research for sales personalization", True),
-    "ai_thumbnail_generator": ("Content Marketing", "Generate YouTube thumbnail concepts and images", True),
-    "client_feedback_collector": ("Client Management", "Collect and analyze client feedback", True),
-    "client_health_score": ("Client Management", "Calculate client health scores", True),
-    "competitor_monitor": ("Research", "Monitor competitor changes and updates", True),
-    "content_translator": ("Content Marketing", "Translate content preserving tone", True),
-    "create_proposal": ("Sales", "Generate client proposals", True),
-    "email_campaign_report": ("Reporting", "Email campaign performance reports", True),
-    "email_flow_writer": ("Sales Outreach", "Write automated email flows", True),
-    "funnel_copywriter": ("Funnel Building", "Write funnel copy with proven frameworks", True),
-    "google_doc_creator": ("Utilities", "Create Google Docs from content", True),
-    "google_maps_scraper": ("Lead Generation", "Scrape Google Maps business data", True),
-    "instagram_reel_script": ("Content Marketing", "Write Instagram Reel scripts", True),
-    "invoice_generator": ("Client Management", "Generate professional invoices", True),
-    "landing_page_cro_analyzer": ("SEO", "Analyze landing pages for CRO", True),
-    "linkedin_dm_automation": ("Sales Outreach", "Automate LinkedIn DM outreach", True),
-    "linkedin_post_generator": ("Content Marketing", "Generate LinkedIn posts", True),
-    "monthly_reporting": ("Reporting", "Generate monthly reports", True),
-    "objection_handler": ("Sales", "Generate objection handling scripts", True),
-    "podcast_repurposer": ("Content Marketing", "Repurpose podcasts to content", True),
-    "press_release_generator": ("Content Marketing", "Generate press releases", True),
-    "product_description_writer": ("Content Generation", "Write product descriptions", True),
-    "product_photoshoot_generator": ("Creative", "Generate product photoshoot concepts", True),
-    "reddit_to_ad_scripts": ("Paid Advertising", "Convert Reddit to ad scripts", True),
-    "sales_call_summarizer": ("Sales", "Summarize sales call recordings", True),
-    "sales_pipeline_dashboard": ("Reporting", "Sales pipeline dashboards", True),
-    "slack_notifier": ("Utilities", "Send Slack notifications", True),
-    "testimonial_request": ("Client Management", "Request testimonials from clients", True),
-    "ultimate_agency_dashboard": ("Reporting", "Agency management dashboard", False),
-    "ultimate_case_study_generator": ("Content Generation", "Generate case studies", True),
-}
-
-for name, (cat, desc, has_script) in remaining_workflows.items():
-    if name not in WORKFLOWS:
-        WORKFLOWS[name] = {
-            "description": desc,
-            "has_script": has_script,
-            "category": cat,
-            "full_description": f"""## Overview
-{desc}
-
-## Prerequisites
-Check the directive file at `directives/{name}.md` for required API keys and setup instructions.
-
-## How to Run
-```bash
-python3 execution/{name}.py --help
-```
-
-See `directives/{name}.md` for detailed step-by-step instructions and examples.""",
-            "inputs": [],
-            "outputs": []
-        }
-
-for name, wf in WORKFLOWS.items():
-    wf["name"] = name
-    if "category" not in wf:
-        wf["category"] = "General"
+def get_db():
+    if 'db' not in g:
+        g.db = sqlite3.connect(DATABASE_PATH)
+        g.db.row_factory = sqlite3.Row
+    return g.db
+
+@app.teardown_appcontext
+def close_db(exception):
+    db = g.pop('db', None)
+    if db is not None:
+        db.close()
+
+def init_db():
+    """Initialize database with all required tables."""
+    conn = sqlite3.connect(DATABASE_PATH)
+    c = conn.cursor()
+
+    # Batches table
+    c.execute('''CREATE TABLE IF NOT EXISTS batches (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        batch_id TEXT UNIQUE NOT NULL,
+        user_id TEXT,
+        total_companies INTEGER DEFAULT 0,
+        completed_companies INTEGER DEFAULT 0,
+        failed_companies INTEGER DEFAULT 0,
+        status TEXT DEFAULT 'processing',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )''')
+
+    # Companies table
+    c.execute('''CREATE TABLE IF NOT EXISTS companies (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        batch_id TEXT NOT NULL,
+        company_name TEXT NOT NULL,
+        website TEXT,
+        first_name TEXT,
+        last_name TEXT,
+        email TEXT,
+        instagram TEXT,
+        linkedin TEXT,
+        about TEXT,
+        status TEXT DEFAULT 'pending',
+        current_step TEXT DEFAULT '',
+        error_message TEXT,
+        slug TEXT UNIQUE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (batch_id) REFERENCES batches(batch_id)
+    )''')
+
+    # Research table
+    c.execute('''CREATE TABLE IF NOT EXISTS research (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        company_id INTEGER NOT NULL,
+        website_content TEXT,
+        company_history TEXT,
+        market_analysis TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (company_id) REFERENCES companies(id)
+    )''')
+
+    # Analysis table (Niche Analysis)
+    c.execute('''CREATE TABLE IF NOT EXISTS analysis (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        company_id INTEGER NOT NULL,
+        target_market TEXT,
+        pain_points TEXT,
+        value_proposition TEXT,
+        unique_benefits TEXT,
+        sales_argument TEXT,
+        why_chosen TEXT,
+        confidence_scores TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (company_id) REFERENCES companies(id)
+    )''')
+
+    # Assets table (5 marketing assets)
+    c.execute('''CREATE TABLE IF NOT EXISTS assets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        company_id INTEGER NOT NULL,
+        vsl_script TEXT,
+        landing_page_copy TEXT,
+        email_sequence TEXT,
+        creative_brief TEXT,
+        offer_deep_dive TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (company_id) REFERENCES companies(id)
+    )''')
+
+    conn.commit()
+    conn.close()
+
+# Initialize database on startup
+init_db()
 
 # =============================================================================
 # Authentication
 # =============================================================================
 
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
-
-def check_password(password):
-    if not DASHBOARD_PASSWORD_HASH:
-        return False
-    return hash_password(password) == DASHBOARD_PASSWORD_HASH
-
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if not session.get('logged_in'):
+        if not session.get('authenticated'):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return decorated_function
 
-def log_event(event_type, status, data, source="system"):
-    with events_lock:
-        events_log.appendleft({
-            "id": len(events_log) + 1,
-            "timestamp": datetime.now().isoformat(),
-            "type": event_type,
-            "status": status,
-            "data": data,
-            "source": source
-        })
+def verify_password(password):
+    if not DASHBOARD_PASSWORD_HASH:
+        return password == "admin"
+    return hashlib.sha256(password.encode()).hexdigest() == DASHBOARD_PASSWORD_HASH
 
 # =============================================================================
-# CSS with Theme Support and Markdown Styling
+# Data Parsing (Google Sheets format)
 # =============================================================================
 
-BASE_CSS = '''
+def parse_google_sheets_data(data):
+    """Parse Google Sheets data - flexible column detection from copy-paste."""
+    companies = []
+    lines = data.strip().split('\n')
+
+    print(f"[PARSE] Received {len(lines)} lines of data")
+    print(f"[PARSE] First line preview: {lines[0][:100] if lines else 'empty'}...")
+
+    # Skip empty data
+    if not lines:
+        print("[PARSE] No lines found")
+        return companies
+
+    # Check if first line is a header row (contains common header words)
+    first_line_lower = lines[0].lower()
+    header_keywords = ['company', 'website', 'name', 'email', 'first', 'last', 'instagram', 'linkedin', 'about']
+    is_header = sum(1 for kw in header_keywords if kw in first_line_lower) >= 2
+
+    start_idx = 1 if is_header else 0
+
+    for line in lines[start_idx:]:
+        if not line.strip():
+            continue
+
+        # Tab-separated (direct Google Sheets copy-paste)
+        if '\t' in line:
+            parts = [p.strip() for p in line.split('\t')]
+
+            # Accept any number of columns (minimum 1)
+            if len(parts) >= 1:
+                company = {
+                    'company_name': '',
+                    'website': '',
+                    'first_name': '',
+                    'last_name': '',
+                    'email': '',
+                    'instagram': '',
+                    'linkedin': '',
+                    'about': ''
+                }
+
+                # Smart column detection based on content
+                for i, part in enumerate(parts):
+                    part_lower = part.lower()
+
+                    # Detect by content pattern
+                    if 'http' in part_lower and 'linkedin' in part_lower:
+                        company['linkedin'] = part
+                    elif 'http' in part_lower or '.com' in part_lower or '.co' in part_lower or '.io' in part_lower:
+                        if not company['website']:
+                            company['website'] = part if part.startswith('http') else f'https://{part}'
+                    elif '@' in part and '.' in part and ' ' not in part:
+                        company['email'] = part
+                    elif part.startswith('@'):
+                        company['instagram'] = part
+                    elif len(part) > 50:  # Long text is likely "about"
+                        company['about'] = part
+                    elif i == 0 and not company['company_name']:
+                        # First column is usually company name
+                        company['company_name'] = part
+                    elif not company['first_name'] and len(part.split()) == 1 and len(part) < 20:
+                        company['first_name'] = part
+                    elif company['first_name'] and not company['last_name'] and len(part.split()) == 1 and len(part) < 20:
+                        company['last_name'] = part
+                    elif not company['company_name']:
+                        company['company_name'] = part
+                    elif not company['about']:
+                        company['about'] = part
+
+                # Ensure we have at least a company name
+                if company['company_name']:
+                    companies.append(company)
+                continue
+
+        # Fallback: comma-separated or other formats
+        if ',' in line:
+            parts = [p.strip() for p in line.split(',')]
+            if len(parts) >= 2:
+                company = parse_parts_smart(parts)
+                if company and company['company_name']:
+                    companies.append(company)
+                continue
+
+        # Single column - just company name
+        if line.strip() and not any(c in line for c in ['\t', ',']):
+            companies.append({
+                'company_name': line.strip(),
+                'website': '',
+                'first_name': '',
+                'last_name': '',
+                'email': '',
+                'instagram': '',
+                'linkedin': '',
+                'about': ''
+            })
+
+    print(f"[PARSE] Parsed {len(companies)} companies")
+    if companies:
+        print(f"[PARSE] First company: {companies[0]}")
+    return companies
+
+def parse_parts_smart(parts):
+    """Smart parsing of parts regardless of order."""
+    company = {
+        'company_name': '',
+        'website': '',
+        'first_name': '',
+        'last_name': '',
+        'email': '',
+        'instagram': '',
+        'linkedin': '',
+        'about': ''
+    }
+
+    for part in parts:
+        part = part.strip()
+        part_lower = part.lower()
+
+        if 'linkedin.com' in part_lower:
+            company['linkedin'] = part
+        elif 'http' in part_lower or '.com' in part_lower or '.co' in part_lower:
+            if not company['website']:
+                company['website'] = part if part.startswith('http') else f'https://{part}'
+        elif '@' in part and '.' in part and ' ' not in part:
+            company['email'] = part
+        elif part.startswith('@'):
+            company['instagram'] = part
+        elif len(part) > 60:
+            company['about'] = part
+        elif not company['company_name']:
+            company['company_name'] = part
+
+    return company
+
+def generate_slug(company_name):
+    """Generate URL-safe slug from company name."""
+    slug = re.sub(r'[^a-zA-Z0-9\s-]', '', company_name.lower())
+    slug = re.sub(r'[\s_]+', '-', slug)
+    slug = re.sub(r'-+', '-', slug).strip('-')
+    return f"{slug}-{secrets.token_hex(4)}"
+
+# =============================================================================
+# AI Generation Functions
+# =============================================================================
+
+def call_ai(prompt, system_prompt="You are an expert marketing strategist and copywriter.", max_tokens=4000):
+    """Call AI via OpenRouter or Anthropic."""
+
+    # Try OpenRouter first
+    if OPENROUTER_API_KEY:
+        try:
+            response = requests.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": "anthropic/claude-3.5-sonnet",
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": prompt}
+                    ],
+                    "max_tokens": max_tokens
+                },
+                timeout=300
+            )
+            if response.status_code == 200:
+                return response.json()['choices'][0]['message']['content']
+        except Exception as e:
+            print(f"[AI ERROR] OpenRouter: {e}")
+
+    # Fallback to Anthropic
+    if ANTHROPIC_API_KEY:
+        try:
+            response = requests.post(
+                "https://api.anthropic.com/v1/messages",
+                headers={
+                    "x-api-key": ANTHROPIC_API_KEY,
+                    "anthropic-version": "2023-06-01",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": "claude-3-5-sonnet-20241022",
+                    "max_tokens": max_tokens,
+                    "system": system_prompt,
+                    "messages": [{"role": "user", "content": prompt}]
+                },
+                timeout=300
+            )
+            if response.status_code == 200:
+                return response.json()['content'][0]['text']
+        except Exception as e:
+            print(f"[AI ERROR] Anthropic: {e}")
+
+    return None
+
+def scrape_website(url):
+    """Simple website scraper to get content."""
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (compatible; MarketingBot/1.0)'}
+        response = requests.get(url, headers=headers, timeout=30)
+        if response.status_code == 200:
+            # Basic HTML to text conversion
+            text = re.sub(r'<script[^>]*>.*?</script>', '', response.text, flags=re.DOTALL)
+            text = re.sub(r'<style[^>]*>.*?</style>', '', text, flags=re.DOTALL)
+            text = re.sub(r'<[^>]+>', ' ', text)
+            text = re.sub(r'\s+', ' ', text)
+            return text[:10000]  # Limit to 10k chars
+    except Exception as e:
+        print(f"[SCRAPE ERROR] {url}: {e}")
+    return ""
+
+# =============================================================================
+# Processing Pipeline
+# =============================================================================
+
+def process_company(company_id):
+    """Process a single company through the full pipeline."""
+    conn = sqlite3.connect(DATABASE_PATH)
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+
+    try:
+        # Get company data
+        c.execute("SELECT * FROM companies WHERE id = ?", (company_id,))
+        company = dict(c.fetchone())
+
+        print(f"[PROCESS] Starting: {company['company_name']}")
+
+        # Step 1: Research
+        update_company_status(conn, company_id, 'researching', 'Scraping website and researching company...')
+
+        website_content = ""
+        if company['website']:
+            website_content = scrape_website(company['website'])
+
+        research_prompt = f"""Research this company and provide a comprehensive analysis:
+
+Company: {company['company_name']}
+Website: {company['website']}
+About: {company['about']}
+Contact: {company['first_name']} {company['last_name']}
+Website Content: {website_content[:5000]}
+
+Provide:
+1. Company Overview (what they do, their mission)
+2. Products/Services offered
+3. Target market they serve
+4. Their unique positioning
+5. Company history and background (if available)
+6. Online presence assessment"""
+
+        research_result = call_ai(research_prompt) or "Research data not available"
+
+        c.execute("""INSERT INTO research (company_id, website_content, company_history, market_analysis)
+                     VALUES (?, ?, ?, ?)""",
+                  (company_id, website_content, research_result, ""))
+        conn.commit()
+
+        # Step 2: Niche Analysis
+        update_company_status(conn, company_id, 'analyzing', 'Performing deep market analysis...')
+
+        analysis_prompt = f"""You are an expert direct response copywriter and marketing strategist. Analyze this company and provide comprehensive insights:
+
+Company: {company['company_name']}
+Website: {company['website']}
+About: {company['about']}
+Research: {research_result[:3000]}
+
+Provide the following with confidence scores (1-10) for each section:
+
+## 1. TARGET MARKET ANALYSIS
+Who is their ideal customer? Be specific about demographics, psychographics, and buying behavior.
+
+## 2. PAIN POINTS & CONCERNS
+What are the top 5-10 pain points their target market experiences? What questions and concerns do prospects have?
+
+## 3. VALUE PROPOSITION
+What is their core value proposition? How do they solve their customers' problems better than alternatives?
+
+## 4. UNIQUE BENEFITS
+What makes them different? What unique benefits do they offer that competitors don't?
+
+## 5. SALES ARGUMENT
+Create a compelling sales argument using Dan Kennedy's framework - why should someone buy from them?
+
+## 6. WHY WE CHOSE THIS COMPANY (For Kairo's outreach)
+Explain why Kairo (a marketing agency specializing in paid funnels with performance-based pricing) would be a perfect fit for this company. What specific opportunities do you see? How could Kairo help them scale?
+
+Be specific, use reasoning, and provide confidence scores for each section."""
+
+        analysis_result = call_ai(analysis_prompt, max_tokens=6000) or "Analysis not available"
+
+        # Parse sections from analysis
+        c.execute("""INSERT INTO analysis (company_id, target_market, pain_points, value_proposition,
+                     unique_benefits, sales_argument, why_chosen, confidence_scores)
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                  (company_id, analysis_result, "", "", "", "", "", ""))
+        conn.commit()
+
+        # Step 3: Generate 5 Marketing Assets
+        update_company_status(conn, company_id, 'generating', 'Generating marketing assets...')
+
+        context = f"""
+Company: {company['company_name']}
+Website: {company['website']}
+Contact: {company['first_name']} {company['last_name']}
+About: {company['about']}
+
+Research & Analysis:
+{analysis_result[:4000]}
+"""
+
+        # Generate all 5 assets
+        print(f"[GEN] Generating VSL Script for {company['company_name']}...")
+        vsl_script = generate_vsl_script(context)
+
+        print(f"[GEN] Generating Landing Page for {company['company_name']}...")
+        landing_page = generate_landing_page(context)
+
+        print(f"[GEN] Generating Email Sequence for {company['company_name']}...")
+        email_sequence = generate_email_sequence(context)
+
+        print(f"[GEN] Generating Creative Brief for {company['company_name']}...")
+        creative_brief = generate_creative_brief(context, analysis_result)
+
+        print(f"[GEN] Generating Offer Deep Dive for {company['company_name']}...")
+        offer_deep_dive = generate_offer_deep_dive(context, analysis_result)
+
+        # Step 4: Save Assets
+        update_company_status(conn, company_id, 'saving', 'Saving generated assets...')
+
+        c.execute("""INSERT INTO assets (company_id, vsl_script, landing_page_copy, email_sequence,
+                     creative_brief, offer_deep_dive)
+                     VALUES (?, ?, ?, ?, ?, ?)""",
+                  (company_id, vsl_script, landing_page, email_sequence, creative_brief, offer_deep_dive))
+        conn.commit()
+
+        # Step 5: Mark Complete
+        update_company_status(conn, company_id, 'completed', '')
+
+        # Update batch progress
+        c.execute("SELECT batch_id FROM companies WHERE id = ?", (company_id,))
+        batch_id = c.fetchone()['batch_id']
+        c.execute("""UPDATE batches SET completed_companies = completed_companies + 1,
+                     updated_at = CURRENT_TIMESTAMP WHERE batch_id = ?""", (batch_id,))
+        conn.commit()
+
+        print(f"[PROCESS] Completed: {company['company_name']}")
+
+    except Exception as e:
+        print(f"[PROCESS ERROR] {e}")
+        update_company_status(conn, company_id, 'failed', str(e))
+        c.execute("SELECT batch_id FROM companies WHERE id = ?", (company_id,))
+        result = c.fetchone()
+        if result:
+            batch_id = result['batch_id']
+            c.execute("""UPDATE batches SET failed_companies = failed_companies + 1,
+                         updated_at = CURRENT_TIMESTAMP WHERE batch_id = ?""", (batch_id,))
+            conn.commit()
+    finally:
+        conn.close()
+
+def update_company_status(conn, company_id, status, current_step):
+    """Update company processing status."""
+    c = conn.cursor()
+    c.execute("""UPDATE companies SET status = ?, current_step = ?, updated_at = CURRENT_TIMESTAMP
+                 WHERE id = ?""", (status, current_step, company_id))
+    conn.commit()
+
+# =============================================================================
+# Asset Generation Functions
+# =============================================================================
+
+def generate_vsl_script(context):
+    """Generate VSL script using the VSL prompt."""
+    prompt = f"""You are creating a Video Sales Letter script for the following company. This VSL should be 4-6 minutes long (approximately 880-1320 words at 220 words per minute).
+
+{context}
+
+Create a compelling VSL script with the following structure:
+
+1. OPENING HOOK (Pattern interrupt, create curiosity)
+2. CREDIBILITY BRIDGE (Why they should listen)
+3. PROBLEM AMPLIFICATION (Escalating waves of pain)
+4. PARADIGM SHIFT (The key insight that changes everything)
+5. SOLUTION REVELATION (Introduce the solution progressively)
+6. PROOF CASCADE (Evidence in multiple forms)
+7. BENEFIT TRANSFORMATION (Benefits as life transformation scenes)
+8. OBJECTION DISSOLUTION (Preemptively handle concerns)
+9. OFFER ARCHITECTURE (Present the offer as logical culmination)
+10. RISK REVERSAL (Position guarantee as confidence)
+11. URGENCY (Create legitimate urgency)
+12. CALL TO ACTION (Book a call)
+13. FUTURE PACING CLOSE
+
+Write the complete script ready to record. Make it conversational, compelling, and focused on transformation."""
+
+    return call_ai(prompt, max_tokens=4000) or "VSL Script generation failed"
+
+def generate_landing_page(context):
+    """Generate landing page copy."""
+    prompt = f"""You are creating landing page copy for the following company. Determine if they are B2B or B2C and write accordingly.
+
+{context}
+
+Create complete landing page copy with:
+
+1. PRE-HEADLINE (10-15 words of context/credibility)
+2. MAIN HEADLINE (Focus on primary outcome/transformation)
+3. SUBHEADLINE (Expand on mechanism/method)
+4. PROBLEM AGITATION (3-5 paragraphs demonstrating deep understanding)
+5. SOLUTION INTRODUCTION (2-3 paragraphs as bridge from problem to outcome)
+6. AUTHORITY/CREDIBILITY BLOCK
+7. BENEFITS SECTION (3-5 major benefits with headlines and explanations)
+8. SOCIAL PROOF SECTION (Structure for case studies/testimonials)
+9. PROCESS/METHOD OVERVIEW (3-5 steps of how it works)
+10. OBJECTION HANDLING (Address top concerns)
+11. OFFER STACK (Itemized list of everything included)
+12. RISK REVERSAL (Guarantee that addresses biggest fear)
+13. CTA (Book a strategy call)
+14. FAQ SECTION (5-7 questions)
+15. FINAL URGENCY BLOCK
+
+Write compelling, conversion-focused copy."""
+
+    return call_ai(prompt, max_tokens=5000) or "Landing page generation failed"
+
+def generate_email_sequence(context):
+    """Generate 12-day email sequence."""
+    prompt = f"""Create a 12-day email nurture sequence for prospects who showed interest but haven't booked a call yet.
+
+{context}
+
+Write 12 emails following this structure:
+
+DAYS 1-3: REENGAGEMENT & VALUE
+- Email 1: Immediate value, soft CTA
+- Email 2: Deep dive teaching
+- Email 3: Case study/success story
+
+DAYS 4-6: AUTHORITY & TRUST
+- Email 4: Paradigm shift insight
+- Email 5: Common mistakes to avoid
+- Email 6: Behind-the-scenes/methodology
+
+DAYS 7-9: DESIRE BUILDING
+- Email 7: Transformation story
+- Email 8: ROI/results breakdown
+- Email 9: Future pacing (life after working together)
+
+DAYS 10-12: CONVERSION PUSH
+- Email 10: Direct sales email with full pitch
+- Email 11: Objection handling & FAQ
+- Email 12: Final invitation with urgency
+
+For each email provide:
+- Subject line (3 variations)
+- Preview text
+- Full email body
+- CTA
+
+Make them feel like a valuable conversation, not a sales barrage."""
+
+    return call_ai(prompt, max_tokens=8000) or "Email sequence generation failed"
+
+def generate_creative_brief(context, analysis):
+    """Generate comprehensive creative brief."""
+    prompt = f"""Create a comprehensive Creative Brief for marketing this company.
+
+{context}
+
+Analysis:
+{analysis[:3000]}
+
+Populate the following sections:
+
+## WHO IS THE IDEAL CLIENT?
+(Detailed avatar description)
+
+## WHAT IS THE COST OF STAYING STUCK?
+(Emotional and financial costs of inaction)
+
+## 3-5 STEPS TO GET THEM TO THE FINISH LINE
+(The transformation journey)
+
+## SINGLE BEST COMPETITIVE ADVANTAGE
+
+## EMOTIONAL BENEFITS CLIENTS EXPERIENCE
+
+## WHAT DISTINGUISHES FROM COMPETITORS
+
+## THE PROMISE
+(Core promise that generates interest)
+
+## THE PROBLEM
+(In-depth problem description establishing preeminence)
+
+## PROBLEM LIST
+(25 specific problems the avatar experiences)
+
+## DESIRED SITUATION
+(Their ideal situation described vividly)
+
+## JOURNAL ENTRY
+(First-person perspective 6 months after transformation)
+
+## THE GAP + HOW TO BRIDGE IT
+
+## USP & USP DETAILS
+
+## REASONS TO BELIEVE
+
+## FEATURES AND BENEFITS
+(List each feature with corresponding benefits)
+
+## THE PRODUCT
+(Conversational description as if telling a prospect)
+
+## SALES ARGUMENT
+(Compelling argument using straight-line selling)
+
+## OBJECTIONS AND RESPONSES
+
+## IDENTIFIER QUESTIONS (10)
+(Questions to call out the audience)
+
+## EMPATHY QUESTIONS (10)
+(Questions showing understanding of their situation)
+
+## OPPORTUNITY QUESTIONS (10)
+(Questions highlighting benefits)"""
+
+    return call_ai(prompt, max_tokens=8000) or "Creative brief generation failed"
+
+def generate_offer_deep_dive(context, analysis):
+    """Generate offer deep dive analysis."""
+    prompt = f"""Create an Offer Deep Dive analysis for this company.
+
+{context}
+
+Analysis:
+{analysis[:3000]}
+
+Provide comprehensive analysis of:
+
+## 1. CURRENT OFFER ASSESSMENT
+- What are they currently selling?
+- How is it positioned?
+- What's the pricing structure?
+
+## 2. OFFER VS SERVICE ANALYSIS
+- Are they selling a service or an offer?
+- What quantifiable results could they promise?
+- What guarantee could they add?
+
+## 3. VALUE PROPOSITION OPTIMIZATION
+- Current value proposition
+- Recommended enhanced value proposition
+- Why this would convert better
+
+## 4. CLAIM & GUARANTEE STRATEGY
+- What specific results could they claim?
+- What guarantee would reduce risk?
+- Contract stipulations needed
+
+## 5. COMPETITIVE POSITIONING
+- Who are their main competitors?
+- What makes them different (or could make them different)?
+- Transfer of logistical intensity opportunities
+
+## 6. PRICING STRATEGY
+- Current pricing analysis
+- Recommended pricing structure
+- Performance-based options
+
+## 7. OFFER STACK RECOMMENDATION
+- Core offer
+- Bonuses to add
+- How to present the stack
+
+## 8. URGENCY & SCARCITY
+- Legitimate urgency factors
+- Ethical scarcity elements
+
+## 9. SOCIAL PROOF STRATEGY
+- What proof do they need?
+- Case study opportunities
+- Authority building tactics
+
+## 10. RECOMMENDED OFFER HEADLINE
+- 3-5 headline variations for cold traffic
+- Explanation of why each would work"""
+
+    return call_ai(prompt, max_tokens=5000) or "Offer deep dive generation failed"
+
+# =============================================================================
+# Background Processing
+# =============================================================================
+
+def process_batch_async(batch_id, companies_data):
+    """Process a batch of companies in background."""
+    def run():
+        conn = sqlite3.connect(DATABASE_PATH)
+        conn.row_factory = sqlite3.Row
+        c = conn.cursor()
+
+        # Get all company IDs for this batch
+        c.execute("SELECT id FROM companies WHERE batch_id = ? ORDER BY id", (batch_id,))
+        company_ids = [row['id'] for row in c.fetchall()]
+        conn.close()
+
+        # Process each company sequentially
+        for company_id in company_ids:
+            process_company(company_id)
+            time.sleep(1)  # Small delay between companies
+
+        # Mark batch as complete
+        conn = sqlite3.connect(DATABASE_PATH)
+        c = conn.cursor()
+        c.execute("""UPDATE batches SET status = 'completed', updated_at = CURRENT_TIMESTAMP
+                     WHERE batch_id = ?""", (batch_id,))
+        conn.commit()
+        conn.close()
+
+    thread = threading.Thread(target=run)
+    thread.daemon = True
+    thread.start()
+
+# =============================================================================
+# Premium UI Styles
+# =============================================================================
+
+PREMIUM_STYLES = """
 <style>
-    :root {
-        --bg-base: #1a1a1a;
-        --bg-surface: #232323;
-        --bg-elevated: #2a2a2a;
-        --bg-hover: #333333;
-        --text-primary: #f5f5f5;
-        --text-secondary: #a3a3a3;
-        --text-muted: #737373;
-        --border: #333333;
-        --border-subtle: #2a2a2a;
-        --accent: #e07a3a;
-        --accent-hover: #f08a4a;
-        --accent-muted: rgba(224, 122, 58, 0.15);
-        --success: #4ade80;
-        --success-muted: rgba(74, 222, 128, 0.15);
-        --error: #f87171;
-        --error-muted: rgba(248, 113, 113, 0.15);
-        --warning: #fbbf24;
-        --warning-muted: rgba(251, 191, 36, 0.15);
-    }
-    [data-theme="light"] {
-        --bg-base: #f8f8f8;
-        --bg-surface: #ffffff;
-        --bg-elevated: #f0f0f0;
-        --bg-hover: #e8e8e8;
-        --text-primary: #1a1a1a;
-        --text-secondary: #525252;
-        --text-muted: #737373;
-        --border: #e0e0e0;
-        --border-subtle: #ebebeb;
-        --accent: #d96c2c;
-        --accent-hover: #c45e20;
-        --accent-muted: rgba(217, 108, 44, 0.12);
-        --success: #16a34a;
-        --success-muted: rgba(22, 163, 74, 0.12);
-        --error: #dc2626;
-        --error-muted: rgba(220, 38, 38, 0.12);
-        --warning: #ca8a04;
-        --warning-muted: rgba(202, 138, 4, 0.12);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-        font-family: 'DM Sans', -apple-system, sans-serif;
-        background: var(--bg-base);
-        color: var(--text-primary);
-        min-height: 100vh;
-        line-height: 1.6;
-        transition: background 0.2s, color 0.2s;
-    }
-    
-    /* Markdown Content Styling */
-    .md-content { line-height: 1.8; }
-    .md-content h2 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--accent); border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem; }
-    .md-content h3 { font-size: 1.1rem; font-weight: 600; margin: 1.25rem 0 0.5rem; color: var(--text-primary); }
-    .md-content h4 { font-size: 1rem; font-weight: 500; margin: 1rem 0 0.5rem; color: var(--text-secondary); }
-    .md-content p { margin: 0.75rem 0; }
-    .md-content strong { color: var(--accent); font-weight: 600; }
-    .md-content em { font-style: italic; color: var(--text-secondary); }
-    .md-content ul, .md-content ol { margin: 0.75rem 0; padding-left: 1.5rem; }
-    .md-content li { margin: 0.375rem 0; }
-    .md-content code { font-family: 'DM Mono', monospace; font-size: 0.875em; background: var(--bg-elevated); padding: 0.125rem 0.375rem; border-radius: 4px; color: var(--accent); }
-    .md-content pre { background: var(--bg-elevated); padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--border-subtle); }
-    .md-content pre code { background: none; padding: 0; color: var(--text-primary); }
-    .md-content .md-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem; }
-    .md-content .md-table td { padding: 0.5rem 0.75rem; border: 1px solid var(--border-subtle); }
-    .md-content .md-table tr:first-child { background: var(--bg-elevated); font-weight: 500; }
-    
-    .theme-toggle { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.8125rem; color: var(--text-secondary); transition: all 0.15s; }
-    .theme-toggle:hover { background: var(--bg-hover); color: var(--text-primary); }
-    .theme-toggle svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
-    
-    .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 240px; background: var(--bg-surface); border-right: 1px solid var(--border-subtle); padding: 1.5rem 0; display: flex; flex-direction: column; }
-    .sidebar-brand { display: flex; align-items: center; gap: 0.75rem; padding: 0 1.25rem; margin-bottom: 1.5rem; }
-    .brand-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-    .brand-icon svg { width: 18px; height: 18px; stroke: white; fill: none; }
-    .sidebar-brand h1 { font-size: 1rem; font-weight: 600; }
-    .theme-row { padding: 0 1.25rem; margin-bottom: 1.5rem; }
-    .nav-section { margin-bottom: 1.5rem; }
-    .nav-label { padding: 0 1.25rem; font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.5rem; }
-    .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem 1.25rem; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: all 0.15s; }
-    .nav-item:hover { background: var(--bg-elevated); color: var(--text-primary); }
-    .nav-item.active { background: var(--accent-muted); color: var(--accent); }
-    .nav-item svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
-    .sidebar-footer { margin-top: auto; padding: 1rem 1.25rem; border-top: 1px solid var(--border-subtle); }
-    .user-info { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
-    .user-avatar { width: 32px; height: 32px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 0.8125rem; color: white; }
-    .user-name { font-size: 0.875rem; font-weight: 500; }
-    .logout-btn { display: block; width: 100%; padding: 0.5rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); font-family: inherit; font-size: 0.8125rem; cursor: pointer; text-align: center; text-decoration: none; }
-    .logout-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
-    
-    .main { margin-left: 240px; padding: 2rem; }
-    .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap; }
-    .page-title { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
-    .page-subtitle { color: var(--text-muted); font-size: 0.875rem; margin-top: 0.25rem; }
-    .status-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.875rem; background: var(--success-muted); border-radius: 9999px; font-size: 0.8125rem; color: var(--success); }
-    .status-badge::before { content: ''; width: 8px; height: 8px; background: currentColor; border-radius: 50%; box-shadow: 0 0 8px currentColor; }
-    
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
-    .stat-card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; }
-    .stat-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; }
-    .stat-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
-    .stat-icon.orange { background: var(--accent-muted); color: var(--accent); }
-    .stat-icon.green { background: var(--success-muted); color: var(--success); }
-    .stat-icon.red { background: var(--error-muted); color: var(--error); }
-    .stat-icon.yellow { background: var(--warning-muted); color: var(--warning); }
-    .stat-value { font-size: 1.75rem; font-weight: 600; }
-    .stat-label { font-size: 0.8125rem; color: var(--text-muted); }
-    
-    .card { background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; margin-bottom: 1.5rem; }
-    .card-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-subtle); }
-    .card-title { font-size: 0.9375rem; font-weight: 500; }
-    .card-action { font-size: 0.8125rem; color: var(--accent); text-decoration: none; padding: 0.25rem 0.5rem; border-radius: 4px; }
-    .card-action:hover { background: var(--accent-muted); }
-    .card-body { padding: 1.25rem; }
-    
-    .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
-    .badge-success { background: var(--success-muted); color: var(--success); }
-    .badge-error { background: var(--error-muted); color: var(--error); }
-    .badge-warning { background: var(--warning-muted); color: var(--warning); }
-    .badge-info { background: var(--accent-muted); color: var(--accent); }
-    .badge-muted { background: var(--bg-elevated); color: var(--text-muted); }
-    .badge-category { background: var(--bg-elevated); color: var(--text-secondary); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.03em; }
-    
-    .form-group { margin-bottom: 1.25rem; }
-    .form-label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.5rem; }
-    .form-input { width: 100%; padding: 0.75rem 1rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-family: inherit; font-size: 0.9375rem; }
-    .form-input:focus { outline: none; border-color: var(--accent); }
-    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: var(--accent); color: white; border: none; border-radius: 8px; font-family: inherit; font-size: 0.875rem; font-weight: 500; cursor: pointer; }
-    .btn:hover { background: var(--accent-hover); }
-    
-    .workflows-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .workflow-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1rem; text-decoration: none; color: inherit; display: block; transition: all 0.15s; }
-    .workflow-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .workflow-name { font-weight: 500; font-size: 0.875rem; margin-bottom: 0.25rem; }
-    .workflow-desc { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .workflow-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    
-    .env-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-    .env-item { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; background: var(--bg-elevated); border-radius: 8px; }
-    .env-name { font-family: 'DM Mono', monospace; font-size: 0.8125rem; }
-    .env-status { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; }
-    .env-status.set { color: var(--success); }
-    .env-status.unset { color: var(--error); }
-    .env-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-    
-    .event-row { display: grid; grid-template-columns: 80px 120px 1fr 100px; gap: 1rem; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-subtle); font-size: 0.8125rem; }
-    .event-row:last-child { border-bottom: none; }
-    .event-row:hover { background: var(--bg-hover); }
-    .event-time { font-family: 'DM Mono', monospace; color: var(--text-muted); }
-    .event-type { font-weight: 500; }
-    .event-data { color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    
-    .table { width: 100%; border-collapse: collapse; }
-    .table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); background: var(--bg-elevated); }
-    .table td { padding: 0.875rem 1rem; font-size: 0.875rem; border-bottom: 1px solid var(--border-subtle); }
-    .table tr:last-child td { border-bottom: none; }
-    .table tbody tr:hover { background: var(--bg-hover); }
-    .mono { font-family: 'DM Mono', monospace; font-size: 0.8125rem; }
-    
-    .empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
-    .alert { padding: 1rem 1.25rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.875rem; }
-    .alert-success { background: var(--success-muted); color: var(--success); border: 1px solid var(--success); }
-    .alert-error { background: var(--error-muted); color: var(--error); border: 1px solid var(--error); }
-    
-    .search-box { margin-bottom: 1.5rem; }
-    .search-box input { width: 100%; max-width: 400px; padding: 0.75rem 1rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-family: inherit; font-size: 0.9375rem; }
-    .search-box input:focus { outline: none; border-color: var(--accent); }
-    
-    .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); text-decoration: none; margin-bottom: 1.5rem; font-size: 0.875rem; }
-    .back-btn:hover { text-decoration: underline; }
-    
-    @media (max-width: 1024px) { 
-        .stats-grid { grid-template-columns: repeat(2, 1fr); } 
-        .workflows-grid { grid-template-columns: repeat(2, 1fr); } 
-        .env-grid { grid-template-columns: 1fr; } 
-    }
-    @media (max-width: 768px) { 
-        .sidebar { display: none; } 
-        .main { margin-left: 0; padding: 1rem; } 
-        .workflows-grid { grid-template-columns: 1fr; } 
-        .event-row { grid-template-columns: 1fr; gap: 0.5rem; } 
-        .page-header { flex-direction: column; }
-        .page-title { font-size: 1.25rem; }
-        .stats-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        .stat-card { padding: 1rem; }
-        .stat-value { font-size: 1.5rem; }
-        .card-body { padding: 1rem; }
-        .md-content pre { font-size: 0.75rem; padding: 0.75rem; }
-        .md-content .md-table { font-size: 0.75rem; }
-        .md-content .md-table td { padding: 0.375rem 0.5rem; }
-        .table { font-size: 0.8rem; }
-        .table th, .table td { padding: 0.5rem; }
-        .form-input { font-size: 16px; } /* Prevent zoom on iOS */
-    }
-    @media (max-width: 480px) {
-        .stats-grid { grid-template-columns: 1fr; }
-        .main { padding: 0.75rem; }
-        .page-title { font-size: 1.1rem; }
-        .workflow-card { padding: 0.75rem; }
-        .workflow-name { font-size: 0.8125rem; }
-        .workflow-desc { font-size: 0.6875rem; }
-        .badge { font-size: 0.625rem; padding: 0.125rem 0.375rem; }
-        .card-header { padding: 0.75rem 1rem; }
-        .md-content h2 { font-size: 1.1rem; }
-        .md-content h3 { font-size: 1rem; }
-        .md-content { font-size: 0.875rem; }
-    }
-</style>
-'''
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
-THEME_SCRIPT = '''
-<script>
-    function getTheme() { return localStorage.getItem('theme') || 'dark'; }
-    function setTheme(theme) { localStorage.setItem('theme', theme); document.documentElement.setAttribute('data-theme', theme); updateToggleIcon(theme); }
-    function toggleTheme() { setTheme(getTheme() === 'dark' ? 'light' : 'dark'); }
-    function updateToggleIcon(theme) {
-        const icon = document.getElementById('theme-icon');
-        if (icon) {
-            icon.innerHTML = theme === 'light' 
-                ? '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
-                : '<circle cx="12" cy="12" r="5" stroke-width="2"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2" stroke-linecap="round"/>';
+    :root {
+        --primary-blue: #1e3a5f;
+        --primary-blue-light: #2d5a87;
+        --primary-blue-dark: #0f1f33;
+        --gold: #d4af37;
+        --gold-light: #e8c547;
+        --gold-dark: #b8942d;
+        --white: #ffffff;
+        --off-white: #f8f9fa;
+        --gray-100: #f1f3f5;
+        --gray-200: #e9ecef;
+        --gray-300: #dee2e6;
+        --gray-400: #ced4da;
+        --gray-500: #adb5bd;
+        --gray-600: #6c757d;
+        --gray-700: #495057;
+        --gray-800: #343a40;
+        --gray-900: #212529;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --error: #ef4444;
+        --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+        --gradient-blue: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+        --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--off-white);
+        color: var(--gray-800);
+        line-height: 1.6;
+        min-height: 100vh;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    @keyframes goldGlow {
+        0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.5); }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .animate-slide-in {
+        animation: slideIn 0.5s ease-out forwards;
+    }
+
+    .animate-pulse {
+        animation: pulse 2s infinite;
+    }
+
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    /* Navigation */
+    .nav {
+        background: var(--gradient-blue);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow-lg);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .nav-brand-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-gold);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: var(--primary-blue-dark);
+        font-size: 1.2rem;
+    }
+
+    .nav-brand-text {
+        color: var(--white);
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+
+    .nav-brand-text span {
+        color: var(--gold);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .nav-link {
+        color: var(--gray-300);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+        font-size: 0.95rem;
+    }
+
+    .nav-link:hover {
+        color: var(--gold);
+    }
+
+    .nav-user {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--white);
+        font-size: 0.9rem;
+    }
+
+    /* Container */
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    /* Hero Section */
+    .hero {
+        background: var(--gradient-blue);
+        padding: 4rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        animation: float 10s ease-in-out infinite;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        color: var(--white);
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .hero h1 span {
+        color: var(--gold);
+    }
+
+    .hero p {
+        color: var(--gray-300);
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Cards */
+    .card {
+        background: var(--white);
+        border-radius: 16px;
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+
+    .card-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--gray-200);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .card-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: var(--gray-800);
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    /* Input Section */
+    .input-section {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow-lg);
+        margin-bottom: 2rem;
+        border: 1px solid var(--gray-200);
+    }
+
+    .input-section h2 {
+        font-family: 'Playfair Display', serif;
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    .input-section p {
+        color: var(--gray-600);
+        margin-bottom: 1.5rem;
+    }
+
+    textarea {
+        width: 100%;
+        min-height: 200px;
+        padding: 1rem;
+        border: 2px solid var(--gray-200);
+        border-radius: 12px;
+        font-family: 'Inter', monospace;
+        font-size: 0.9rem;
+        resize: vertical;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    textarea:focus {
+        outline: none;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
+
+    .format-guide {
+        background: linear-gradient(135deg, var(--gray-100) 0%, var(--white) 100%);
+        border: 1px solid var(--gray-200);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .sample-table {
+        overflow-x: auto;
+        border-radius: 8px;
+        border: 1px solid var(--gray-200);
+    }
+
+    .sample-table table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+    }
+
+    .sample-table th {
+        background: var(--primary-blue);
+        color: white;
+        padding: 0.5rem 0.75rem;
+        text-align: left;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .sample-table td {
+        background: white;
+        padding: 0.5rem 0.75rem;
+        border-top: 1px solid var(--gray-200);
+        color: var(--gray-600);
+        white-space: nowrap;
+    }
+
+    textarea::placeholder {
+        color: var(--gray-400);
+    }
+
+    /* Buttons */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0.875rem 1.75rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        background: var(--gradient-gold);
+        color: var(--primary-blue-dark);
+        box-shadow: var(--shadow-gold);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 30px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-secondary {
+        background: var(--primary-blue);
+        color: var(--white);
+    }
+
+    .btn-secondary:hover {
+        background: var(--primary-blue-light);
+    }
+
+    .btn-outline {
+        background: transparent;
+        border: 2px solid var(--gold);
+        color: var(--gold);
+    }
+
+    .btn-outline:hover {
+        background: var(--gold);
+        color: var(--primary-blue-dark);
+    }
+
+    .btn-lg {
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+    }
+
+    /* Company Counter */
+    .company-counter {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+        padding: 1rem;
+        background: var(--gray-100);
+        border-radius: 12px;
+    }
+
+    .counter-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-blue);
+        font-family: 'Playfair Display', serif;
+    }
+
+    .counter-label {
+        color: var(--gray-600);
+    }
+
+    /* Batch Cards */
+    .batch-grid {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .batch-card {
+        background: var(--white);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--gray-200);
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .batch-header {
+        background: var(--gradient-blue);
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .batch-id {
+        color: var(--white);
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .batch-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.375rem 0.875rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .batch-status.processing {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+    }
+
+    .batch-status.completed {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .batch-progress {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .progress-bar-container {
+        height: 8px;
+        background: var(--gray-200);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: var(--gradient-gold);
+        border-radius: 4px;
+        transition: width 0.5s ease;
+    }
+
+    .progress-text {
+        font-size: 0.85rem;
+        color: var(--gray-600);
+    }
+
+    .batch-companies {
+        padding: 1rem 1.5rem;
+    }
+
+    .company-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.875rem;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+        background: var(--gray-100);
+        transition: background 0.2s;
+    }
+
+    .company-item:hover {
+        background: var(--gray-200);
+    }
+
+    .company-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .company-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .company-icon.pending {
+        background: var(--gray-200);
+        color: var(--gray-500);
+    }
+
+    .company-icon.processing {
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+        animation: pulse 1.5s infinite;
+    }
+
+    .company-icon.completed {
+        background: rgba(16, 185, 129, 0.2);
+        color: #10b981;
+    }
+
+    .company-icon.failed {
+        background: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+    }
+
+    .company-name {
+        font-weight: 500;
+        color: var(--gray-800);
+    }
+
+    .company-status {
+        font-size: 0.8rem;
+        color: var(--gray-500);
+    }
+
+    .view-page-btn {
+        padding: 0.5rem 1rem;
+        background: var(--gradient-gold);
+        color: var(--primary-blue-dark);
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: transform 0.2s;
+    }
+
+    .view-page-btn:hover {
+        transform: scale(1.05);
+    }
+
+    /* Status Icons */
+    .status-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Login Page */
+    .login-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--gradient-blue);
+        padding: 2rem;
+    }
+
+    .login-box {
+        background: var(--white);
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: var(--shadow-xl);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .login-box h1 {
+        font-family: 'Playfair Display', serif;
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+    }
+
+    .login-box h1 span {
+        color: var(--gold);
+    }
+
+    .login-input {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid var(--gray-200);
+        border-radius: 10px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        transition: border-color 0.2s;
+    }
+
+    .login-input:focus {
+        outline: none;
+        border-color: var(--gold);
+    }
+
+    /* Footer */
+    .footer {
+        background: var(--primary-blue-dark);
+        color: var(--gray-400);
+        padding: 2rem;
+        text-align: center;
+        margin-top: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .nav {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+        }
+
+        .container {
+            padding: 1rem;
         }
     }
-    document.documentElement.setAttribute('data-theme', getTheme());
-    document.addEventListener('DOMContentLoaded', function() { updateToggleIcon(getTheme()); });
-</script>
-'''
-
-def render_sidebar(active="overview", username="admin"):
-    return f'''
-    <aside class="sidebar">
-        <div class="sidebar-brand">
-            <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h1>AIAA</h1>
-        </div>
-        <div class="theme-row">
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <svg id="theme-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" stroke-width="2"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2" stroke-linecap="round"/></svg>
-                <span>Toggle theme</span>
-            </button>
-        </div>
-        <nav>
-            <div class="nav-section">
-                <div class="nav-label">Dashboard</div>
-                <a href="/" class="nav-item {'active' if active == 'overview' else ''}"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke-width="2"/></svg>Overview</a>
-            </div>
-            <div class="nav-section">
-                <div class="nav-label">Management</div>
-                <a href="/workflows" class="nav-item {'active' if active == 'workflows' else ''}"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke-width="2"/></svg>Workflows</a>
-                <a href="/env" class="nav-item {'active' if active == 'env' else ''}"><svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-width="2"/></svg>Environment</a>
-                <a href="/webhooks" class="nav-item {'active' if active == 'webhooks' else ''}"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke-width="2"/></svg>Webhooks</a>
-                <a href="/logs" class="nav-item {'active' if active == 'logs' else ''}"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" stroke-width="2"/></svg>Logs</a>
-            </div>
-        </nav>
-        <div class="sidebar-footer">
-            <div class="user-info"><div class="user-avatar">{username[0].upper()}</div><span class="user-name">{username}</span></div>
-            <a href="/logout" class="logout-btn">Sign Out</a>
-        </div>
-    </aside>
-    '''
+</style>
+"""
 
 # =============================================================================
-# Routes
+# Public Page Styles (Premium Landing Page)
+# =============================================================================
+
+PUBLIC_PAGE_STYLES = """
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+    :root {
+        --primary-blue: #1e3a5f;
+        --primary-blue-light: #2d5a87;
+        --primary-blue-dark: #0f1f33;
+        --gold: #d4af37;
+        --gold-light: #e8c547;
+        --gold-dark: #b8942d;
+        --white: #ffffff;
+        --off-white: #f8f9fa;
+        --gray-100: #f1f3f5;
+        --gray-200: #e9ecef;
+        --gray-300: #dee2e6;
+        --gray-600: #6c757d;
+        --gray-800: #343a40;
+        --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+        --gradient-blue: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+        --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--off-white);
+        color: var(--gray-800);
+        line-height: 1.7;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes goldShimmer {
+        0% { background-position: -200% center; }
+        100% { background-position: 200% center; }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    .animate-fade-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+    .animate-delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+    /* Hero Section */
+    .public-hero {
+        background: var(--gradient-blue);
+        padding: 6rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .public-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(ellipse at top, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+    }
+
+    .public-hero::after {
+        content: '';
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: var(--off-white);
+        transform: skewY(-2deg);
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(212, 175, 55, 0.2);
+        color: var(--gold);
+        padding: 0.5rem 1.25rem;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .public-hero h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        color: var(--white);
+        margin-bottom: 1rem;
+        font-weight: 600;
+        position: relative;
+        z-index: 1;
+    }
+
+    .public-hero h1 .gold-text {
+        background: var(--gradient-gold);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .public-hero .tagline {
+        color: var(--gray-300);
+        font-size: 1.25rem;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Why Chosen Section */
+    .why-chosen {
+        background: linear-gradient(135deg, rgba(30, 58, 95, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+        padding: 4rem 2rem;
+        margin: -2rem 0 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .why-chosen-card {
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--white);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        position: relative;
+    }
+
+    .why-chosen-card::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: var(--gradient-gold);
+        border-radius: 22px;
+        z-index: -1;
+        opacity: 0.5;
+    }
+
+    .why-chosen h2 {
+        font-family: 'Playfair Display', serif;
+        color: var(--primary-blue);
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .why-chosen h2 .icon {
+        width: 40px;
+        height: 40px;
+        background: var(--gradient-gold);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Asset Sections */
+    .assets-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .asset-section {
+        background: var(--white);
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        border: 1px solid var(--gray-200);
+        animation: scaleIn 0.6s ease-out forwards;
+    }
+
+    .asset-header {
+        background: var(--gradient-blue);
+        padding: 1.5rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .asset-header:hover {
+        background: var(--primary-blue-light);
+    }
+
+    .asset-header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .asset-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--gradient-gold);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .asset-title {
+        color: var(--white);
+        font-family: 'Playfair Display', serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    .asset-subtitle {
+        color: var(--gray-300);
+        font-size: 0.9rem;
+    }
+
+    .expand-icon {
+        color: var(--gold);
+        font-size: 1.5rem;
+        transition: transform 0.3s;
+    }
+
+    .asset-section.expanded .expand-icon {
+        transform: rotate(180deg);
+    }
+
+    .asset-content {
+        padding: 2rem;
+        display: none;
+        background: var(--white);
+    }
+
+    .asset-section.expanded .asset-content {
+        display: block;
+        animation: fadeInUp 0.4s ease-out;
+    }
+
+    .asset-content pre {
+        background: var(--gray-100);
+        padding: 1.5rem;
+        border-radius: 12px;
+        overflow-x: auto;
+        font-size: 0.9rem;
+        line-height: 1.8;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: var(--gradient-blue);
+        padding: 5rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(ellipse at bottom, rgba(212, 175, 55, 0.2) 0%, transparent 60%);
+    }
+
+    .cta-content {
+        position: relative;
+        z-index: 1;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .cta-section h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        color: var(--white);
+        margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+        color: var(--gray-300);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--gradient-gold);
+        color: var(--primary-blue-dark);
+        padding: 1.25rem 3rem;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: var(--shadow-gold);
+        transition: transform 0.3s, box-shadow 0.3s;
+        animation: goldShimmer 3s linear infinite;
+        background-size: 200% auto;
+    }
+
+    .cta-btn:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 8px 40px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Footer */
+    .public-footer {
+        background: var(--primary-blue-dark);
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+
+    .footer-brand {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        color: var(--white);
+        margin-bottom: 0.5rem;
+    }
+
+    .footer-brand span {
+        color: var(--gold);
+    }
+
+    .footer-text {
+        color: var(--gray-600);
+        font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .public-hero h1 {
+            font-size: 2.25rem;
+        }
+
+        .asset-header {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .asset-header-left {
+            flex-direction: column;
+        }
+    }
+</style>
+"""
+
+# =============================================================================
+# Routes - Authentication
 # =============================================================================
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -2715,294 +1835,1000 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username', '')
         password = request.form.get('password', '')
-        if username == DASHBOARD_USERNAME and check_password(password):
-            session['logged_in'] = True
-            session['username'] = username
-            log_event("auth", "success", {"user": username}, source="login")
-            return redirect(url_for('dashboard'))
-        log_event("auth", "failed", {"user": username}, source="login")
-        return render_template_string(LOGIN_TEMPLATE, error="Invalid username or password")
-    return render_template_string(LOGIN_TEMPLATE, error=None)
 
-LOGIN_TEMPLATE = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — AIAA Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap" rel="stylesheet">
-    {BASE_CSS}{THEME_SCRIPT}
-</head>
-<body style="display:flex;align-items:center;justify-content:center;">
-    <div style="width:100%;max-width:380px;padding:2rem;">
-        <div class="card" style="padding:2.5rem;">
-            <div style="display:flex;align-items:center;gap:0.75rem;justify-content:center;margin-bottom:2rem;">
-                <div class="brand-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                <h1 style="font-size:1.25rem;font-weight:600;">AIAA Dashboard</h1>
-            </div>
-            {{% if error %}}<div class="alert alert-error">{{{{ error }}}}</div>{{% endif %}}
-            <form method="POST">
-                <div class="form-group"><label class="form-label">Username</label><input type="text" name="username" class="form-input" required autofocus></div>
-                <div class="form-group"><label class="form-label">Password</label><input type="password" name="password" class="form-input" required></div>
-                <button type="submit" class="btn" style="width:100%;">Sign In</button>
-            </form>
-            <div style="text-align:center;margin-top:1.5rem;font-size:0.8125rem;color:var(--text-muted);">AIAA Agentic OS v2.3</div>
-        </div>
-    </div>
-</body>
-</html>
-'''
+        if username == DASHBOARD_USERNAME and verify_password(password):
+            session['authenticated'] = True
+            session['username'] = username
+            return redirect(url_for('dashboard'))
+        else:
+            return render_template_string(LOGIN_TEMPLATE, error="Invalid credentials")
+
+    return render_template_string(LOGIN_TEMPLATE, error=None)
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('login'))
 
+# =============================================================================
+# Routes - Dashboard
+# =============================================================================
+
 @app.route('/')
 @login_required
 def dashboard():
-    with events_lock:
-        recent = list(events_log)[:10]
-    env_vars = [{"name": var, "set": bool(os.getenv(var, "") or RUNTIME_ENV_VARS.get(var, ""))} for var in TRACKED_ENV_VARS]
-    stats = {"workflows": len(WORKFLOWS), "events_success": sum(1 for e in events_log if e["status"] == "success"), "events_error": sum(1 for e in events_log if e["status"] == "error"), "webhooks": 4}
-    workflows_list = list(WORKFLOWS.items())[:6]
-    username = session.get('username', 'admin')
-    return render_template_string(DASHBOARD_TEMPLATE, username=username, env_vars=env_vars, recent_events=recent, stats=stats, workflows=workflows_list, sidebar=render_sidebar("overview", username))
+    db = get_db()
+    batches = db.execute("""
+        SELECT b.*,
+               (SELECT COUNT(*) FROM companies WHERE batch_id = b.batch_id) as total,
+               (SELECT COUNT(*) FROM companies WHERE batch_id = b.batch_id AND status = 'completed') as done
+        FROM batches b ORDER BY created_at DESC LIMIT 20
+    """).fetchall()
 
-DASHBOARD_TEMPLATE = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard — AIAA</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    {BASE_CSS}{THEME_SCRIPT}
-</head>
-<body>
-    {{{{ sidebar | safe }}}}
-    <main class="main">
-        <div class="page-header"><div><h1 class="page-title">Dashboard</h1><p class="page-subtitle">AIAA Agentic Operating System</p></div><div class="status-badge">All Systems Operational</div></div>
-        <div class="stats-grid">
-            <div class="stat-card"><div class="stat-icon orange"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke-width="2"/></svg></div><div class="stat-value">{{{{ stats.workflows }}}}</div><div class="stat-label">Workflows</div></div>
-            <div class="stat-card"><div class="stat-icon green"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke-width="2"/><path d="M22 4L12 14.01l-3-3" stroke-width="2"/></svg></div><div class="stat-value">{{{{ stats.events_success }}}}</div><div class="stat-label">Successful Events</div></div>
-            <div class="stat-card"><div class="stat-icon yellow"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke-width="2"/></svg></div><div class="stat-value">{{{{ stats.webhooks }}}}</div><div class="stat-label">Webhook Endpoints</div></div>
-            <div class="stat-card"><div class="stat-icon red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke-width="2"/><path d="M12 9v4M12 17h.01" stroke-width="2"/></svg></div><div class="stat-value">{{{{ stats.events_error }}}}</div><div class="stat-label">Errors (24h)</div></div>
-        </div>
-        <div class="card"><div class="card-header"><span class="card-title">Environment Variables</span><a href="/env" class="card-action">Manage</a></div><div class="card-body"><div class="env-grid">{{% for var in env_vars %}}<div class="env-item"><span class="env-name">{{{{ var.name }}}}</span><span class="env-status {{{{ 'set' if var.set else 'unset' }}}}">{{{{ 'Set' if var.set else 'Not set' }}}}</span></div>{{% endfor %}}</div></div></div>
-        <div class="card"><div class="card-header"><span class="card-title">Recent Events</span><a href="/logs" class="card-action">View All</a></div>{{% if recent_events %}}<div>{{% for event in recent_events %}}<div class="event-row"><span class="event-time">{{{{ event.timestamp[11:19] }}}}</span><span class="event-type">{{{{ event.type }}}}</span><span class="event-data">{{{{ event.data | tojson | truncate(60) }}}}</span><span class="badge badge-{{{{ 'success' if event.status == 'success' else 'error' if event.status == 'error' else 'muted' }}}}">{{{{ event.status }}}}</span></div>{{% endfor %}}</div>{{% else %}}<div class="empty">No events yet.</div>{{% endif %}}</div>
-        <div class="card"><div class="card-header"><span class="card-title">Available Workflows</span><a href="/workflows" class="card-action">View All ({{{{ stats.workflows }}}})</a></div><div class="card-body"><div class="workflows-grid">{{% for name, wf in workflows %}}<a href="/workflow/{{{{ name }}}}" class="workflow-card"><div class="workflow-name">{{{{ name.replace('_', ' ').title() }}}}</div><div class="workflow-desc">{{{{ wf.description }}}}</div><div class="workflow-meta"><span class="badge badge-category">{{{{ wf.category }}}}</span><span class="badge {{{{ 'badge-success' if wf.has_script else 'badge-muted' }}}}">{{{{ 'Script' if wf.has_script else 'Directive' }}}}</span></div></a>{{% endfor %}}</div></div></div>
-    </main>
-    <script>setTimeout(() => location.reload(), 60000);</script>
-</body>
-</html>
-'''
+    return render_template_string(DASHBOARD_TEMPLATE, batches=batches)
 
-@app.route('/workflows')
+@app.route('/api/batches')
 @login_required
-def workflows_page():
-    username = session.get('username', 'admin')
-    workflows_list = sorted(WORKFLOWS.items(), key=lambda x: x[0])
-    return render_template_string(WORKFLOWS_TEMPLATE, workflows=workflows_list, sidebar=render_sidebar("workflows", username))
+def api_batches():
+    db = get_db()
+    batches = db.execute("""
+        SELECT b.*,
+               (SELECT COUNT(*) FROM companies WHERE batch_id = b.batch_id) as total,
+               (SELECT COUNT(*) FROM companies WHERE batch_id = b.batch_id AND status = 'completed') as done
+        FROM batches b ORDER BY created_at DESC LIMIT 20
+    """).fetchall()
 
-WORKFLOWS_TEMPLATE = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workflows — AIAA</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    {BASE_CSS}{THEME_SCRIPT}
-</head>
-<body>
-    {{{{ sidebar | safe }}}}
-    <main class="main">
-        <div class="page-header"><div><h1 class="page-title">Workflows</h1><p class="page-subtitle">{{{{ workflows | length }}}} available workflows</p></div></div>
-        <div class="search-box"><input type="text" id="search" placeholder="Search workflows..." oninput="filterWorkflows()"></div>
-        <div class="workflows-grid" id="grid">{{% for name, wf in workflows %}}<a href="/workflow/{{{{ name }}}}" class="workflow-card" data-name="{{{{ name }}}} {{{{ wf.category }}}} {{{{ wf.description }}}}"><div class="workflow-name">{{{{ name.replace('_', ' ').title() }}}}</div><div class="workflow-desc">{{{{ wf.description }}}}</div><div class="workflow-meta"><span class="badge badge-category">{{{{ wf.category }}}}</span><span class="badge {{{{ 'badge-success' if wf.has_script else 'badge-muted' }}}}">{{{{ 'Script' if wf.has_script else 'Directive' }}}}</span></div></a>{{% endfor %}}</div>
-    </main>
-    <script>function filterWorkflows() {{ const s = document.getElementById('search').value.toLowerCase(); document.querySelectorAll('.workflow-card').forEach(c => {{ c.style.display = c.dataset.name.toLowerCase().includes(s) ? 'block' : 'none'; }}); }}</script>
-</body>
-</html>
-'''
+    result = []
+    for batch in batches:
+        companies = db.execute("""
+            SELECT id, company_name, status, current_step, slug
+            FROM companies WHERE batch_id = ? ORDER BY id
+        """, (batch['batch_id'],)).fetchall()
 
-@app.route('/workflow/<name>')
+        result.append({
+            'batch_id': batch['batch_id'],
+            'total': batch['total'],
+            'done': batch['done'],
+            'status': batch['status'],
+            'created_at': batch['created_at'],
+            'companies': [dict(c) for c in companies]
+        })
+
+    return jsonify(result)
+
+@app.route('/api/process', methods=['POST'])
 @login_required
-def workflow_detail(name):
-    if name not in WORKFLOWS:
-        return redirect(url_for('workflows_page'))
-    wf = WORKFLOWS[name]
-    username = session.get('username', 'admin')
-    html_content = markdown_to_html(wf.get('full_description', ''))
-    return render_template_string(WORKFLOW_DETAIL_TEMPLATE, name=name, wf=wf, html_content=html_content, sidebar=render_sidebar("workflows", username))
+def api_process():
+    data = request.json.get('data', '')
 
-WORKFLOW_DETAIL_TEMPLATE = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{{{ name.replace('_', ' ').title() }}}} — AIAA</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    {BASE_CSS}{THEME_SCRIPT}
-</head>
-<body>
-    {{{{ sidebar | safe }}}}
-    <main class="main">
-        <a href="/workflows" class="back-btn">← Back to Workflows</a>
-        <div class="page-header">
-            <div><span class="badge badge-category" style="margin-bottom:0.5rem;">{{{{ wf.category }}}}</span><h1 class="page-title">{{{{ name.replace('_', ' ').title() }}}}</h1><p class="page-subtitle">{{{{ wf.description }}}}</p></div>
-            <span class="badge {{{{ 'badge-success' if wf.has_script else 'badge-muted' }}}}" style="font-size:0.875rem;padding:0.5rem 1rem;">{{{{ 'Execution Script Available' if wf.has_script else 'Directive Only' }}}}</span>
-        </div>
-        <div class="card"><div class="card-body md-content">{{{{ html_content }}}}</div></div>
-        {{% if wf.inputs %}}<div class="card"><div class="card-header"><span class="card-title">Inputs</span></div><div class="card-body"><div style="display:flex;flex-wrap:wrap;gap:0.5rem;">{{% for inp in wf.inputs %}}<span class="badge badge-info">{{{{ inp }}}}</span>{{% endfor %}}</div></div></div>{{% endif %}}
-        {{% if wf.outputs %}}<div class="card"><div class="card-header"><span class="card-title">Outputs</span></div><div class="card-body"><div style="display:flex;flex-wrap:wrap;gap:0.5rem;">{{% for out in wf.outputs %}}<span class="badge badge-success">{{{{ out }}}}</span>{{% endfor %}}</div></div></div>{{% endif %}}
-        <div class="card"><div class="card-header"><span class="card-title">How to Run</span></div><div class="card-body"><pre><code>python3 execution/{{{{ name }}}}.py --help</code></pre></div></div>
-    </main>
-</body>
-</html>
-'''
+    if not data.strip():
+        return jsonify({'error': 'No data provided'}), 400
 
-@app.route('/env', methods=['GET', 'POST'])
-@login_required
-def env_page():
-    username = session.get('username', 'admin')
-    message = message_type = None
-    if request.method == 'POST':
-        var_name = request.form.get('var_name', '').strip()
-        var_value = request.form.get('var_value', '').strip()
-        if var_name and var_value:
-            RUNTIME_ENV_VARS[var_name] = var_value
-            os.environ[var_name] = var_value
-            log_event("env_var", "set", {"variable": var_name}, source="dashboard")
-            message, message_type = f"Successfully set {var_name}", "success"
-        else:
-            message, message_type = "Please provide both name and value", "error"
-    env_vars = [{"name": var, "set": bool(os.getenv(var, "") or RUNTIME_ENV_VARS.get(var, "")), "preview": f"{(os.getenv(var, '') or RUNTIME_ENV_VARS.get(var, ''))[:4]}...{(os.getenv(var, '') or RUNTIME_ENV_VARS.get(var, ''))[-4:]}" if len(os.getenv(var, "") or RUNTIME_ENV_VARS.get(var, "")) > 10 else "***" if os.getenv(var, "") or RUNTIME_ENV_VARS.get(var, "") else ""} for var in TRACKED_ENV_VARS]
-    return render_template_string(ENV_TEMPLATE, env_vars=env_vars, sidebar=render_sidebar("env", username), message=message, message_type=message_type, tracked_vars=TRACKED_ENV_VARS)
+    companies = parse_google_sheets_data(data)
 
-ENV_TEMPLATE = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Environment — AIAA</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    {BASE_CSS}{THEME_SCRIPT}
-</head>
-<body>
-    {{{{ sidebar | safe }}}}
-    <main class="main">
-        <div class="page-header"><div><h1 class="page-title">Environment Variables</h1><p class="page-subtitle">Manage API keys and configuration</p></div></div>
-        {{% if message %}}<div class="alert alert-{{{{ message_type }}}}">{{{{ message }}}}</div>{{% endif %}}
-        <div class="card"><div class="card-header"><span class="card-title">Set Environment Variable</span></div><div class="card-body"><form method="POST"><div style="display:grid;grid-template-columns:1fr 2fr auto;gap:1rem;align-items:end;"><div class="form-group" style="margin-bottom:0;"><label class="form-label">Variable Name</label><select name="var_name" class="form-input">{{% for var in tracked_vars %}}<option value="{{{{ var }}}}">{{{{ var }}}}</option>{{% endfor %}}</select></div><div class="form-group" style="margin-bottom:0;"><label class="form-label">Value</label><input type="password" name="var_value" class="form-input" placeholder="Enter API key..."></div><button type="submit" class="btn">Set Variable</button></div></form></div></div>
-        <div class="card"><div class="card-header"><span class="card-title">Current Configuration</span></div><ul style="list-style:none;">{{% for var in env_vars %}}<li style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border-subtle);"><span class="mono">{{{{ var.name }}}}</span><div style="display:flex;align-items:center;gap:0.75rem;">{{% if var.set %}}<span class="mono" style="color:var(--text-muted);background:var(--bg-elevated);padding:0.25rem 0.5rem;border-radius:4px;">{{{{ var.preview }}}}</span>{{% else %}}<span style="font-size:0.8125rem;color:var(--text-muted);">Not configured</span>{{% endif %}}<span style="width:8px;height:8px;border-radius:50%;background:{{{{ 'var(--success)' if var.set else 'var(--error)' }}}};"></span></div></li>{{% endfor %}}</ul></div>
-        <div style="padding:1rem 1.25rem;background:var(--bg-elevated);border-radius:8px;font-size:0.8125rem;color:var(--text-secondary);"><strong>Note:</strong> Variables set here are stored in memory for this session. For persistent storage, set them in Railway's dashboard.</div>
-    </main>
-</body>
-</html>
-'''
+    if not companies:
+        return jsonify({'error': 'Could not parse any companies from data'}), 400
 
-@app.route('/webhooks')
-@login_required
-def webhooks_page():
-    username = session.get('username', 'admin')
-    base_url = request.host_url.rstrip('/')
-    endpoints = [{"method": "GET", "path": "/", "description": "Dashboard"},{"method": "GET", "path": "/health", "description": "Health check"},{"method": "GET", "path": "/api/events", "description": "Events JSON"},{"method": "POST", "path": "/webhook/calendly", "description": "Calendly meeting prep"},{"method": "POST", "path": "/webhook/<workflow>", "description": "Generic workflow webhook"}]
-    return render_template_string(WEBHOOKS_TEMPLATE, base_url=base_url, endpoints=endpoints, sidebar=render_sidebar("webhooks", username))
+    if len(companies) > 30:
+        return jsonify({'error': 'Maximum 30 companies per batch'}), 400
 
-WEBHOOKS_TEMPLATE = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webhooks — AIAA</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    {BASE_CSS}{THEME_SCRIPT}
-</head>
-<body>
-    {{{{ sidebar | safe }}}}
-    <main class="main">
-        <div class="page-header"><div><h1 class="page-title">Webhook Endpoints</h1><p class="page-subtitle">Available API endpoints</p></div></div>
-        <div style="padding:1rem 1.25rem;background:var(--bg-elevated);border-radius:8px;margin-bottom:1.5rem;"><div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem;">Base URL</div><code class="mono" style="font-size:0.9375rem;color:var(--accent);">{{{{ base_url }}}}</code></div>
-        <div class="card"><div class="card-header"><span class="card-title">Available Endpoints</span></div>{{% for endpoint in endpoints %}}<div style="display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border-subtle);"><span class="mono badge {{{{ 'badge-success' if endpoint.method == 'GET' else 'badge-info' }}}}" style="min-width:50px;text-align:center;">{{{{ endpoint.method }}}}</span><span class="mono" style="flex:1;">{{{{ endpoint.path }}}}</span><span style="color:var(--text-muted);font-size:0.8125rem;">{{{{ endpoint.description }}}}</span></div>{{% endfor %}}</div>
-    </main>
-</body>
-</html>
-'''
+    # Create batch
+    batch_id = f"BATCH-{secrets.token_hex(4).upper()}"
 
-@app.route('/logs')
-@login_required
-def logs_page():
-    username = session.get('username', 'admin')
-    with events_lock:
-        events = list(events_log)
-    return render_template_string(LOGS_TEMPLATE, events=events, sidebar=render_sidebar("logs", username))
+    db = get_db()
+    db.execute("""INSERT INTO batches (batch_id, total_companies, status)
+                  VALUES (?, ?, 'processing')""", (batch_id, len(companies)))
 
-LOGS_TEMPLATE = f'''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logs — AIAA</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    {BASE_CSS}{THEME_SCRIPT}
-</head>
-<body>
-    {{{{ sidebar | safe }}}}
-    <main class="main">
-        <div class="page-header"><div><h1 class="page-title">Event Logs</h1><p class="page-subtitle">System activity and webhook events</p></div></div>
-        <div class="card"><table class="table"><thead><tr><th>Timestamp</th><th>Type</th><th>Source</th><th>Data</th><th>Status</th></tr></thead><tbody>{{% if events %}}{{% for event in events %}}<tr><td class="mono">{{{{ event.timestamp[:19] }}}}</td><td>{{{{ event.type }}}}</td><td>{{{{ event.source }}}}</td><td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{{{ event.data | tojson }}}}</td><td><span class="badge badge-{{{{ 'success' if event.status == 'success' else 'error' if event.status == 'error' else 'muted' }}}}">{{{{ event.status }}}}</span></td></tr>{{% endfor %}}{{% else %}}<tr><td colspan="5" class="empty">No events recorded yet.</td></tr>{{% endif %}}</tbody></table></div>
-    </main>
-    <script>setTimeout(() => location.reload(), 30000);</script>
-</body>
-</html>
-'''
+    # Create company records
+    for company in companies:
+        slug = generate_slug(company['company_name'])
+        db.execute("""INSERT INTO companies (batch_id, company_name, website, first_name,
+                      last_name, email, instagram, linkedin, about, slug)
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                   (batch_id, company['company_name'], company['website'],
+                    company['first_name'], company['last_name'], '',
+                    company['instagram'], company['linkedin'], company['about'], slug))
+
+    db.commit()
+
+    # Start background processing
+    process_batch_async(batch_id, companies)
+
+    return jsonify({
+        'success': True,
+        'batch_id': batch_id,
+        'companies': len(companies)
+    })
 
 # =============================================================================
-# API Endpoints
+# Routes - Public Landing Pages
+# =============================================================================
+
+@app.route('/page/<slug>')
+def public_page(slug):
+    db = get_db()
+
+    company = db.execute("SELECT * FROM companies WHERE slug = ?", (slug,)).fetchone()
+    if not company:
+        return "Company not found", 404
+
+    analysis = db.execute("SELECT * FROM analysis WHERE company_id = ?", (company['id'],)).fetchone()
+    assets = db.execute("SELECT * FROM assets WHERE company_id = ?", (company['id'],)).fetchone()
+
+    if not assets:
+        return render_template_string(PENDING_PAGE_TEMPLATE, company=company)
+
+    return render_template_string(PUBLIC_PAGE_TEMPLATE,
+                                  company=company,
+                                  analysis=analysis,
+                                  assets=assets)
+
+# =============================================================================
+# Routes - Health Check
 # =============================================================================
 
 @app.route('/health')
 def health():
-    return jsonify({"status": "ok", "service": "aiaa-dashboard", "version": "2.3.0", "workflows": len(WORKFLOWS), "timestamp": datetime.now().isoformat()})
+    return jsonify({
+        'status': 'ok',
+        'service': 'kairo-marketing-engine',
+        'version': '1.0.0',
+        'timestamp': datetime.utcnow().isoformat()
+    })
 
-@app.route('/api/events')
-def api_events():
-    if not session.get('logged_in'):
-        return jsonify({"error": "Unauthorized"}), 401
-    with events_lock:
-        return jsonify(list(events_log))
+# =============================================================================
+# Templates
+# =============================================================================
 
-@app.route('/api/workflows')
-def api_workflows():
-    if not session.get('logged_in'):
-        return jsonify({"error": "Unauthorized"}), 401
-    return jsonify({k: {"description": v["description"], "has_script": v["has_script"], "category": v.get("category", "General")} for k, v in WORKFLOWS.items()})
+LOGIN_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Kairo Marketing Engine</title>
+    """ + PREMIUM_STYLES + """
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box animate-fade-in">
+            <div class="nav-brand-icon" style="width: 60px; height: 60px; font-size: 1.5rem; margin: 0 auto 1.5rem;">K</div>
+            <h1>Kairo <span>Engine</span></h1>
+            <p style="color: var(--gray-600); margin-bottom: 2rem;">Marketing Automation Platform</p>
 
-@app.route('/api/env', methods=['POST'])
-def api_set_env():
-    if not session.get('logged_in'):
-        return jsonify({"error": "Unauthorized"}), 401
-    data = request.get_json()
-    if not data or 'name' not in data or 'value' not in data:
-        return jsonify({"error": "Missing name or value"}), 400
-    RUNTIME_ENV_VARS[data['name']] = data['value']
-    os.environ[data['name']] = data['value']
-    log_event("env_var", "set", {"variable": data['name']}, source="api")
-    return jsonify({"status": "ok", "variable": data['name']})
+            {% if error %}
+            <div style="background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem;">
+                {{ error }}
+            </div>
+            {% endif %}
 
-@app.route('/webhook/<workflow_name>', methods=['POST'])
-def generic_webhook(workflow_name):
-    payload = request.get_json() or {}
-    log_event(f"webhook:{workflow_name}", "received", {"workflow": workflow_name}, source="webhook")
-    if workflow_name not in WORKFLOWS:
-        log_event(f"webhook:{workflow_name}", "error", {"error": "Not found"}, source="webhook")
-        return jsonify({"error": f"Workflow '{workflow_name}' not found"}), 404
-    log_event(f"webhook:{workflow_name}", "success", {"workflow": workflow_name}, source="webhook")
-    return jsonify({"status": "received", "workflow": workflow_name, "timestamp": datetime.now().isoformat()})
+            <form method="POST">
+                <input type="text" name="username" class="login-input" placeholder="Username" required>
+                <input type="password" name="password" class="login-input" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+"""
 
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8080))
-    log_event("system", "started", {"port": port, "workflows": len(WORKFLOWS)})
-    print(f"Starting AIAA Dashboard v2.3 on port {port} with {len(WORKFLOWS)} workflows")
-    app.run(host="0.0.0.0", port=port, debug=False)
+DASHBOARD_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Kairo Marketing Engine</title>
+    """ + PREMIUM_STYLES + """
+</head>
+<body>
+    <nav class="nav">
+        <a href="/" class="nav-brand">
+            <div class="nav-brand-icon">K</div>
+            <div class="nav-brand-text">Kairo <span>Engine</span></div>
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Dashboard</a>
+            <a href="/logout" class="nav-link">Logout</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Marketing <span>Automation</span> Engine</h1>
+            <p>Generate complete marketing packages for multiple companies at once. VSL scripts, landing pages, email sequences, and more.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="input-section animate-fade-in">
+            <h2>Generate Marketing Packages</h2>
+            <p>Paste company data from Google Sheets (up to 30 companies). Format: First Name, Last Name, Company, Website, Instagram, LinkedIn, About</p>
+
+            <div class="format-guide">
+                <h4 style="margin: 0 0 0.75rem 0; color: var(--primary-blue);">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 0.5rem;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Copy & Paste from Google Sheets
+                </h4>
+                <p style="margin: 0 0 1rem 0; color: var(--gray-600); font-size: 0.9rem;">
+                    Select your data in Google Sheets and paste directly. We auto-detect columns!
+                </p>
+                <div class="sample-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Website</th>
+                                <th>First Name</th>
+                                <th>Email</th>
+                                <th>About</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Acme Corp</td>
+                                <td>acme.com</td>
+                                <td>John</td>
+                                <td>john@acme.com</td>
+                                <td>B2B SaaS for...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin: 0.75rem 0 0 0; color: var(--gray-500); font-size: 0.8rem;">
+                    ✓ Columns can be in any order &nbsp; ✓ Headers optional &nbsp; ✓ Max 30 companies
+                </p>
+            </div>
+
+            <textarea id="companyData" placeholder="Paste your Google Sheets data here...
+
+Acme Corp	https://acme.com	John	Doe	john@acme.com	B2B SaaS company helping teams...
+Widget Inc	widgetinc.io	Sarah	Smith	sarah@widget.io	E-commerce platform for..."></textarea>
+
+            <div class="company-counter">
+                <div class="counter-number" id="companyCount">0</div>
+                <div class="counter-label">
+                    <div style="font-weight: 600;">Companies Detected</div>
+                    <div style="font-size: 0.85rem;">Maximum 30 per batch</div>
+                </div>
+            </div>
+
+            <button id="generateBtn" class="btn btn-primary btn-lg" onclick="startProcessing()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                Generate Marketing Assets
+            </button>
+        </div>
+
+        <div id="batchesSection">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary-blue); margin-bottom: 1rem;">Recent Batches</h2>
+            <div id="batchesList" class="batch-grid">
+                <!-- Batches loaded via JS -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Kairo Marketing Engine v1.0 | Powered by AI</p>
+    </footer>
+
+    <script>
+        const textarea = document.getElementById('companyData');
+        const counter = document.getElementById('companyCount');
+
+        textarea.addEventListener('input', function() {
+            const lines = this.value.trim().split('\\n').filter(l => l.trim());
+            counter.textContent = lines.length;
+            counter.style.color = lines.length > 30 ? '#ef4444' : 'var(--primary-blue)';
+        });
+
+        function startProcessing() {
+            const data = textarea.value.trim();
+            if (!data) {
+                alert('Please paste company data first');
+                return;
+            }
+
+            const btn = document.getElementById('generateBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="animate-pulse">Processing...</span>';
+
+            fetch('/api/process', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: data })
+            })
+            .then(r => r.json())
+            .then(result => {
+                if (result.error) {
+                    alert(result.error);
+                } else {
+                    textarea.value = '';
+                    counter.textContent = '0';
+                    loadBatches();
+                }
+                btn.disabled = false;
+                btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> Generate Marketing Assets';
+            })
+            .catch(err => {
+                alert('Error: ' + err.message);
+                btn.disabled = false;
+                btn.innerHTML = '<svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> Generate Marketing Assets';
+            });
+        }
+
+        function loadBatches() {
+            fetch('/api/batches')
+            .then(r => r.json())
+            .then(batches => {
+                const container = document.getElementById('batchesList');
+                if (batches.length === 0) {
+                    container.innerHTML = '<p style="color: var(--gray-500); text-align: center; padding: 2rem;">No batches yet. Paste company data above to get started.</p>';
+                    return;
+                }
+
+                container.innerHTML = batches.map(batch => `
+                    <div class="batch-card">
+                        <div class="batch-header">
+                            <span class="batch-id">${batch.batch_id}</span>
+                            <span class="batch-status ${batch.status}">${batch.status === 'completed' ? '✓ Completed' : '⏳ Processing'}</span>
+                        </div>
+                        <div class="batch-progress">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: ${batch.total > 0 ? (batch.done / batch.total * 100) : 0}%"></div>
+                            </div>
+                            <div class="progress-text">${batch.done} of ${batch.total} companies completed</div>
+                        </div>
+                        <div class="batch-companies">
+                            ${batch.companies.map(c => `
+                                <div class="company-item">
+                                    <div class="company-info">
+                                        <div class="company-icon ${c.status}">${getStatusIcon(c.status)}</div>
+                                        <div>
+                                            <div class="company-name">${c.company_name}</div>
+                                            <div class="company-status">${c.current_step || c.status}</div>
+                                        </div>
+                                    </div>
+                                    ${c.status === 'completed' ? `<a href="/page/${c.slug}" class="view-page-btn" target="_blank">View Page</a>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function getStatusIcon(status) {
+            switch(status) {
+                case 'completed': return '✓';
+                case 'failed': return '✗';
+                case 'pending': return '○';
+                default: return '◉';
+            }
+        }
+
+        // Load batches on page load and refresh every 5 seconds
+        loadBatches();
+        setInterval(loadBatches, 5000);
+    </script>
+</body>
+</html>
+"""
+
+PUBLIC_PAGE_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company.company_name }} | Marketing Package by Kairo</title>
+    """ + PUBLIC_PAGE_STYLES + """
+</head>
+<body>
+    <header class="public-hero">
+        <div class="hero-badge animate-fade-up">
+            <span>✨</span> Custom Marketing Package
+        </div>
+        <h1 class="animate-fade-up animate-delay-1">
+            <span class="gold-text">{{ company.company_name }}</span>
+        </h1>
+        <p class="tagline animate-fade-up animate-delay-2">
+            A personalized marketing strategy crafted specifically for your business by Kairo
+        </p>
+    </header>
+
+    {% if analysis and analysis.target_market %}
+    <section class="why-chosen">
+        <div class="why-chosen-card animate-fade-up animate-delay-3">
+            <h2>
+                <span class="icon">🎯</span>
+                Why We Selected {{ company.company_name }}
+            </h2>
+            <div style="color: var(--gray-600); line-height: 1.8;">
+                {{ analysis.target_market | safe }}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <div class="assets-container">
+        <!-- VSL Script -->
+        <div class="asset-section animate-fade-up animate-delay-1" onclick="toggleSection(this)">
+            <div class="asset-header">
+                <div class="asset-header-left">
+                    <div class="asset-icon">📹</div>
+                    <div>
+                        <div class="asset-title">VSL Script</div>
+                        <div class="asset-subtitle">4-6 minute video sales letter script</div>
+                    </div>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="asset-content">
+                <pre>{{ assets.vsl_script }}</pre>
+            </div>
+        </div>
+
+        <!-- Landing Page -->
+        <div class="asset-section animate-fade-up animate-delay-2" onclick="toggleSection(this)">
+            <div class="asset-header">
+                <div class="asset-header-left">
+                    <div class="asset-icon">🌐</div>
+                    <div>
+                        <div class="asset-title">Landing Page Copy</div>
+                        <div class="asset-subtitle">High-converting sales page content</div>
+                    </div>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="asset-content">
+                <pre>{{ assets.landing_page_copy }}</pre>
+            </div>
+        </div>
+
+        <!-- Email Sequence -->
+        <div class="asset-section animate-fade-up animate-delay-3" onclick="toggleSection(this)">
+            <div class="asset-header">
+                <div class="asset-header-left">
+                    <div class="asset-icon">📧</div>
+                    <div>
+                        <div class="asset-title">12-Day Email Sequence</div>
+                        <div class="asset-subtitle">Nurture sequence to convert prospects</div>
+                    </div>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="asset-content">
+                <pre>{{ assets.email_sequence }}</pre>
+            </div>
+        </div>
+
+        <!-- Creative Brief -->
+        <div class="asset-section animate-fade-up animate-delay-4" onclick="toggleSection(this)">
+            <div class="asset-header">
+                <div class="asset-header-left">
+                    <div class="asset-icon">🎨</div>
+                    <div>
+                        <div class="asset-title">Creative Brief</div>
+                        <div class="asset-subtitle">Brand voice, messaging & design guidelines</div>
+                    </div>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="asset-content">
+                <pre>{{ assets.creative_brief }}</pre>
+            </div>
+        </div>
+
+        <!-- Offer Deep Dive -->
+        <div class="asset-section animate-fade-up animate-delay-5" onclick="toggleSection(this)">
+            <div class="asset-header">
+                <div class="asset-header-left">
+                    <div class="asset-icon">💎</div>
+                    <div>
+                        <div class="asset-title">Offer Deep Dive</div>
+                        <div class="asset-subtitle">Strategic offer analysis & optimization</div>
+                    </div>
+                </div>
+                <div class="expand-icon">▼</div>
+            </div>
+            <div class="asset-content">
+                <pre>{{ assets.offer_deep_dive }}</pre>
+            </div>
+        </div>
+    </div>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Implement This Strategy?</h2>
+            <p>Let's discuss how Kairo can build and run your entire marketing funnel on a performance basis — you only pay when you earn more.</p>
+            <a href="https://kairo-scales.com/boostconversions" class="cta-btn" target="_blank">
+                <span>📅</span> Book Your Strategy Call
+            </a>
+        </div>
+    </section>
+
+    <footer class="public-footer">
+        <div class="footer-brand">Kairo <span>Marketing</span></div>
+        <p class="footer-text">Performance-Based Marketing That Scales Your Business</p>
+    </footer>
+
+    <script>
+        function toggleSection(section) {
+            section.classList.toggle('expanded');
+        }
+
+        // Expand first section by default
+        document.querySelector('.asset-section').classList.add('expanded');
+    </script>
+</body>
+</html>
+"""
+
+PENDING_PAGE_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ company.company_name }} | Processing...</title>
+    """ + PUBLIC_PAGE_STYLES + """
+    <style>
+        .pending-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-blue);
+            text-align: center;
+            padding: 2rem;
+        }
+        .pending-content {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--gray-200);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="pending-container">
+        <div class="pending-content">
+            <div class="spinner"></div>
+            <h1 style="font-family: 'Playfair Display', serif; color: var(--primary-blue); margin-bottom: 0.5rem;">
+                {{ company.company_name }}
+            </h1>
+            <p style="color: var(--gray-600); margin-bottom: 1rem;">
+                Your marketing package is being generated...
+            </p>
+            <p style="color: var(--gray-500); font-size: 0.9rem;">
+                Status: <strong>{{ company.current_step or company.status }}</strong>
+            </p>
+            <p style="color: var(--gray-400); font-size: 0.85rem; margin-top: 1rem;">
+                This page will auto-refresh in 10 seconds
+            </p>
+        </div>
+    </div>
+    <script>
+        setTimeout(() => location.reload(), 10000);
+    </script>
+</body>
+</html>
+"""
+
+# =============================================================================
+# Ron Breitenbach — Lead Capture + Email Sequence
+# =============================================================================
+#
+# Required environment variables:
+#   SENDGRID_API_KEY   — SendGrid API key for sending emails
+#   FROM_EMAIL         — Sender address (e.g. ron@yourdomain.com)
+#   FROM_NAME          — Sender display name (e.g. "Ron Breitenbach")
+#   RON_GUIDE_URL      — Direct link to the PDF/page with the Investor ID Guide
+#
+# Google Sheets (master sheet, existing):
+#   Sheet ID: 1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk
+#   Tab name: "Ron Leads — Apr 2026"
+# =============================================================================
+
+import gspread
+from google.oauth2.service_account import Credentials as ServiceCredentials
+
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", "")
+FROM_EMAIL       = os.getenv("FROM_EMAIL", "ron@kairoscales.com")
+FROM_NAME        = os.getenv("FROM_NAME", "Ron Breitenbach")
+RON_GUIDE_URL    = os.getenv("RON_GUIDE_URL", "https://kairoscales.com/investor-id-guide")
+
+MASTER_SHEET_ID  = "1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk"
+RON_SHEET_TAB    = "Ron Leads — Apr 2026"
+
+# ---------------------------------------------------------------------------
+# DB tables for Ron's leads
+# ---------------------------------------------------------------------------
+
+def init_ron_db():
+    conn = sqlite3.connect(DATABASE_PATH)
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS ron_leads (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        first_name TEXT,
+        last_name  TEXT,
+        email      TEXT NOT NULL,
+        phone      TEXT,
+        source     TEXT DEFAULT 'landing_page',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )''')
+    c.execute('''CREATE TABLE IF NOT EXISTS ron_email_queue (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        lead_id     INTEGER NOT NULL,
+        email_index INTEGER NOT NULL,
+        send_at     TIMESTAMP NOT NULL,
+        sent_at     TIMESTAMP,
+        status      TEXT DEFAULT 'pending',
+        FOREIGN KEY (lead_id) REFERENCES ron_leads(id)
+    )''')
+    conn.commit()
+    conn.close()
+
+init_ron_db()
+
+# ---------------------------------------------------------------------------
+# 8-email sequence copy
+# ---------------------------------------------------------------------------
+
+def get_ron_emails(first_name, guide_url):
+    name = first_name or "there"
+    return [
+        # ── Email 0: Immediate ──────────────────────────────────────────────
+        {
+            "subject": "Your Free Investor ID Guide is here 📬",
+            "html": f"""
+<p>Hey {name},</p>
+<p>Your <strong>Investor ID Guide</strong> is ready. Here's your link:</p>
+<p style="text-align:center;margin:28px 0;">
+  <a href="{guide_url}" style="background:#6F00FF;color:#fff;padding:14px 32px;border-radius:100px;text-decoration:none;font-weight:700;font-size:16px;">
+    Download Your Free Guide →
+  </a>
+</p>
+<p>Inside you'll find the 5 investor paths, the one question that tells you which fits you, and a 90-day action plan for your specific niche.</p>
+<p>Read it tonight. Most people who download this and take the 90-day plan seriously see their first deal within the year.</p>
+<p>— Ron</p>
+<p style="font-size:12px;color:#888;">P.S. Over the next few weeks I'll send you a few more resources — real stories, numbers, and frameworks from 15 years of investing. You can unsubscribe anytime.</p>
+"""
+        },
+        # ── Email 1: Day 1 ──────────────────────────────────────────────────
+        {
+            "subject": "Which of the 5 niches is actually yours?",
+            "html": f"""
+<p>Hey {name},</p>
+<p>Yesterday I sent over the Investor ID Guide. Today I want to cut straight to the part most people skip.</p>
+<p><strong>The 5 niches aren't equal for everyone.</strong></p>
+<p>Fix &amp; flip sounds exciting — but if you work 50 hours a week and have $40K saved, that path will drain you before your first deal closes.</p>
+<p>Wholesale sounds easy — but if you hate cold calling and pressure-heavy negotiations, you'll quit in month two.</p>
+<p>The guide walks you through this, but here's the shortcut question:</p>
+<blockquote style="border-left:4px solid #6F00FF;padding-left:16px;margin:20px 0;font-style:italic;color:#444;">
+  "If I had 10 hours a week and $50K to deploy — what would let me sleep well AND build wealth?"
+</blockquote>
+<p>Your answer to that is your niche. Everything else is noise.</p>
+<p>Reply to this email and tell me what you think your niche is. I read every reply.</p>
+<p>— Ron</p>
+"""
+        },
+        # ── Email 2: Day 3 ──────────────────────────────────────────────────
+        {
+            "subject": "From $200K/yr to $1M+ in real estate profits (real story)",
+            "html": f"""
+<p>Hey {name},</p>
+<p>One of my students — I'll call him Marcus — came to me earning $200K a year as a software engineer. Solid income. Zero real estate experience.</p>
+<p>His first question: <em>"Where do I start?"</em></p>
+<p>We ran through the Investor ID framework. His profile: high income, limited time (maybe 6 hours/week), low appetite for active management. Classic <strong>rental/BRRRR</strong> investor.</p>
+<p>Year one: One duplex in a B-class neighborhood. Small cash flow. Big learning curve.</p>
+<p>Year three: 7 doors. Cash flow covering his car payment every month.</p>
+<p>Year five: 22 doors. Passive income exceeding $1M in total real estate portfolio value. Refinanced into a 4-unit commercial property. Hasn't touched his 401k since.</p>
+<p><strong>None of this required genius. It required identifying the right niche and not quitting.</strong></p>
+<p>The guide gives you the framework Marcus used to identify his path. Your first step after reading it: pick ONE niche and spend 90 days learning only that niche.</p>
+<p>— Ron</p>
+"""
+        },
+        # ── Email 3: Day 5 ──────────────────────────────────────────────────
+        {
+            "subject": "The LLC mistake that cost this couple 14 homes",
+            "html": f"""
+<p>Hey {name},</p>
+<p>I mentioned this in the guide but I want to hammer it home because I've seen it destroy investors personally.</p>
+<p>A couple I know — bought their first rental property in their personal name. They thought they'd "set up the LLC later." Later never came.</p>
+<p>A tenant slipped on their property. Sued. Won.</p>
+<p>The judgment pierced their personal assets. They lost 14 properties over the following 18 months — not because of the lawsuit directly, but because lenders called notes and their credit collapsed.</p>
+<p><strong>14 properties. Gone. Because they skipped one $500 step.</strong></p>
+<p>Before you buy a single property:</p>
+<ol style="margin:16px 0;padding-left:20px;line-height:2;">
+  <li>Form an LLC (one per property cluster or one holding LLC minimum)</li>
+  <li>Get landlord liability insurance</li>
+  <li>Never buy in your personal name</li>
+</ol>
+<p>This is covered in the guide but I want you to take it seriously. The people who skip this are usually the ones who are "pretty sure it won't happen to them."</p>
+<p>It happens.</p>
+<p>— Ron</p>
+"""
+        },
+        # ── Email 4: Day 7 ──────────────────────────────────────────────────
+        {
+            "subject": "Your 90-day action plan (let's make it real)",
+            "html": f"""
+<p>Hey {name},</p>
+<p>You've had the guide for a week. By now you should have a sense of which niche fits you.</p>
+<p>Here's what the next 90 days should look like, regardless of niche:</p>
+<p><strong>Days 1–30: Education only.</strong> No deals. Read 2 books specific to your niche. Join 1 local real estate investor meetup. Find a mentor or community (we have one — 40,000 strong).</p>
+<p><strong>Days 31–60: Analyze 30 deals.</strong> Don't buy. Just run the numbers on 30 real deals in your market using the criteria in the guide. Your eye for a good deal develops here.</p>
+<p><strong>Days 61–90: Make your first offer.</strong> Not your first purchase — your first offer. You may not close. That's fine. The reps are what matter.</p>
+<p>The investors who follow this sequence close their first deal within 12 months. The investors who skip straight to buying usually lose money and quit.</p>
+<p>Which day are you on right now?</p>
+<p>— Ron</p>
+"""
+        },
+        # ── Email 5: Day 10 ─────────────────────────────────────────────────
+        {
+            "subject": "The question I get asked most (answered)",
+            "html": f"""
+<p>Hey {name},</p>
+<p>The #1 question I get from people at my stage in their journey:</p>
+<blockquote style="border-left:4px solid #6F00FF;padding-left:16px;margin:20px 0;font-style:italic;color:#444;">
+  "Ron, I don't have enough money to start. What do I do?"
+</blockquote>
+<p>Here's the honest answer: <strong>capital is rarely the real barrier.</strong></p>
+<p>Wholesale requires almost no capital — you're assigning contracts, not buying homes.</p>
+<p>BRRRR requires capital initially, but after the refinance, that capital comes back — and you still own the asset.</p>
+<p>Hard money lenders fund fix &amp; flips. Private money comes from your network. Partnerships split the equity.</p>
+<p>The real barrier is <strong>knowledge and conviction.</strong> Most people use "I don't have money" as a reason not to learn. They wait until they have capital — and by the time they do, they still haven't learned anything.</p>
+<p>Start learning now. The deals will find the capital. I've seen it happen dozens of times.</p>
+<p>— Ron</p>
+<p style="font-size:12px;color:#888;">P.S. If you want to talk through your specific situation, just reply to this email. I do read them.</p>
+"""
+        },
+        # ── Email 6: Day 14 ─────────────────────────────────────────────────
+        {
+            "subject": "A real deal breakdown (numbers inside)",
+            "html": f"""
+<p>Hey {name},</p>
+<p>Let me show you what a real deal looks like. This is a rental property I analyzed recently (numbers slightly adjusted):</p>
+<table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+  <tr style="background:#f3f0ff;"><td style="padding:10px;font-weight:700;">Purchase Price</td><td style="padding:10px;">$185,000</td></tr>
+  <tr><td style="padding:10px;font-weight:700;">Down Payment (20%)</td><td style="padding:10px;">$37,000</td></tr>
+  <tr style="background:#f3f0ff;"><td style="padding:10px;font-weight:700;">Monthly Rent</td><td style="padding:10px;">$1,850</td></tr>
+  <tr><td style="padding:10px;font-weight:700;">PITI + Insurance</td><td style="padding:10px;">$1,240</td></tr>
+  <tr style="background:#f3f0ff;"><td style="padding:10px;font-weight:700;">Vacancy (8%)</td><td style="padding:10px;">$148</td></tr>
+  <tr><td style="padding:10px;font-weight:700;">Maintenance (5%)</td><td style="padding:10px;">$93</td></tr>
+  <tr style="background:#f3f0ff;font-weight:700;color:#6F00FF;"><td style="padding:10px;">Monthly Cash Flow</td><td style="padding:10px;">$369/mo</td></tr>
+  <tr><td style="padding:10px;font-weight:700;">Cash-on-Cash Return</td><td style="padding:10px;">11.96%</td></tr>
+</table>
+<p>That's $4,428/year on $37,000 invested. Not life-changing alone — but stack 10 of these and you're at $44K/year in passive income. Stack 20 and you've replaced a solid salary.</p>
+<p>This is how wealth gets built in real estate. Not one big score. Systematic accumulation.</p>
+<p>Run this analysis on 30 deals in your market. By deal 30 you'll know what a good deal looks like without a spreadsheet.</p>
+<p>— Ron</p>
+"""
+        },
+        # ── Email 7: Day 21 ─────────────────────────────────────────────────
+        {
+            "subject": "Ready to take the next step?",
+            "html": f"""
+<p>Hey {name},</p>
+<p>Three weeks ago you downloaded the Investor ID Guide. I hope it's been useful.</p>
+<p>I want to be direct with you:</p>
+<p>The guide gives you the map. But maps don't build portfolios. <strong>Mentorship, community, and accountability do.</strong></p>
+<p>I'm part of a nationwide investor education platform — 40,000 active investors, live trainings, deal reviews, and a community of people doing exactly what you're trying to do.</p>
+<p>If you're serious about your first deal in the next 12 months, I'd like to get on a quick call with you. No pitch. Just a conversation about where you are, what niche fits you, and what your realistic next step looks like.</p>
+<p>I pick up the phone. That's not a marketing line — it's just how I operate.</p>
+<p style="text-align:center;margin:28px 0;">
+  <a href="https://calendly.com/ronbreitenbach" style="background:#6F00FF;color:#fff;padding:14px 32px;border-radius:100px;text-decoration:none;font-weight:700;font-size:16px;">
+    Book a Free 20-Minute Call →
+  </a>
+</p>
+<p>If you're not ready yet, no problem — keep learning. I'll still be here.</p>
+<p>— Ron</p>
+<p style="font-size:12px;color:#888;">You've received this email because you downloaded the free Investor ID Guide. To unsubscribe, reply with "unsubscribe" in the subject line.</p>
+"""
+        },
+    ]
+
+# ---------------------------------------------------------------------------
+# Email sender (SendGrid)
+# ---------------------------------------------------------------------------
+
+def send_email_sendgrid(to_email, to_name, subject, html_body):
+    """Send a single email via SendGrid API."""
+    if not SENDGRID_API_KEY:
+        print(f"[EMAIL] No SENDGRID_API_KEY — skipping email to {to_email}")
+        return False
+    payload = {
+        "personalizations": [{"to": [{"email": to_email, "name": to_name}]}],
+        "from": {"email": FROM_EMAIL, "name": FROM_NAME},
+        "subject": subject,
+        "content": [{"type": "text/html", "value": html_body}],
+    }
+    resp = requests.post(
+        "https://api.sendgrid.com/v3/mail/send",
+        headers={
+            "Authorization": f"Bearer {SENDGRID_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+        timeout=15,
+    )
+    if resp.status_code in (200, 202):
+        print(f"[EMAIL] Sent '{subject}' to {to_email}")
+        return True
+    print(f"[EMAIL] SendGrid error {resp.status_code}: {resp.text}")
+    return False
+
+# ---------------------------------------------------------------------------
+# Google Sheets helper
+# ---------------------------------------------------------------------------
+
+def append_ron_lead_to_sheet(first_name, last_name, email, phone):
+    try:
+        creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "credentials.json")
+        scopes = [
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive",
+        ]
+        creds = ServiceCredentials.from_service_account_file(creds_path, scopes=scopes)
+        gc = gspread.authorize(creds)
+        sh = gc.open_by_key(MASTER_SHEET_ID)
+        try:
+            ws = sh.worksheet(RON_SHEET_TAB)
+        except gspread.exceptions.WorksheetNotFound:
+            ws = sh.add_worksheet(title=RON_SHEET_TAB, rows=1000, cols=10)
+            ws.append_row(["First Name", "Last Name", "Email", "Phone", "Source", "Created At"])
+        ws.append_row([first_name, last_name, email, phone, "landing_page",
+                       datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")])
+        print(f"[SHEETS] Appended lead {email} to '{RON_SHEET_TAB}'")
+    except Exception as e:
+        print(f"[SHEETS] Error saving lead to sheet: {e}")
+
+# ---------------------------------------------------------------------------
+# Background email scheduler thread
+# ---------------------------------------------------------------------------
+
+def ron_email_scheduler():
+    """Runs in background. Every 60s, checks for pending emails and sends them."""
+    from datetime import timezone
+    while True:
+        try:
+            conn = sqlite3.connect(DATABASE_PATH)
+            conn.row_factory = sqlite3.Row
+            c = conn.cursor()
+            now_str = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+            rows = c.execute("""
+                SELECT q.id, q.lead_id, q.email_index,
+                       l.first_name, l.last_name, l.email
+                FROM ron_email_queue q
+                JOIN ron_leads l ON l.id = q.lead_id
+                WHERE q.status = 'pending' AND q.send_at <= ?
+                ORDER BY q.send_at ASC
+                LIMIT 20
+            """, (now_str,)).fetchall()
+
+            for row in rows:
+                emails = get_ron_emails(row["first_name"], RON_GUIDE_URL)
+                idx = row["email_index"]
+                if idx < len(emails):
+                    email_data = emails[idx]
+                    full_name = f"{row['first_name'] or ''} {row['last_name'] or ''}".strip()
+                    ok = send_email_sendgrid(
+                        to_email=row["email"],
+                        to_name=full_name or row["email"],
+                        subject=email_data["subject"],
+                        html_body=email_data["html"],
+                    )
+                    status = "sent" if ok else "failed"
+                    c.execute("""
+                        UPDATE ron_email_queue
+                        SET status=?, sent_at=?
+                        WHERE id=?
+                    """, (status, now_str, row["id"]))
+                    conn.commit()
+        except Exception as e:
+            print(f"[SCHEDULER] Error: {e}")
+        finally:
+            try:
+                conn.close()
+            except Exception:
+                pass
+        time.sleep(60)
+
+# Start the scheduler in a background thread
+_scheduler_thread = threading.Thread(target=ron_email_scheduler, daemon=True)
+_scheduler_thread.start()
+
+# ---------------------------------------------------------------------------
+# Email send delays (days after signup)
+# ---------------------------------------------------------------------------
+EMAIL_SEND_DELAYS_DAYS = [0, 1, 3, 5, 7, 10, 14, 21]
+
+# ---------------------------------------------------------------------------
+# Webhook endpoint: POST /webhook/ron-lead
+# ---------------------------------------------------------------------------
+
+@app.route("/webhook/ron-lead", methods=["POST", "OPTIONS"])
+def ron_lead_webhook():
+    # CORS preflight
+    if request.method == "OPTIONS":
+        resp = app.make_default_options_response()
+        resp.headers["Access-Control-Allow-Origin"] = "*"
+        resp.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        resp.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+        return resp
+
+    data = request.get_json(silent=True) or {}
+    first_name = (data.get("first_name") or "").strip()
+    last_name  = (data.get("last_name")  or "").strip()
+    email      = (data.get("email")      or "").strip().lower()
+    phone      = (data.get("phone")      or "").strip()
+
+    if not email:
+        resp = jsonify({"error": "email is required"})
+        resp.headers["Access-Control-Allow-Origin"] = "*"
+        return resp, 400
+
+    # 1. Save lead to SQLite
+    conn = sqlite3.connect(DATABASE_PATH)
+    c = conn.cursor()
+    c.execute("""
+        INSERT INTO ron_leads (first_name, last_name, email, phone)
+        VALUES (?, ?, ?, ?)
+    """, (first_name, last_name, email, phone))
+    lead_id = c.lastrowid
+
+    # 2. Schedule all 8 emails
+    now = datetime.utcnow()
+    for idx, delay_days in enumerate(EMAIL_SEND_DELAYS_DAYS):
+        from datetime import timedelta
+        send_at = now + timedelta(days=delay_days)
+        # Email 0 sends in 10 seconds so it arrives quickly
+        if delay_days == 0:
+            from datetime import timedelta as td
+            send_at = now + td(seconds=10)
+        c.execute("""
+            INSERT INTO ron_email_queue (lead_id, email_index, send_at)
+            VALUES (?, ?, ?)
+        """, (lead_id, idx, send_at.strftime("%Y-%m-%d %H:%M:%S")))
+
+    conn.commit()
+    conn.close()
+
+    # 3. Save to Google Sheet (non-blocking)
+    sheet_thread = threading.Thread(
+        target=append_ron_lead_to_sheet,
+        args=(first_name, last_name, email, phone),
+        daemon=True,
+    )
+    sheet_thread.start()
+
+    resp = jsonify({"success": True, "message": "Lead captured and email sequence started."})
+    resp.headers["Access-Control-Allow-Origin"] = "*"
+    return resp, 200
+
+
+# =============================================================================
+# Main
+# =============================================================================
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)

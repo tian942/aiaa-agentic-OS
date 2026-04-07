@@ -4,70 +4,66 @@
 
 ## Tone & Style
 
-**Primary Tone:** [Professional / Casual / Authoritative / Friendly / Bold]
+**Primary Tone:** Professional
 
-**Secondary Tone:** [Supportive / Educational / Provocative / Inspiring]
+**Secondary Tone:** Results-Driven
 
-**Formality Level:** [1-10, where 1 is very casual and 10 is very formal]
+**Formality Level:** 7/10 (Professional but approachable)
 
 ## Voice Characteristics
 
 **We Sound Like:**
-- [Characteristic 1 - e.g., "A trusted advisor"]
-- [Characteristic 2 - e.g., "A knowledgeable friend"]
-- [Characteristic 3 - e.g., "A results-driven partner"]
+- A strategic business partner who gets results
+- A confident expert who backs claims with performance
+- A straightforward advisor who values your time
 
 **We DON'T Sound Like:**
-- [Anti-characteristic 1 - e.g., "A pushy salesperson"]
-- [Anti-characteristic 2 - e.g., "An academic lecturer"]
-- [Anti-characteristic 3 - e.g., "A generic corporation"]
+- A pushy salesperson making empty promises
+- An overly casual friend who lacks credibility
+- A corporate entity hiding behind jargon
 
 ## Language Rules
 
 ### Words & Phrases to USE:
-- [Word/phrase 1]
-- [Word/phrase 2]
-- [Word/phrase 3]
+- Scale / Growth / Results
+- ROI / Performance / Revenue
+- Partner / Strategy / Systems
+- Fast / Efficient / Streamlined
+- Accountability / Transparency
 
 ### Words & Phrases to AVOID:
-- [Word/phrase 1]
-- [Word/phrase 2]
-- [Word/phrase 3]
+- "Guaranteed" (without context)
+- "Cheap" or "Budget"
+- Overly hyped language ("INSANE", "CRUSHING IT")
+- Vague promises ("Take your business to the next level")
 
 ### Industry Jargon Policy:
-[Use sparingly / Use freely / Avoid completely]
+Use sparingly - be clear and accessible while demonstrating expertise
 
 ## Content Guidelines
 
 ### Headlines:
-- [Rule 1 - e.g., "Always lead with benefit"]
-- [Rule 2 - e.g., "Use numbers when possible"]
+- Lead with the benefit or result
+- Be specific when possible (numbers, timeframes)
+- Keep it clear and direct
 
 ### Body Copy:
-- [Rule 1 - e.g., "Short paragraphs, max 3 sentences"]
-- [Rule 2 - e.g., "Use bullet points for lists"]
+- Short paragraphs, max 3-4 sentences
+- Focus on outcomes, not features
+- Back claims with logic or proof
 
 ### Calls to Action:
-- [CTA style - e.g., "Action-oriented, specific"]
-- [Example CTAs: "Book Your Strategy Call", "Get Your Free Audit"]
+- Action-oriented and specific
+- Examples: "Book Your Strategy Call", "See If You Qualify", "Get Your Growth Plan"
 
 ## Formatting Standards
 
-**Capitalization:** [Title Case / Sentence case / etc.]
+**Capitalization:** Sentence case for body, Title Case for headlines
 
-**Emoji Usage:** [Never / Sparingly / Freely]
+**Emoji Usage:** Sparingly, only when appropriate for platform
 
-**Exclamation Points:** [Avoid / Use sparingly / Use freely]
+**Exclamation Points:** Use sparingly - confidence doesn't need to shout
 
 ## Brand Personality
 
-If our brand were a person, they would be:
-[2-3 sentences describing the brand as a person]
-
-## Examples
-
-### Good Example:
-> [Example of content that matches your voice]
-
-### Bad Example:
-> [Example of content that does NOT match your voice]
+If Kairo were a person, they would be a seasoned business strategist who has built and scaled multiple ventures. They're confident but not arrogant, direct but respectful, and they only make promises they can keep. They value their time and yours, and they're genuinely invested in seeing clients succeed because their success is tied to it.

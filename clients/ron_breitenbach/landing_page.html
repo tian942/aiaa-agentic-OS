@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Kind of Real Estate Investor Are You? — Free Investor ID Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #6F00FF;
+    --purple-dark: #5A00CC;
+    --navy: #131628;
+    --red: #F1283A;
+    --hero-bg: #EBEBEB;
+    --section-alt: #FAFAFA;
+    --white: #FFFFFF;
+    --text: #131628;
+    --text-light: #444;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; color: var(--text); background: var(--white); }
+
+  /* ── ANNOUNCEMENT BAR ───────────────────────────────────────────── */
+  .ann-bar {
+    background: var(--purple);
+    color: var(--white);
+    text-align: center;
+    padding: 11px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .ann-bar .ann-badge {
+    display: inline-block;
+    background: var(--white);
+    color: var(--purple);
+    border-radius: 50px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .ann-bar strong { color: var(--white); }
+  .ann-bar .arr { margin-left: 8px; }
+
+  /* ── NAV ────────────────────────────────────────────────────────── */
+  nav {
+    background: var(--navy);
+    padding: 18px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    color: var(--white);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--purple); }
+  .nav-tagline {
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  /* ── HERO ───────────────────────────────────────────────────────── */
+  .hero {
+    background: var(--hero-bg);
+    padding: 80px 24px 72px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    border-radius: 50px;
+    padding: 5px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 800;
+    line-height: 1.08;
+    color: var(--navy);
+    max-width: 860px;
+    margin: 0 auto 22px;
+  }
+  .hero h1 em {
+    color: var(--purple);
+    font-style: normal;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-light);
+    max-width: 680px;
+    margin: 0 auto 36px;
+  }
+  .stars-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+  }
+  .stars-line .stars { color: #F59E0B; letter-spacing: 2px; }
+
+  /* ── OPT-IN SECTION ─────────────────────────────────────────────── */
+  .optin-section {
+    background: var(--white);
+    padding: 72px 24px;
+  }
+  .optin-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  /* Bullets */
+  .benefits-col h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 28px;
+    line-height: 1.2;
+  }
+  .benefits-col h2 em { color: var(--purple); font-style: normal; }
+  .benefit-list { list-style: none; }
+  .benefit-list li {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text);
+    align-items: flex-start;
+  }
+  .benefit-list li .check {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .benefit-list li strong { font-weight: 600; color: var(--navy); }
+
+  /* Form card */
+  .form-col {
+    background: var(--hero-bg);
+    border-radius: 16px;
+    padding: 36px 32px 32px;
+  }
+  .form-col .form-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .form-col input[type="text"],
+  .form-col input[type="email"],
+  .form-col input[type="tel"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #DCDCE8;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--navy);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-col input:focus { border-color: var(--purple); }
+  .form-col input::placeholder { color: #9999BB; }
+  .field-stack { display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; }
+  .btn-primary {
+    display: block;
+    width: 100%;
+    background: var(--purple);
+    color: var(--white);
+    border: none;
+    border-radius: 100px;
+    padding: 18px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s, opacity 0.2s;
+    text-align: center;
+    margin-top: 12px;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--purple-dark); transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: 0.65; cursor: not-allowed; }
+  .btn-subtext {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+    color: #777;
+    margin-top: 10px;
+    font-style: italic;
+  }
+  .microcopy {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 300;
+    color: #888;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* Success state */
+  .success-box {
+    display: none;
+    background: #f0fdf4;
+    border: 2px solid #22c55e;
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    margin-top: 16px;
+  }
+  .success-box .success-icon { font-size: 40px; margin-bottom: 12px; }
+  .success-box h3 { font-size: 20px; font-weight: 700; color: #15803d; margin-bottom: 8px; }
+  .success-box p { font-size: 14px; color: #166534; font-weight: 300; line-height: 1.6; }
+
+  /* Error message */
+  .error-msg {
+    display: none;
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #dc2626;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* ── TRANSITION LINE ────────────────────────────────────────────── */
+  .transition-section {
+    background: var(--navy);
+    padding: 52px 24px;
+    text-align: center;
+  }
+  .transition-section p {
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 700;
+    color: var(--white);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+  .transition-section p em { color: var(--purple); font-style: normal; }
+
+  /* ── CREDIBILITY ────────────────────────────────────────────────── */
+  .credibility-section {
+    background: var(--section-alt);
+    padding: 72px 24px;
+  }
+  .cred-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 48px;
+    align-items: center;
+  }
+  .cred-avatar {
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 52px;
+    font-weight: 800;
+    border: 6px solid var(--white);
+    box-shadow: 0 8px 32px rgba(111,0,255,0.25);
+    letter-spacing: -2px;
+  }
+  .cred-text h3 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .cred-text .cred-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--purple);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .cred-text p {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--text-light);
+  }
+  .cred-text p strong { font-weight: 600; color: var(--navy); }
+
+  /* ── FOOTER TRUST ───────────────────────────────────────────────── */
+  .trust-section {
+    background: var(--white);
+    padding: 40px 24px;
+    border-top: 1px solid #EAEAF4;
+  }
+  .trust-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+  }
+  .trust-item .icon { font-size: 18px; }
+
+  /* ── FOOTER ─────────────────────────────────────────────────────── */
+  footer {
+    background: var(--navy);
+    padding: 28px 48px;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .optin-inner { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .cred-inner { flex-direction: column; text-align: center; }
+    .cred-avatar { width: 120px; height: 120px; font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="ann-bar">
+  <span class="ann-badge">FREE</span>
+  <strong>New Guide Released:</strong> The Investor ID — 5 paths, 1 is yours. Download it now. <span class="arr">→</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">RON <span>BREITENBACH</span></a>
+  <div class="nav-tagline">Real Estate Investor · Mentor · Renatus Educator</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">It's Free</div>
+  <h1>What Kind of Real Estate Investor <em>Are You?</em></h1>
+  <p class="hero-sub">Most people spend 3–5 years 'thinking about' real estate, because they never identified their actual niche. This free guide maps out the 5 investor paths, tells you which one fits your schedule, income, and risk tolerance, and gives you the exact first 90 days for your path to escaping the revenue trap.</p>
+  <div class="stars-line">
+    <span class="stars">★★★★★</span>
+    <span>Built on 15 years of real investing experience — used by investors in 40,000+ strong nationwide community</span>
+  </div>
+</section>
+
+<!-- OPT-IN SECTION -->
+<section class="optin-section">
+  <div class="optin-inner">
+
+    <!-- LEFT: Benefits -->
+    <div class="benefits-col">
+      <h2>Inside Your <em>Free</em> Investor ID Guide:</h2>
+      <ul class="benefit-list">
+        <li>
+          <span class="check">✓</span>
+          <span><strong>What Ron did in his own first 90 days</strong> — and the framework that took one of his students from $200K/year to over $1M/year in real estate profits</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span><strong>The 5 real estate niches explained in plain English</strong> — fix &amp; flip, wholesale, rental, land, and commercial — and the exact profile of investor who wins in each</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span><strong>The one question that tells you which niche fits</strong> your income, time, and risk tolerance (most investors skip this and waste years)</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span><strong>The 90-day action plan for YOUR niche</strong> — so your first week isn't wasted figuring out where to start</span>
+        </li>
+        <li>
+          <span class="check">✓</span>
+          <span><strong>The LLC protection rule every investor must know</strong> before buying a single property (this one mistake cost a couple I know 14 homes)</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="form-col">
+      <div class="form-label">Where should I send your free Investor ID?</div>
+      <form id="lead-form">
+        <div class="form-row">
+          <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+          <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+        </div>
+        <div class="field-stack">
+          <input type="email" name="email" id="email" placeholder="Your best email address" required>
+          <input type="tel" name="phone" id="phone" placeholder="Phone number (e.g. 555-123-4567)" required>
+        </div>
+        <button type="submit" class="btn-primary" id="submit-btn">Get My Free Investor Roadmap →</button>
+        <div class="btn-subtext">Discover your niche. Get your roadmap. Start this week.</div>
+        <div class="microcopy">
+          🔒 100% free. No spam, ever. Unsubscribe anytime. Your information is protected.
+        </div>
+        <div class="error-msg" id="error-msg">Something went wrong. Please try again or email us directly.</div>
+      </form>
+
+      <!-- Success state (shown after submission) -->
+      <div class="success-box" id="success-box">
+        <div class="success-icon">📬</div>
+        <h3>Check your inbox!</h3>
+        <p>Your free Investor ID Guide is on its way. It should arrive within the next 60 seconds.<br><br>While you wait — read through what's inside. Your roadmap starts today.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSITION LINE -->
+<section class="transition-section">
+  <p>You know real estate is the path. So why does it still feel like you're standing at the bottom of a mountain <em>with no trail?</em></p>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="credibility-section">
+  <div class="cred-inner">
+    <div class="cred-avatar">RB</div>
+    <div class="cred-text">
+      <h3>Ron Breitenbach</h3>
+      <div class="cred-title">Real Estate Investor · Renatus Educator · Mentor</div>
+      <p>
+        Ron has been a real estate investor since <strong>2010</strong>. He doesn't have a 401k — <strong>his retirement is in deals</strong>. He's part of a nationwide education platform with <strong>40,000 active investors</strong>, and the methodology in this guide has taken students from zero to six-figure yearly profits. <strong>He also picks up the phone when you call.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER TRUST -->
+<section class="trust-section">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="icon">🔒</span><span>Your information is protected and never shared.</span></div>
+    <div class="trust-item"><span class="icon">📧</span><span>Your Investor ID guide arrives in your inbox within 60 seconds.</span></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 Ron Breitenbach · Kairoscales. All rights reserved.</p>
+</footer>
+
+<script>
+  // ── FORM SUBMISSION ─────────────────────────────────────────────────
+  // Replace this URL with your deployed Railway app URL once live.
+  // Example: "https://your-app.up.railway.app/webhook/ron-lead"
+  const WEBHOOK_URL = "https://YOUR_RAILWAY_APP.up.railway.app/webhook/ron-lead";
+
+  document.getElementById('lead-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('submit-btn');
+    const errorMsg = document.getElementById('error-msg');
+
+    btn.disabled = true;
+    btn.textContent = 'Sending your guide...';
+    errorMsg.style.display = 'none';
+
+    const payload = {
+      first_name: document.getElementById('first_name').value.trim(),
+      last_name:  document.getElementById('last_name').value.trim(),
+      email:      document.getElementById('email').value.trim(),
+      phone:      document.getElementById('phone').value.trim(),
+    };
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        document.getElementById('lead-form').style.display = 'none';
+        document.getElementById('success-box').style.display = 'block';
+      } else {
+        throw new Error('Server error: ' + res.status);
+      }
+    } catch (err) {
+      console.error(err);
+      btn.disabled = false;
+      btn.textContent = 'Get My Free Investor Roadmap →';
+      errorMsg.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>

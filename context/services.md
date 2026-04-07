@@ -4,86 +4,62 @@
 
 ## Core Services
 
-### Service 1: [Service Name]
-**Description:** [What it is]
-**Ideal For:** [Who needs this]
+### Service 1: Full Paid Funnel Buildout
+**Description:** Complete marketing funnel from ad creative to conversion - landing pages, ad campaigns, email sequences, and tracking.
+**Ideal For:** Online coaches and local businesses ready to scale with paid advertising
 **Deliverables:**
-- [Deliverable 1]
-- [Deliverable 2]
-**Timeline:** [Typical duration]
-**Price Range:** [$ range or starting at]
+- Ad creative and copy
+- Landing page design and copy
+- Ad campaign setup and management
+- Conversion tracking implementation
+- Email/SMS follow-up sequences
+**Timeline:** Fast integration - get running quickly
 
-### Service 2: [Service Name]
-**Description:** [What it is]
-**Ideal For:** [Who needs this]
+### Service 2: Business Scaling
+**Description:** Strategic growth partnership to scale your revenue through optimized paid acquisition and funnel optimization.
+**Ideal For:** Businesses with proven offers ready to pour fuel on the fire
 **Deliverables:**
-- [Deliverable 1]
-- [Deliverable 2]
-**Timeline:** [Typical duration]
-**Price Range:** [$ range or starting at]
+- Scaling strategy and roadmap
+- Campaign optimization
+- Funnel conversion optimization
+- Performance reporting and analytics
+**Timeline:** Ongoing partnership
 
-### Service 3: [Service Name]
-**Description:** [What it is]
-**Ideal For:** [Who needs this]
-**Deliverables:**
-- [Deliverable 1]
-- [Deliverable 2]
-**Timeline:** [Typical duration]
-**Price Range:** [$ range or starting at]
+## Pricing Model
 
-## Packages / Tiers
+### Performance-Based Partnership
+**How It Works:** You only pay when you earn more
+**Why This Works:**
+- Zero risk for you
+- Complete alignment of incentives
+- We're motivated to maximize your results
+**Best For:** Coaches and local businesses ready to scale
 
-### Starter Package
-**Price:** $[X]/month or one-time
-**Includes:**
-- [Item 1]
-- [Item 2]
-**Best For:** [Client type]
+## What's Included
 
-### Growth Package
-**Price:** $[X]/month or one-time
-**Includes:**
-- [Everything in Starter, plus...]
-- [Item 1]
-- [Item 2]
-**Best For:** [Client type]
-
-### Scale Package
-**Price:** $[X]/month or one-time
-**Includes:**
-- [Everything in Growth, plus...]
-- [Item 1]
-- [Item 2]
-**Best For:** [Client type]
-
-## Add-On Services
-
-| Add-On | Description | Price |
-|--------|-------------|-------|
-| [Add-on 1] | [Description] | $[X] |
-| [Add-on 2] | [Description] | $[X] |
-| [Add-on 3] | [Description] | $[X] |
+- Complete funnel buildout
+- Ad campaign management
+- Ongoing optimization
+- Performance tracking and reporting
+- Strategic guidance
 
 ## What's NOT Included
 
-- [Thing you don't do 1]
-- [Thing you don't do 2]
-- [Thing you don't do 3]
+- Organic social media management
+- SEO services
+- Brand design/logo creation
+- Website development (outside of funnels)
 
 ## Process Overview
 
-1. **Discovery:** [What happens]
-2. **Strategy:** [What happens]
-3. **Execution:** [What happens]
-4. **Optimization:** [What happens]
+1. **Discovery:** Understand your business, offer, and goals
+2. **Strategy:** Design the funnel and scaling roadmap
+3. **Buildout:** Fast implementation of all funnel components
+4. **Launch:** Go live with campaigns
+5. **Optimize:** Continuous improvement based on data
 
-## Guarantees / Promises
+## Our Promise
 
-- [Guarantee 1]
-- [Guarantee 2]
-
-## Payment Terms
-
-**Payment Methods:** [Credit card, Wire, etc.]
-**Payment Schedule:** [Upfront, Monthly, etc.]
-**Refund Policy:** [Your policy]
+- Fast integration - no lengthy onboarding
+- Performance-based pricing - you only pay when you earn more
+- Full accountability - your success is our success

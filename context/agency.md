@@ -4,53 +4,44 @@
 
 ## Agency Identity
 
-**Agency Name:** [Your Agency Name]
+**Agency Name:** Kairo
 
-**Tagline:** [One-line description of what you do]
+**Tagline:** Scale faster. Pay only when you earn more.
 
-**Founded:** [Year]
-
-**Location:** [City, State/Country]
+**Website:** https://kairo-scales.com/boostconversions
 
 ## Positioning
 
 **What We Do:**
-[2-3 sentences describing your core service]
+We build complete paid marketing funnels and scale businesses. From ad creative to conversion optimization, we handle the entire funnel buildout so you can focus on delivering your service.
 
 **Who We Serve:**
-[Your ideal client profile - industry, size, stage]
+- Online coaches looking to scale their programs
+- Local businesses ready to grow with paid advertising
 
 **Our Unique Value:**
-[What makes you different from competitors]
+Fast integration and performance-based pricing - clients only pay when they earn more. Zero risk, maximum accountability.
+
+## Key Differentiators
+
+1. **Fast Integration** - Get up and running quickly without lengthy onboarding
+2. **Performance-Based Pricing** - You only pay when you earn more
+3. **Full Funnel Buildout** - Complete paid marketing system, not just one piece
 
 ## Mission & Vision
 
 **Mission:**
-[Why your agency exists]
+Help coaches and local businesses scale profitably without the risk of traditional agency retainers.
 
 **Vision:**
-[Where you're taking your clients]
+Be the go-to growth partner for businesses ready to scale, where success is truly shared.
 
-## Key Differentiators
+## Client Industries
 
-1. [Differentiator 1]
-2. [Differentiator 2]
-3. [Differentiator 3]
-
-## Social Proof
-
-**Notable Results:**
-- [Result 1 with numbers]
-- [Result 2 with numbers]
-- [Result 3 with numbers]
-
-**Client Industries:**
-- [Industry 1]
-- [Industry 2]
-- [Industry 3]
+- Online Coaching & Course Creators
+- Local Service Businesses
+- Professional Services
 
 ## Contact
 
-**Website:** [URL]
-**Email:** [Contact email]
-**Phone:** [Phone number]
+**Website:** https://kairo-scales.com/boostconversions
