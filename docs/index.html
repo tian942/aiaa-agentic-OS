@@ -533,7 +533,13 @@
       });
 
       if (res.ok) {
-        window.location.href = 'thankyou.html';
+        const a = document.createElement('a');
+        a.href = 'investor-id-guide.pdf';
+        a.download = 'Ron-Breitenbach-Investor-ID-Guide.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => { window.location.href = 'thankyou.html'; }, 1000);
       } else {
         throw new Error('Server error: ' + res.status);
       }
