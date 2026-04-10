@@ -429,7 +429,13 @@
         body: JSON.stringify(payload)
       });
       if (res.ok) {
-        window.location.href = 'thankyou.html';
+        const a = document.createElement('a');
+        a.href = '90day-blueprint.pdf';
+        a.download = 'Ron-Breitenbach-90-Day-Blueprint.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => { window.location.href = 'thankyou.html'; }, 1000);
       } else {
         throw new Error('Server error');
       }
