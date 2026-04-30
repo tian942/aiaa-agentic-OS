@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Kairo Marketing Automation Engine v1.0
+Win Marketing Marketing Automation Engine v1.0
 Premium AI-Powered Marketing Package Generator
 
 Features:
@@ -448,8 +448,8 @@ What makes them different? What unique benefits do they offer that competitors d
 ## 5. SALES ARGUMENT
 Create a compelling sales argument using Dan Kennedy's framework - why should someone buy from them?
 
-## 6. WHY WE CHOSE THIS COMPANY (For Kairo's outreach)
-Explain why Kairo (a marketing agency specializing in paid funnels with performance-based pricing) would be a perfect fit for this company. What specific opportunities do you see? How could Kairo help them scale?
+## 6. WHY WE CHOSE THIS COMPANY (For Win Marketing's outreach)
+Explain why Win Marketing (a marketing agency specializing in paid funnels with performance-based pricing) would be a perfect fit for this company. What specific opportunities do you see? How could Win Marketing help them scale?
 
 Be specific, use reasoning, and provide confidence scores for each section."""
 
@@ -1971,7 +1971,7 @@ def public_page(slug):
 def health():
     return jsonify({
         'status': 'ok',
-        'service': 'kairo-marketing-engine',
+        'service': 'win-marketing-engine',
         'version': '1.0.0',
         'timestamp': datetime.utcnow().isoformat()
     })
@@ -1986,14 +1986,14 @@ LOGIN_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Kairo Marketing Engine</title>
+    <title>Login | Win Marketing Marketing Engine</title>
     """ + PREMIUM_STYLES + """
 </head>
 <body>
     <div class="login-container">
         <div class="login-box animate-fade-in">
             <div class="nav-brand-icon" style="width: 60px; height: 60px; font-size: 1.5rem; margin: 0 auto 1.5rem;">K</div>
-            <h1>Kairo <span>Engine</span></h1>
+            <h1>Win Marketing <span>Engine</span></h1>
             <p style="color: var(--gray-600); margin-bottom: 2rem;">Marketing Automation Platform</p>
 
             {% if error %}
@@ -2019,14 +2019,14 @@ DASHBOARD_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Kairo Marketing Engine</title>
+    <title>Dashboard | Win Marketing Marketing Engine</title>
     """ + PREMIUM_STYLES + """
 </head>
 <body>
     <nav class="nav">
         <a href="/" class="nav-brand">
             <div class="nav-brand-icon">K</div>
-            <div class="nav-brand-text">Kairo <span>Engine</span></div>
+            <div class="nav-brand-text">Win Marketing <span>Engine</span></div>
         </a>
         <div class="nav-links">
             <a href="/" class="nav-link">Dashboard</a>
@@ -2113,7 +2113,7 @@ Widget Inc	widgetinc.io	Sarah	Smith	sarah@widget.io	E-commerce platform for...">
     </div>
 
     <footer class="footer">
-        <p>Kairo Marketing Engine v1.0 | Powered by AI</p>
+        <p>Win Marketing Marketing Engine v1.0 | Powered by AI</p>
     </footer>
 
     <script>
@@ -2225,7 +2225,7 @@ PUBLIC_PAGE_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ company.company_name }} | Marketing Package by Kairo</title>
+    <title>{{ company.company_name }} | Marketing Package by Win Marketing</title>
     """ + PUBLIC_PAGE_STYLES + """
 </head>
 <body>
@@ -2237,7 +2237,7 @@ PUBLIC_PAGE_TEMPLATE = """
             <span class="gold-text">{{ company.company_name }}</span>
         </h1>
         <p class="tagline animate-fade-up animate-delay-2">
-            A personalized marketing strategy crafted specifically for your business by Kairo
+            A personalized marketing strategy crafted specifically for your business by Win Marketing
         </p>
     </header>
 
@@ -2345,7 +2345,7 @@ PUBLIC_PAGE_TEMPLATE = """
     <section class="cta-section">
         <div class="cta-content">
             <h2>Ready to Implement This Strategy?</h2>
-            <p>Let's discuss how Kairo can build and run your entire marketing funnel on a performance basis — you only pay when you earn more.</p>
+            <p>Let's discuss how Win Marketing can build and run your entire marketing funnel on a performance basis — you only pay when you earn more.</p>
             <a href="https://kairo-scales.com/boostconversions" class="cta-btn" target="_blank">
                 <span>📅</span> Book Your Strategy Call
             </a>
@@ -2353,7 +2353,7 @@ PUBLIC_PAGE_TEMPLATE = """
     </section>
 
     <footer class="public-footer">
-        <div class="footer-brand">Kairo <span>Marketing</span></div>
+        <div class="footer-brand">Win Marketing <span>Marketing</span></div>
         <p class="footer-text">Performance-Based Marketing That Scales Your Business</p>
     </footer>
 
@@ -2724,6 +2724,85 @@ def ron_leads_export():
         mimetype="text/csv",
         headers={"Content-Disposition": "attachment; filename=ron_leads.csv"}
     )
+
+
+# =============================================================================
+# Client Feedback — Win Marketing Monthly Check-In
+# =============================================================================
+
+FEEDBACK_SHEET_ID  = '1yY2jqgokNDe-C0NLurARlxGTA--Hg9lUHLK219-Wywk'
+FEEDBACK_TAB_NAME  = 'CLIENT FEEDBACK'
+FEEDBACK_HEADERS   = [
+    'Timestamp', 'Client Name',
+    '01 — Biggest Win', '02 — One Thing They\'d Miss',
+    '03 — Score (1–10)', '03 — Reason for Score',
+    '04 — Not Working', '05 — Next 30 Days'
+]
+
+def _get_sheets_service():
+    from google.oauth2.credentials import Credentials
+    from googleapiclient.discovery import build
+    creds = Credentials(
+        token=None,
+        refresh_token=os.getenv('GOOGLE_REFRESH_TOKEN'),
+        client_id=os.getenv('GOOGLE_CLIENT_ID'),
+        client_secret=os.getenv('GOOGLE_CLIENT_SECRET'),
+        token_uri='https://oauth2.googleapis.com/token',
+    )
+    return build('sheets', 'v4', credentials=creds)
+
+
+def _ensure_feedback_tab(service):
+    meta = service.spreadsheets().get(spreadsheetId=FEEDBACK_SHEET_ID).execute()
+    existing = [s['properties']['title'] for s in meta.get('sheets', [])]
+    if FEEDBACK_TAB_NAME not in existing:
+        service.spreadsheets().batchUpdate(
+            spreadsheetId=FEEDBACK_SHEET_ID,
+            body={'requests': [{'addSheet': {'properties': {'title': FEEDBACK_TAB_NAME}}}]}
+        ).execute()
+        service.spreadsheets().values().append(
+            spreadsheetId=FEEDBACK_SHEET_ID,
+            range=f"'{FEEDBACK_TAB_NAME}'!A1",
+            valueInputOption='RAW',
+            body={'values': [FEEDBACK_HEADERS]}
+        ).execute()
+
+
+@app.route('/client-feedback', methods=['POST', 'OPTIONS'])
+def client_feedback():
+    if request.method == 'OPTIONS':
+        resp = app.make_default_options_response()
+        resp.headers['Access-Control-Allow-Origin'] = '*'
+        resp.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        resp.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return resp
+
+    try:
+        data = request.get_json(force=True) or {}
+        row = [
+            data.get('timestamp') or datetime.utcnow().isoformat(),
+            data.get('client_name', ''),
+            data.get('biggest_win', ''),
+            data.get('one_thing', ''),
+            data.get('score', ''),
+            data.get('score_reason', ''),
+            data.get('not_working', ''),
+            data.get('next_30_days', ''),
+        ]
+        service = _get_sheets_service()
+        _ensure_feedback_tab(service)
+        service.spreadsheets().values().append(
+            spreadsheetId=FEEDBACK_SHEET_ID,
+            range=f"'{FEEDBACK_TAB_NAME}'!A1",
+            valueInputOption='RAW',
+            body={'values': [row]}
+        ).execute()
+        resp = jsonify({'success': True})
+    except Exception as e:
+        resp = jsonify({'success': False, 'error': str(e)})
+
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 
 # =============================================================================

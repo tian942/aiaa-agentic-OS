@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Success Check-In — Win Marketing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FAF7F2;
+      min-height: 100vh;
+      color: #1A1A1A;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #111111;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    header img {
+      height: 38px;
+      width: auto;
+    }
+
+    /* ── Page wrapper ── */
+    .page {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    /* ── Intro ── */
+    .intro {
+      margin-bottom: 52px;
+    }
+
+    .intro .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 14px;
+    }
+
+    .intro h1 {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #1A1A1A;
+      margin-bottom: 14px;
+    }
+
+    .intro p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    /* ── Form card ── */
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+
+    /* ── Question block ── */
+    .question {
+      margin-bottom: 40px;
+    }
+
+    .question:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .q-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #BBBBBB;
+      margin-bottom: 8px;
+    }
+
+    .q-label {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1A1A1A;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .q-sub {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 14px;
+      margin-top: -8px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1A1A1A;
+      background: #F9F9F9;
+      border: 1.5px solid #EBEBEB;
+      border-radius: 10px;
+      padding: 14px 16px;
+      outline: none;
+      resize: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #1A1A1A;
+      background: #fff;
+    }
+
+    input[type="text"]::placeholder,
+    textarea::placeholder {
+      color: #BBBBBB;
+      font-weight: 400;
+    }
+
+    /* ── Score picker ── */
+    .score-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .score-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      border: 1.5px solid #EBEBEB;
+      background: #F9F9F9;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #888;
+      cursor: pointer;
+      transition: all 0.12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-btn:hover {
+      border-color: #1A1A1A;
+      color: #1A1A1A;
+    }
+
+    .score-btn.selected {
+      background: #1A1A1A;
+      border-color: #1A1A1A;
+      color: #fff;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: #F0F0F0;
+      margin: 40px 0;
+    }
+
+    /* ── Submit button ── */
+    .submit-wrap {
+      margin-top: 40px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 17px;
+      background: #1A1A1A;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    button[type="submit"]:hover {
+      background: #333;
+    }
+
+    button[type="submit"]:active {
+      transform: scale(0.99);
+    }
+
+    button[type="submit"]:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    /* ── Success state ── */
+    .success {
+      display: none;
+      text-align: center;
+      padding: 60px 40px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+
+    .success .check {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .success h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #1A1A1A;
+    }
+
+    .success p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 14px 20px; }
+      .page { padding: 40px 16px 80px; }
+      .card { padding: 28px 20px; }
+      .intro h1 { font-size: 26px; }
+      .score-btn { width: 40px; height: 40px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="win_logo.png" alt="Win Marketing" />
+  </header>
+
+  <div class="page">
+
+    <div class="intro">
+      <div class="label">Monthly Check-In</div>
+      <h1>How are we doing?</h1>
+      <p>Five quick questions. Takes about three minutes.<br>Your answers shape how we work with you next month.</p>
+    </div>
+
+    <!-- FORM -->
+    <form id="feedbackForm">
+      <div class="card">
+
+        <!-- Name -->
+        <div class="question">
+          <div class="q-number">Your name</div>
+          <div class="q-label">What's your name?</div>
+          <input type="text" name="client_name" placeholder="First and last name" required />
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q1 -->
+        <div class="question">
+          <div class="q-number">01</div>
+          <div class="q-label">What's been your biggest win this past month?</div>
+          <textarea name="biggest_win" rows="3" placeholder="A result, a moment, anything that felt like progress…"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q2 -->
+        <div class="question">
+          <div class="q-number">02</div>
+          <div class="q-label">If we stopped working together tomorrow and you could only keep ONE thing — what would it be, and why?</div>
+          <p class="q-sub">Be honest. This is the most important question on this form.</p>
+          <textarea name="one_thing" rows="4" placeholder="The one thing you'd never give up…"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q3 -->
+        <div class="question">
+          <div class="q-number">03</div>
+          <div class="q-label">On a scale of 1–10, how happy are you with the work right now?</div>
+          <div class="score-row" id="scoreRow">
+            <button type="button" class="score-btn" data-val="1">1</button>
+            <button type="button" class="score-btn" data-val="2">2</button>
+            <button type="button" class="score-btn" data-val="3">3</button>
+            <button type="button" class="score-btn" data-val="4">4</button>
+            <button type="button" class="score-btn" data-val="5">5</button>
+            <button type="button" class="score-btn" data-val="6">6</button>
+            <button type="button" class="score-btn" data-val="7">7</button>
+            <button type="button" class="score-btn" data-val="8">8</button>
+            <button type="button" class="score-btn" data-val="9">9</button>
+            <button type="button" class="score-btn" data-val="10">10</button>
+          </div>
+          <input type="hidden" name="score" id="scoreInput" />
+          <textarea name="score_reason" rows="2" placeholder="What's behind that number?"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q4 -->
+        <div class="question">
+          <div class="q-number">04</div>
+          <div class="q-label">What's one thing that's not working, or that you wish was different?</div>
+          <textarea name="not_working" rows="3" placeholder="Nothing's off limits here…"></textarea>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Q5 -->
+        <div class="question">
+          <div class="q-number">05</div>
+          <div class="q-label">What do you need most from us in the next 30 days?</div>
+          <textarea name="next_30_days" rows="3" placeholder="A result, a deliverable, a focus area…"></textarea>
+        </div>
+
+        <div class="submit-wrap">
+          <button type="submit" id="submitBtn">Submit →</button>
+        </div>
+
+      </div>
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success" id="successState">
+      <div class="check">✓</div>
+      <h2>Thank you.</h2>
+      <p>Your answers have been saved.<br>We'll use this to make next month better.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const APPS_SCRIPT_URL = 'https://ron-leads-production.up.railway.app/client-feedback';
+
+    // Score picker
+    let selectedScore = null;
+    document.querySelectorAll('.score-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.score-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedScore = btn.dataset.val;
+        document.getElementById('scoreInput').value = selectedScore;
+      });
+    });
+
+    // Form submit
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      const formData = new FormData(e.target);
+      const payload = {};
+      formData.forEach((v, k) => payload[k] = v);
+      payload.timestamp = new Date().toISOString();
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (_) {}
+
+      document.getElementById('feedbackForm').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
