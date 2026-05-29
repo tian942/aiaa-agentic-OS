@@ -255,7 +255,26 @@ h3 { font-weight: 600; }
   display: flex; align-items: center; justify-content: space-between;
   height: 56px;
 }
-.nav-logo { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1rem; color:var(--yg); text-decoration:none; letter-spacing:0.01em; }
+.nav-logo {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 4px 10px;
+  text-decoration: none;
+}
+.nav-logo::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 90% at 50% 50%, rgba(149,212,74,0.18) 0%, transparent 70%);
+  border-radius: 8px;
+  pointer-events: none;
+}
+.nav-logo img {
+  height: 38px;
+  width: auto;
+  display: block;
+  position: relative;
+  filter: drop-shadow(0 0 6px rgba(149,212,74,0.35)) drop-shadow(0 0 14px rgba(149,212,74,0.15));
+}
 .nav-cta {
   background: var(--green); color: var(--cream);
   font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.82rem;
@@ -612,7 +631,7 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
 
   /* Nav: tighten so logo + button fit on 375px */
   .nav { padding:0 1.25rem; }
-  .nav-logo { font-size:0.88rem; }
+  .nav-logo img { height:30px; }
   .nav-cta { font-size:0.75rem; padding:0.45rem 0.9rem; }
 
   /* Grids → single column */
@@ -718,7 +737,9 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
 
 <!-- Nav -->
 <nav class="nav">
-  <a href="/" class="nav-logo">Fast Grass Lawns</a>
+  <a href="#quote" class="nav-logo">
+    <img src="https://fastgrasslawns.com/wp-content/uploads/2024/06/fast-grass-lawn-llc-big-logo.png" alt="Fast Grass Lawns">
+  </a>
   <a href="#quote" class="nav-cta">Get Free Quote</a>
 </nav>
 
