@@ -280,10 +280,10 @@ h3 { font-weight: 600; }
 .btn-secondary {
   display: inline-block; color: var(--yg);
   font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.9rem;
-  text-decoration: none; border-bottom: 1px solid rgba(149,212,74,0.3);
-  padding-bottom: 2px; transition: border-color 0.2s;
+  text-decoration: none; border: 1.5px solid rgba(149,212,74,0.4);
+  padding: 0.75rem 1.5rem; border-radius: var(--radius); transition: border-color 0.2s, background 0.2s;
 }
-.btn-secondary:hover { border-color: var(--yg); }
+.btn-secondary:hover { border-color: var(--yg); background: rgba(149,212,74,0.08); }
 
 .btn-call {
   display: inline-flex; align-items: center; gap: 0.5rem;
@@ -361,7 +361,7 @@ section { padding:5rem 0; }
   background: linear-gradient(to bottom, rgba(26,26,26,0.55) 0%, rgba(26,26,26,0.35) 50%, rgba(26,26,26,0.85) 100%);
   z-index:1; pointer-events:none;
 }
-.hero .container-narrow { position:relative; z-index:2; }
+.hero .container-narrow { position:relative; z-index:2; margin: 0; max-width: 620px; }
 
 /* hero video shows on all screen sizes */
 
@@ -406,6 +406,11 @@ section { padding:5rem 0; }
 .trust-icon { color:var(--yg); font-size:1.1rem; flex-shrink:0; margin-top:1px; }
 .trust-stack .trust-item:nth-child(5) { grid-column: 1 / -1; }
 
+/* Hero trust bullet list */
+.trust-bullet-list { list-style:none; display:flex; flex-direction:column; gap:0.55rem; margin:1.5rem 0 2rem; padding:0; }
+.trust-bullet-list li { display:flex; align-items:flex-start; gap:0.65rem; font-size:0.95rem; line-height:1.5; color:var(--cream); }
+.trust-bullet-list li::before { content:'—'; color:var(--yg); font-weight:800; flex-shrink:0; margin-top:1px; }
+
 /* ---- SECTION BG VARIANTS ---- */
 .bg-cream { background:var(--cream); color:var(--charcoal); }
 .bg-cream .section-tag { color:var(--green); }
@@ -413,8 +418,8 @@ section { padding:5rem 0; }
 .bg-cream p, .bg-cream li { color:#3a3a38; }
 .bg-cream .card { background:#e8e8e3; box-shadow:none; }
 .bg-cream .x-list li::before { background:rgba(139,32,32,0.15); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%238B2020' stroke-width='2.5' stroke-linecap='round'%3E%3Cline x1='4' y1='4' x2='12' y2='12'/%3E%3Cline x1='12' y1='4' x2='4' y2='12'/%3E%3C/svg%3E"); background-size:11px; background-repeat:no-repeat; background-position:center; }
-.bg-cream .btn-secondary { color:var(--green); border-color:rgba(45,106,79,0.3); }
-.bg-cream .btn-secondary:hover { border-color:var(--green); }
+.bg-cream .btn-secondary { color:var(--green); border-color:rgba(45,106,79,0.4); }
+.bg-cream .btn-secondary:hover { border-color:var(--green); background: rgba(45,106,79,0.08); }
 
 .bg-green { background:var(--green); }
 .bg-green .section-tag { color:var(--yg); }
@@ -708,7 +713,7 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
 
 <!-- Ranked Banner -->
 <div class="ranked-banner">
-  ⭐ <span>Ranked #1 in Manitowoc for 3+ years.</span> &nbsp;38 Five-Star Reviews on Google.
+  <span>Ranked #1 in Manitowoc for 3+ years.</span> &nbsp;38 Five-Star Reviews on Google.
 </div>
 
 <!-- Nav -->
@@ -734,8 +739,17 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
   <div class="container-narrow">
     <p class="hero-eyebrow">Lawn Restoration — Manitowoc, WI</p>
     <p style="font-size:1rem; color:var(--grey); margin-bottom:0.5rem; font-style:italic;">Stop wasting money on lawn treatments that don't work.</p>
-    <h1>The <em>ONLY</em> Lawn Restoration That Fixes Your Lawn at the Root, Not Just the Symptoms</h1>
+    <h1>The <em>ONLY</em> Lawn Restoration That<br>Fixes Your Lawn at the Root</h1>
     <p class="hero-body">Your lawn isn't the problem. The companies treating it are. They skip dethatching because it takes more work, but it's the one step that actually lets nutrients reach the soil. We don't skip it. That's why ours last.</p>
+
+    <!-- Trust bullets -->
+    <ul class="trust-bullet-list stagger-children">
+      <li>Ranked #1 in Manitowoc for 3+ years</li>
+      <li>The only company in Manitowoc that dethatches before restoration</li>
+      <li>Lawn restoration warranty — if any part fails, we fix it free</li>
+      <li>Locally owned and operated — not a franchise</li>
+      <li>Our own unique 8-Step "Fast Grass Root Restoration Method"</li>
+    </ul>
 
     <!-- Hero testimonial -->
     <div class="hero-testimonial">
@@ -746,15 +760,6 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
 
     <a href="#quote" class="btn-primary">Get My Free Quote &amp; Lawn Assessment →</a>
     <span class="btn-comfort">No obligation. No pressure. Free assessment worth $197.</span>
-
-    <!-- Trust Stack -->
-    <div class="trust-stack stagger-children">
-      <div class="trust-item"><span class="trust-icon">★</span><span>Ranked #1 in Manitowoc for 3+ years</span></div>
-      <div class="trust-item"><span class="trust-icon">✓</span><span>The only company in Manitowoc that dethatches before restoration</span></div>
-      <div class="trust-item"><span class="trust-icon">🛡</span><span>Lawn restoration warranty — if any part fails, we fix it free</span></div>
-      <div class="trust-item"><span class="trust-icon">📍</span><span>Locally owned and operated — not a franchise</span></div>
-      <div class="trust-item"><span class="trust-icon">⚙️</span><span>Our own unique 8-Step "Fast Grass Root Restoration Method"</span></div>
-    </div>
   </div>
 </section>
 
@@ -876,7 +881,7 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
 <hr class="section-divider">
 
 <!-- ============ ENEMY ============ -->
-<section class="bg-red">
+<section class="bg-green">
   <div class="container-narrow">
     <p class="section-tag reveal">The Business Model</p>
     <h2 class="reveal">The Lawn Care Industry Is Built on You <em style="font-style:normal;color:var(--yg)">Never</em> Getting Better.</h2>
@@ -935,7 +940,6 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
       <div class="step-card"><div class="step-number">8</div><h3>Written Watering Plan and Ongoing Support</h3><p>Before we leave, you get a written watering plan — specific to your lawn, your soil, and your restoration. Exactly what to do. When to do it. How much. And if anything fails to establish, we come back and fix it at no cost.</p></div>
     </div>
     <div class="warranty-card reveal reveal-pop">
-      <div class="warranty-icon">🛡</div>
       <div>
         <h4>Restoration Warranty — No Exceptions</h4>
         <p>If any part of your restoration fails to establish, we come back and fix it. No arguments. No bill. No fine print. This is the only lawn restoration in Manitowoc backed by a written warranty.</p>
@@ -1112,7 +1116,7 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
     <h2 class="reveal">We're Not the Right Fit for Everyone — Here's Who We Work With</h2>
     <div class="qualifier-grid stagger-children">
       <div class="qualifier-card right-fit">
-        <h4>✓ Right Fit</h4>
+        <h4>Right Fit</h4>
         <ul class="check-list">
           <li>Done throwing money at treatments that don't fix anything</li>
           <li>Want a proper restoration — not another band-aid</li>
@@ -1122,7 +1126,7 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
         </ul>
       </div>
       <div class="qualifier-card wrong-fit">
-        <h4>✗ Wrong Fit</h4>
+        <h4>Wrong Fit</h4>
         <ul class="x-list">
           <li>Looking for the lowest price regardless of result</li>
           <li>Applied pre-emergent herbicides in the last 6 months</li>
@@ -1132,7 +1136,7 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
       </div>
     </div>
     <div class="preemergent-warning">
-      <strong>⚠ Applied weed control recently? Read this.</strong>
+      <strong>Applied weed control recently? Read this.</strong>
       Pre-emergent herbicides stop all seed germination — including grass seed. If you've used any weed treatment in the last 6 months, mention it when you get in touch so we can assess timing correctly for your restoration.
     </div>
   </div>
@@ -1141,15 +1145,15 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
 <hr class="section-divider">
 
 <!-- ============ URGENCY ============ -->
-<section class="bg-red">
+<section class="bg-green">
   <div class="container-narrow">
     <p class="section-tag reveal">Why Not Wait</p>
     <h2 class="reveal">Every Season You Wait Makes It Harder to Fix</h2>
     <p class="reveal" style="margin:1.25rem 0; line-height:1.8;">The longer thatch sits there — compacting, building up, blocking nutrients — the more damage it does to the soil underneath.</p>
     <div class="urgency-icons stagger-children">
-      <div class="urgency-icon-card"><div class="icon">📈</div><p><strong>Thatch Keeps Building</strong><br>Deeper every season it's left untreated</p></div>
-      <div class="urgency-icon-card"><div class="icon">🌱</div><p><strong>Soil Gets Harder to Restore</strong><br>Nutrient deficiencies compound over time</p></div>
-      <div class="urgency-icon-card"><div class="icon">💰</div><p><strong>Cost of Fixing Goes Up</strong><br>More damage means more work to reverse it</p></div>
+      <div class="urgency-icon-card"><p><strong>Thatch Keeps Building</strong><br>Deeper every season it's left untreated</p></div>
+      <div class="urgency-icon-card"><p><strong>Soil Gets Harder to Restore</strong><br>Nutrient deficiencies compound over time</p></div>
+      <div class="urgency-icon-card"><p><strong>Cost of Fixing Goes Up</strong><br>More damage means more work to reverse it</p></div>
     </div>
     <p style="line-height:1.8; margin-bottom:1.5rem;">The average homeowner spends $500–$1,500 per year on treatments that aren't addressing the root cause. That's $5,000–$15,000 over a decade — for a lawn that looks exactly the same.</p>
     <p style="font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem;">At some point you have to decide whether you're going to keep treating symptoms or fix the actual problem.</p>
@@ -1198,7 +1202,7 @@ footer { background:#111; padding:3rem 0 2rem; border-top:1px solid var(--divide
       </div>
       <span class="btn-comfort" style="text-align:left; margin-top:0.75rem;">We respond same day.</span>
       <div class="cta-guarantee">
-        🛡 &nbsp;<strong>Restoration Warranty:</strong> If any part of your lawn fails to establish after the restoration, we come back and fix it at no cost. No fine print. No arguments.
+        <strong>Restoration Warranty:</strong> If any part of your lawn fails to establish after the restoration, we come back and fix it at no cost. No fine print. No arguments.
       </div>
     </div>
   </div>
