@@ -30,17 +30,24 @@ def close_db(e=None):
 def init_db():
     db = sqlite3.connect(DB_PATH)
     db.execute('''CREATE TABLE IF NOT EXISTS videos (
-        id          INTEGER PRIMARY KEY AUTOINCREMENT,
-        name        TEXT    NOT NULL,
-        drive_link  TEXT    NOT NULL,
-        editor      TEXT    NOT NULL,
-        post_date   DATE    NOT NULL,
-        posted      INTEGER DEFAULT 0,
-        views       INTEGER,
-        likes       INTEGER,
-        comments    INTEGER,
-        created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+        id            INTEGER PRIMARY KEY AUTOINCREMENT,
+        name          TEXT    NOT NULL,
+        drive_link    TEXT    NOT NULL,
+        editor        TEXT    NOT NULL,
+        post_date     DATE    NOT NULL,
+        posted        INTEGER DEFAULT 0,
+        views         INTEGER,
+        likes         INTEGER,
+        comments      INTEGER,
+        editor_done   INTEGER DEFAULT 0,
+        finished_link TEXT,
+        created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
     )''')
+    for col, defn in [('editor_done','INTEGER DEFAULT 0'), ('finished_link','TEXT')]:
+        try:
+            db.execute(f"ALTER TABLE videos ADD COLUMN {col} {defn}")
+        except Exception:
+            pass
     db.commit()
     db.close()
 
@@ -175,6 +182,25 @@ def update_stats(vid):
     db.commit()
     return jsonify(success=True)
 
+@app.route('/api/videos/<int:vid>/editor-done', methods=['POST'])
+def editor_done(vid):
+    db = get_db()
+    row = db.execute("SELECT editor_done FROM videos WHERE id=?", (vid,)).fetchone()
+    if not row: return jsonify(error='Not found'), 404
+    new = 1 - (row['editor_done'] or 0)
+    db.execute("UPDATE videos SET editor_done=? WHERE id=?", (new, vid))
+    db.commit()
+    return jsonify(done=new)
+
+@app.route('/api/videos/<int:vid>/finished-link', methods=['POST'])
+def finished_link(vid):
+    d = request.json or {}
+    link = d.get('link', '').strip()
+    db = get_db()
+    db.execute("UPDATE videos SET finished_link=? WHERE id=?", (link or None, vid))
+    db.commit()
+    return jsonify(success=True)
+
 @app.route('/api/videos/<int:vid>', methods=['DELETE'])
 @login_required
 def delete_video(vid):
@@ -254,7 +280,7 @@ body{font-family:'Inter',sans-serif;background:#F2F2F2;color:#111;min-height:100
 :root{
   --lime:#C1F000;--lime-dim:rgba(193,240,0,.2);--lime-border:rgba(150,185,0,.35);
   --bg:#F2F2F2;--bg2:#FFFFFF;--bg3:#EBEBEB;
-  --border:#E2E2E2;--border2:#D2D2D2;--muted:rgba(0,0,0,.38)
+  --border:#E2E2E2;--border2:#D2D2D2;--muted:rgba(0,0,0,.52)
 }
 a{color:inherit;text-decoration:none}
 
@@ -304,9 +330,9 @@ a{color:inherit;text-decoration:none}
 .day.empty:hover{border-color:transparent}
 .day.today{border-color:#C1F000}
 .day.past{opacity:.65}
-.day-num{font-size:11px;font-weight:700;color:var(--muted);
+.day-num{font-size:11px;font-weight:700;color:#555;
   position:absolute;top:6px;right:7px}
-.day.today .day-num{color:var(--lime)}
+.day.today .day-num{color:#6A9E00;font-size:12px}
 .vcards{margin-top:18px;display:flex;flex-direction:column;gap:2px}
 
 /* VIDEO CARD */
@@ -314,14 +340,15 @@ a{color:inherit;text-decoration:none}
   padding:5px 7px;cursor:pointer;display:flex;align-items:center;gap:4px;
   transition:border-color .15s}
 .vcard:hover{border-color:rgba(255,255,255,.2)}
-.vcard.posted{background:rgba(193,240,0,.05);border-color:rgba(193,240,0,.2)}
+.vcard.posted{background:rgba(193,240,0,.08);border-color:rgba(150,185,0,.3)}
+.vcard.editor-done-card{border-left:3px solid #C1F000}
 .vbadge{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
   padding:2px 5px;border-radius:3px;flex-shrink:0}
 .vb-vlad{color:#6A9E00;background:rgba(193,240,0,.3)}
 .vb-richard{color:#444;background:rgba(0,0,0,.07)}
 .vb-cgl{color:#2278A0;background:rgba(126,200,227,.25)}
 .vname{flex:1;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  color:rgba(255,255,255,.8)}
+  color:#1A1A1A;font-weight:500}
 .vcheck{width:13px;height:13px;flex-shrink:0;accent-color:var(--lime);cursor:pointer}
 
 /* WEEKLY TABLE */
@@ -468,10 +495,11 @@ a{color:inherit;text-decoration:none}
             <div class="day-num">{{ day }}</div>
             <div class="vcards">
               {% for v in vbd.get(dstr, []) %}
-              <div class="vcard {{ 'posted' if v.posted else '' }}"
+              <div class="vcard {{ 'posted' if v.posted else '' }} {{ 'editor-done-card' if v.editor_done else '' }}"
                    onclick="event.stopPropagation(); openModal({{ v.id }})">
                 <span class="vbadge vb-{{ v.editor }}">{{ v.editor[:3] }}</span>
                 <span class="vname">{{ v.name }}</span>
+                {% if v.editor_done %}<span title="Editor done" style="font-size:10px;color:#6A9E00;flex-shrink:0">✓</span>{% endif %}
                 <input class="vcheck" type="checkbox" {{ 'checked' if v.posted else '' }}
                        onclick="event.stopPropagation(); togglePosted(event, {{ v.id }})">
               </div>
@@ -554,7 +582,10 @@ a{color:inherit;text-decoration:none}
       <button class="x-btn" onclick="closeModal()">×</button>
     </div>
     <div class="modal-meta" id="mMeta"></div>
-    <a class="drive-btn" id="mDrive" href="#" target="_blank">▶ Open in Drive</a>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap">
+      <a class="drive-btn" id="mDrive" href="#" target="_blank" style="margin-bottom:0">▶ Raw Footage</a>
+      <a class="drive-btn" id="mFinishedDrive" href="#" target="_blank" style="margin-bottom:0;display:none;background:rgba(193,240,0,.3)">✓ Finished Edit</a>
+    </div>
 
     <div class="posted-row" onclick="togglePostedModal()">
       <input class="pcheck" type="checkbox" id="mPostedChk">
@@ -630,14 +661,18 @@ async function togglePosted(event, id) {
 function openModal(id) {
   const v = VD[id]; if (!v) return;
   activeId = id;
-  document.getElementById('mTitle').textContent   = v.name;
-  document.getElementById('mMeta').textContent    = `${v.editor.charAt(0).toUpperCase()+v.editor.slice(1)}  ·  ${v.post_date}`;
-  document.getElementById('mDrive').href          = v.drive_link;
-  document.getElementById('mPostedChk').checked   = !!v.posted;
+  document.getElementById('mTitle').textContent     = v.name;
+  document.getElementById('mMeta').textContent      = `${v.editor.charAt(0).toUpperCase()+v.editor.slice(1)}  ·  ${v.post_date}`;
+  document.getElementById('mDrive').href            = v.drive_link;
+  document.getElementById('mPostedChk').checked     = !!v.posted;
   document.getElementById('mPostedLbl').textContent = v.posted ? '✓ Posted' : 'Mark as posted';
   document.getElementById('mViews').value    = v.views    || '';
   document.getElementById('mLikes').value    = v.likes    || '';
   document.getElementById('mComments').value = v.comments || '';
+  const finBtn = document.getElementById('mFinishedDrive');
+  if (v.finished_link) {
+    finBtn.href = v.finished_link; finBtn.style.display = 'inline-flex';
+  } else { finBtn.style.display = 'none'; }
   calcRatio();
   document.getElementById('mOverlay').classList.add('open');
 }
@@ -679,7 +714,11 @@ async function saveStats() {
     method:'POST', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({views, likes, comments})
   });
-  if (r.ok) { document.getElementById('mOverlay').classList.remove('open'); location.reload(); }
+  if (r.ok) {
+    if (VD[activeId]) { VD[activeId].views=views; VD[activeId].likes=likes; VD[activeId].comments=comments; }
+    document.getElementById('mOverlay').classList.remove('open');
+    activeId = null;
+  }
 }
 
 async function deleteVideo() {
@@ -705,78 +744,156 @@ EDITOR_HTML = '''<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:#F2F2F2;color:#111;min-height:100vh;padding:0}
-:root{--accent:{{ color }};--bg2:#FFFFFF;--bg3:#EBEBEB;--border:#E2E2E2;--muted:rgba(0,0,0,.38)}
+body{font-family:'Inter',sans-serif;background:#F2F2F2;color:#111;min-height:100vh}
+:root{--accent:{{ color }};--bg2:#FFFFFF;--bg3:#F4F4F4;--border:#E2E2E2}
 .nav{background:#FFFFFF;border-bottom:1px solid var(--border);padding:0 24px;
   display:flex;align-items:center;height:56px;gap:12px}
 .logo{font-size:18px;font-weight:800}.logo span{color:var(--accent)}
-.divider{color:#333}
-.editor-tag{color:var(--accent);font-size:14px;font-weight:700}
-.main{padding:28px 24px 60px;max-width:900px}
-h2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  color:var(--muted);margin:28px 0 12px}
-h2:first-child{margin-top:0}
-table{width:100%;border-collapse:collapse}
-th{text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;
-  color:var(--muted);padding:8px 14px;border-bottom:1px solid var(--border)}
-td{padding:13px 14px;border-bottom:1px solid var(--border);font-size:13px}
-tr:hover td{background:var(--bg2)}
-.date{font-weight:700;color:#111}
-.past-date{color:var(--muted)}
-.vname{font-weight:500}
-.drive-link{color:var(--accent);font-weight:700;font-size:12px;display:inline-flex;align-items:center;gap:4px}
-.drive-link:hover{text-decoration:underline}
+.sep{color:#DDD}
+.editor-tag{color:#111;font-size:14px;font-weight:700}
+.main{padding:28px 24px 80px;max-width:960px;margin:0 auto}
+.sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:#888;margin:32px 0 10px}
+.sec:first-of-type{margin-top:0}
+.chip{display:inline-block;background:#EBEBEB;color:#666;font-size:11px;
+  font-weight:600;padding:2px 8px;border-radius:20px;margin-left:6px}
+.card{background:#FFFFFF;border:1px solid var(--border);border-radius:10px;
+  margin-bottom:8px;padding:16px 18px;display:grid;
+  grid-template-columns:90px 1fr auto auto;gap:12px;align-items:center;
+  transition:box-shadow .15s}
+.card:hover{box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.card.done-card{border-left:3px solid var(--accent)}
+.card-date{font-size:12px;font-weight:700;color:#444}
+.card-name{font-size:14px;font-weight:600;color:#111}
+.card-sub{font-size:11px;color:#888;margin-top:2px;display:flex;gap:8px;align-items:center}
+.raw-link{color:#6A9E00;font-weight:700;font-size:11px}
+.raw-link:hover{text-decoration:underline}
+.fin-link{color:#2278A0;font-weight:700;font-size:11px}
+.fin-link:hover{text-decoration:underline}
+.card-actions{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.btn-done{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;
+  padding:6px 14px;border-radius:6px;cursor:pointer;border:none;transition:all .15s}
+.btn-done.not-done{background:#F0F0F0;color:#555}
+.btn-done.not-done:hover{background:#E0E0E0}
+.btn-done.is-done{background:rgba(193,240,0,.25);color:#5A8A00}
+.link-input{font-family:'Inter',sans-serif;font-size:11px;padding:6px 10px;
+  border:1px solid var(--border);border-radius:6px;color:#111;outline:none;width:220px;
+  background:#F8F8F8}
+.link-input:focus{border-color:var(--accent)}
+.link-input.saved{border-color:#6A9E00}
+.save-link-btn{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;
+  padding:6px 12px;background:#111;color:#fff;border:none;border-radius:6px;cursor:pointer;white-space:nowrap}
+.save-link-btn:hover{background:#333}
 .badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
-.badge-pending{background:rgba(255,255,255,.07);color:rgba(255,255,255,.45)}
-.badge-posted{color:var(--accent);background:rgba(193,240,0,.1)}
-.empty{color:var(--muted);font-size:13px;padding:16px 0}
-.today-row td{background:rgba(193,240,0,.04)}
-.count-chip{display:inline-block;background:rgba(255,255,255,.07);color:var(--muted);
-  font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-left:6px}
+.badge-pending{background:#F0F0F0;color:#888}
+.badge-posted{background:rgba(193,240,0,.2);color:#5A8A00}
+.empty{color:#999;font-size:13px;padding:12px 0}
+.past-card{opacity:.6}
+.link-row{display:flex;gap:6px;align-items:center;margin-top:6px}
 </style>
 </head>
 <body>
 <nav class="nav">
   <div class="logo">Ric<span>Fit</span></div>
-  <div class="divider">|</div>
+  <div class="sep">|</div>
   <div class="editor-tag">{{ editor }}</div>
 </nav>
 <div class="main">
-  <h2>Upcoming <span class="count-chip">{{ upcoming|length }}</span></h2>
+
+  <div class="sec">Upcoming <span class="chip">{{ upcoming|length }}</span></div>
   {% if upcoming %}
-  <table>
-    <thead><tr><th>Post Date</th><th>Video</th><th>Drive</th><th>Status</th></tr></thead>
-    <tbody>
     {% for v in upcoming %}
-    <tr class="{{ 'today-row' if v.post_date == today else '' }}">
-      <td class="date">{{ v.post_date[8:10] }}/{{ v.post_date[5:7] }}/{{ v.post_date[:4] }}</td>
-      <td class="vname">{{ v.name }}</td>
-      <td><a class="drive-link" href="{{ v.drive_link }}" target="_blank">▶ Open</a></td>
-      <td><span class="badge {{ 'badge-posted' if v.posted else 'badge-pending' }}">{{ 'Posted' if v.posted else 'Pending' }}</span></td>
-    </tr>
+    <div class="card {{ 'done-card' if v.editor_done else '' }}" id="card-{{ v.id }}">
+      <div class="card-date">
+        {{ v.post_date[8:10] }}/{{ v.post_date[5:7] }}<br>
+        <span style="font-weight:400;color:#888">{{ v.post_date[:4] }}</span>
+      </div>
+      <div>
+        <div class="card-name">{{ v.name }}</div>
+        <div class="card-sub">
+          <a class="raw-link" href="{{ v.drive_link }}" target="_blank">▶ Raw Footage</a>
+          {% if v.finished_link %}
+          <a class="fin-link" id="finlink-{{ v.id }}" href="{{ v.finished_link }}" target="_blank">✓ Finished Edit</a>
+          {% else %}
+          <span id="finlink-{{ v.id }}"></span>
+          {% endif %}
+        </div>
+        <div class="link-row">
+          <input class="link-input" id="linkinput-{{ v.id }}" type="url"
+                 placeholder="Paste finished footage link…"
+                 value="{{ v.finished_link or '' }}"
+                 onkeydown="if(event.key==='Enter') saveLink({{ v.id }})">
+          <button class="save-link-btn" onclick="saveLink({{ v.id }})">Save</button>
+        </div>
+      </div>
+      <span class="badge {{ 'badge-posted' if v.posted else 'badge-pending' }}">
+        {{ 'Posted' if v.posted else 'Pending' }}
+      </span>
+      <div class="card-actions">
+        <button class="btn-done {{ 'is-done' if v.editor_done else 'not-done' }}"
+                id="donebtn-{{ v.id }}"
+                onclick="markDone({{ v.id }})">
+          {{ '✓ Done' if v.editor_done else 'Mark Done' }}
+        </button>
+      </div>
+    </div>
     {% endfor %}
-    </tbody>
-  </table>
   {% else %}
   <div class="empty">No upcoming videos assigned yet.</div>
   {% endif %}
 
   {% if past %}
-  <h2>Past 30 Days <span class="count-chip">{{ past|length }}</span></h2>
-  <table>
-    <thead><tr><th>Post Date</th><th>Video</th><th>Drive</th><th>Status</th></tr></thead>
-    <tbody>
+  <div class="sec">Past 30 Days <span class="chip">{{ past|length }}</span></div>
     {% for v in past %}
-    <tr>
-      <td class="past-date">{{ v.post_date[8:10] }}/{{ v.post_date[5:7] }}/{{ v.post_date[:4] }}</td>
-      <td class="vname" style="opacity:.6">{{ v.name }}</td>
-      <td><a class="drive-link" href="{{ v.drive_link }}" target="_blank">▶ Open</a></td>
-      <td><span class="badge {{ 'badge-posted' if v.posted else 'badge-pending' }}">{{ 'Posted' if v.posted else 'Pending' }}</span></td>
-    </tr>
+    <div class="card past-card">
+      <div class="card-date">{{ v.post_date[8:10] }}/{{ v.post_date[5:7] }}</div>
+      <div>
+        <div class="card-name" style="font-size:13px">{{ v.name }}</div>
+        <div class="card-sub">
+          <a class="raw-link" href="{{ v.drive_link }}" target="_blank">▶ Raw</a>
+          {% if v.finished_link %}<a class="fin-link" href="{{ v.finished_link }}" target="_blank">✓ Finished</a>{% endif %}
+        </div>
+      </div>
+      <span class="badge {{ 'badge-posted' if v.posted else 'badge-pending' }}">
+        {{ 'Posted' if v.posted else 'Pending' }}
+      </span>
+      <div></div>
+    </div>
     {% endfor %}
-    </tbody>
-  </table>
   {% endif %}
+
 </div>
+<script>
+async function markDone(id) {
+  const r = await fetch(`/api/videos/${id}/editor-done`, {method:'POST'});
+  if (!r.ok) return;
+  const data = await r.json();
+  const btn  = document.getElementById(`donebtn-${id}`);
+  const card = document.getElementById(`card-${id}`);
+  if (data.done) {
+    btn.textContent = '✓ Done'; btn.className = 'btn-done is-done';
+    card.classList.add('done-card');
+  } else {
+    btn.textContent = 'Mark Done'; btn.className = 'btn-done not-done';
+    card.classList.remove('done-card');
+  }
+}
+
+async function saveLink(id) {
+  const input = document.getElementById(`linkinput-${id}`);
+  const link  = input.value.trim();
+  const r = await fetch(`/api/videos/${id}/finished-link`, {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({link})
+  });
+  if (r.ok) {
+    input.classList.add('saved');
+    const el = document.getElementById(`finlink-${id}`);
+    if (el && link) {
+      el.outerHTML = `<a class="fin-link" id="finlink-${id}" href="${link}" target="_blank">✓ Finished Edit</a>`;
+    }
+  }
+}
+</script>
 </body>
 </html>'''
