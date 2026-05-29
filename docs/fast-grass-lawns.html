@@ -380,7 +380,7 @@ section { padding:5rem 0; }
   background: linear-gradient(to bottom, rgba(26,26,26,0.55) 0%, rgba(26,26,26,0.35) 50%, rgba(26,26,26,0.85) 100%);
   z-index:1; pointer-events:none;
 }
-.hero .container-narrow { position:relative; z-index:2; margin: 0; max-width: 620px; }
+.hero .container-narrow { position:relative; z-index:2; margin: 0 auto; max-width: 680px; text-align: center; }
 
 /* hero video shows on all screen sizes */
 
@@ -388,9 +388,9 @@ section { padding:5rem 0; }
   font-family:'Montserrat',sans-serif; font-weight:600; font-size:0.78rem;
   letter-spacing:0.12em; text-transform:uppercase; color:var(--yg); margin-bottom:1rem;
 }
-.hero h1 { font-size:clamp(1.6rem, 2.5vw, 2rem); color:var(--cream); margin-bottom:1.25rem; max-width:700px; }
+.hero h1 { font-size:clamp(1.6rem, 2.5vw, 2rem); color:var(--cream); margin:0 auto 1.25rem; max-width:600px; }
 .hero h1 em { font-style:normal; color:var(--yg); }
-.hero-body { font-size:1.05rem; color:var(--grey); max-width:620px; margin-bottom:2.5rem; line-height:1.75; }
+.hero-body { font-size:1.05rem; color:var(--grey); max-width:580px; margin:0 auto 2.5rem; line-height:1.75; }
 
 /* VSL */
 .vsl-wrap {
@@ -409,8 +409,8 @@ section { padding:5rem 0; }
 /* Hero testimonial */
 .hero-testimonial {
   background:var(--charcoal-card); border-radius:var(--radius-card);
-  border-left:3px solid var(--yg); padding:1.25rem 1.5rem;
-  margin-bottom:2rem; font-style:italic; font-size:0.95rem; color:var(--cream);
+  border-top:3px solid var(--yg); padding:1.25rem 1.5rem;
+  margin-bottom:2rem; font-style:italic; font-size:0.95rem; color:var(--cream); text-align:left;
 }
 .hero-testimonial .attribution { margin-top:0.5rem; font-style:normal; font-size:0.82rem; color:var(--grey); }
 .stars { color:var(--yg); font-size:1rem; margin-bottom:0.35rem; }
@@ -426,7 +426,7 @@ section { padding:5rem 0; }
 .trust-stack .trust-item:nth-child(5) { grid-column: 1 / -1; }
 
 /* Hero trust bullet list */
-.trust-bullet-list { list-style:none; display:flex; flex-direction:column; gap:0.55rem; margin:1.5rem 0 2rem; padding:0; }
+.trust-bullet-list { list-style:none; display:inline-flex; flex-direction:column; gap:0.55rem; margin:1.5rem 0 2rem; padding:0; text-align:left; }
 .trust-bullet-list li { display:flex; align-items:flex-start; gap:0.65rem; font-size:0.95rem; line-height:1.5; color:var(--cream); }
 .trust-bullet-list li::before { content:'—'; color:var(--yg); font-weight:800; flex-shrink:0; margin-top:1px; }
 
