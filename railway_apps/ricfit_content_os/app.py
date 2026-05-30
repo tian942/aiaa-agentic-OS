@@ -43,7 +43,7 @@ def init_db():
         finished_link TEXT,
         created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
     )''')
-    for col, defn in [('editor_done','INTEGER DEFAULT 0'), ('finished_link','TEXT')]:
+    for col, defn in [('editor_done','INTEGER DEFAULT 0'), ('finished_link','TEXT'), ('in_progress','INTEGER DEFAULT 0')]:
         try:
             db.execute(f"ALTER TABLE videos ADD COLUMN {col} {defn}")
         except Exception:
@@ -209,6 +209,57 @@ def delete_video(vid):
     db.commit()
     return jsonify(success=True)
 
+@app.route('/api/pipeline')
+@login_required
+def pipeline_data():
+    db  = get_db()
+    today      = date.today()
+    seven_ago  = (today - timedelta(days=7)).isoformat()
+    fourteen_ago = (today - timedelta(days=14)).isoformat()
+    t = today.isoformat()
+
+    queued = [dict(r) for r in db.execute(
+        "SELECT * FROM videos WHERE in_progress=0 AND editor_done=0 AND posted=0 AND post_date>=? ORDER BY post_date",
+        (seven_ago,)).fetchall()]
+    in_prog = [dict(r) for r in db.execute(
+        "SELECT * FROM videos WHERE in_progress=1 AND editor_done=0 AND posted=0 ORDER BY post_date"
+        ).fetchall()]
+    ready = [dict(r) for r in db.execute(
+        "SELECT * FROM videos WHERE (editor_done=1 OR finished_link IS NOT NULL) AND posted=0 ORDER BY post_date"
+        ).fetchall()]
+    posted = [dict(r) for r in db.execute(
+        "SELECT * FROM videos WHERE posted=1 AND post_date>=? ORDER BY post_date DESC",
+        (fourteen_ago,)).fetchall()]
+    return jsonify(queued=queued, in_progress=in_prog, ready=ready, posted=posted)
+
+@app.route('/api/editor-pipeline/<name>')
+def editor_pipeline(name):
+    name = name.lower()
+    if name not in EDITORS: return jsonify(error='Not found'), 404
+    db = get_db()
+    today     = date.today()
+    seven_ago = (today - timedelta(days=7)).isoformat()
+
+    to_edit = [dict(r) for r in db.execute(
+        "SELECT * FROM videos WHERE editor=? AND in_progress=0 AND editor_done=0 AND posted=0 AND post_date>=? ORDER BY post_date",
+        (name, seven_ago)).fetchall()]
+    in_prog = [dict(r) for r in db.execute(
+        "SELECT * FROM videos WHERE editor=? AND in_progress=1 AND editor_done=0 ORDER BY post_date",
+        (name,)).fetchall()]
+    done = [dict(r) for r in db.execute(
+        "SELECT * FROM videos WHERE editor=? AND (editor_done=1 OR finished_link IS NOT NULL) ORDER BY post_date DESC LIMIT 30",
+        (name,)).fetchall()]
+    return jsonify(to_edit=to_edit, in_progress=in_prog, done=done)
+
+@app.route('/api/videos/<int:vid>/start', methods=['POST'])
+def start_editing(vid):
+    db = get_db()
+    if not db.execute("SELECT id FROM videos WHERE id=?", (vid,)).fetchone():
+        return jsonify(error='Not found'), 404
+    db.execute("UPDATE videos SET in_progress=1 WHERE id=?", (vid,))
+    db.commit()
+    return jsonify(success=True)
+
 @app.route('/editor/<name>')
 def editor_view(name):
     name = name.lower()
@@ -226,9 +277,6 @@ def editor_view(name):
         editor=name.capitalize(), color=colors.get(name, '#C1F000'),
         upcoming=upcoming, past=past, today=today
     )
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 # ── TEMPLATES ───────────────────────────────────────────────────────────────
 
@@ -421,6 +469,42 @@ a{color:inherit;text-decoration:none}
 .btn-danger{background:rgba(255,59,59,.1);color:#ff4444;font-family:'Inter',sans-serif;
   font-size:13px;padding:11px 14px;border:1px solid rgba(255,59,59,.2);border-radius:7px;cursor:pointer}
 .btn-danger:hover{background:rgba(255,59,59,.2)}
+
+/* TABS */
+.view-tabs{display:flex;gap:2px;background:#E5E5E5;border-radius:8px;padding:3px}
+.tab-btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;padding:6px 16px;border:none;border-radius:6px;cursor:pointer;background:none;color:#666;transition:all .15s}
+.tab-btn.active{background:#fff;color:#111;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+/* PIPELINE */
+.pipeline-wrap{padding:16px 24px 60px}
+.pipeline-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:1000px){.pipeline-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.pipeline-grid{grid-template-columns:1fr}}
+.p-col{background:#EBEBEB;border-radius:10px;padding:12px;min-height:200px}
+.p-col-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.p-col-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#555}
+.p-col-count{background:#D8D8D8;color:#555;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;min-width:24px;text-align:center}
+.p-col-inprog .p-col-title{color:#2278A0}
+.p-col-ready .p-col-title{color:#6A9E00}
+.p-card{background:#fff;border-radius:8px;padding:10px 12px;margin-bottom:6px;border:1px solid #E5E5E5;transition:box-shadow .15s}
+.p-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.p-card-risk{border-left:3px solid #F59E0B}
+.p-card-overdue{border-left:3px solid #EF4444}
+.p-card-top{display:flex;align-items:center;gap:5px;margin-bottom:5px;flex-wrap:wrap}
+.p-date{font-size:10px;color:#999;font-weight:600;margin-left:auto}
+.tag-risk{font-size:9px;font-weight:700;text-transform:uppercase;background:rgba(245,158,11,.15);color:#D97706;padding:2px 5px;border-radius:3px}
+.tag-overdue{font-size:9px;font-weight:700;text-transform:uppercase;background:rgba(239,68,68,.12);color:#DC2626;padding:2px 5px;border-radius:3px}
+.p-name{font-size:13px;font-weight:600;color:#111;margin-bottom:7px;line-height:1.3}
+.p-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.p-links{display:flex;gap:8px;align-items:center}
+.p-link{font-size:11px;font-weight:700;color:#6A9E00;text-decoration:none}
+.p-link:hover{text-decoration:underline}
+.p-link-fin{color:#2278A0}
+.p-metrics{font-size:11px;color:#999}
+.p-action-btn{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;padding:5px 12px;background:#C1F000;color:#111;border:none;border-radius:5px;cursor:pointer;white-space:nowrap}
+.p-action-btn:hover{background:#d4ff00}
+.p-empty{font-size:12px;color:#bbb;text-align:center;padding:24px 0}
+.p-loading{font-size:12px;color:#bbb;text-align:center;padding:24px 0}
 </style>
 </head>
 <body>
@@ -429,7 +513,11 @@ a{color:inherit;text-decoration:none}
 <nav class="nav">
   <div class="nav-left">
     <div class="logo">Ric<span>Fit</span></div>
-    <div class="month-nav">
+    <div class="view-tabs">
+      <button class="tab-btn active" id="tab-cal" onclick="switchTab('calendar')">Calendar</button>
+      <button class="tab-btn" id="tab-pipe" onclick="switchTab('pipeline')">Pipeline</button>
+    </div>
+    <div class="month-nav" id="monthNav">
       <a href="/?m={{ pm }}&y={{ py }}"><button class="mnav-btn">‹</button></a>
       <div class="mname">{{ mname }} {{ y }}</div>
       <a href="/?m={{ nm }}&y={{ ny }}"><button class="mnav-btn">›</button></a>
@@ -446,6 +534,7 @@ a{color:inherit;text-decoration:none}
   </div>
 </nav>
 
+<div id="calendar-view">
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat">
@@ -541,6 +630,31 @@ a{color:inherit;text-decoration:none}
   </table>
   {% endif %}
 
+</div><!-- /main -->
+</div><!-- /calendar-view -->
+
+<!-- PIPELINE VIEW -->
+<div id="pipeline-view" style="display:none">
+  <div class="pipeline-wrap">
+    <div class="pipeline-grid">
+      <div class="p-col" id="pColQueued">
+        <div class="p-col-hdr"><span class="p-col-title">Queued</span><span class="p-col-count" id="pCntQ">—</span></div>
+        <div class="p-loading">Loading…</div>
+      </div>
+      <div class="p-col p-col-inprog" id="pColInprog">
+        <div class="p-col-hdr"><span class="p-col-title">In Progress</span><span class="p-col-count" id="pCntI">—</span></div>
+        <div class="p-loading">Loading…</div>
+      </div>
+      <div class="p-col p-col-ready" id="pColReady">
+        <div class="p-col-hdr"><span class="p-col-title">Ready to Post</span><span class="p-col-count" id="pCntR">—</span></div>
+        <div class="p-loading">Loading…</div>
+      </div>
+      <div class="p-col" id="pColPosted">
+        <div class="p-col-hdr"><span class="p-col-title">Posted</span><span class="p-col-count" id="pCntP">—</span></div>
+        <div class="p-loading">Loading…</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ADD VIDEO PANEL -->
@@ -728,6 +842,89 @@ async function deleteVideo() {
   if (r.ok) { document.getElementById('mOverlay').classList.remove('open'); location.reload(); }
 }
 
+// ── PIPELINE ──────────────────────────────────────────────────────────────
+function switchTab(name) {
+  const isCalendar = name === 'calendar';
+  document.getElementById('calendar-view').style.display  = isCalendar ? '' : 'none';
+  document.getElementById('pipeline-view').style.display  = isCalendar ? 'none' : '';
+  document.getElementById('monthNav').style.display       = isCalendar ? '' : 'none';
+  document.getElementById('tab-cal').className  = 'tab-btn' + (isCalendar ? ' active' : '');
+  document.getElementById('tab-pipe').className = 'tab-btn' + (isCalendar ? '' : ' active');
+  if (!isCalendar) loadPipeline();
+}
+
+async function loadPipeline() {
+  ['pColQueued','pColInprog','pColReady','pColPosted'].forEach(id => {
+    const col = document.getElementById(id);
+    while (col.children.length > 1) col.removeChild(col.lastChild);
+    col.insertAdjacentHTML('beforeend', '<div class="p-loading">Loading…</div>');
+  });
+  const r = await fetch('/api/pipeline');
+  if (!r.ok) return;
+  const d = await r.json();
+  renderPCol('pColQueued', 'pCntQ', d.queued,      'queued');
+  renderPCol('pColInprog', 'pCntI', d.in_progress, 'inprog');
+  renderPCol('pColReady',  'pCntR', d.ready,        'ready');
+  renderPCol('pColPosted', 'pCntP', d.posted,       'posted');
+}
+
+function renderPCol(colId, cntId, videos, colType) {
+  const col = document.getElementById(colId);
+  while (col.children.length > 1) col.removeChild(col.lastChild);
+  document.getElementById(cntId).textContent = videos.length;
+  if (!videos.length) { col.insertAdjacentHTML('beforeend', '<div class="p-empty">Nothing here</div>'); return; }
+  videos.forEach(v => col.insertAdjacentHTML('beforeend', buildPCard(v, colType)));
+}
+
+function buildPCard(v, colType) {
+  const todayMs = new Date(new Date().toISOString().slice(0,10) + 'T00:00:00').getTime();
+  const postMs  = new Date(v.post_date + 'T00:00:00').getTime();
+  const diff    = Math.ceil((postMs - todayMs) / 86400000);
+  let riskTag = '', riskCls = '';
+  if (!v.posted && !v.editor_done) {
+    if (diff < 0)      { riskTag = '<span class="tag-overdue">OVERDUE</span>';  riskCls = 'p-card-overdue'; }
+    else if (diff <= 2){ riskTag = '<span class="tag-risk">⚠ Due Soon</span>'; riskCls = 'p-card-risk'; }
+  }
+  const badge  = `<span class="vbadge vb-${v.editor}">${v.editor.slice(0,3)}</span>`;
+  let links    = `<a class="p-link" href="${v.drive_link}" target="_blank">▶ Raw</a>`;
+  if (v.finished_link) links += ` <a class="p-link p-link-fin" href="${v.finished_link}" target="_blank">✓ Edit</a>`;
+  let action   = colType === 'ready'
+    ? `<button class="p-action-btn" onclick="markPostedPipeline(${v.id})">Mark Posted</button>`
+    : '';
+  let metrics  = (colType === 'posted' && v.views)
+    ? `<div class="p-metrics">${Number(v.views).toLocaleString()} views</div>`
+    : '';
+  return `<div class="p-card ${riskCls}" id="pcard-${v.id}">
+    <div class="p-card-top">${badge}${riskTag}<span class="p-date">${v.post_date}</span></div>
+    <div class="p-name">${v.name.replace(/</g,'&lt;')}</div>
+    <div class="p-card-bottom"><div class="p-links">${links}</div>${metrics}${action}</div>
+  </div>`;
+}
+
+async function markPostedPipeline(id) {
+  const r = await fetch(`/api/videos/${id}/toggle`, {method:'POST'});
+  if (!r.ok) return;
+  const data = await r.json();
+  if (!data.posted) return;
+  if (VD[id]) VD[id].posted = 1;
+  // move card from Ready → Posted
+  const card = document.getElementById(`pcard-${id}`);
+  if (card) {
+    card.querySelector('.p-action-btn')?.remove();
+    const postedCol = document.getElementById('pColPosted');
+    const empty = postedCol.querySelector('.p-empty');
+    if (empty) empty.remove();
+    postedCol.insertAdjacentElement('beforeend', card);
+    const rCnt = document.getElementById('pCntR'), pCnt = document.getElementById('pCntP');
+    rCnt.textContent = Math.max(0, parseInt(rCnt.textContent) - 1);
+    pCnt.textContent = parseInt(pCnt.textContent) + 1;
+  }
+  // sync calendar checkbox
+  const calCard = document.querySelector(`.vcard[onclick*="openModal(${id})"]`);
+  if (calCard) { calCard.classList.add('posted'); const cb = calCard.querySelector('.vcheck'); if(cb) cb.checked=true; }
+}
+// ──────────────────────────────────────────────────────────────────────────
+
 document.addEventListener('keydown', e => {
   if (e.key==='Escape') { closePanel(); document.getElementById('mOverlay').classList.remove('open'); }
 });
@@ -745,51 +942,59 @@ EDITOR_HTML = '''<!DOCTYPE html>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:#F2F2F2;color:#111;min-height:100vh}
-:root{--accent:{{ color }};--bg2:#FFFFFF;--bg3:#F4F4F4;--border:#E2E2E2}
-.nav{background:#FFFFFF;border-bottom:1px solid var(--border);padding:0 24px;
+:root{--accent:{{ color }};--border:#E2E2E2}
+.nav{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;
   display:flex;align-items:center;height:56px;gap:12px}
 .logo{font-size:18px;font-weight:800}.logo span{color:var(--accent)}
 .sep{color:#DDD}
-.editor-tag{color:#111;font-size:14px;font-weight:700}
-.main{padding:28px 24px 80px;max-width:960px;margin:0 auto}
-.sec{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-  color:#888;margin:32px 0 10px}
-.sec:first-of-type{margin-top:0}
-.chip{display:inline-block;background:#EBEBEB;color:#666;font-size:11px;
-  font-weight:600;padding:2px 8px;border-radius:20px;margin-left:6px}
-.card{background:#FFFFFF;border:1px solid var(--border);border-radius:10px;
-  margin-bottom:8px;padding:16px 18px;display:grid;
-  grid-template-columns:90px 1fr auto auto;gap:12px;align-items:center;
-  transition:box-shadow .15s}
-.card:hover{box-shadow:0 2px 12px rgba(0,0,0,.07)}
-.card.done-card{border-left:3px solid var(--accent)}
-.card-date{font-size:12px;font-weight:700;color:#444}
-.card-name{font-size:14px;font-weight:600;color:#111}
-.card-sub{font-size:11px;color:#888;margin-top:2px;display:flex;gap:8px;align-items:center}
-.raw-link{color:#6A9E00;font-weight:700;font-size:11px}
-.raw-link:hover{text-decoration:underline}
-.fin-link{color:#2278A0;font-weight:700;font-size:11px}
-.fin-link:hover{text-decoration:underline}
-.card-actions{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
-.btn-done{font-family:'Inter',sans-serif;font-size:12px;font-weight:700;
-  padding:6px 14px;border-radius:6px;cursor:pointer;border:none;transition:all .15s}
-.btn-done.not-done{background:#F0F0F0;color:#555}
-.btn-done.not-done:hover{background:#E0E0E0}
-.btn-done.is-done{background:rgba(193,240,0,.25);color:#5A8A00}
-.link-input{font-family:'Inter',sans-serif;font-size:11px;padding:6px 10px;
-  border:1px solid var(--border);border-radius:6px;color:#111;outline:none;width:220px;
-  background:#F8F8F8}
-.link-input:focus{border-color:var(--accent)}
-.link-input.saved{border-color:#6A9E00}
-.save-link-btn{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;
-  padding:6px 12px;background:#111;color:#fff;border:none;border-radius:6px;cursor:pointer;white-space:nowrap}
-.save-link-btn:hover{background:#333}
-.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
-.badge-pending{background:#F0F0F0;color:#888}
-.badge-posted{background:rgba(193,240,0,.2);color:#5A8A00}
-.empty{color:#999;font-size:13px;padding:12px 0}
-.past-card{opacity:.6}
-.link-row{display:flex;gap:6px;align-items:center;margin-top:6px}
+.editor-tag{font-size:14px;font-weight:700;color:#111}
+.wrap{padding:20px 20px 80px}
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.kanban{grid-template-columns:1fr}}
+.kcol{background:#EBEBEB;border-radius:10px;padding:12px;min-height:160px}
+.kcol-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.kcol-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#555}
+.kcol-inprog .kcol-title{color:#2278A0}
+.kcol-done .kcol-title{color:#6A9E00}
+.kcol-count{background:#D8D8D8;color:#555;font-size:11px;font-weight:700;
+  padding:2px 8px;border-radius:20px;min-width:22px;text-align:center}
+.ec{background:#fff;border:1px solid var(--border);border-radius:8px;
+  padding:12px 13px;margin-bottom:6px;transition:box-shadow .15s}
+.ec:hover{box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.ec.inprog-card{border-left:3px solid #2278A0}
+.ec.done-card{border-left:3px solid var(--accent)}
+.ec-top{display:flex;align-items:center;gap:6px;margin-bottom:5px;flex-wrap:wrap}
+.ec-date{font-size:10px;color:#999;font-weight:600;margin-left:auto}
+.ec-name{font-size:13px;font-weight:600;color:#111;margin-bottom:7px;line-height:1.3}
+.ec-links{display:flex;gap:8px;margin-bottom:7px}
+.raw-lnk{font-size:11px;font-weight:700;color:#6A9E00;text-decoration:none}
+.raw-lnk:hover{text-decoration:underline}
+.fin-lnk{font-size:11px;font-weight:700;color:#2278A0;text-decoration:none}
+.fin-lnk:hover{text-decoration:underline}
+.tag-risk{font-size:9px;font-weight:700;text-transform:uppercase;
+  background:rgba(245,158,11,.15);color:#D97706;padding:2px 5px;border-radius:3px}
+.tag-overdue{font-size:9px;font-weight:700;text-transform:uppercase;
+  background:rgba(239,68,68,.12);color:#DC2626;padding:2px 5px;border-radius:3px}
+.ec-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.btn-start{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;
+  padding:5px 12px;background:#E8F4FF;color:#2278A0;border:1px solid #BDE0F7;
+  border-radius:6px;cursor:pointer}
+.btn-start:hover{background:#D0E8FA}
+.btn-done-e{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;
+  padding:5px 12px;background:rgba(193,240,0,.2);color:#5A8A00;
+  border:1px solid rgba(193,240,0,.4);border-radius:6px;cursor:pointer}
+.btn-done-e:hover{background:rgba(193,240,0,.35)}
+.link-inp{font-family:'Inter',sans-serif;font-size:11px;padding:5px 9px;
+  border:1px solid var(--border);border-radius:6px;color:#111;
+  outline:none;background:#F8F8F8;flex:1;min-width:0}
+.link-inp:focus{border-color:var(--accent)}
+.link-inp.saved{border-color:#6A9E00}
+.btn-save-lnk{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;
+  padding:5px 10px;background:#111;color:#fff;border:none;border-radius:6px;cursor:pointer;white-space:nowrap}
+.btn-save-lnk:hover{background:#333}
+.link-row{display:flex;gap:5px;align-items:center;margin-top:6px}
+.kcol-empty{font-size:12px;color:#bbb;text-align:center;padding:24px 0}
+.kcol-loading{font-size:12px;color:#bbb;text-align:center;padding:24px 0}
 </style>
 </head>
 <body>
@@ -798,102 +1003,132 @@ body{font-family:'Inter',sans-serif;background:#F2F2F2;color:#111;min-height:100
   <div class="sep">|</div>
   <div class="editor-tag">{{ editor }}</div>
 </nav>
-<div class="main">
-
-  <div class="sec">Upcoming <span class="chip">{{ upcoming|length }}</span></div>
-  {% if upcoming %}
-    {% for v in upcoming %}
-    <div class="card {{ 'done-card' if v.editor_done else '' }}" id="card-{{ v.id }}">
-      <div class="card-date">
-        {{ v.post_date[8:10] }}/{{ v.post_date[5:7] }}<br>
-        <span style="font-weight:400;color:#888">{{ v.post_date[:4] }}</span>
-      </div>
-      <div>
-        <div class="card-name">{{ v.name }}</div>
-        <div class="card-sub">
-          <a class="raw-link" href="{{ v.drive_link }}" target="_blank">▶ Raw Footage</a>
-          {% if v.finished_link %}
-          <a class="fin-link" id="finlink-{{ v.id }}" href="{{ v.finished_link }}" target="_blank">✓ Finished Edit</a>
-          {% else %}
-          <span id="finlink-{{ v.id }}"></span>
-          {% endif %}
-        </div>
-        <div class="link-row">
-          <input class="link-input" id="linkinput-{{ v.id }}" type="url"
-                 placeholder="Paste finished footage link…"
-                 value="{{ v.finished_link or '' }}"
-                 onkeydown="if(event.key==='Enter') saveLink({{ v.id }})">
-          <button class="save-link-btn" onclick="saveLink({{ v.id }})">Save</button>
-        </div>
-      </div>
-      <span class="badge {{ 'badge-posted' if v.posted else 'badge-pending' }}">
-        {{ 'Posted' if v.posted else 'Pending' }}
-      </span>
-      <div class="card-actions">
-        <button class="btn-done {{ 'is-done' if v.editor_done else 'not-done' }}"
-                id="donebtn-{{ v.id }}"
-                onclick="markDone({{ v.id }})">
-          {{ '✓ Done' if v.editor_done else 'Mark Done' }}
-        </button>
-      </div>
+<div class="wrap">
+  <div class="kanban">
+    <div class="kcol" id="kColToEdit">
+      <div class="kcol-hdr"><span class="kcol-title">To Edit</span><span class="kcol-count" id="kCntA">—</span></div>
+      <div class="kcol-loading">Loading…</div>
     </div>
-    {% endfor %}
-  {% else %}
-  <div class="empty">No upcoming videos assigned yet.</div>
-  {% endif %}
-
-  {% if past %}
-  <div class="sec">Past 30 Days <span class="chip">{{ past|length }}</span></div>
-    {% for v in past %}
-    <div class="card past-card">
-      <div class="card-date">{{ v.post_date[8:10] }}/{{ v.post_date[5:7] }}</div>
-      <div>
-        <div class="card-name" style="font-size:13px">{{ v.name }}</div>
-        <div class="card-sub">
-          <a class="raw-link" href="{{ v.drive_link }}" target="_blank">▶ Raw</a>
-          {% if v.finished_link %}<a class="fin-link" href="{{ v.finished_link }}" target="_blank">✓ Finished</a>{% endif %}
-        </div>
-      </div>
-      <span class="badge {{ 'badge-posted' if v.posted else 'badge-pending' }}">
-        {{ 'Posted' if v.posted else 'Pending' }}
-      </span>
-      <div></div>
+    <div class="kcol kcol-inprog" id="kColInprog">
+      <div class="kcol-hdr"><span class="kcol-title">In Progress</span><span class="kcol-count" id="kCntB">—</span></div>
+      <div class="kcol-loading">Loading…</div>
     </div>
-    {% endfor %}
-  {% endif %}
-
+    <div class="kcol kcol-done" id="kColDone">
+      <div class="kcol-hdr"><span class="kcol-title">Done</span><span class="kcol-count" id="kCntC">—</span></div>
+      <div class="kcol-loading">Loading…</div>
+    </div>
+  </div>
 </div>
 <script>
+const ENAME = '{{ editor.lower() }}';
+const TODAY = new Date(new Date().toISOString().slice(0,10)+'T00:00:00').getTime();
+
+async function loadPipeline() {
+  const r = await fetch(`/api/editor-pipeline/${ENAME}`);
+  if (!r.ok) return;
+  const d = await r.json();
+  renderKCol('kColToEdit','kCntA', d.to_edit,     'toedit');
+  renderKCol('kColInprog','kCntB', d.in_progress, 'inprog');
+  renderKCol('kColDone',  'kCntC', d.done,        'done');
+}
+
+function renderKCol(colId, cntId, videos, colType) {
+  const col = document.getElementById(colId);
+  while (col.children.length > 1) col.removeChild(col.lastChild);
+  document.getElementById(cntId).textContent = videos.length;
+  if (!videos.length) { col.insertAdjacentHTML('beforeend','<div class="kcol-empty">Nothing here</div>'); return; }
+  videos.forEach(v => col.insertAdjacentHTML('beforeend', buildCard(v, colType)));
+}
+
+function riskTag(v) {
+  if (v.editor_done) return '';
+  const diff = Math.ceil((new Date(v.post_date+'T00:00:00').getTime() - TODAY) / 86400000);
+  if (diff < 0)      return '<span class="tag-overdue">OVERDUE</span>';
+  if (diff <= 2)     return '<span class="tag-risk">⚠ Due Soon</span>';
+  return '';
+}
+
+function buildCard(v, colType) {
+  const tag    = riskTag(v);
+  const cls    = colType==='inprog' ? 'inprog-card' : colType==='done' ? 'done-card' : '';
+  const flink  = v.finished_link ? `<a class="fin-lnk" href="${v.finished_link}" target="_blank" id="fl-${v.id}">✓ Finished Edit</a>` : `<span id="fl-${v.id}"></span>`;
+  let actions  = '';
+  if (colType === 'toedit') {
+    actions = `<button class="btn-start" onclick="startEdit(${v.id})">Start Editing</button>`;
+  } else if (colType === 'inprog') {
+    actions = `
+      <button class="btn-done-e" onclick="markDone(${v.id})">✓ Mark Done</button>
+      <div class="link-row" style="width:100%">
+        <input class="link-inp" id="li-${v.id}" type="url" placeholder="Paste finished footage link…" value="${v.finished_link||''}" onkeydown="if(event.key==='Enter')saveLink(${v.id})">
+        <button class="btn-save-lnk" onclick="saveLink(${v.id})">Save</button>
+      </div>`;
+  }
+  return `<div class="ec ${cls}" id="ec-${v.id}">
+    <div class="ec-top"><span style="font-size:10px;font-weight:700;color:#999">${v.post_date}</span>${tag}</div>
+    <div class="ec-name">${v.name.replace(/</g,'&lt;')}</div>
+    <div class="ec-links"><a class="raw-lnk" href="${v.drive_link}" target="_blank">▶ Raw Footage</a>${flink}</div>
+    <div class="ec-actions">${actions}</div>
+  </div>`;
+}
+
+async function startEdit(id) {
+  const r = await fetch(`/api/videos/${id}/start`,{method:'POST'});
+  if (!r.ok) return;
+  moveCard(id,'kColToEdit','kCntA','kColInprog','kCntB','inprog');
+}
+
 async function markDone(id) {
-  const r = await fetch(`/api/videos/${id}/editor-done`, {method:'POST'});
+  const r = await fetch(`/api/videos/${id}/editor-done`,{method:'POST'});
   if (!r.ok) return;
   const data = await r.json();
-  const btn  = document.getElementById(`donebtn-${id}`);
-  const card = document.getElementById(`card-${id}`);
-  if (data.done) {
-    btn.textContent = '✓ Done'; btn.className = 'btn-done is-done';
-    card.classList.add('done-card');
-  } else {
-    btn.textContent = 'Mark Done'; btn.className = 'btn-done not-done';
-    card.classList.remove('done-card');
-  }
+  if (data.done) moveCard(id,'kColInprog','kCntB','kColDone','kCntC','done');
 }
 
 async function saveLink(id) {
-  const input = document.getElementById(`linkinput-${id}`);
-  const link  = input.value.trim();
-  const r = await fetch(`/api/videos/${id}/finished-link`, {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({link})
+  const inp  = document.getElementById(`li-${id}`);
+  const link = inp?.value.trim() || '';
+  const r = await fetch(`/api/videos/${id}/finished-link`,{
+    method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({link})
   });
   if (r.ok) {
-    input.classList.add('saved');
-    const el = document.getElementById(`finlink-${id}`);
-    if (el && link) {
-      el.outerHTML = `<a class="fin-link" id="finlink-${id}" href="${link}" target="_blank">✓ Finished Edit</a>`;
-    }
+    if (inp) inp.classList.add('saved');
+    const el = document.getElementById(`fl-${id}`);
+    if (el && link) el.outerHTML = `<a class="fin-lnk" href="${link}" target="_blank" id="fl-${id}">✓ Finished Edit</a>`;
   }
 }
+
+function moveCard(id, fromColId, fromCntId, toColId, toCntId, newColType) {
+  const card    = document.getElementById(`ec-${id}`);
+  const fromCol = document.getElementById(fromColId);
+  const toCol   = document.getElementById(toColId);
+  if (!card || !fromCol || !toCol) return;
+  card.remove();
+  // update from count
+  const fCnt = document.getElementById(fromCntId);
+  fCnt.textContent = Math.max(0, parseInt(fCnt.textContent)-1);
+  if (parseInt(fCnt.textContent) === 0 && !fromCol.querySelector('.ec')) {
+    fromCol.insertAdjacentHTML('beforeend','<div class="kcol-empty">Nothing here</div>');
+  }
+  // remove empty state from target
+  const empty = toCol.querySelector('.kcol-empty');
+  if (empty) empty.remove();
+  // rebuild card for new column type
+  toCol.insertAdjacentHTML('beforeend', buildCard(
+    {id, name: card.querySelector('.ec-name').textContent,
+     drive_link: card.querySelector('.raw-lnk')?.href || '#',
+     finished_link: card.querySelector('.fin-lnk')?.href || null,
+     post_date: card.querySelector('.ec-top span')?.textContent || '',
+     editor_done: newColType==='done'?1:0},
+    newColType
+  ));
+  const tCnt = document.getElementById(toCntId);
+  tCnt.textContent = parseInt(tCnt.textContent)+1;
+}
+
+loadPipeline();
 </script>
 </body>
 </html>'''
+
+if __name__ == '__main__':
+    app.run(debug=True)
