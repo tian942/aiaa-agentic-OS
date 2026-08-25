@@ -241,17 +241,18 @@ These are sent automatically as part of the "Ramp Up" onboarding email once a ca
 
 | Account | Pay Structure | Source (last touched) |
 |---|---|---|
-| **Kairo (own offer)** | **$300 base, activated after 10 booked appointments** + **5% commission from closed deal** | `directives/kairo_cold_caller_sop.md` v2.0 — CANONICAL, Aug 24, 2026 |
+| **Kairo (own offer)** | **$300 base, activated once a caller books 10 qualified appointments in a calendar month** + **10% commission from closed deal** | Confirmed directly by Tian, Aug 25, 2026 (see resolved-conflict note below) |
 | **PreCog Security** | **$30 per qualified shown call** + **5% commission from closed deal** | `clients/alex_gagic_precog_security/cold_caller_sop.md` — Aug 17, 2026 |
 | **ABCNS** | **$30 per qualified shown call** + **5% commission from closed deal** | `clients/brian_bouchard_abcns/cold_caller_sop.md` — Aug 17, 2026 |
 | **Alvearium Cyber (Dan Boskovic)** | **⚠️ UNRESOLVED — do not quote a number.** This list is warm and finite (existing clients + dormant contacts), not ongoing cold outbound, so pay may be structured differently (e.g. a flat per-booked-visit rate). Confirm with Tian/Dan before anyone dials this account on the assumption of Kairo's or PreCog's default. | `clients/dan_boskovic/cold_caller_sop.md` — Aug 17, 2026 |
 
-**⚠️ Known conflict, flagged for Tian to resolve at the source:** the Dan Boskovic SOP file contains an internal caution note describing "Kairo's own default" as *$40/show, 10% commission* — this does **not** match the canonical Aug 24, 2026 SOP (`$300 base after 10 bookings + 5% commission`), which is explicitly the newer, "do not paraphrase" master document. Treat the $300-base-after-10-bookings + 5% figure as correct for the Kairo account, and treat the $40/show note as outdated language that should be corrected wherever it still appears.
+**✅ Resolved Aug 25, 2026 (confirmed directly by Tian):** the Kairo account is $300 base, activated once a caller books **10 qualified appointments in a calendar month**, plus **10% commission** from closed deal. The `directives/kairo_cold_caller_sop.md` canonical doc previously said 5% commission — that was wrong and has been corrected at the source to match. The older "$40/show" figure that appeared in a caution note inside the Dan Boskovic SOP was also wrong and should be disregarded; the 10% commission in that same note turned out to be the one correct detail in it.
 
 **What is and isn't confirmed:**
-- ✅ Confirmed: base/flat amounts and commission percentages per account (table above)
+- ✅ Confirmed: base/flat amounts and commission percentages per account (table above), including the Kairo account's 10% commission and its "10 qualified appointments in a calendar month" activation window — confirmed directly by Tian, Aug 25, 2026
 - ⚠️ Not confirmed anywhere in the current docs: exact commission payout timing/cadence for the current offer stack. (An older, superseded March 2026 draft said "commission paid within 48 hours of confirmed client payment" — that draft predates the current $8K–$100K offer stack and should not be quoted as current policy without checking with Tian.)
 - ⚠️ Not confirmed: whether callers are W2/employee or 1099/contractor, and whether the role is full-time or part-time. Don't guess — say you'll confirm.
+- ⚠️ Not confirmed: whether PreCog's and ABCNS's $30/show + 5% commission structures also use a monthly qualifying window like Kairo's, or whether every show is paid individually with no threshold. Don't assume Kairo's monthly-threshold model applies to those accounts without checking.
 
 **If a caller asks "what's my OTE / how much can I make" on a brand-new account:**
 Don't invent a number and don't dodge. The honest, correct pattern (this is literally what fixed the mistake that started this document):
@@ -313,7 +314,7 @@ These three don't currently have an active cold-calling account documented in th
 A: Depends entirely on which account you're on — see the pay table in Part 4. If your account is brand new, say so honestly and point to real numbers from other Kairo accounts rather than guessing. Never invent a figure.
 
 **Q: Is this a base salary or fully commission?**
-A: It's structured per account (Part 4) — e.g. the Kairo account has a $300 base that activates after 10 booked appointments, plus 5% commission on closed deals; PreCog and ABCNS pay a flat $30 per qualified shown call plus 5% commission. It is not a traditional flat salary on any current account.
+A: It's structured per account (Part 4) — e.g. the Kairo account has a $300 base that activates once you book 10 qualified appointments in a calendar month, plus 10% commission on closed deals; PreCog and ABCNS pay a flat $30 per qualified shown call plus 5% commission. It is not a traditional flat salary on any current account.
 
 **Q: When and how do I get paid?**
 A: ⚠️ Not confirmed in current docs for the live offer stack — don't quote a timeline. Say you'll confirm and follow up.
@@ -357,7 +358,8 @@ A: Same mindset, same daily standards, same KPI bar, same warmup ramp — every 
 
 | Topic | Canonical source | Last touched | Status |
 |---|---|---|---|
-| Kairo's own current offer stack, pay structure, FAQ, mindset, script skeleton | `directives/kairo_cold_caller_sop.md` (v2.0) | Aug 24, 2026 | ✅ Current |
+| Kairo's own current offer stack, FAQ, mindset, script skeleton | `directives/kairo_cold_caller_sop.md` (v2.0) | Aug 24, 2026 (pay figures corrected Aug 25, 2026) | ✅ Current |
+| Kairo's own pay structure ($300 base / 10 qualified appts per month / 10% commission) | Confirmed directly by Tian | Aug 25, 2026 | ✅ Current — corrects the 5% commission figure that was in the SOP doc through Aug 24, 2026 |
 | 30-Day Client Launch process | `directives/cold_calling_30_day_client_launch.md` | Jul 28, 2026 | ✅ Current |
 | Sales Manager's 2 KPIs, onboarding pipeline, client directory | `clients/kairo/SALES_TEAM_MANAGER_MASTER_PLAYBOOK.md` (also mirrored to a Google Doc) | Aug 22, 2026 | ✅ Current |
 | Cold-calling-as-a-service fulfillment process (roles, phases, QA loop) | `clients/kairo/fulfillment_sops/cold_calling_fulfillment_sop.md` | Jul 18, 2026 | ✅ Current |
