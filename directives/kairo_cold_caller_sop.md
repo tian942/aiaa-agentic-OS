@@ -35,29 +35,16 @@ Basically we identify the biggest bottlenecks and then build out stuff to help y
 
 ### Pricing
 
-**MAIN (Anchor) — Full Stack Partner**
-- 6 months: $100,000 ($16,667/mo)
-- 3 months: $55,000 ($18,333/mo)
-- Guarantee: $500K in additional revenue in 6 months or we work free until you hit it
-- Qualification: $30K+/mo revenue, proven offer, $5K/mo ad budget ready
+**MAIN (Anchor) — Full Stack Partner, all four pillars (cold calling, cold email, Meta Ads, Google Ads)**
+$100,000 — the price anchor.
 
-**DOWNSELL 1 — Growth Partner** (if $100K is too much upfront)
-$25,000 setup + $5,000/mo + 10% net revenue. Same service, lower upfront, we win when you win.
+**DOWNSELL 1 — Calling + Closing Team** (if $100K is too much upfront)
+$25,000 setup + 10% commission.
 
-**DOWNSELL 2 — Core Partner** (still too much upfront)
-$12,500 setup + $5,000/mo + 12% net revenue. Lowest entry point, higher rev share on the backend.
+**DOWNSELL 2 — Cold Calling Only** (still too much upfront)
+$10,000 setup + 10% commission.
 
-**DOWNSELL 3 — 60-Day Sprint** (can't commit / want to test first)
-$8,000 total — split pay options:
-
-| Plan | Payment | Every |
-|------|---------|-------|
-| 2-Pay | $4,000 | 14 days |
-| 3-Pay | $2,666 | 14 days |
-| 4-Pay | $2,000 | 14 days |
-| 5-Pay | $1,600 | 14 days |
-
-Pick one at sign-up: Cold Email Sprint / Paid Ads Sprint / Full Funnel Sprint. Results delivered → natural upsell to D2 or D1.
+Open with the $100K anchor. Too much upfront → drop to Calling + Closing ($25K + 10%). Still too much → drop to Cold Calling Only ($10K + 10%).
 
 ### Kairo Full Deliverable Stack
 

@@ -50,48 +50,35 @@ A caller might be booking calls for Kairo's own offer (2A) *or* for one of Kairo
 
 ### 2A — Kairo's Own Offer Stack (what Kairo-account callers are booking calls for)
 
-**⚠️ Freshness note first:** there are two different offer stacks in the system. The one below (high-ticket, rev-share) is the **current, canonical one** — confirmed by the most recently updated file in the repo (`directives/kairo_cold_caller_sop.md`, Version 2.0, last touched Aug 24, 2026). An older stack (`$1,200 setup + $180/qualified call` Sprint, `$2,200/mo` retainer, up to `$5,500/mo` Full Machine — see `context/services.md` and `clients/kairo/OFFER_STACK_AND_SALES_SCRIPT.md`, both dated May 2026) was the offer while **cold email** was Kairo's primary channel. As of **July 31, 2026**, cold **calling** became Kairo's primary fulfillment channel and the offer moved to the high-ticket stack below. Treat the May 2026 stack as legacy/superseded unless Tian says otherwise — if a candidate or client references "$1,200 setup" or "$180 per call," that's the old offer.
+**⚠️ Freshness note first:** this offer has changed twice in the life of this document. May 2026: cold-email-led, `$1,200 setup + $180/qualified call` Sprint up to `$5,500/mo` Full Machine (`context/services.md`, `clients/kairo/OFFER_STACK_AND_SALES_SCRIPT.md`) — superseded. Aug 24, 2026: high-ticket rev-share stack, MAIN $100K/$55K anchor → D1 $25K+$5K/mo+10% net → D2 $12.5K+$5K/mo+12% net → D3 $8K Sprint (`directives/kairo_cold_caller_sop.md` v2.0) — **also now superseded.** **Current, confirmed directly by Tian, Aug 25, 2026:**
 
-**MAIN (Anchor) — Full Stack Partner**
-| Option | Price | Per Month |
-|---|---|---|
-| 6 months | $100,000 | $16,667/mo |
-| 3 months | $55,000 | $18,333/mo |
+**MAIN (Anchor) — Full Stack Partner, all four pillars (cold calling, cold email, Meta Ads, Google Ads)**
+$100,000 — the price anchor.
 
-- **Guarantee:** $500,000 in additional revenue within 6 months, or Kairo keeps working for free until it's hit
-- **Qualification to activate the guarantee:** $30K+/mo existing revenue (proven offer), active sales process (client can close calls), implements recommendations within 48 hours, gives full account access, minimum $5K/mo ad budget available
-- **What's included:** full marketing team insertion and management — cold email, Meta Ads, Google Ads, full execution
+**DOWNSELL 1 — Calling + Closing Team** (offered if $100K is too much upfront)
+$25,000 setup + **10% commission**
 
-**DOWNSELL 1 — Growth Partner** (offered if $100K is too much upfront)
-$25,000 setup + $5,000/mo + **10% net revenue**
-
-**DOWNSELL 2 — Core Partner** (offered if D1 is still too much upfront)
-$12,500 setup + $5,000/mo + **12% net revenue** (higher rev share compensates for the lower entry point)
-
-**DOWNSELL 3 — 60-Day Sprint** (offered when they can't commit or want to test first — the door-opener)
-$8,000 total, pick a split-pay plan:
-| Plan | Payment | Every |
-|---|---|---|
-| 2-Pay | $4,000 | 14 days |
-| 3-Pay | $2,666 | 14 days |
-| 4-Pay | $2,000 | 14 days |
-| 5-Pay | $1,600 | 14 days |
-
-Picks one scope at sign-up: Cold Email Sprint / Paid Ads Sprint / Full Funnel Sprint. Results from the Sprint are the natural upsell path into D2 or D1.
-
-**Net revenue definition (used in every rev-share tier, must appear word-for-word in contracts):** cash collected minus paid media spend.
+**DOWNSELL 2 — Cold Calling Only** (offered if D1 is still too much upfront — the door-opener)
+$10,000 setup + **10% commission**
 
 **Sales sequence (anchor high, downsell on objection):**
 ```
-Open with MAIN ($100K / $55K)
+Open with MAIN ($100K, all four pillars)
     ↓ "too much upfront"
-Offer D1 ($25K + $5K/mo + 10% net)
+Offer Calling + Closing Team ($25K + 10% commission)
     ↓ "still too much upfront"
-Offer D2 ($12.5K + $5K/mo + 12% net)
-    ↓ "can't commit / want to test first"
-Offer D3 Sprint ($8K, split-pay)
-    ↓ deliver → upsell to D2 or D1
+Offer Cold Calling Only ($10K + 10% commission)
 ```
+
+**⚠️ Not yet reconfirmed — do not promise any of the following on a live call until Tian confirms it still applies:**
+- Whether the $500K-in-6-months guarantee (and its qualification bar: $30K+/mo revenue, proven offer, $5K+/mo ad budget) still attaches to the $100K Main tier
+- Whether the 3-month/$55K option still exists alongside the 6-month/$100K option
+- Whether "10% commission" here is calculated the same way "net revenue" was defined before (cash collected minus paid media spend) — that definition is not yet reconfirmed for the new structure
+- Whether the old D2 "Core Partner" tier ($12.5K + $5K/mo + 12%) still exists as a fourth rung, or has been fully retired in favor of the two-tier downsell above
+- Whether any split-pay option (like the old 2/3/4/5-pay Sprint plans) applies to the $25K or $10K setup fees, or whether those are due in full
+- What exactly "Calling + Closing Team" includes beyond calling itself (a dedicated closer, or the caller closes their own booked calls) — confirm before describing the deliverable in detail
+
+These removed/unconfirmed items have also been pulled out of the canonical recitable script (`directives/kairo_cold_caller_sop.md` Section 1) — that script now only states the three confirmed numbers above, nothing hedged or unconfirmed, since it's meant to be delivered verbatim on a real call.
 
 **Full deliverable stack Kairo can build for a client:**
 - **Paid Ads:** ad scripts (hooks/body/CTA), short + long-form video editing, campaign management (Meta, YouTube, TikTok), pixel/conversion tracking, retargeting
@@ -306,7 +293,7 @@ These three don't currently have an active cold-calling account documented in th
 
 ---
 
-## PART 6 — FAQ: What Callers and Candidates Actually Ask
+## PART 6A — FAQ: What Candidates Ask During Recruiting (before they're live)
 
 *(Answers below are grounded in the sections above — same citation discipline. Where the honest answer is "I don't know yet," that's the answer.)*
 
@@ -338,7 +325,10 @@ A: Default is 1–2 days off per week (typically Saturday/Sunday on the Kairo ac
 A: First miss = flagged, same-day conversation. Three misses in a week = formal warning. A repeated pattern after that = off the team. This is enforced the same way on every account (Part 3).
 
 **Q: Can the client I'm calling for offer a guarantee if a prospect asks?**
-A: Only if it's explicitly documented for that account. PreCog and Alvearium Cyber both explicitly have **no guarantee** — never invent one for either, even under pressure; lean on track record and tenure instead (their client cards in Part 5 have the exact lines to use). Kairo's own offer does have a documented guarantee (Part 2A) — but only for the Main tier, with stated qualification requirements.
+A: Only if it's explicitly documented for that account. PreCog and Alvearium Cyber both explicitly have **no guarantee** — never invent one for either, even under pressure; lean on track record and tenure instead (their client cards in Part 5 have the exact lines to use). Kairo's own Main tier guarantee is currently **unconfirmed** (Part 2A) — don't promise one on a live call until that's reconfirmed.
+
+**Q: Does the 10% commission mean the same thing on the Kairo account whether we're talking about my pay or the client's price?**
+A: No — don't conflate these, they're two different flows that happen to share a number right now. (1) What a *business* pays Kairo for the Calling+Closing or Cold-Calling-Only tiers is $25K/$10K setup **+ 10% commission to Kairo** (Part 2A). (2) What *you* get paid as a caller on the Kairo account is $300 base + **10% commission to you** on a closed deal (Part 4). Same percentage, two unrelated payments — Kairo's cut from the client and your cut from Kairo.
 
 **Q: Can I adjust the script if I think I've got a better way to say it?**
 A: Structure is fixed across every account. Wording can flex once you've done 500+ calls and know the framework cold — until then, stick to it exactly.
@@ -354,12 +344,63 @@ A: Same mindset, same daily standards, same KPI bar, same warmup ramp — every 
 
 ---
 
+## PART 6B — FAQ: What Live Callers Ask Their Sales/Calling Manager (day-to-day ops)
+
+*(Once a caller is actually live and dialing, the questions shift from "should I take this job" to "how do I actually do this." These are grounded the same way as 6A — cited where documented, flagged where it's an operational judgment call rather than a written rule.)*
+
+**Q: How do I submit my EOD report — walk me through it step by step?**
+A:
+1. If you're ever unsure of the exact format, check your client's cold caller SOP doc (Section 6 of the Kairo master template, which every client-specific SOP is cloned from) — it has the full template.
+2. Log into your own tab on that client's tracker — the Google Sheet with your name on it.
+3. Enter your numbers for the day.
+4. Submit the EOD form (the Tally form linked in your client's SOP) — your name, dials, contacts, calls booked, and the qualitative fields.
+5. The main thing that actually makes the report useful: write down the hardest moment of the day (an objection or situation that tripped you up — be honest, this is how coaching works, not surveillance) and **upload your call recordings for the day.** A report without the recordings is incomplete — recordings are what your manager actually reviews weekly to coach you.
+
+For every call you booked that day, also log who the prospect is, what their business does, their main pain, and their goal — that's a required field alongside the standard numbers.
+
+No exceptions, every working day. "Skipping the EOD report" is explicitly called out as a mistake to never make — a missing EOD is the first thing your manager checks when something looks off.
+
+**Q: What if I run out of leads before my shift ends?**
+A: Flag it immediately, don't sit idle. Lists are supposed to get refreshed before they drop below roughly 3 days of dialing volume — running dry usually means that refresh slipped, so tell your manager the same day so it gets fixed before it costs you a full day.
+
+**Q: How do I know if a call I booked actually "counts" as qualified?**
+A: Same bar everywhere: ICP match + the prospect showed up. Booking it isn't enough on its own — this is exactly why the reminder sequence (confirm on the call, text the day before, text/call an hour before) is part of your job, not just a courtesy. A no-show that doesn't reschedule after one follow-up text doesn't count.
+
+**Q: Who do I escalate a weird or tricky call to?**
+A: The Owner, same day — not saved for the next EOD summary. Nuanced calls are often the ones closest to actually converting, so speed matters more here than anywhere else in the loop.
+
+**Q: How do I know if I'm on track this week / hitting my minimums?**
+A: Compare your own numbers against the KPI table (Part 3) yourself — dials, contact rate, booking rate, show rate. Your manager is checking daily, not just at a weekly review, so if you're under on a given day, expect to hear about it that same day rather than finding out later.
+
+**Q: What actually happens in my first week?**
+A: You're on the warmup ramp (Part 3), not full volume: 30 dials day 1, 45 day 2, 60 day 3–4, 50 days 5–7, then +7/day uncapped after that. This protects your new phone number from getting flagged as spam and lets you build confidence gradually. You don't touch a real list at all until you're certified — SOP read, script rehearsed until it doesn't sound read, shadowed 5+ real call recordings, roleplayed at least 3 objections with your manager, and confirmed on every access point (list, tracker, EOD process, dialer login).
+
+**Q: What if my number gets flagged as spam?**
+A: ⚠️ Not documented as a specific fix in current SOPs — flag it to your manager immediately rather than guessing at a workaround. The warmup ramp exists specifically to reduce this risk, which is why it's not optional even for an experienced caller starting on a new number.
+
+**Q: Can I get moved to a different client account?**
+A: ⚠️ Not documented either way — this is a manager/Owner decision, not something to assume is or isn't possible. Ask directly.
+
+**Q: What if I need a day off outside my normal 1–2 per week?**
+A: Give advance notice for visibility — this isn't a same-day request.
+
+**Q: What if I'm going to be late to the daily huddle or a scheduled call?**
+A: Say so at least 5 minutes ahead of time in the team channel (what's said, why, and how long). Not doing this is a strike — 2 strikes, gone on the 3rd. This is enforced, not a soft guideline.
+
+**Q: What if a client complains about how I handled a call?**
+A: ⚠️ Not documented as a specific process — expect it to be treated like any other issue: flagged and discussed the same day it comes up, not left to accumulate. Don't assume it's an automatic strike either way; ask your manager how this specific situation is being handled.
+
+*(This section will keep growing as real questions come up on the floor — add the next one here rather than answering it once and letting it disappear.)*
+
+---
+
 ## PART 7 — Source Map (what's canonical, what's legacy, what's still open)
 
 | Topic | Canonical source | Last touched | Status |
 |---|---|---|---|
-| Kairo's own current offer stack, FAQ, mindset, script skeleton | `directives/kairo_cold_caller_sop.md` (v2.0) | Aug 24, 2026 (pay figures corrected Aug 25, 2026) | ✅ Current |
-| Kairo's own pay structure ($300 base / 10 qualified appts per month / 10% commission) | Confirmed directly by Tian | Aug 25, 2026 | ✅ Current — corrects the 5% commission figure that was in the SOP doc through Aug 24, 2026 |
+| Kairo's own recitable script, FAQ, mindset, script skeleton | `directives/kairo_cold_caller_sop.md` (v2.0) | Pay + pricing corrected Aug 25, 2026 | ✅ Current |
+| Kairo's own current offer stack ($100K anchor / $25K+10% Calling+Closing / $10K+10% Cold Calling Only, several details unconfirmed) | Confirmed directly by Tian | Aug 25, 2026 | ✅ Current for the 3 headline numbers — see the unconfirmed list in Part 2A before quoting anything beyond them |
+| Kairo's own caller pay structure ($300 base / 10 qualified appts per month / 10% commission) | Confirmed directly by Tian | Aug 25, 2026 | ✅ Current — corrects the 5% commission figure that was in the SOP doc through Aug 24, 2026 |
 | 30-Day Client Launch process | `directives/cold_calling_30_day_client_launch.md` | Jul 28, 2026 | ✅ Current |
 | Sales Manager's 2 KPIs, onboarding pipeline, client directory | `clients/kairo/SALES_TEAM_MANAGER_MASTER_PLAYBOOK.md` (also mirrored to a Google Doc) | Aug 22, 2026 | ✅ Current |
 | Cold-calling-as-a-service fulfillment process (roles, phases, QA loop) | `clients/kairo/fulfillment_sops/cold_calling_fulfillment_sop.md` | Jul 18, 2026 | ✅ Current |
