@@ -24,6 +24,12 @@
 **How Kairo explains itself on a call (verbatim from the canonical script):**
 > "We are a growth firm. Our goal is to come into the business and fill your calendars to get you more customers without any extra work from you... Basically we identify the biggest bottlenecks and then build out stuff to help you fix it — sometimes that's marketing materials, emails, ads, sometimes fulfilment or sales process."
 
+**How Tian explains the business model, in his own words (from live team training, Jul 18, 2026):** "We run a different model — it's more of a media company, where we have all the departments... Look at it as a private equity [firm] — when a person gives you $3 million, buys the equity, and uses their resources to help you scale. That's what we do. But we don't buy out the company, we just give them the services in exchange for money." The core operating logic: identify the client's single biggest bottleneck, then deploy whichever deliverable actually fixes it — **if they're already running ads, deploy the paid media team; if they have no ads and no social presence, deploy cold calling + cold email team-build-out.** That's why the deliverable stack (Part 2A) is broad — different clients get different tools depending on what their bottleneck actually is, not a one-size-fits-all package.
+
+**Sales philosophy, stated directly to new hires:** "You never sell the deliverables on the call. You sell the result. What do they want? Money. Why do they want money? Because they want to pay off their house, take their family on vacation... How can we do that? Okay, let's put you on a call with our CEO, Tian."
+
+**12-month company goal (stated Jul 18, 2026, so target ≈ mid-2027):** $300K/month in revenue. Useful context if a candidate asks how big/ambitious this actually is — this is Tian's own stated target, not a caller-facing promise to make on a client call.
+
 **Brand philosophy — Weird Is Normal:** the ideas that feel too bold or too "out there" are the ones that win. Kairo doesn't sound like a polished agency pitching a retainer, an overly casual friend with no credibility, or a corporate entity hiding behind jargon. It sounds like an operator who's been in the trenches, knows what works, and says so directly.
 
 **Tone rules for anything Kairo-branded:**
@@ -33,6 +39,8 @@
 - Confidence doesn't need to shout — exclamation points and hype are used sparingly
 
 **Owner:** Tian. Operational EOD reports on the cold-calling floor route to `tian@kairoscales.com`.
+
+**COO / VP of Sales:** Ben (Ben Milsom). Runs script development and caller coaching directly alongside Tian — he wrote and personally trained the team on the current live script (Part 2C), reviews call recordings, and coaches tonality/confidence. Roughly 8–9 years in sales, has personally closed millions in sales before Kairo. Source: live team training recordings, Jul–Aug 2026.
 
 ---
 
@@ -76,7 +84,7 @@ Offer Cold Calling Only ($10K + 10% commission)
 - Whether "10% commission" here is calculated the same way "net revenue" was defined before (cash collected minus paid media spend) — that definition is not yet reconfirmed for the new structure
 - Whether the old D2 "Core Partner" tier ($12.5K + $5K/mo + 12%) still exists as a fourth rung, or has been fully retired in favor of the two-tier downsell above
 - Whether any split-pay option (like the old 2/3/4/5-pay Sprint plans) applies to the $25K or $10K setup fees, or whether those are due in full
-- What exactly "Calling + Closing Team" includes beyond calling itself (a dedicated closer, or the caller closes their own booked calls) — confirm before describing the deliverable in detail
+- What exactly "Calling + Closing Team" includes beyond calling itself (a dedicated closer, or the caller closes their own booked calls) — confirm before describing the deliverable in detail. **Partial supporting evidence, not a full confirmation:** live training from Jul 20, 2026 has Tian saying he personally closes every booked call today and is actively hiring a dedicated closer role — this fits a reading of "Calling + Closing Team" as calling *plus a dedicated closer Kairo provides*, versus the cheaper Cold-Calling-Only tier where presumably the client closes their own booked calls. Treat this as a reasonable inference from real context, not a confirmed answer — still check with Tian before describing it that way to a client.
 
 These removed/unconfirmed items have also been pulled out of the canonical recitable script (`directives/kairo_cold_caller_sop.md` Section 1) — that script now only states the three confirmed numbers above, nothing hedged or unconfirmed, since it's meant to be delivered verbatim on a real call.
 
@@ -108,7 +116,7 @@ Kairo builds and runs a full cold-calling operation for a client: infrastructure
 | Fulfillment Lead | Tian | Onboarding call, ICP/offer/list criteria, script approval, client relationship |
 | List Builder | — | Apify scraping + AI Ark phone enrichment, dedupe, loads tracker |
 | Cold Caller | — | Dials assigned list, follows script, books + confirms appointments, logs everything, submits EOD |
-| Calling Manager / QA Lead | Ben (or whoever owns the floor once 2–3+ callers are live) | Hires/certifies/trains callers, weekly call recording review, KPI tracking, fire/hire calls, weekly client report |
+| Calling Manager / QA Lead | Ben Milsom (COO/VP of Sales — see Part 1), or whoever owns the floor day-to-day once 2–3+ callers are live | Hires/certifies/trains callers, weekly call recording review, KPI tracking, fire/hire calls, weekly client report |
 
 **Full process map:**
 ```
@@ -122,7 +130,14 @@ Client signs → Onboarding call → List building (Apify + AI Ark)
 ```
 Onboarding happens once. Everything after that repeats weekly for the life of the contract.
 
-**Tools used across the floor:** QUO (live dialer), CloudTalk (used in candidate onboarding/number provisioning), Apify (list scraping), AI Ark (phone enrichment/verification), Tally (EOD report form), Google Sheets (per-client trackers).
+**Tools used across the floor:** QUO (the original live dialer — still referenced in current onboarding links, Part 3) and CloudTalk, introduced live in the Aug 10, 2026 team training as a **new power dialer** meant to let callers dial straight through a list faster and see stats more easily. ⚠️ Not fully reconciled: whether CloudTalk has now replaced QUO as the primary dialer or runs alongside it is not confirmed in writing anywhere — treat "which dialer do I actually use" as a live-onboarding question to confirm with your manager rather than assuming either one. Also: Apify (list scraping), AI Ark (phone enrichment/verification), Tally (EOD report form), Google Sheets (per-client trackers).
+
+**Tracker color-coding (from live training, confirmed pattern):**
+- **White (default):** not yet resolved — keep working it. A double-dial with no pickup stays white, not red.
+- **Red:** the prospect explicitly said never call again. This is the *only* thing that marks a number dead — a non-answer is never a reason to mark red.
+- **"Lead" status:** the actual decision-maker (not a gatekeeper) picked up, showed interest, but didn't book — told you to call back another time.
+
+**⚠️ Re-dial cadence — two different numbers exist, not yet reconciled:** the written client SOPs (e.g. ABCNS, PreCog) say **7–8 attempts across different times of day, over 7 days**, then mark dead. Live team training on the Kairo account (Jul 20, 2026) described a looser, monthly cadence instead: **double-dial per session** (call twice back-to-back), retry every 2–3 days, for up to roughly **7 sessions across a full month** before giving up (excluding anyone who explicitly says stop). Don't assume one applies to every account — check which cadence your specific client's SOP states, and if it's silent, ask rather than guessing which of these two patterns applies.
 
 **Script skeleton every client script is built from (the "Quick to Cash" framework):**
 ```
@@ -137,6 +152,73 @@ Onboarding happens once. Everything after that repeats weekly for the life of th
 9. BOOK THE MEETING — never "would you like to book a call," offer a choice instead
 ```
 Rule that never changes across clients: **the caller does not pitch until the prospect has told them their pain and agreed it's real.**
+
+---
+
+### 2C — The Real Kairo Script, Word-for-Word (from Ben Milsom's live training, Jul 16, 2026)
+
+The abstract 9-step skeleton above (2B) is the general shape every client script follows. This section is the **actual named sections and actual language** of Kairo's own live script, as Ben personally trained the team on it — far more concrete than the skeleton, and the best source when a caller asks "what do I actually say."
+
+**The real named sections (read directly off the live script by a caller on the call):** Pattern Interrupt → Scapegoat → New Belief → New Mechanism → Position → Quick-to-Cash → Qualify → Book.
+
+**Core principle Ben repeated throughout:** this is a **psychological arc** — you need a genuine agreement at each stage before moving to the next. Don't rush to the next beat just to get through the script; if you don't feel like they've truly agreed, dig deeper with a prompt question first.
+
+**1. Opener (pattern interrupt):**
+> "Would I completely destroy your day if I told you this was a cold call?" *(pause for a laugh/no)* "Can I ask you a quick question?"
+
+If they derail and ask "who are you / where are you calling from":
+> "Yeah, no worries — my name is [X], from a company called Kairo. We work with business owners to uncover revenue opportunities that are already sitting inside their business, before they spend more money trying to generate new ones. Does that make sense?"
+
+If they push "what are you selling":
+> "I'm not selling anything on this call. The way we work is we identify companies we think have potential and can help. We identify quick, easy-to-implement tweaks that unlock a predictable number of customers each week — we do this part completely free. A good percentage of the businesses we help this way become customers afterward, and the ones that don't still walk away with real value. So either way, there's no urgency on our end to sell you anything, because it's already factored into our numbers. Does that make sense?"
+
+**2. Desired Outcome:**
+> "If you could choose one type of customer to get more of every month, who would it be?" → "What makes those customers so valuable?" (prompt if stuck: low friction? high monthly revenue? something else?) → "How many of those a month would make a noticeable difference?" → "If those came in consistently, what would that let you do?"
+Summarize back before moving on: *"So it sounds like you'd like more of X because of Y, and another [N] a month would make a real difference — have I got that right?"* Wait for an explicit yes.
+
+**3. The Gap (problem, without making them feel bad):**
+> "Makes perfect sense. So look — you're obviously doing well already, I mean you've got annoying salesmen like me calling you, so you must be doing something right. But what's stopping you from getting *even more* customers like the ones you just mentioned?"
+**Critical language rule Ben was explicit about:** never say "what's stopping you from getting those customers" (implies they aren't getting any — reads as an insult). Always frame it as "even more" — implies they're already succeeding, you're just offering to help them go further. This single word choice is treated as a real, coached skill, not a nitpick.
+Prompt if they stall: is it volume, quality, consistency, conversion, or referral dependency? Then dig: *"How long has that been the case? Would you say that's frustrating? Is that something you'd like to fix this year?"* — get them to admit it's ongoing, frustrating, and something they want solved soon. Summarize and get an explicit yes before moving on.
+
+**4. The Scapegoat (reframe — this is what makes prospects open up instead of getting defensive):**
+> "Honestly, that's what almost everyone tells us at first — most people think they've got a lead generation problem [or whatever they said]. But nine times out of ten, they don't. What they've actually got is a **visibility problem** — there are already warm revenue opportunities sitting inside the business that have just never been identified, prioritized, or systematically worked. And that's not really their fault — it's extremely hard to see these things when you're inside the business working it every day."
+Why this works (Ben's own explanation): it disarms their ego by telling them it's not their fault, while setting up exactly why Kairo's pitch makes sense next.
+
+**5. Micro Stories (real, specific proof — never vague):**
+> "We spoke to a coaching client recently who was convinced he needed more leads. When we looked inside his business, he had hundreds of old leads no one had followed up with — that became the first priority on his quick-to-cash plan, and it unlocked $30K in about two weeks." / "We had a landscaping company convinced he needed new leads — turned out his fastest win was just unlocking high-ticket jobs with the right follow-up on his existing inquiries. Got him another $40K in high-ticket jobs in a week, no extra advertising, no extra staff."
+Let them react between each story. Close with: *"Time and time again we find that unlocks a quick five figures in a couple of weeks — no extra ad spend, no cold outbound of your own, just a real system deployed against revenue that's already sitting there."*
+
+**6. Position (introduce Kairo):**
+> "That's what Kairo specializes in. Before we ever tell anyone to spend money on marketing, we identify every warm revenue asset already sitting inside the business, rank them by what's likely to put cash in the bank fastest, what can generate recurring revenue, and what longer-term assets should get built afterward. So rather than guessing where growth comes from, everything gets prioritized by speed to cash. Does that make more sense than jumping straight into spending money on marketing before you know what actually works?"
+
+**7. The Quick-to-Cash Plan (the free next step — this is the literal name of Kairo's Tier 0 free diagnostic):**
+> "The first part is completely free. Our CEO Tian will ask you a handful of questions about your customers, sales pipeline, marketing, and current offers. Within about 10 minutes he'll usually be able to identify the warmest revenue opportunities already sitting inside your business, rank them by priority, and show you what's likely to generate cash the quickest. Most businesses are genuinely surprised by how much money is already sitting there. Do you think a plan like that would be useful for your business?"
+**Why "would it be useful" and not "do you want to book a call":** asking if it would be *useful* is nearly impossible to say no to after the above build-up — it doesn't ask for the commitment directly, so resistance is much lower. Ask for the booking only after they've already agreed it would be useful.
+
+**8. Qualify (the financial qualifier — added after a real bad-booking incident, see Part 6B):**
+> "Just so we know whether it's worth both our time — roughly where's the business at today in terms of monthly revenue, and ideally where would you like that to be over the next 12 months?" — or, often better since it reads as less invasive: *"What does your average customer typically spend with you?"* / *"When a new customer comes on board, what's a typical deal worth?"*
+**Never ask "how much are you earning" or "how's business doing" directly** — it reads as invasive and can blow up rapport built earlier in the call.
+**Real qualification thresholds (stated directly by Tian):**
+- Business revenue: **five figures/month ($10K+) or more** = worth speaking with.
+- If they answer with a **range** for average customer value: **$1–$500 = not a fit, don't book** (*"I don't think that's the right fit right now"*); **anything above $500 = worth booking.**
+- If they answer with a **single number**: **$1,000+ (four figures) = worth booking.**
+- Trust your read, too — if the tone/vibe signals someone who clearly can't or won't pay (Tian's own example: a prospect earning $800/month total), it's fine and expected not to book them even if they technically clear a number.
+
+**9. Trial Close + Book:**
+> "Sounds like we've established three things: you want more of this type of customer, you've got a few things getting in the way, and there's a good chance there are opportunities already sitting inside the business that haven't been fully worked yet — is that a fair summary?" *(wait for yes)* "Brilliant — let's get 10 minutes in the diary with Tian. Whether we end up working together or not, you'll leave knowing exactly where the quickest opportunities are. What tends to work better for you, mornings or afternoons?"
+**Never ask "would you like to book a call."** Assume it, offer a choice instead.
+
+**Handling smokescreen objections ("I'm in a meeting," "not interested," "is this a solicitation"):**
+Ben's core insight: these usually aren't real objections — they're the prospect's way of getting off a call from someone they've pattern-matched as "trying to sell me something." **The fix is the script itself** — if the psychological beats above are followed properly and not rushed, these objections mostly stop showing up. When they do come up:
+- **"I'm in a meeting" / "too busy" (validate, then re-hook):** *"Completely understand — to be honest I'd be surprised if you weren't busy, you own a business. Can I ask one quick question before I let you go: when you started this business, was the goal to build something that eventually gave you freedom, or did you want to work 70+ hours a week forever?"* → almost everyone says freedom → *"So let me ask — is the reason you're this busy today because you've got more people/systems than you need, or because there isn't quite enough predictable revenue yet to put those things in place?"* → they'll usually say revenue → *"That's exactly it — in a strange way, the fact that you're this busy is probably the biggest reason this call is worth having."* Then return to the trial close. If they're genuinely busy (not a smokescreen), don't force it — book a follow-up call for next week instead.
+- **"Is this a solicitation / are you selling anything?"** Don't say "not today" (implies a future pitch is coming and undoes the trust just built). Say plainly: *"No, we're not selling you anything — this is exactly how it works: we give this part away free, a portion of the people we help become customers afterward, and honestly it doesn't matter to us either way because we've already factored that into our numbers."*
+- **"Not interested" (as a reflex, before you've even started):** Validate, then ask a reframing question rather than defending the offer — e.g. *"Totally fair — can I ask, what is it specifically you're not interested in?"* Never argue with the objection directly.
+- **General principle for any objection:** validate their position first (even if you think it's not true), then ask a question that reframes it back on them rather than trying to out-argue it. If you genuinely don't have anything to say, ask a clarifying question instead of guessing — *"That's interesting, what makes you ask that?"* — it keeps you in control of the conversation instead of derailing.
+
+**Gatekeeper technique (getting past a receptionist/assistant to the actual decision-maker):** tonality matters more than the words. Sound genuinely a little confused, not scripted: *"Hey, is this Bob? ...Are you the one responsible for [whatever the offer is]? ...Could you point me in the right direction? I'd need to speak to whoever's responsible for that."* Once transferred, open normally with the pattern interrupt.
+
+**Rejection-rate reality, stated directly to new hires (set expectations honestly, this is real coaching language, not a caller-facing promise):** roughly 80% of calls end in a hang-up, about 18% will tell you no more gently, and about 2% turn into an actual human conversation worth working — and that 2% number is expected to improve to 3–5%+ purely with more reps, not a different script.
 
 ---
 
@@ -188,6 +270,8 @@ Every new cold-calling client goes through the same fixed 30-day build. This is 
 
 **Pre-dial checklist — all 5 required before a caller starts:** access to lead list, access to tracker, knows how to file EOD by email, knows how to file EOD on the sheet, understands the warmup process.
 
+**No booking-rate pressure in the first 10 days (stated directly in live onboarding, Jul 18, 2026):** the only thing a brand-new caller is held to in their first ~10 days is hitting their daily dial ramp — not sets/bookings, which are volume-dependent and can take two weeks or more to start showing up even for a caller doing everything right. After ~10 days, the baseline expectation becomes roughly **2 booked-and-shown appointments a week**. This is real, stated management philosophy for setting a new caller's expectations honestly — use it when a nervous new hire asks "is it normal that I haven't booked anything yet."
+
 **Caller KPI benchmarks — same table, every client account:**
 | Metric | Minimum | Target | Great |
 |---|---|---|---|
@@ -198,9 +282,25 @@ Every new cold-calling client goes through the same fixed 30-day build. This is 
 | Booked calls/day | 1 | 2 | 3+ |
 | Show rate of booked calls | — | 70% | 85%+ |
 
-**Fire/hire policy:** first miss = flagged, same-day conversation. Three misses in a week = formal warning. Repeated pattern after a warning = off the team, no exceptions. This team runs on speed in both directions — hire fast, fire fast.
+**Fire/hire policy — KPI performance misses (dials/contacts/bookings, written SOP):** first miss = flagged, same-day conversation. Three misses in a week = formal warning. Repeated pattern after a warning = off the team, no exceptions.
 
-**Daily manager loop:** check every caller's tracker against ramp/minimums → chase anyone under-dialing or missing days the same day → run the daily Team Huddle (10–15 min, 10:00 AM Eastern) → check EOD reports daily, follow up same day on anything missing.
+**⚠️ Separate and stricter — EOD submission specifically (stated directly by Tian in live onboarding, Jul 18, 2026):** "I allow two strikes on missing EODs... after two strikes, you're gone." This is harsher than the general 3-miss KPI policy above and applies specifically to *not submitting the report at all* — not to hitting/missing your dial or booking numbers. Don't conflate the two: missing your booking target three times in a week gets a formal warning; failing to submit the EOD form itself only tolerates two misses total before you're off the team. **If you have a genuinely quiet or zero-activity day, you still must submit the EOD with 0s entered — a skipped/missing entry counts as a miss and also throws off everyone's average stats, since it's excluded from the average rather than counted as a zero.**
+
+**Lateness policy (consistent across written SOP and live training):** give at least 5 minutes' notice in the team channel if you're going to be late to a huddle or scheduled call, with a reason. Not doing so = a strike. 2 strikes, gone on the 3rd.
+
+**Slack/communication SLA (stated directly, Jul 18, 2026):** respond to any Slack message from Tian, Ben, or a teammate within 24 hours — a simple thumbs-up acknowledgment counts. Weekend response isn't required, but the 24-hour clock still applies once the next working day starts. This is treated as a hard rule ("that's how the team grows, that's how we move with speed"), not a nice-to-have.
+
+**Daily manager loop:** check every caller's tracker against ramp/minimums → chase anyone under-dialing or missing days the same day → run the daily Team Huddle → check EOD reports daily, follow up same day on anything missing.
+
+**Team Huddle cadence — ⚠️ has changed at least twice, most recent wins:**
+- Current (confirmed in live training, Aug 10, 2026): **Monday/Wednesday/Friday, 4:00 PM Central European Time**, 10–15 min.
+- Earlier (Jul 18–30, 2026 live trainings): Monday/Thursday, usually 8:00 PM Central time (shifted around Tian's schedule as needed).
+- The written playbook (`SALES_TEAM_MANAGER_MASTER_PLAYBOOK.md`, Aug 22, 2026) says "10:00 AM Eastern, every day" — this conflicts with both live-training cadences above and is the most recently-dated written source, so **this is a genuine unresolved conflict, not just historical drift** — confirm the actual current cadence with Tian rather than picking one of these three.
+
+**Performance incentives beyond commission (real examples from live training):**
+- **Monthly contest:** first caller to hit 10 qualified booked-and-shown appointments in a calendar month wins a fully paid trip (flight + hotel) to wherever Tian is hosting that period's team gathering — Slovenia was the live Aug 2026 destination. If more than one caller hits 10 in the same month, whoever has the *most* total wins, not whoever hit 10 first. Nobody had won as of Aug 10, 2026 — same goal carries over unclaimed until someone wins it.
+- **Top-performer reward:** the single best-performing caller gets access to Kairo's own warm cold-email reply leads (people who replied positively to Kairo's outbound cold email) — meaningfully warmer than a cold dial, and a real incentive to be the best on the team, not just hit minimums.
+- **Quarterly team retreat/mastermind:** Tian, Ben, and select fulfillment team members meet in person quarterly (Marbella in late Jul 2026, next likely Dec 2026/Jan 2027). ⚠️ Not confirmed whether cold callers are included in this specific retreat — don't promise it as a caller perk without checking.
 
 **Client Directory — active cold-calling accounts (as of Aug 22, 2026):**
 | Client | Notes |
@@ -240,6 +340,8 @@ These are sent automatically as part of the "Ramp Up" onboarding email once a ca
 - ⚠️ Not confirmed anywhere in the current docs: exact commission payout timing/cadence for the current offer stack. (An older, superseded March 2026 draft said "commission paid within 48 hours of confirmed client payment" — that draft predates the current $8K–$100K offer stack and should not be quoted as current policy without checking with Tian.)
 - ⚠️ Not confirmed: whether callers are W2/employee or 1099/contractor, and whether the role is full-time or part-time. Don't guess — say you'll confirm.
 - ⚠️ Not confirmed: whether PreCog's and ABCNS's $30/show + 5% commission structures also use a monthly qualifying window like Kairo's, or whether every show is paid individually with no threshold. Don't assume Kairo's monthly-threshold model applies to those accounts without checking.
+
+**Real proof this pays out (from live training, Jul 16, 2026):** caller Shifu Temi booked a prospect ("Brian") who closed for two deals at $4,000 each ($8,000 total) — Shifu earned $800, exactly **10% commission**, consistent with the confirmed Kairo commission rate above. This is a genuine, named, dated example — use it when a candidate wants to know if the commission structure actually pays out in real life, not just on paper.
 
 **If a caller asks "what's my OTE / how much can I make" on a brand-new account:**
 Don't invent a number and don't dodge. The honest, correct pattern (this is literally what fixed the mistake that started this document):
@@ -342,6 +444,15 @@ A: Never bluff, never guess. Redirect to the booking: *"That's a great question 
 **Q: What's the difference between calling for Kairo's own offer vs. calling for a client like PreCog or ABCNS?**
 A: Same mindset, same daily standards, same KPI bar, same warmup ramp — every account runs on the identical operating system (Part 2B, Part 3). What changes per account is Section 1 (the offer/pricing/proof you're pitching) and the objection library language. Never assume Kairo's own pay, guarantee, or pricing rules apply to a client account, or vice versa — always check the specific account's card (Part 4, Part 5).
 
+**Q: Realistically, is this going to be brutal? What percentage of calls actually go well?**
+A: Give it to them straight, this is exactly how it's framed to every new hire: roughly 80% of calls end in a hang-up, about 18% will tell you no more gently, and only about 2% turn into a real conversation worth working. That 2% is expected to climb toward 3–5%+ purely from doing more reps, not from a better script. Confidence is explicitly framed as coming from volume, not from some innate trait — "the fear of picking up the phone never fully goes away, you just get more used to it."
+
+**Q: What if a prospect threatens to sue me, report me, or says something like "I'm calling my lawyer"?**
+A: You're personally covered — this is a direct, stated company policy: if anyone would ever have real legal exposure from what's said on a cold call, it's the company/owner, never the caller. Stay calm, don't engage, log it and move on, same as any other hostile call.
+
+**Q: Is the team culture competitive? What happens to callers who don't perform?**
+A: Yes, deliberately so — there's an explicit "hire fast, fire fast" philosophy, and a stated view that the team gets built by consistently replacing the lowest performer with a new candidate as the standard rises. This isn't hidden — it's stated directly to new hires as how the team grows. Pair this with the flip side: the fire/hire policy (Part 3) gives real warning steps before anyone's cut, and there are real upside incentives (commission proof in Part 4, contests and rewards in Part 3) for anyone performing.
+
 ---
 
 ## PART 6B — FAQ: What Live Callers Ask Their Sales/Calling Manager (day-to-day ops)
@@ -365,6 +476,12 @@ A: Flag it immediately, don't sit idle. Lists are supposed to get refreshed befo
 
 **Q: How do I know if a call I booked actually "counts" as qualified?**
 A: Same bar everywhere: ICP match + the prospect showed up. Booking it isn't enough on its own — this is exactly why the reminder sequence (confirm on the call, text the day before, text/call an hour before) is part of your job, not just a courtesy. A no-show that doesn't reschedule after one follow-up text doesn't count.
+
+**Q: How do I actually tell if a prospect is financially qualified before I book them?**
+A: Never ask directly how much they earn or how business is doing — it reads as invasive. Ask indirectly: their monthly revenue and where they'd like it in 12 months, or (often better) what their average customer spends / what a typical new deal is worth. Real thresholds: revenue of $10K+/month or more is worth booking; if they give a *range* for customer value, $1–$500 is not a fit but anything above $500 is; if they give a *single number*, $1,000+ is worth booking. This exists because of a real bad booking — a prospect earning $800/month total got booked and wasted 45 minutes of everyone's time. Full script language is in Part 2C, Section 8 (Qualify).
+
+**Q: Which dialer do I actually use — QUO or CloudTalk?**
+A: ⚠️ Not fully resolved in writing. QUO is the original dialer still referenced in current onboarding resource links (Part 3); CloudTalk was introduced as a new power-dialer in Aug 2026 for faster list-dialing and easier stats. Confirm with your manager which one is live for your specific account rather than assuming — don't guess based on which one an older document mentions.
 
 **Q: Who do I escalate a weird or tricky call to?**
 A: The Owner, same day — not saved for the next EOD summary. Nuanced calls are often the ones closest to actually converting, so speed matters more here than anywhere else in the loop.
@@ -411,6 +528,8 @@ A: ⚠️ Not documented as a specific process — expect it to be treated like 
 | Old $1,200+$180/call cold-email-led offer stack | `context/services.md`, `clients/kairo/OFFER_STACK_AND_SALES_SCRIPT.md` | May 2026 | ⛔ Superseded — kept for history only |
 | Early $3,000 "60-Day Takeover" draft offer/pay | `.tmp/kairo_cold_caller_sop/KAIRO_COLD_CALLER_SOP_2026.md` | Mar 2026 | ⛔ Superseded — kept for history only, do not quote |
 | Client economics (CAC/LTV/margins across Kairo's own client base) | Memory: `project_kairo_client_economics.md` | Jul 23, 2026 | Reference only — for Tian's internal strategy, not caller-facing |
+| Real live script (Part 2C), gatekeeper technique, financial qualifier, rejection-rate stats, commission proof example, org details (Ben Milsom), tracker color rules | Live team training recordings, transcripts supplied Jul 16 / 18 / 20 / 30, Aug 10, 2026 | Jul 16 – Aug 10, 2026 | ✅ Current, richest single source for actual call language — but see the 3 flagged conflicts below it surfaced |
+| **Open conflicts surfaced by the training transcripts, not yet resolved:** (1) Team Huddle cadence — 3 different answers across sources (Part 3); (2) QUO vs. CloudTalk as primary dialer (Part 3); (3) re-dial cadence — 7-8 attempts/7 days (written client SOPs) vs. double-dial every 2-3 days for ~7 sessions/month (live Kairo training) (Part 3) | — | Aug 25, 2026 | ⚠️ Ask Tian directly, don't guess which source wins |
 
 ---
 
