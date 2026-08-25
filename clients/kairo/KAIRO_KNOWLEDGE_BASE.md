@@ -130,14 +130,14 @@ Client signs → Onboarding call → List building (Apify + AI Ark)
 ```
 Onboarding happens once. Everything after that repeats weekly for the life of the contract.
 
-**Tools used across the floor:** QUO (the original live dialer — still referenced in current onboarding links, Part 3) and CloudTalk, introduced live in the Aug 10, 2026 team training as a **new power dialer** meant to let callers dial straight through a list faster and see stats more easily. ⚠️ Not fully reconciled: whether CloudTalk has now replaced QUO as the primary dialer or runs alongside it is not confirmed in writing anywhere — treat "which dialer do I actually use" as a live-onboarding question to confirm with your manager rather than assuming either one. Also: Apify (list scraping), AI Ark (phone enrichment/verification), Tally (EOD report form), Google Sheets (per-client trackers).
+**Tools used across the floor:** **QUO is the live dialer, confirmed current by Tian, Aug 25, 2026.** CloudTalk was introduced and discussed in the Aug 10, 2026 team training as a possible new power dialer, but **it is not in use — Kairo runs on QUO for now.** Don't tell a caller to expect CloudTalk. Also: Apify (list scraping), AI Ark (phone enrichment/verification), Tally (EOD report form), Google Sheets (per-client trackers).
 
 **Tracker color-coding (from live training, confirmed pattern):**
 - **White (default):** not yet resolved — keep working it. A double-dial with no pickup stays white, not red.
 - **Red:** the prospect explicitly said never call again. This is the *only* thing that marks a number dead — a non-answer is never a reason to mark red.
 - **"Lead" status:** the actual decision-maker (not a gatekeeper) picked up, showed interest, but didn't book — told you to call back another time.
 
-**⚠️ Re-dial cadence — two different numbers exist, not yet reconciled:** the written client SOPs (e.g. ABCNS, PreCog) say **7–8 attempts across different times of day, over 7 days**, then mark dead. Live team training on the Kairo account (Jul 20, 2026) described a looser, monthly cadence instead: **double-dial per session** (call twice back-to-back), retry every 2–3 days, for up to roughly **7 sessions across a full month** before giving up (excluding anyone who explicitly says stop). Don't assume one applies to every account — check which cadence your specific client's SOP states, and if it's silent, ask rather than guessing which of these two patterns applies.
+**Re-dial cadence — confirmed by Tian, Aug 25, 2026: every attempt is always a double-dial** (call the number twice back-to-back before moving on) — this applies to every account, no exceptions. Written client SOPs (ABCNS, PreCog) additionally frame the overall retry window as 7–8 attempts across different times of day over 7 days; live Kairo-account training described a looser monthly retry interval (every 2–3 days, up to ~7 sessions across a month). The double-dial mechanic itself is settled — if you're unsure of the exact retry *interval* for your specific account, check that account's written SOP first.
 
 **Script skeleton every client script is built from (the "Quick to Cash" framework):**
 ```
@@ -253,9 +253,9 @@ Every new cold-calling client goes through the same fixed 30-day build. This is 
 
 **Onboarding pipeline — candidate to live caller (steady-state hiring, 5 steps):**
 1. **Hiring** — all applicants tracked in the Hiring Sheet, status flow `REACHED OUT → RAMP UP → ACTIVE` (or `Left`)
-2. **WhatsApp reach-out, in order:** (1) intro message asking for a call same day — *this starts the 70-hour clock* — (2) onboarding materials (welcome email + 2 short videos) once the intro call happens — (3) CloudTalk invite + 4-item pre-dial checklist once materials are confirmed done
+2. **WhatsApp reach-out, in order:** (1) intro message asking for a call same day — *this starts the 70-hour clock* — (2) onboarding materials (welcome email + 2 short videos) once the intro call happens — (3) QUO invite + 4-item pre-dial checklist once materials are confirmed done.
 3. **Interview format:** one-on-one WhatsApp calls, same day if possible — no group interviews for steady-state hiring (good candidates move fast). *Note: the formal 30-Day Client Launch process (used only when standing up a brand-new client account from scratch) does use a group interview on Day 8 — that's a different, heavier process for a first-time buildout, not the day-to-day hiring loop.*
-4. **Onboarding materials** confirmed complete before the CloudTalk invite goes out
+4. **Onboarding materials** confirmed complete before the QUO invite goes out
 5. **Assign, warm up, go live** — assigned to a client, added to that client's tracker, warmup ramp begins
 
 **Warmup ramp (new number or new caller — applies everywhere):**
@@ -292,10 +292,7 @@ Every new cold-calling client goes through the same fixed 30-day build. This is 
 
 **Daily manager loop:** check every caller's tracker against ramp/minimums → chase anyone under-dialing or missing days the same day → run the daily Team Huddle → check EOD reports daily, follow up same day on anything missing.
 
-**Team Huddle cadence — ⚠️ has changed at least twice, most recent wins:**
-- Current (confirmed in live training, Aug 10, 2026): **Monday/Wednesday/Friday, 4:00 PM Central European Time**, 10–15 min.
-- Earlier (Jul 18–30, 2026 live trainings): Monday/Thursday, usually 8:00 PM Central time (shifted around Tian's schedule as needed).
-- The written playbook (`SALES_TEAM_MANAGER_MASTER_PLAYBOOK.md`, Aug 22, 2026) says "10:00 AM Eastern, every day" — this conflicts with both live-training cadences above and is the most recently-dated written source, so **this is a genuine unresolved conflict, not just historical drift** — confirm the actual current cadence with Tian rather than picking one of these three.
+**Team Huddle cadence — confirmed by Tian, Aug 25, 2026: Monday/Wednesday/Friday, 4:00 PM Central European Time.** (`SALES_TEAM_MANAGER_MASTER_PLAYBOOK.md` previously said "10:00 AM Eastern, every day" — corrected at the source to match, Aug 25, 2026.) An earlier Monday/Thursday ~8:00 PM Central pattern from Jul 18–30, 2026 live trainings is also superseded.
 
 **Performance incentives beyond commission (real examples from live training):**
 - **Monthly contest:** first caller to hit 10 qualified booked-and-shown appointments in a calendar month wins a fully paid trip (flight + hotel) to wherever Tian is hosting that period's team gathering — Slovenia was the live Aug 2026 destination. If more than one caller hits 10 in the same month, whoever has the *most* total wins, not whoever hit 10 first. Nobody had won as of Aug 10, 2026 — same goal carries over unclaimed until someone wins it.
@@ -418,7 +415,7 @@ A: Depends on your assigned account — check the Client Directory (Part 3) and 
 A: A booked call only counts as "qualified" once it shows (ICP match + showed up — the standard bar everywhere). Commission is earned on **closed** deals specifically, on top of the base/show fee. Show-rate management (reminder texts, day-before and 1-hour-before) is the caller's job, not just the client's calendar system — a no-show is a wasted appointment either way, so the reminder sequence in Part 2B matters directly to your pay.
 
 **Q: What tools do I need?**
-A: CloudTalk (you'll be invited to this as part of onboarding — confirm access before your first call) and QUO (the live dialer). Lists live in Apify/AI Ark-enriched trackers you don't need direct access to, just your assigned tab.
+A: QUO — that's the live dialer, confirmed current (Kairo does not currently use CloudTalk, even though it was piloted internally in Aug 2026). You'll be invited to QUO as part of onboarding — confirm access before your first call. Lists live in Apify/AI Ark-enriched trackers you don't need direct access to, just your assigned tab.
 
 **Q: What's the schedule / do I get days off?**
 A: Default is 1–2 days off per week (typically Saturday/Sunday on the Kairo account). Power hours to prioritize: 8–9 AM, 11:30 AM–12:30 PM, 4–5:30 PM in the prospect's timezone. 2x/week sales training is mandatory, not optional, on every account.
@@ -481,7 +478,7 @@ A: Same bar everywhere: ICP match + the prospect showed up. Booking it isn't eno
 A: Never ask directly how much they earn or how business is doing — it reads as invasive. Ask indirectly: their monthly revenue and where they'd like it in 12 months, or (often better) what their average customer spends / what a typical new deal is worth. Real thresholds: revenue of $10K+/month or more is worth booking; if they give a *range* for customer value, $1–$500 is not a fit but anything above $500 is; if they give a *single number*, $1,000+ is worth booking. This exists because of a real bad booking — a prospect earning $800/month total got booked and wasted 45 minutes of everyone's time. Full script language is in Part 2C, Section 8 (Qualify).
 
 **Q: Which dialer do I actually use — QUO or CloudTalk?**
-A: ⚠️ Not fully resolved in writing. QUO is the original dialer still referenced in current onboarding resource links (Part 3); CloudTalk was introduced as a new power-dialer in Aug 2026 for faster list-dialing and easier stats. Confirm with your manager which one is live for your specific account rather than assuming — don't guess based on which one an older document mentions.
+A: QUO — confirmed directly by Tian, Aug 25, 2026. CloudTalk was floated as a possible power-dialer upgrade in Aug 2026 training but was not adopted; Kairo runs on QUO for now.
 
 **Q: Who do I escalate a weird or tricky call to?**
 A: The Owner, same day — not saved for the next EOD summary. Nuanced calls are often the ones closest to actually converting, so speed matters more here than anywhere else in the loop.
@@ -528,8 +525,8 @@ A: ⚠️ Not documented as a specific process — expect it to be treated like 
 | Old $1,200+$180/call cold-email-led offer stack | `context/services.md`, `clients/kairo/OFFER_STACK_AND_SALES_SCRIPT.md` | May 2026 | ⛔ Superseded — kept for history only |
 | Early $3,000 "60-Day Takeover" draft offer/pay | `.tmp/kairo_cold_caller_sop/KAIRO_COLD_CALLER_SOP_2026.md` | Mar 2026 | ⛔ Superseded — kept for history only, do not quote |
 | Client economics (CAC/LTV/margins across Kairo's own client base) | Memory: `project_kairo_client_economics.md` | Jul 23, 2026 | Reference only — for Tian's internal strategy, not caller-facing |
-| Real live script (Part 2C), gatekeeper technique, financial qualifier, rejection-rate stats, commission proof example, org details (Ben Milsom), tracker color rules | Live team training recordings, transcripts supplied Jul 16 / 18 / 20 / 30, Aug 10, 2026 | Jul 16 – Aug 10, 2026 | ✅ Current, richest single source for actual call language — but see the 3 flagged conflicts below it surfaced |
-| **Open conflicts surfaced by the training transcripts, not yet resolved:** (1) Team Huddle cadence — 3 different answers across sources (Part 3); (2) QUO vs. CloudTalk as primary dialer (Part 3); (3) re-dial cadence — 7-8 attempts/7 days (written client SOPs) vs. double-dial every 2-3 days for ~7 sessions/month (live Kairo training) (Part 3) | — | Aug 25, 2026 | ⚠️ Ask Tian directly, don't guess which source wins |
+| Real live script (Part 2C), gatekeeper technique, financial qualifier, rejection-rate stats, commission proof example, org details (Ben Milsom), tracker color rules | Live team training recordings, transcripts supplied Jul 16 / 18 / 20 / 30, Aug 10, 2026 | Jul 16 – Aug 10, 2026 | ✅ Current, richest single source for actual call language |
+| **Resolved Aug 25, 2026 (confirmed directly by Tian):** Team Huddle is Mon/Wed/Fri 4:00 PM CET; the floor runs on QUO only, CloudTalk is not in use; every re-dial attempt is a double-dial, always (all Part 3). `SALES_TEAM_MANAGER_MASTER_PLAYBOOK.md` was corrected at the source to match (huddle cadence + CloudTalk→QUO references), same date. | Confirmed directly by Tian | Aug 25, 2026 | ✅ Current |
 
 ---
 
