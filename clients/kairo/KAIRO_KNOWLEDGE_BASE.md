@@ -225,6 +225,14 @@ Every new cold-calling client goes through the same fixed 30-day build. This is 
 
 Each account has its own tracker sheet + its own client-specific cold caller SOP doc (built by cloning the canonical Kairo SOP and swapping Section 1). The Kairo SOP (`directives/kairo_cold_caller_sop.md`) is the master template every other account's SOP is built from.
 
+**Live resource links to hand a new caller (confirmed current, Aug 24, 2026):**
+- Dialer/calling system SOP (how to use the calling system, doc + video): https://docs.google.com/document/d/1gjPuAMCCwwfd6J_-vyJ4ziLfQTpQd2TPOMLyUxI6J1Y/edit
+- QUO setup video: https://www.loom.com/share/79dd15d6e71f414eb2bbecbb9b1d75df
+- Confirmation page: https://kairoscales.com/confirm
+- Main site: https://kairoscales.com/
+
+These are sent automatically as part of the "Ramp Up" onboarding email once a candidate's status moves to Ramp Up in the hiring pipeline.
+
 ---
 
 ## PART 4 — Caller Pay / OTE (the question most likely to come up)
