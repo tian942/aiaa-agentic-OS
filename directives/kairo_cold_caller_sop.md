@@ -138,7 +138,7 @@ In CET, do calls between 3:30 PM CET and 9:30 PM CET.
 ---
 
 **EXTREMELY IMPORTANT: WATCH THE DAILY WORK SOP:**
-[Daily EOD Reporting and Dialer Workflow - Watch Video](https://www.loom.com/share/cb36ff0a8592424fa1eb47b1a3c8be64)
+[Daily EOD Reporting and Dialer Workflow - Watch Video](https://www.loom.com/share/4fc12c0414984bcabe810df01285a85c)
 
 ## 6. End-of-Day Report
 
