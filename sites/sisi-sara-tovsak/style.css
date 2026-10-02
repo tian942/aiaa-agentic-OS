@@ -210,3 +210,14 @@ html{-webkit-text-size-adjust:100%}
 /* Explicit alpha transparency keeps the original fine strokes on mobile WebKit. */
 .signature-ready .logo-mask{visibility:visible}
 .signature-fallback .logo-mask{visibility:visible;background:transparent url('sisi-logo.png') center/contain no-repeat;-webkit-mask-image:none;mask-image:none;mix-blend-mode:screen}
+
+/* Language controls stay visible on phones, outside the collapsed menu. */
+.language-switch{display:flex;align-items:center;gap:2px;order:3;margin-left:24px;color:#b8aaaF;font-size:12px;flex-shrink:0}
+.language-switch button{border:0;border-radius:18px;background:transparent;color:#c4b9bd;min-width:40px;min-height:44px;padding:8px;cursor:pointer;font-size:12px;letter-spacing:.06em}
+.language-switch button[aria-pressed="true"]{color:#fff;background:#f5dce413}
+header nav{margin-left:auto}
+html[lang="sl"] .hero h1{font-size:clamp(72px,8.2vw,132px)}
+html[lang="sl"] .highlights h2{font-size:clamp(54px,6.5vw,104px)}
+@media(max-width:1100px) and (min-width:861px){header nav{gap:20px}.language-switch{margin-left:14px}}
+@media(max-width:860px){.language-switch{order:0;margin-left:auto;margin-right:12px}header nav{margin-left:0}.menu{flex-shrink:0}}
+@media(max-width:650px){html[lang="sl"] .hero h1{font-size:clamp(52px,12vw,78px)}html[lang="sl"] .highlights h2{font-size:clamp(46px,10.8vw,68px)}html[lang="sl"] .services summary h3{font-size:clamp(22px,6vw,32px)}.language-switch button{min-width:34px}.language-switch{margin-right:8px}.menu{padding:8px 15px}}

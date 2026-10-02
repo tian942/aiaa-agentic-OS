@@ -3,7 +3,7 @@ const navigation = document.querySelector('#navigation');
 function setMenu(open){
  menu.setAttribute('aria-expanded',String(open));
  navigation.classList.toggle('open',open);
- menu.textContent=open?'Close':'Menu';
+ menu.textContent=t(open?'Close':'Menu');
 }
 menu.addEventListener('click',()=>setMenu(menu.getAttribute('aria-expanded')!=='true'));
 navigation.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setMenu(false)));
@@ -17,6 +17,8 @@ document.querySelector('header').addEventListener('focusout',event=>{
  if(event.relatedTarget && !event.currentTarget.contains(event.relatedTarget))setMenu(false);
 });
 window.matchMedia('(max-width:860px)').addEventListener('change',()=>setMenu(false));
+document.addEventListener('sisi:language-change',()=>setMenu(false));
+setMenu(false);
 const interest = document.querySelector('#interest');
 function updateFields(){document.querySelector('#event-fields').hidden = interest.value !== 'A performance';}
 interest.addEventListener('change', updateFields);
@@ -24,9 +26,10 @@ document.querySelectorAll('[data-interest]').forEach(link => link.addEventListen
 document.querySelector('#enquiry').addEventListener('submit', event => {
  event.preventDefault(); const data = new FormData(event.target);
  const recipient = data.get('interest') === 'A performance' ? 'bookings.sisi@gmail.com' : 'sara.tovsak@gmail.com';
- const body = ['Hello Sara,', '', 'I am interested in: '+data.get('interest'), 'Full name: '+data.get('name'), 'Email: '+data.get('email'), 'Phone: '+(data.get('phone')||'Not provided'), ...(data.get('interest')==='A performance'?['Event date: '+(data.get('date')||'To be confirmed'),'Location: '+(data.get('location')||'To be confirmed')]:[]), '', 'My wishes:', data.get('wishes')].join('\n');
- window.location.href='mailto:'+recipient+'?subject='+encodeURIComponent('SISI enquiry — '+data.get('interest'))+'&body='+encodeURIComponent(body);
- const status=document.querySelector('#form-status');status.hidden=false;status.textContent='Your enquiry is ready in your email app. Please press send there to complete it. If your app did not open, email '+recipient+' directly.';
+ const body = [t('Hello Sara,'), '', t('I am interested in')+': '+t(data.get('interest')), t('Full name')+': '+data.get('name'), t('Email')+': '+data.get('email'), t('Phone')+': '+(data.get('phone')||t('Not provided')), ...(data.get('interest')==='A performance'?[t('Event date')+': '+(data.get('date')||t('To be confirmed')),t('Event location')+': '+(data.get('location')||t('To be confirmed'))]:[]), '', t('Your wishes')+':', data.get('wishes')].join('\n');
+ window.location.href='mailto:'+recipient+'?subject='+encodeURIComponent(t('SISI enquiry')+' — '+t(data.get('interest')))+'&body='+encodeURIComponent(body);
+ const status=document.querySelector('#form-status');status.hidden=false;status.textContent=t('Your enquiry is ready in your email app. Please press send there to complete it. If your app did not open, email')+' '+recipient+' '+t('directly.');
+
 });
 
 // Prepare one alpha mask from the original artwork. WebKit must not interpret
@@ -199,7 +202,7 @@ performanceVideos.forEach(video => {
   const button=document.createElement('button');button.type='button';button.className='interest-option';button.setAttribute('role','option');button.dataset.value=option.value;button.textContent=option.text;
   button.addEventListener('click',()=>{select.value=option.value;syncChoice();select.dispatchEvent(new Event('input',{bubbles:true}));select.dispatchEvent(new Event('change',{bubbles:true}));choice.close(true);});choice.popup.append(button);return button;
  });
- function syncChoice(){choice.value.textContent=select.value;options.forEach(button=>{const selected=button.dataset.value===select.value;button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;button.innerHTML='';button.append(document.createTextNode(button.dataset.value));if(selected)button.insertAdjacentHTML('beforeend',tick);});}
+ function syncChoice(){choice.value.textContent=t(select.value);options.forEach(button=>{const selected=button.dataset.value===select.value;button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;button.innerHTML='';button.append(document.createTextNode(t(button.dataset.value)));if(selected)button.insertAdjacentHTML('beforeend',tick);});}
  syncChoice();select.addEventListener('change',()=>{syncChoice();if(select.value!=='A performance')pickers[1]?.close();});
  document.querySelectorAll('[data-interest]').forEach(link=>link.addEventListener('click',syncChoice));
  function openChoice(){choice.open();options[select.selectedIndex].focus();}
@@ -212,9 +215,9 @@ performanceVideos.forEach(video => {
  const localISO=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
  const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12);};
  const today=new Date();let cursor=input.value?parse(input.value):new Date();
- const display=new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric'});
- const monthDisplay=new Intl.DateTimeFormat('en-GB',{month:'long',year:'numeric'});
- const syncDate=()=>{date.value.textContent=input.value?display.format(parse(input.value)):'Select a date';};syncDate();input.addEventListener('change',syncDate);
+ let display=new Intl.DateTimeFormat(siteLocale(),{day:'numeric',month:'long',year:'numeric'});
+ let monthDisplay=new Intl.DateTimeFormat(siteLocale(),{month:'long',year:'numeric'});
+ const syncDate=()=>{date.value.textContent=input.value?display.format(parse(input.value)):t('Select a date');};syncDate();input.addEventListener('change',syncDate);
  date.popup.innerHTML='<div class="calendar-heading"><span class="calendar-month" aria-live="polite"></span><div class="calendar-nav"><button type="button" aria-label="Previous month">‹</button><button type="button" aria-label="Next month">›</button></div></div><div class="calendar-week" aria-hidden="true">'+['M','T','W','T','F','S','S'].map(d=>'<span>'+d+'</span>').join('')+'</div><div class="calendar-days" role="group" aria-label="Days"></div><div class="calendar-footer"><button type="button">Clear date</button><button type="button">Today</button></div>';
  const days=date.popup.querySelector('.calendar-days');
  function choose(d){input.value=d?localISO(d):'';syncDate();input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));date.close(true);}
@@ -241,6 +244,19 @@ performanceVideos.forEach(video => {
   else if(e.key==='PageUp'||e.key==='PageDown')shiftMonth(e.key==='PageUp'?-1:1);
   else return;e.preventDefault();render(true);
  });
+ function localizePickers(){
+  display=new Intl.DateTimeFormat(siteLocale(),{day:'numeric',month:'long',year:'numeric'});
+  monthDisplay=new Intl.DateTimeFormat(siteLocale(),{month:'long',year:'numeric'});
+  syncChoice();syncDate();
+  date.popup.setAttribute('aria-label',t('Choose event date'));
+  nav[0].setAttribute('aria-label',t('Previous month'));nav[1].setAttribute('aria-label',t('Next month'));
+  days.setAttribute('aria-label',t('Days'));
+  foot[0].textContent=t('Clear date');foot[1].textContent=t('Today');
+  const weekdays=siteLanguage==='sl'?['P','T','S','Č','P','S','N']:['M','T','W','T','F','S','S'];
+  date.popup.querySelectorAll('.calendar-week span').forEach((span,i)=>span.textContent=weekdays[i]);
+  if(!date.popup.hidden)render();
+ }
+ document.addEventListener('sisi:language-change',localizePickers);localizePickers();
  date.trigger.addEventListener('click',()=>{if(!date.popup.hidden){date.close();return;}cursor=input.value?parse(input.value):new Date();date.open();render(true);});
 })();
 
