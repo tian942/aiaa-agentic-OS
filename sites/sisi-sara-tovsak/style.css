@@ -229,3 +229,5 @@ html[lang="sl"] .highlights h2{font-size:clamp(54px,6.5vw,104px)}
 }
 .signature-completion-glow{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0;filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 11px #efbad3);will-change:opacity;transform:translateZ(0)}
 @media(prefers-reduced-motion:reduce){.signature-completion-glow{display:none}}
+
+.form-honey{display:none!important}#enquiry button[type="submit"]:disabled{opacity:.65;cursor:wait;transform:none}

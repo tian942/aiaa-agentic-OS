@@ -124,7 +124,12 @@ const slCopy = {
  "To be confirmed": "Po dogovoru",
  "SISI enquiry": "Povpraševanje SISI",
  "Your enquiry is ready in your email app. Please press send there to complete it. If your app did not open, email": "Povpraševanje je pripravljeno v vaši e-poštni aplikaciji. Za oddajo kliknite Pošlji v aplikaciji. Če se aplikacija ni odprla, pišite na",
- "directly.": "neposredno."
+ "directly.": "neposredno.",
+ "Your enquiry is sent securely via FormSubmit to Sara’s team.": "Povpraševanje bo prek storitve FormSubmit varno poslano Sarini ekipi.",
+ "Sending…": "Pošiljanje …",
+ "Sending your enquiry…": "Pošiljamo vaše povpraševanje …",
+ "Thank you. Your enquiry has been submitted. We will be in touch soon.": "Hvala. Vaše povpraševanje je bilo oddano. Kmalu se vam oglasimo.",
+ "We could not confirm your submission. Your details are still here. Please try again later or email": "Oddaje ni bilo mogoče potrditi. Vaši podatki so ohranjeni. Poskusite pozneje ali pišite na"
 };
 let siteLanguage = 'en';
 try { siteLanguage = localStorage.getItem('sisi-language') === 'sl' ? 'sl' : 'en'; } catch {}

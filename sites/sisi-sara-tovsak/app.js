@@ -23,14 +23,49 @@ const interest = document.querySelector('#interest');
 function updateFields(){document.querySelector('#event-fields').hidden = interest.value !== 'A performance';}
 interest.addEventListener('change', updateFields);
 document.querySelectorAll('[data-interest]').forEach(link => link.addEventListener('click', () => {interest.value=link.dataset.interest;updateFields();}));
-document.querySelector('#enquiry').addEventListener('submit', event => {
- event.preventDefault(); const data = new FormData(event.target);
- const recipient = data.get('interest') === 'A performance' ? 'bookings.sisi@gmail.com' : 'sara.tovsak@gmail.com';
- const body = [t('Hello Sara,'), '', t('I am interested in')+': '+t(data.get('interest')), t('Full name')+': '+data.get('name'), t('Email')+': '+data.get('email'), t('Phone')+': '+(data.get('phone')||t('Not provided')), ...(data.get('interest')==='A performance'?[t('Event date')+': '+(data.get('date')||t('To be confirmed')),t('Event location')+': '+(data.get('location')||t('To be confirmed'))]:[]), '', t('Your wishes')+':', data.get('wishes')].join('\n');
- window.location.href='mailto:'+recipient+'?subject='+encodeURIComponent(t('SISI enquiry')+' — '+t(data.get('interest')))+'&body='+encodeURIComponent(body);
- const status=document.querySelector('#form-status');status.hidden=false;status.textContent=t('Your enquiry is ready in your email app. Please press send there to complete it. If your app did not open, email')+' '+recipient+' '+t('directly.');
-
+const enquiryForm=document.querySelector('#enquiry');
+let enquirySending=false;
+let enquiryFeedback='';
+let enquiryRecipient='';
+function showEnquiryFeedback(){
+ const status=document.querySelector('#form-status');status.hidden=!enquiryFeedback;
+ status.textContent=enquiryFeedback?t(enquiryFeedback)+(enquiryRecipient?' '+enquiryRecipient:''):'';
+}
+document.addEventListener('sisi:language-change',()=>{
+ showEnquiryFeedback();
+ enquiryForm.querySelector('[type="submit"]').textContent=t(enquirySending?'Sending…':'Send an enquiry');
 });
+enquiryForm.addEventListener('submit',async event=>{
+ event.preventDefault();
+ if(enquirySending || !enquiryForm.reportValidity())return;
+ const data=new FormData(enquiryForm);
+ if(data.get('_honey'))return;
+ const recipient=data.get('interest')==='A performance'?'bookings.sisi@gmail.com':'sara.tovsak@gmail.com';
+ const button=enquiryForm.querySelector('[type="submit"]');
+ const fields=[...enquiryForm.querySelectorAll('input,select,textarea')];
+ const payload={name:data.get('name').trim(),email:data.get('email').trim(),phone:data.get('phone').trim()||t('Not provided'),interest:t(data.get('interest')),message:data.get('wishes').trim(),_subject:t('SISI enquiry')+' — '+t(data.get('interest')),_template:'table',_honey:'',_url:location.origin+location.pathname};
+ if(data.get('interest')==='A performance'){
+  payload['Event date']=data.get('date')||t('To be confirmed');
+  payload['Event location']=data.get('location').trim()||t('To be confirmed');
+ }
+ enquirySending=true;button.disabled=true;button.textContent=t('Sending…');enquiryForm.setAttribute('aria-busy','true');
+ enquiryFeedback='Sending your enquiry…';enquiryRecipient='';showEnquiryFeedback();
+ const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),25000);
+ try{
+  const response=await fetch('https://formsubmit.co/ajax/'+recipient,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+  const result=await response.json();
+  if(!response.ok || ![true,'true'].includes(result.success) || /activat|confirm your email/i.test(result.message||''))throw new Error('not-accepted');
+  enquiryFeedback='Thank you. Your enquiry has been submitted. We will be in touch soon.';
+  // Preserve anything the visitor changed while their request was in flight.
+  fields.forEach(field=>{if(field.name!=='interest' && field.value===data.get(field.name))field.value='';});
+  document.querySelector('#event-date').dispatchEvent(new Event('change',{bubbles:true}));
+ }catch{
+  enquiryFeedback='We could not confirm your submission. Your details are still here. Please try again later or email';enquiryRecipient=recipient;
+ }finally{
+  clearTimeout(timeout);enquirySending=false;button.disabled=false;button.textContent=t('Send an enquiry');enquiryForm.removeAttribute('aria-busy');showEnquiryFeedback();
+ }
+});
+
 
 // Prepare one alpha mask from the original artwork. WebKit must not interpret
 // the opaque black background as part of the signature during compositing.
