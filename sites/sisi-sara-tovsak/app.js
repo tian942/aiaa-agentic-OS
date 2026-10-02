@@ -90,6 +90,7 @@ signatureAsset.catch(() => document.documentElement.classList.add('signature-fal
   }
   // The final original mask guarantees the complete, crisp mark before flight.
   ink.style.background='#fff';glintWrap.remove();
+  if(window.matchMedia('(min-width: 861px) and (hover: hover) and (pointer: fine)').matches){
   // Glow a separate, completed image: only opacity animates, so the writing
   // strokes never have to be blurred and repainted on every frame.
   const glow=document.createElement('img');glow.src=signatureURL;glow.alt='';
@@ -100,6 +101,10 @@ signatureAsset.catch(() => document.documentElement.classList.add('signature-fal
    {opacity:.75,offset:.64},{opacity:0,offset:1}
   ],{duration:850,easing:'ease-in-out',fill:'forwards'});
   animations.push(pulse);await pulse.finished;if(finished)return;glow.remove();
+  }else{
+   const hold=wrap.animate([{opacity:1},{opacity:1}],{duration:180});
+   animations.push(hold);await hold.finished;if(finished)return;
+  }
   const from=wrap.getBoundingClientRect();
   const targets=[document.querySelector('.brand>.logo-mask'),document.querySelector('.hero-signature')];
   const landing=targets.map((target,index)=>{
