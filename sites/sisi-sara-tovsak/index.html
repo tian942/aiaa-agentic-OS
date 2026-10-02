@@ -1,5 +1,27 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SISI — Sara Tovšak | Dance you can feel</title><meta name="description" content="Pole dance, aerial hoop performances and dance coaching by Sara Tovšak. Elegance, strength and expression for your event."><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='20' fill='%23781f32'/%3E%3Ctext x='20' y='29' text-anchor='middle' fill='white' font-family='Georgia' font-style='italic' font-size='30'%3ES%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style.css?v=20261002-autofill"></head>
+<html lang="en"><head><script>
+// Start each visit at the hero instead of restoring an old section.
+(() => {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
+  let interacted = false;
+  const events = ['pointerdown', 'touchstart', 'wheel', 'keydown'];
+  const stop = () => {
+    interacted = true;
+    events.forEach(type => window.removeEventListener(type, stop, true));
+  };
+  events.forEach(type => window.addEventListener(type, stop, {capture: true, passive: true}));
+  const startAtTop = () => {
+    if (!interacted) window.scrollTo({top: 0, left: 0, behavior: 'instant'});
+  };
+  startAtTop();
+  document.addEventListener('DOMContentLoaded', startAtTop, {once: true});
+  window.addEventListener('pageshow', () => {
+    startAtTop();
+    stop();
+  }, {once: true});
+})();
+</script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SISI — Sara Tovšak | Dance you can feel</title><meta name="description" content="Pole dance, aerial hoop performances and dance coaching by Sara Tovšak. Elegance, strength and expression for your event."><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='20' fill='%23781f32'/%3E%3Ctext x='20' y='29' text-anchor='middle' fill='white' font-family='Georgia' font-style='italic' font-size='30'%3ES%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="style.css?v=20261002-autofill"></head>
 <body><div class="brand-intro" aria-hidden="true"><div class="intro-logo-wrap"><span class="logo-mask intro-logo"><svg viewBox="0 0 1440 1080" fill="none" aria-hidden="true"><path d="M733 377 C686 376 633 414 665 426 C699 442 794 408 810 360 C839 273 645 328 563 354 C456 388 361 432 381 475 C391 496 486 497 553 516 C651 542 682 574 607 612 C514 656 269 665 183 635 C118 612 159 569 225 556" pathLength="1" data-duration="800"/><path d="M753 532 C720 566 683 606 698 631 C725 669 810 595 851 542" pathLength="1" data-duration="270"/><path d="M848 541 C870 557 953 581 934 619 C920 650 843 682 833 650 C827 633 868 620 893 615" pathLength="1" data-duration="270"/><path d="M962 542 C944 578 1023 565 1074 548 C1027 577 1008 625 997 674" pathLength="1" data-duration="230"/><path d="M786 477 L787 478" pathLength="1" data-duration="90"/><path d="M1051 526 C1057 493 1120 468 1135 435 C1154 389 1088 417 1073 452 C1034 408 1003 428 1034 465 L1066 501" pathLength="1" data-duration="230"/><path d="M232 428 C408 186 780 135 1026 227 C1227 282 1325 425 1281 606 C1240 773 1031 859 803 887 C642 908 504 898 476 841 C436 761 546 704 613 708 C697 707 710 767 650 792 C619 807 611 794 629 779" pathLength="1" data-duration="720"/></svg></span></div></div><a class="skip" href="#services">Skip to content</a>
 <header><a href="#home" class="brand" aria-label="SISI home"><span  class="logo-mask" role="img" aria-label="SISI"></span></a><div class="language-switch" role="group" aria-label="Language / Jezik"><button type="button" data-language="en" lang="en" aria-pressed="true" aria-label="English">EN</button><span aria-hidden="true">/</span><button type="button" data-language="sl" lang="sl" aria-pressed="false" aria-label="Slovenščina">SL</button></div><button class="menu" aria-expanded="false" aria-controls="navigation">Menu</button><nav id="navigation" aria-label="Main navigation"><a href="#services">Services</a><a href="#about">About me</a><a href="#vision">Vision</a><a href="#pricing">Pricing</a><a href="#contact" class="nav-contact">Contact</a></nav></header>
 <main><section class="hero" id="home"><div class="hero-art" aria-hidden="true"></div><div class="hero-top"><span>Dancer · Coach · Performer</span><span>Sara Tovšak</span></div><div class="hero-copy"><p class="eyebrow">Elegance in motion. Emotion on stage.</p><h1>Dance you<br>can <em>feel.</em></h1><p class="hero-intro">Elegance, strength and femininity brought together in professional dance performances that capture attention and leave a lasting impression.</p><div class="actions"><a class="button light" href="#contact">Send an enquiry</a><a class="text-link" href="#highlights">View performances</a></div></div><span class="hero-signature logo-mask" role="img" aria-label="SISI signature"></span><div class="hero-bottom"><span>Art. Freedom. A way of life.</span></div></section>
