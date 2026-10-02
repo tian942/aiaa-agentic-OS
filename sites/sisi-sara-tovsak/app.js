@@ -29,6 +29,32 @@ document.querySelector('#enquiry').addEventListener('submit', event => {
  const status=document.querySelector('#form-status');status.hidden=false;status.textContent='Your enquiry is ready in your email app. Please press send there to complete it. If your app did not open, email '+recipient+' directly.';
 });
 
+// Prepare one alpha mask from the original artwork. WebKit must not interpret
+// the opaque black background as part of the signature during compositing.
+const signatureAsset = (async () => {
+ const source = new Image();
+ source.src = 'sisi-logo.png';
+ await source.decode();
+ const canvas = document.createElement('canvas');
+ canvas.width = source.naturalWidth; canvas.height = source.naturalHeight;
+ const context = canvas.getContext('2d', {willReadFrequently:true});
+ context.drawImage(source, 0, 0);
+ const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+ for(let i=0;i<pixels.data.length;i+=4){
+  const luminance=.2126*pixels.data[i]+.7152*pixels.data[i+1]+.0722*pixels.data[i+2];
+  pixels.data[i+3]=Math.round(pixels.data[i+3]*luminance/255);
+  pixels.data[i]=pixels.data[i+1]=pixels.data[i+2]=255;
+ }
+ context.putImageData(pixels, 0, 0);
+ const url = canvas.toDataURL('image/png');
+ const ready = new Image(); ready.src = url; await ready.decode();
+ document.documentElement.style.setProperty('--signature-image', `url("${url}")`);
+ document.documentElement.classList.add('signature-ready');
+ return url;
+})();
+// Keep the original artwork visible if image preparation is unavailable.
+signatureAsset.catch(() => document.documentElement.classList.add('signature-fallback'));
+
 // Reveal the original signature through sequential strokes, then place it.
 (async function signatureEntrance(){
  const intro=document.querySelector('.brand-intro');
@@ -43,7 +69,7 @@ document.querySelector('#enquiry').addEventListener('submit', event => {
  document.documentElement.classList.add('signature-intro-active');
  ['pointerdown','focusin','wheel','touchstart'].forEach(type=>document.addEventListener(type,finish,{passive:true}));window.addEventListener('resize',finish);motion.addEventListener('change',finish);
  try{
-  const asset=new Image();asset.src='sisi-logo.png';await asset.decode();if(finished)return;
+  const signatureURL=await signatureAsset;if(finished)return;
   for(const path of ink.querySelectorAll('path')){
    const draw=path.animate([{strokeDashoffset:'1'},{strokeDashoffset:'0'}],{duration:Number(path.dataset.duration),easing:'ease-in-out',fill:'forwards'});animations.push(draw);
    const length=path.getTotalLength();
@@ -63,11 +89,11 @@ document.querySelector('#enquiry').addEventListener('submit', event => {
   const from=wrap.getBoundingClientRect();
   const targets=[document.querySelector('.brand>.logo-mask'),document.querySelector('.hero-signature')];
   const landing=targets.map((target,index)=>{
-   const to=target.getBoundingClientRect();const copy=document.createElement('span');copy.className='logo-mask signature-flight';copy.setAttribute('aria-hidden','true');Object.assign(copy.style,{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'});document.body.append(copy);flights.push(copy);
+   const to=target.getBoundingClientRect();const copy=document.createElement('img');copy.src=signatureURL;copy.alt='';copy.className='signature-flight';copy.setAttribute('aria-hidden','true');Object.assign(copy.style,{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'});document.body.append(copy);flights.push(copy);
    const dx=to.left+to.width/2-(from.left+from.width/2);const dy=to.top+to.height/2-(from.top+from.height/2);const scale=Math.min(target.offsetWidth/from.width,target.offsetHeight/from.height);const rotation=index===1?'-8deg':'0deg';
    const flight=copy.animate([{transform:'translate(0,0) scale(1) rotate(0deg)',opacity:1},{transform:`translate(${dx}px,${dy}px) scale(${scale}) rotate(${rotation})`,opacity:index===1?.9:1}],{duration:1100,delay:index*80,easing:'cubic-bezier(.65,0,.2,1)',fill:'forwards'});animations.push(flight);return flight.finished;
   });
-  wrap.style.visibility='hidden';document.dispatchEvent(new Event('sisi:hero-reveal'));const fade=intro.animate([{opacity:1},{opacity:0}],{duration:800,easing:'ease-in-out',fill:'forwards'});animations.push(fade);
+  wrap.style.display='none';document.dispatchEvent(new Event('sisi:hero-reveal'));const fade=intro.animate([{opacity:1},{opacity:0}],{duration:800,easing:'ease-in-out',fill:'forwards'});animations.push(fade);
   await Promise.all(landing);finish();
  }catch{finish();}
 })();
