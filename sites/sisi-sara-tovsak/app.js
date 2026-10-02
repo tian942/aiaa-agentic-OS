@@ -65,26 +65,28 @@ signatureAsset.catch(() => document.documentElement.classList.add('signature-fal
  const ink=intro.querySelector('.intro-logo');
  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
  if(motion.matches || window.scrollY>80 || !Element.prototype.animate){intro.remove();return;}
- let finished=false;let glintFrame=0;const animations=[];const flights=[];
- const glintWrap=document.createElement('span');glintWrap.className='signature-glint-wrap';const glint=document.createElement('span');glint.className='logo-mask signature-glint';glintWrap.append(glint);wrap.append(glintWrap);
- const finish=()=>{if(finished)return;finished=true;cancelAnimationFrame(glintFrame);animations.forEach(a=>a.cancel());flights.forEach(el=>el.remove());document.documentElement.classList.remove('signature-intro-active');intro.remove();document.dispatchEvent(new Event('sisi:hero-reveal'));clearTimeout(failsafe);['pointerdown','focusin','wheel','touchstart'].forEach(type=>document.removeEventListener(type,finish));window.removeEventListener('resize',finish);motion.removeEventListener('change',finish);};
+ let finished=false;const animations=[];const flights=[];
+ const glintWrap=document.createElement('span');glintWrap.className='signature-glint-wrap';const glint=document.createElement('span');glint.className='signature-glint';glintWrap.append(glint);wrap.append(glintWrap);
+ const finish=()=>{if(finished)return;finished=true;animations.forEach(a=>a.cancel());flights.forEach(el=>el.remove());document.documentElement.classList.remove('signature-intro-active');intro.remove();document.dispatchEvent(new Event('sisi:hero-reveal'));clearTimeout(failsafe);['pointerdown','focusin','wheel','touchstart'].forEach(type=>document.removeEventListener(type,finish));window.removeEventListener('resize',finish);motion.removeEventListener('change',finish);};
  const failsafe=setTimeout(finish,7000);
  document.documentElement.classList.add('signature-intro-active');
  ['pointerdown','focusin','wheel','touchstart'].forEach(type=>document.addEventListener(type,finish,{passive:true}));window.addEventListener('resize',finish);motion.addEventListener('change',finish);
  try{
   const signatureURL=await signatureAsset;if(finished)return;
+  const shineScaleX=wrap.clientWidth/1440,shineScaleY=wrap.clientHeight/1080;
   for(const path of ink.querySelectorAll('path')){
    const draw=path.animate([{strokeDashoffset:'1'},{strokeDashoffset:'0'}],{duration:Number(path.dataset.duration),easing:'ease-in-out',fill:'forwards'});animations.push(draw);
+   // Sample the pen path once. The browser animates a small glow with only
+   // transform/opacity, avoiding full-logo gradient and filter repaints per frame.
    const length=path.getTotalLength();
-   const followTip=()=>{
-    if(finished)return;
-    const progress=draw.effect.getComputedTiming().progress??0;
-    const point=path.getPointAtLength(length*Math.max(0,Math.min(1,progress)));
-    glint.style.setProperty('--tip-x',(point.x/1440*100)+'%');glint.style.setProperty('--tip-y',(point.y/1080*100)+'%');
-    glintWrap.style.opacity=String(Math.min(1,progress*12)*(progress>.9?(1-progress)*10:1));
-    glintFrame=requestAnimationFrame(followTip);
-   };
-   followTip();await draw.finished;cancelAnimationFrame(glintFrame);if(finished)return;
+   const shineFrames=Array.from({length:61},(_,index)=>{
+    const progress=index/60,point=path.getPointAtLength(length*progress);
+    return {offset:progress,transform:`translate3d(${point.x*shineScaleX-4}px,${point.y*shineScaleY-4}px,0)`,opacity:Math.min(1,progress*12)*(progress>.9?(1-progress)*10:1)};
+   });
+   const shine=glint.animate(shineFrames,{duration:Number(path.dataset.duration),easing:'ease-in-out',fill:'forwards'});
+   animations.push(shine);
+   await draw.finished;if(finished)return;
+   shine.cancel();
   }
   // The final original mask guarantees the complete, crisp mark before flight.
   ink.style.background='#fff';glintWrap.remove();

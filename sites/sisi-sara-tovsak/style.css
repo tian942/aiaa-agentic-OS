@@ -16,7 +16,7 @@
 @media(prefers-reduced-motion:reduce){.brand-intro,.signature-flight{display:none!important}.signature-intro-active .brand>.logo-mask{opacity:1}.signature-intro-active .hero-signature{opacity:.9}}
 
 /* A localized shine follows the pen without softening the letter edges. */
-.intro-logo-wrap{position:relative;filter:drop-shadow(0 0 2px rgba(255,245,249,.22))}.signature-glint-wrap{position:absolute;inset:0;pointer-events:none;opacity:0;filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 9px #f8dbe8) drop-shadow(0 0 18px #dba4ba99)}.signature-glint.logo-mask{width:100%;height:100%;background:radial-gradient(circle 22px at var(--tip-x,50%) var(--tip-y,50%),#fff 0%,#fff 16%,rgba(255,238,246,.94) 35%,rgba(243,206,223,.4) 65%,transparent 100%)}
+.intro-logo-wrap{position:relative;isolation:isolate}.signature-glint-wrap{position:absolute;inset:0;pointer-events:none}.signature-glint{position:absolute;top:0;left:0;width:8px;height:8px;border-radius:50%;opacity:0;background:radial-gradient(circle,#fff 0%,#fff4ed 25%,#f5d1e280 55%,transparent 75%);box-shadow:0 0 7px 2px #f8dbe875,0 0 15px 4px #dba4ba35;will-change:transform,opacity;pointer-events:none}
 @media(prefers-reduced-motion:reduce){.signature-glint-wrap{display:none}}
 
 /* Curated performance films, with the original portrait framing intact. */
