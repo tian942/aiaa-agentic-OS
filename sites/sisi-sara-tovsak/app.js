@@ -54,12 +54,16 @@ enquiryForm.addEventListener('submit',async event=>{
  try{
   const response=await fetch('https://formsubmit.co/ajax/'+recipient,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
   const result=await response.json();
-  if(!response.ok || ![true,'true'].includes(result.success) || /activat|confirm your email/i.test(result.message||''))throw new Error('not-accepted');
+  if(!response.ok || ![true,'true'].includes(result.success) || /activat|confirm your email/i.test(result.message||'')){
+   console.warn('SISI form service:',response.status,String(result.message||'No service message').slice(0,500));
+   throw new Error('not-accepted');
+  }
   enquiryFeedback='Thank you. Your enquiry has been submitted. We will be in touch soon.';
   // Preserve anything the visitor changed while their request was in flight.
   fields.forEach(field=>{if(field.name!=='interest' && field.value===data.get(field.name))field.value='';});
   document.querySelector('#event-date').dispatchEvent(new Event('change',{bubbles:true}));
- }catch{
+ }catch(error){
+  if(error.message!=='not-accepted')console.warn('SISI form connection:',error.name,error.message);
   enquiryFeedback='We could not confirm your submission. Your details are still here. Please try again later or email';enquiryRecipient=recipient;
  }finally{
   clearTimeout(timeout);enquirySending=false;button.disabled=false;button.textContent=t('Send an enquiry');enquiryForm.removeAttribute('aria-busy');showEnquiryFeedback();
