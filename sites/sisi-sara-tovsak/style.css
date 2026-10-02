@@ -231,3 +231,9 @@ html[lang="sl"] .highlights h2{font-size:clamp(54px,6.5vw,104px)}
 @media(prefers-reduced-motion:reduce){.signature-completion-glow{display:none}}
 
 .form-honey{display:none!important}#enquiry button[type="submit"]:disabled{opacity:.65;cursor:wait;transform:none}
+
+/* Match browser-filled fields to the dark form while retaining the focus line. */
+#enquiry input:-webkit-autofill,#enquiry input:-webkit-autofill:hover,#enquiry input:-webkit-autofill:focus,#enquiry textarea:-webkit-autofill{
+ -webkit-text-fill-color:var(--paper)!important;caret-color:var(--paper);-webkit-box-shadow:0 0 0 1000px var(--black) inset!important;box-shadow:0 0 0 1000px var(--black) inset!important;
+}
+#enquiry input:autofill,#enquiry textarea:autofill{background-color:var(--black)!important;color:var(--paper)!important;box-shadow:0 0 0 1000px var(--black) inset!important}
