@@ -1,4 +1,7 @@
 const slCopy = {
+ "Group performances": "Skupinski nastopi",
+ "Sara also takes the stage with Señoritas. For their ballet barre performance, all four dancers come together around the barre.": "Sara nastopa tudi s skupino Señoritas. V skupinski točki ob baletnem drogu skupaj zaplešejo vse štiri plesalke.",
+ "Enquire about Señoritas": "Povpraševanje za nastop skupine Señoritas",
  "Skip to content": "Preskoči na vsebino",
  "SISI home": "SISI – domov",
  "Main navigation": "Glavna navigacija",

@@ -257,3 +257,12 @@ html[lang="sl"] .highlights h2{font-size:clamp(54px,6.5vw,104px)}
  .hero-art picture::before{content:"";position:absolute;inset:0 0 0 50%;margin-block:auto;height:min(100%,150cqw);pointer-events:none;background:linear-gradient(90deg,transparent 42%,rgba(24,17,19,.19)),linear-gradient(180deg,#635348 0%,#69574f 8%,#65544c 18%,#6c5d56 28%,#736966 42%,#6d6460 56%,#736c69 70%,#736a67 80%,#776f6b 82%,#817c7c 83%,#929194 84%,#8f8f91 85%,#483a34 86%,#4e3d35 87%,#46342d 89%,#433026 91%,#533b2e 95%,#553e2f 100%)}
  .hero-art img{position:relative}
 }
+
+.ensemble{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:center;gap:clamp(24px,7vw,120px);padding:clamp(56px,7vw,110px) 7%;color:var(--paper);background:radial-gradient(ellipse at 12% 105%,#49242e,transparent 70%),#21191d;border-block:1px solid #ffffff19}
+.ensemble .eyebrow{color:#dbb9bf;margin:0 0 16px}
+.ensemble h2{font-size:clamp(58px,7vw,112px);margin:0}
+.ensemble-copy{max-width:45ch}
+.ensemble-copy p{color:#e1d8d6;margin:0 0 18px}
+.ensemble .text-link{display:inline-block;padding-block:6px}
+.ensemble .text-link::after{content:" ↗";margin-left:.45em}
+@media(max-width:700px){.ensemble{grid-template-columns:1fr;gap:22px;padding-inline:6%}}
