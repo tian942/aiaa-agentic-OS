@@ -251,3 +251,9 @@ html[lang="sl"] .highlights h2{font-size:clamp(54px,6.5vw,104px)}
  .hero-art:after{background:linear-gradient(180deg,rgba(15,12,14,.45),transparent 85px,transparent calc(64px + var(--portrait-width)*1.38),#191417 calc(65px + var(--portrait-width)*1.5)),linear-gradient(90deg,rgba(25,20,23,.2),transparent 50%)}
  .hero-copy{margin-top:calc(var(--portrait-width)*1.5 - 48px)}
 }
+/* Extend the right wall, baseboard and floor using colors from the portrait edge. */
+@media(min-width:651px){
+ .hero-art picture{container-type:inline-size}
+ .hero-art picture::before{content:"";position:absolute;inset:0 0 0 50%;margin-block:auto;height:min(100%,150cqw);pointer-events:none;background:linear-gradient(90deg,transparent 42%,rgba(24,17,19,.19)),linear-gradient(180deg,#635348 0%,#69574f 8%,#65544c 18%,#6c5d56 28%,#736966 42%,#6d6460 56%,#736c69 70%,#736a67 80%,#776f6b 82%,#817c7c 83%,#929194 84%,#8f8f91 85%,#483a34 86%,#4e3d35 87%,#46342d 89%,#433026 91%,#533b2e 95%,#553e2f 100%)}
+ .hero-art img{position:relative}
+}
