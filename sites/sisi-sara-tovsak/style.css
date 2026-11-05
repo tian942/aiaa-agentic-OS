@@ -238,15 +238,16 @@ html[lang="sl"] .highlights h2{font-size:clamp(54px,6.5vw,104px)}
 }
 #enquiry input:autofill,#enquiry textarea:autofill{background-color:var(--black)!important;color:var(--paper)!important;box-shadow:0 0 0 1000px var(--black) inset!important}
 
-/* Sara's opening portrait. Keep the lit face clear and shade the copy independently. */
-.hero-art{background:#191417}
-.hero-art picture{position:absolute;inset:0 0 0 auto;width:clamp(55%,62vw,1300px);height:100%}
-.hero-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 13%}
-.hero-art:after{mix-blend-mode:normal;background:linear-gradient(90deg,#191417 0%,#191417 38%,rgba(25,20,23,.90) 42%,rgba(25,20,23,.27) 54%,transparent 65%),linear-gradient(0deg,#10100f 0%,transparent 27%),linear-gradient(180deg,rgba(15,12,14,.42),transparent 17%)}
-@media(min-width:651px) and (max-width:1000px){.hero-copy{max-width:56%}.hero-art picture{width:67%}.hero-art:after{background:linear-gradient(90deg,#191417 25%,rgba(25,20,23,.88) 37%,transparent 65%),linear-gradient(0deg,#10100f,transparent 27%)}}
+/* Keep the full original frame while blending the portrait into the stage. */
+.hero-art{background:radial-gradient(ellipse at 78% 40%,#463936 0%,#241d20 38%,#191417 70%)}
+.hero-art picture{position:absolute;inset:64px 0 0 auto;width:62%;display:flex;align-items:center;justify-content:center}
+.hero-art img{display:block;width:auto;height:100%;max-width:100%;object-fit:contain;mask-image:linear-gradient(90deg,transparent,#000 13%,#000 90%,transparent)}
+.hero-art:after{mix-blend-mode:normal;background:linear-gradient(90deg,#191417 0%,#191417 36%,rgba(25,20,23,.82) 43%,transparent 64%),linear-gradient(0deg,#10100f,transparent 10%),linear-gradient(180deg,rgba(15,12,14,.36),transparent 17%)}
+@media(min-width:651px) and (max-width:1000px){.hero-copy{max-width:56%}.hero-art picture{width:61%}}
 @media(max-width:650px){
- .hero-art picture{inset:0 0 auto;width:100%;height:clamp(385px,112vw,530px)}
- .hero-art img{object-position:50% 12%}
- .hero-art:after{background:linear-gradient(180deg,rgba(15,12,14,.6) 0,transparent 95px,transparent clamp(195px,56vw,275px),#191417 clamp(380px,110vw,520px)),linear-gradient(90deg,rgba(25,20,23,.35),transparent 60%)}
- .hero-copy{margin-top:clamp(180px,51vw,285px)}
+ .hero{--portrait-width:min(100vw,430px)}
+ .hero-art picture{inset:64px 0 auto;width:var(--portrait-width);height:auto;aspect-ratio:1366/2048;margin:auto}
+ .hero-art img{width:100%;height:100%}
+ .hero-art:after{background:linear-gradient(180deg,rgba(15,12,14,.45),transparent 85px,transparent calc(64px + var(--portrait-width)*1.38),#191417 calc(65px + var(--portrait-width)*1.5)),linear-gradient(90deg,rgba(25,20,23,.2),transparent 50%)}
+ .hero-copy{margin-top:calc(var(--portrait-width)*1.5 - 48px)}
 }
